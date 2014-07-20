@@ -4,7 +4,7 @@
   <title><![CDATA[smilevchy's blog]]></title>
   <link href="http://smilevchy.github.io/atom.xml" rel="self"/>
   <link href="http://smilevchy.github.io/"/>
-  <updated>2014-07-20T15:48:27+08:00</updated>
+  <updated>2014-07-20T15:51:13+08:00</updated>
   <id>http://smilevchy.github.io/</id>
   <author>
     <name><![CDATA[smilevchy]]></name>
@@ -60,15 +60,16 @@ Here, the latter will override the former.</p>
 
 <hr />
 
-<p>So, you need
-1. Exact Match
+<p>So, you need</p>
+
+<p>1.Exact Match
 location = /smiley_019.png {</p>
 
 <pre><code>root html/image;
 </code></pre>
 
 <p>}
-2. Override the match of latter regex match
+2.Override the match of latter regex match
 location ^~ /smiley_019.png {</p>
 
 <pre><code>root html/image;
