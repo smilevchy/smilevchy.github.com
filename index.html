@@ -9,8 +9,7 @@
   <meta name="author" content="smilevchy">
 
   
-  <meta name="description" content="It is a test. Hello Github Pages.
-">
+  <meta name="description" content="location smiley_019.png { root html/image; } location ~.(gif|jpg|png)$ { root E:/Pictures; } In this condition, it will just match the latter, nor &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -72,6 +71,97 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/blog/2014/07/20/nginx-config-url-match/">Nginx_config_url_match</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-07-20T15:15:10+08:00" pubdate data-updated="true">Jul 20<sup>th</sup>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>location smiley_019.png {</p>
+
+<pre><code>root html/image;
+</code></pre>
+
+<p>}</p>
+
+<p>location ~.(gif|jpg|png)$ {</p>
+
+<pre><code>root E:/Pictures;
+</code></pre>
+
+<p>}</p>
+
+<p>In this condition, it will just match the latter, nor the former, which lacks a slash( must be added if it is not regex description)</p>
+
+<hr />
+
+<p>after you add it:</p>
+
+<p>location /smiley_019.png {</p>
+
+<pre><code>root html/image;
+</code></pre>
+
+<p>}</p>
+
+<p>location ~.(gif|jpg|png)$ {</p>
+
+<pre><code>root E:/Pictures;
+</code></pre>
+
+<p>}</p>
+
+<p>In this condition, it will not match the former again because of nginx&rsquo;s matching rules about location.
+Here, the latter will override the former.</p>
+
+<hr />
+
+<p>So, you need
+1. Exact Match
+location = /smiley_019.png {</p>
+
+<pre><code>root html/image;
+</code></pre>
+
+<p>}
+2. Override the match of latter regex match
+location ^~ /smiley_019.png {</p>
+
+<pre><code>root html/image;
+</code></pre>
+
+<p>}</p>
+
+<p>Thus, the former match will not be overrided by the latter.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/blog/2014/07/20/test/">Test</a></h1>
     
     
@@ -116,6 +206,10 @@
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2014/07/20/nginx-config-url-match/">Nginx_config_url_match</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2014/07/20/test/">Test</a>

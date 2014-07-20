@@ -5,12 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Test - smilevchy's blog</title>
+  <title>Nginx_config_url_match - smilevchy's blog</title>
   <meta name="author" content="smilevchy">
 
   
-  <meta name="description" content="It is a test. Hello Github Pages.
-">
+  <meta name="description" content="location smiley_019.png { root html/image; } location ~.(gif|jpg|png)$ { root E:/Pictures; } In this condition, it will just match the latter, nor &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -19,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://smilevchy.github.io/blog/2014/07/20/test">
+  <link rel="canonical" href="http://smilevchy.github.io/blog/2014/07/20/nginx-config-url-match">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="smilevchy's blog" type="application/atom+xml">
@@ -69,7 +68,7 @@
   
   <header>
     
-      <h1 class="entry-title">Test</h1>
+      <h1 class="entry-title">Nginx_config_url_match</h1>
     
     
       <p class="meta">
@@ -85,16 +84,69 @@
   
 
 
-<time datetime="2014-07-20T14:11:09+08:00" pubdate data-updated="true">Jul 20<sup>th</sup>, 2014</time>
+<time datetime="2014-07-20T15:15:10+08:00" pubdate data-updated="true">Jul 20<sup>th</sup>, 2014</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p>It is a test.</p>
+<div class="entry-content"><p>location smiley_019.png {</p>
 
-<p><em>Hello Github Pages.</em></p>
+<pre><code>root html/image;
+</code></pre>
+
+<p>}</p>
+
+<p>location ~.(gif|jpg|png)$ {</p>
+
+<pre><code>root E:/Pictures;
+</code></pre>
+
+<p>}</p>
+
+<p>In this condition, it will just match the latter, nor the former, which lacks a slash( must be added if it is not regex description)</p>
+
+<hr />
+
+<p>after you add it:</p>
+
+<p>location /smiley_019.png {</p>
+
+<pre><code>root html/image;
+</code></pre>
+
+<p>}</p>
+
+<p>location ~.(gif|jpg|png)$ {</p>
+
+<pre><code>root E:/Pictures;
+</code></pre>
+
+<p>}</p>
+
+<p>In this condition, it will not match the former again because of nginx&rsquo;s matching rules about location.
+Here, the latter will override the former.</p>
+
+<hr />
+
+<p>So, you need
+1. Exact Match
+location = /smiley_019.png {</p>
+
+<pre><code>root html/image;
+</code></pre>
+
+<p>}
+2. Override the match of latter regex match
+location ^~ /smiley_019.png {</p>
+
+<pre><code>root html/image;
+</code></pre>
+
+<p>}</p>
+
+<p>Thus, the former match will not be overrided by the latter.</p>
 </div>
 
 
@@ -117,8 +169,14 @@
   
 
 
-<time datetime="2014-07-20T14:11:09+08:00" pubdate data-updated="true">Jul 20<sup>th</sup>, 2014</time>
+<time datetime="2014-07-20T15:15:10+08:00" pubdate data-updated="true">Jul 20<sup>th</sup>, 2014</time>
       
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/nginx/'>nginx</a>
+  
+</span>
 
 
     </p>
@@ -132,8 +190,8 @@
     
     <p class="meta">
       
+        <a class="basic-alignment left" href="/blog/2014/07/20/test/" title="Previous Post: test">&laquo; test</a>
       
-        <a class="basic-alignment right" href="/blog/2014/07/20/nginx-config-url-match/" title="Next Post: nginx_config_url_match">nginx_config_url_match &raquo;</a>
       
     </p>
   </footer>
