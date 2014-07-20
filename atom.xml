@@ -4,7 +4,7 @@
   <title><![CDATA[smilevchy's blog]]></title>
   <link href="http://smilevchy.github.io/atom.xml" rel="self"/>
   <link href="http://smilevchy.github.io/"/>
-  <updated>2014-07-20T20:07:30+08:00</updated>
+  <updated>2014-07-20T21:18:26+08:00</updated>
   <id>http://smilevchy.github.io/</id>
   <author>
     <name><![CDATA[smilevchy]]></name>
@@ -92,6 +92,23 @@ Here, the latter will override the former.</p>
     <content type="html"><![CDATA[<p>It is a test.</p>
 
 <p><em>Hello Github Pages.</em></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Test Chinese]]></title>
+    <link href="http://smilevchy.github.io/blog/2014/07/20/test-chinese/"/>
+    <updated>2014-07-20T00:00:00+08:00</updated>
+    <id>http://smilevchy.github.io/blog/2014/07/20/test-chinese</id>
+    <content type="html"><![CDATA[<p>﻿&mdash;&ndash;
+layout: post
+title: &ldquo;test chinese&rdquo;
+date: 2014-07-20 21:17:20 +0800
+comments: true</p>
+
+<h2>categories: </h2>
+
+<p>测试中文 ABC</p>
 ]]></content>
   </entry>
   
