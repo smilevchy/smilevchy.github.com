@@ -5,11 +5,12 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Nginx_config_url_match - smilevchy's blog</title>
+  <title>Octopress 下中文的处理 - smilevchy's blog</title>
   <meta name="author" content="smilevchy">
 
   
-  <meta name="description" content="location smiley_019.png { root html/image; } location ~.(gif|jpg|png)$ { root E:/Pictures; } In this condition, it will just match the latter, nor &hellip;">
+  <meta name="description" content="安装好 Octopress 后，想要发布一篇带有中文字符的文章，结果发现在 &ldquo;rake generate&rdquo; 阶段就遇到错误。
+在网上搜寻一番，大家给出的几种处理方式大致如下： 设置环境变量 LC_ALL=zh_CN.UTF-8 LANG=zh_CN.UTF-8 或者 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +19,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://smilevchy.github.io/blog/2014/07/20/nginx-config-url-match">
+  <link rel="canonical" href="http://smilevchy.github.io/blog/2014/07/20/octopresss-handling-chinese-character">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="smilevchy's blog" type="application/atom+xml">
@@ -68,7 +69,7 @@
   
   <header>
     
-      <h1 class="entry-title">Nginx_config_url_match</h1>
+      <h1 class="entry-title">Octopress 下中文的处理</h1>
     
     
       <p class="meta">
@@ -84,76 +85,41 @@
   
 
 
-<time datetime="2014-07-20T15:15:10+08:00" pubdate data-updated="true">Jul 20<sup>th</sup>, 2014</time>
+<time datetime="2014-07-20T21:24:11+08:00" pubdate data-updated="true">Jul 20<sup>th</sup>, 2014</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p>location smiley_019.png {</p>
+<div class="entry-content"><p>安装好 Octopress 后，想要发布一篇带有中文字符的文章，结果发现在 &ldquo;rake generate&rdquo; 阶段就遇到错误。
+在网上搜寻一番，大家给出的几种处理方式大致如下：</p>
 
-<pre><code>root html/image;
-</code></pre>
+<ol>
+<li><p>设置环境变量</p>
 
-<p>}</p>
+<blockquote><p>LC_ALL=zh_CN.UTF-8</p>
 
-<p>location ~.(gif|jpg|png)$ {</p>
+<p>LANG=zh_CN.UTF-8</p></blockquote>
 
-<pre><code>root E:/Pictures;
-</code></pre>
+<p> 或者</p>
 
-<p>}</p>
+<blockquote><p>LC_ALL=en_US.UTF-8</p>
 
-<p>In this condition, it will just match the latter, nor the former, which lacks a slash( must be added if it is not regex description)</p>
+<p>LANG=en_US.UTF-8</p></blockquote>
 
-<hr />
+<p> <!-- more --></p></li>
+<li><p>修改 Ruby 安装目录下的 convertible.rb 和 include.rb</p>
 
-<!-- more -->
+<p> 分别在其中找到一句代码类似 self.content = File.read(File.join(base, name), &hellip;) 的，这句代码的行数依据不同版本会不一样的。
+ 将其改为self.content = File.read(File.join(base, name), :encoding => &lsquo;utf-8&rsquo;)</p></li>
+<li>转换该文章的编码格式为 UTF-8 无 BOM 编码格式</li>
+</ol>
 
 
-<p>after you add it:</p>
+<p>本人都试验了以上的方法，发现 1 和 2 对于我的配置不设置也可以，而 3 则是必须的。这个可能看个人的配置而有所变化。</p>
 
-<p>location /smiley_019.png {</p>
-
-<pre><code>root html/image;
-</code></pre>
-
-<p>}</p>
-
-<p>location ~.(gif|jpg|png)$ {</p>
-
-<pre><code>root E:/Pictures;
-</code></pre>
-
-<p>}</p>
-
-<p>In this condition, it will not match the former again because of nginx&rsquo;s matching rules about location.
-Here, the latter will override the former.</p>
-
-<hr />
-
-<p>So, you need</p>
-
-<p>1.Exact Match</p>
-
-<p>location = /smiley_019.png {</p>
-
-<pre><code>root html/image;
-</code></pre>
-
-<p>}</p>
-
-<p>2.Override the match of latter regex match</p>
-
-<p>location ^~ /smiley_019.png {</p>
-
-<pre><code>root html/image;
-</code></pre>
-
-<p>}</p>
-
-<p>Thus, the former match will not be overrided by the latter.</p>
+<p>目前也只是一种 workaround，具体的处理还需要花点时间学习下这个框架。</p>
 </div>
 
 
@@ -176,14 +142,8 @@ Here, the latter will override the former.</p>
   
 
 
-<time datetime="2014-07-20T15:15:10+08:00" pubdate data-updated="true">Jul 20<sup>th</sup>, 2014</time>
+<time datetime="2014-07-20T21:24:11+08:00" pubdate data-updated="true">Jul 20<sup>th</sup>, 2014</time>
       
-
-<span class="categories">
-  
-    <a class='category' href='/blog/categories/nginx/'>nginx</a>
-  
-</span>
 
 
     </p>
@@ -197,10 +157,8 @@ Here, the latter will override the former.</p>
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2014/07/20/test/" title="Previous Post: test">&laquo; test</a>
+        <a class="basic-alignment left" href="/blog/2014/07/20/nginx-config-url-match/" title="Previous Post: nginx_config_url_match">&laquo; nginx_config_url_match</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2014/07/20/octopresss-handling-chinese-character/" title="Next Post: octopress 下中文的处理">octopress 下中文的处理 &raquo;</a>
       
     </p>
   </footer>
