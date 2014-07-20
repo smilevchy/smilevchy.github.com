@@ -38,11 +38,13 @@ Here, the latter will override the former.
 So, you need
 
 1.Exact Match
+
 location = /smiley_019.png {
     root html/image;
 }
 
 2.Override the match of latter regex match
+
 location ^~ /smiley_019.png {
     root html/image;
 }
