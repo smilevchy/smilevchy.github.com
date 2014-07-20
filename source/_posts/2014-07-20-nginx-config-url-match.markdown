@@ -18,6 +18,8 @@ In this condition, it will just match the latter, nor the former, which lacks a 
 
 ---
 
+<!-- more -->
+
 after you add it:
 
 location /smiley_019.png {
@@ -34,11 +36,13 @@ Here, the latter will override the former.
 ---
 
 So, you need
-1. Exact Match
+
+1.Exact Match
 location = /smiley_019.png {
     root html/image;
 }
-2. Override the match of latter regex match
+
+2.Override the match of latter regex match
 location ^~ /smiley_019.png {
     root html/image;
 }
