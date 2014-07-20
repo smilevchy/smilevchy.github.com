@@ -135,16 +135,18 @@ Here, the latter will override the former.</p>
 
 <p>So, you need</p>
 
-<p>1.Exact Match
-location = /smiley_019.png {</p>
+<p>1.Exact Match</p>
+
+<p>location = /smiley_019.png {</p>
 
 <pre><code>root html/image;
 </code></pre>
 
 <p>}</p>
 
-<p>2.Override the match of latter regex match
-location ^~ /smiley_019.png {</p>
+<p>2.Override the match of latter regex match</p>
+
+<p>location ^~ /smiley_019.png {</p>
 
 <pre><code>root html/image;
 </code></pre>
