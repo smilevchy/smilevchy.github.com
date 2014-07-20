@@ -4,7 +4,7 @@
   <title><![CDATA[smilevchy's blog]]></title>
   <link href="http://smilevchy.github.io/atom.xml" rel="self"/>
   <link href="http://smilevchy.github.io/"/>
-  <updated>2014-07-20T15:43:45+08:00</updated>
+  <updated>2014-07-20T15:48:27+08:00</updated>
   <id>http://smilevchy.github.io/</id>
   <author>
     <name><![CDATA[smilevchy]]></name>
@@ -35,6 +35,9 @@
 <p>In this condition, it will just match the latter, nor the former, which lacks a slash( must be added if it is not regex description)</p>
 
 <hr />
+
+<!-- more -->
+
 
 <p>after you add it:</p>
 

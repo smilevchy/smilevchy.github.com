@@ -112,46 +112,12 @@
 
 <hr />
 
-<p>after you add it:</p>
-
-<p>location /smiley_019.png {</p>
-
-<pre><code>root html/image;
-</code></pre>
-
-<p>}</p>
-
-<p>location ~.(gif|jpg|png)$ {</p>
-
-<pre><code>root E:/Pictures;
-</code></pre>
-
-<p>}</p>
-
-<p>In this condition, it will not match the former again because of nginx&rsquo;s matching rules about location.
-Here, the latter will override the former.</p>
-
-<hr />
-
-<p>So, you need
-1. Exact Match
-location = /smiley_019.png {</p>
-
-<pre><code>root html/image;
-</code></pre>
-
-<p>}
-2. Override the match of latter regex match
-location ^~ /smiley_019.png {</p>
-
-<pre><code>root html/image;
-</code></pre>
-
-<p>}</p>
-
-<p>Thus, the former match will not be overrided by the latter.</p>
 </div>
   
+  
+    <footer>
+      <a rel="full-article" href="/blog/2014/07/20/nginx-config-url-match/">Read on &rarr;</a>
+    </footer>
   
 
 
