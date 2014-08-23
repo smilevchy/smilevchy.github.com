@@ -5,12 +5,12 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Octopress 下中文的处理 - smilevchy's blog</title>
+  <title>Thinking in Whether Programmers Should Stay Up Late - smilevchy's blog</title>
   <meta name="author" content="smilevchy">
 
   
-  <meta name="description" content="安装好 Octopress 后，想要发布一篇带有中文字符的文章，结果发现在 &ldquo;rake generate&rdquo; 阶段就遇到错误。
-在网上搜寻一番，大家给出的几种处理方式大致如下： 设置环境变量 LC_ALL=zh_CN.UTF-8 LANG=zh_CN.UTF-8 或者 &hellip;">
+  <meta name="description" content="&ldquo;你平时几点睡觉啊&rdquo; “11点左右吧” “啊，那么早啊，不是说程序员都要熬夜吗” “&hellip;&hellip;” “你这样还是程序员吗？” “&hellip;&hellip;” 周围很多人都认为：“程序员就要熬夜，不熬夜的不是程序员”。
+不仅很多非 IT &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -19,7 +19,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://smilevchy.github.io/blog/2014/07/20/octopresss-handling-chinese-character">
+  <link rel="canonical" href="http://smilevchy.github.io/blog/2014/08/23/thinking-in-whether-programmers-should-stay-up-late">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="smilevchy's blog" type="application/atom+xml">
@@ -69,7 +69,7 @@
   
   <header>
     
-      <h1 class="entry-title">Octopress 下中文的处理</h1>
+      <h1 class="entry-title">Thinking in Whether Programmers Should Stay Up Late</h1>
     
     
       <p class="meta">
@@ -85,7 +85,7 @@
   
 
 
-<time datetime="2014-07-20T21:24:11+08:00" pubdate data-updated="true">Jul 20<sup>th</sup>, 2014</time>
+<time datetime="2014-08-23T10:31:39+08:00" pubdate data-updated="true">Aug 23<sup>rd</sup>, 2014</time>
         
            | <a href="#disqus_thread"
              data-disqus-identifier="http://smilevchy.github.io">Comments</a>
@@ -95,34 +95,48 @@
   </header>
 
 
-<div class="entry-content"><p>安装好 Octopress 后，想要发布一篇带有中文字符的文章，结果发现在 &ldquo;rake generate&rdquo; 阶段就遇到错误。
-在网上搜寻一番，大家给出的几种处理方式大致如下：</p>
+<div class="entry-content"><p>&ldquo;你平时几点睡觉啊&rdquo;</p>
 
-<ol>
-<li><p>设置环境变量</p>
+<p>“11点左右吧”</p>
 
-<blockquote><p>LC_ALL=zh_CN.UTF-8</p>
+<p>“啊，那么早啊，不是说程序员都要熬夜吗”</p>
 
-<p>LANG=zh_CN.UTF-8</p></blockquote>
+<p>“&hellip;&hellip;”</p>
 
-<p> 或者</p>
+<p>“你这样还是程序员吗？”</p>
 
-<blockquote><p>LC_ALL=en_US.UTF-8</p>
+<p>“&hellip;&hellip;”</p>
 
-<p>LANG=en_US.UTF-8</p></blockquote>
-
-<p> <!-- more --></p></li>
-<li><p>修改 Ruby 安装目录下的 convertible.rb 和 include.rb</p>
-
-<p> 分别在其中找到一句代码类似 self.content = File.read(File.join(base, name), &hellip;) 的，这句代码的行数依据不同版本会不一样的。
- 将其改为self.content = File.read(File.join(base, name), :encoding => &lsquo;utf-8&rsquo;)</p></li>
-<li>转换该文章的编码格式为 UTF-8 无 BOM 编码格式</li>
-</ol>
+<!-- more -->
 
 
-<p>本人都试验了以上的方法，发现 1 和 2 对于我的配置不设置也可以，而 3 则是必须的。这个可能看个人的配置而有所变化。</p>
+<p>周围很多人都认为：“程序员就要熬夜，不熬夜的不是程序员”。
+不仅很多非 IT 人士持有这种观点，而且很多 IT 人士也不知怎么地也认同这一观点并且付诸以实践。</p>
 
-<p>目前也只是一种 workaround，具体的处理还需要花点时间学习下这个框架。</p>
+<p>对于这个问题，我感到很不解。
+熬夜和是否是程序员真的有那么深刻的相关关系吗？
+是谁说一定要熬夜才能算是程序员的。
+我不知道那些随口就说出“程序员就需要熬夜”的人是否有经过自己的思考的，或许因为周围的环境都那样，很多人都那样说，所以他们也糊里糊涂地跟风，然后就经常快乐地在夜深人静的时空里和自己的电脑进行思想的交流。</p>
+
+<p>至于我自己，则是进行了一定的思考的。</p>
+
+<p>我在此鲜明并独立地断言，“熬夜和是否是程序员没有深刻的相关关系”。</p>
+
+<p>程序员的使命是充当机器与现实世界的连接层，他们负责把现实世界的问题建模并诉诸机器。
+所以说，只要能完成这一连接，就是程序员。至于完成的时间点，这些根本就构不成关键因素。</p>
+
+<p>这个问题也类似于“求最优解”。现在，在可能集里有两个解：</p>
+
+<pre><code>一个是熬夜，通宵赶代码，获得的 side effect(bad)则是第二天精疲力尽，头脑不清晰，影响当天的工作，给自己的身体积累了不良性；
+
+另一个则是 10 点睡觉，然后早上 6 - 7 点醒， 获得的 side effect(good) 则是精力充沛，头脑清晰，符合养生之道，而且照样有那段安静的时间可以写代码。
+</code></pre>
+
+<p>明明就有多种组合，为什么一定要选择那条性价比最低的呢？当然，有些人的 side effect 是不一样的，或许他熬夜之后还能保持战斗力甚至更甚之。</p>
+
+<p>我只是想说，如果有另一条更好的方法可选，为什么一定要选择那条不好的，就因为周围大家都那么做，然后就跟着做了？</p>
+
+<p>程序员这一职业本来就就要脑力和体力，为了能够更加持续性地发挥自己的智力，应该多注意体力的保持，而不是爆发性地榨干自身体力。</p>
 </div>
 
 
@@ -145,8 +159,14 @@
   
 
 
-<time datetime="2014-07-20T21:24:11+08:00" pubdate data-updated="true">Jul 20<sup>th</sup>, 2014</time>
+<time datetime="2014-08-23T10:31:39+08:00" pubdate data-updated="true">Aug 23<sup>rd</sup>, 2014</time>
       
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/thinking/'>thinking</a>
+  
+</span>
 
 
     </p>
@@ -160,10 +180,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2014/07/20/nginx-config-url-match/" title="Previous Post: nginx_config_url_match">&laquo; nginx_config_url_match</a>
+        <a class="basic-alignment left" href="/blog/2014/08/02/reaction-to-code-complete/" title="Previous Post: Reaction to &lt;Code Complete&gt;">&laquo; Reaction to &lt;Code Complete&gt;</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2014/08/02/reaction-to-code-complete/" title="Next Post: Reaction to &lt;Code Complete&gt;">Reaction to &lt;Code Complete&gt; &raquo;</a>
       
     </p>
   </footer>
@@ -258,8 +276,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://smilevchy.github.io/blog/2014/07/20/octopresss-handling-chinese-character/';
-        var disqus_url = 'http://smilevchy.github.io/blog/2014/07/20/octopresss-handling-chinese-character/';
+        var disqus_identifier = 'http://smilevchy.github.io/blog/2014/08/23/thinking-in-whether-programmers-should-stay-up-late/';
+        var disqus_url = 'http://smilevchy.github.io/blog/2014/08/23/thinking-in-whether-programmers-should-stay-up-late/';
         var disqus_script = 'embed.js';
       
     (function () {
