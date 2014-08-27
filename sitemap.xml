@@ -3,6 +3,12 @@
   
   
   <url>
+    <loc>http://smilevchy.github.io/blog/2014/08/27/todays-shock/</loc>
+    <lastmod>2014-08-27T21:04:45+08:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
     <loc>http://smilevchy.github.io/blog/2014/08/23/thinking-in-whether-programmers-should-stay-up-late/</loc>
     <lastmod>2014-08-23T10:31:39+08:00</lastmod>
     <priority>0.8</priority>
@@ -29,14 +35,14 @@
   
   <url>
     <loc>http://smilevchy.github.io/blog/archives/</loc>
-    <lastmod>2014-08-23T11:21:57+08:00</lastmod>
+    <lastmod>2014-08-27T21:18:37+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   
   <url>
     <loc>http://smilevchy.github.io/</loc>
-    <lastmod>2014-08-23T11:21:57+08:00</lastmod>
+    <lastmod>2014-08-27T21:18:37+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
