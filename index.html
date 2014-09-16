@@ -147,21 +147,6 @@
     &lt;input type="button" value="clear" id="clearBtn" /&gt;
     &lt;input type="button" value="add" id="addBtn" /&gt;
 &lt;/div&gt;
-
-&lt;script&gt;
-    $(function() {
-        var tempDom = $("&lt;span&gt;hello world&lt;/span&gt;");
-        $("#container").append(tempDom);
-
-        $("#btnArea").delegate("#clearBtn", "click", function(evt) {
-            $("#container").html("");
-        });
-
-        $("#btnArea").delegate("#addBtn", "click", function(evt) {
-            $("#container").append(tempDom);               
-        });
-    });
-&lt;/script&gt;
 </code></pre>
 
 </div>
