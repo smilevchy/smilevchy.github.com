@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Nginx | smilevchy's blog]]></title>
+  <link href="http://smilevchy.github.io/blog/categories/nginx/atom.xml" rel="self"/>
+  <link href="http://smilevchy.github.io/"/>
+  <updated>2014-10-19T22:40:25+08:00</updated>
+  <id>http://smilevchy.github.io/</id>
+  <author>
+    <name><![CDATA[smilevchy]]></name>
+    <email><![CDATA[smilevchy@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Nginx_config_url_match]]></title>
+    <link href="http://smilevchy.github.io/blog/2014/07/20/nginx-config-url-match/"/>
+    <updated>2014-07-20T15:15:10+08:00</updated>
+    <id>http://smilevchy.github.io/blog/2014/07/20/nginx-config-url-match</id>
+    <content type="html"><![CDATA[<p>location smiley_019.png {</p>
+
+<pre><code>root html/image;
+</code></pre>
+
+<p>}</p>
+
+<p>location ~.(gif|jpg|png)$ {</p>
+
+<pre><code>root E:/Pictures;
+</code></pre>
+
+<p>}</p>
+
+<p>In this condition, it will just match the latter, nor the former, which lacks a slash( must be added if it is not regex description)</p>
+
+<hr />
+
+<!-- more -->
+
+
+<p>after you add it:</p>
+
+<p>location /smiley_019.png {</p>
+
+<pre><code>root html/image;
+</code></pre>
+
+<p>}</p>
+
+<p>location ~.(gif|jpg|png)$ {</p>
+
+<pre><code>root E:/Pictures;
+</code></pre>
+
+<p>}</p>
+
+<p>In this condition, it will not match the former again because of nginx&rsquo;s matching rules about location.
+Here, the latter will override the former.</p>
+
+<hr />
+
+<p>So, you need</p>
+
+<p>1.Exact Match</p>
+
+<p>location = /smiley_019.png {</p>
+
+<pre><code>root html/image;
+</code></pre>
+
+<p>}</p>
+
+<p>2.Override the match of latter regex match</p>
+
+<p>location ^~ /smiley_019.png {</p>
+
+<pre><code>root html/image;
+</code></pre>
+
+<p>}</p>
+
+<p>Thus, the former match will not be overrided by the latter.</p>
+]]></content>
+  </entry>
+  
+</feed>

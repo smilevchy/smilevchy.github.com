@@ -1,0 +1,622 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[smilevchy's blog]]></title>
+  <link href="http://smilevchy.github.io/atom.xml" rel="self"/>
+  <link href="http://smilevchy.github.io/"/>
+  <updated>2014-10-19T22:40:25+08:00</updated>
+  <id>http://smilevchy.github.io/</id>
+  <author>
+    <name><![CDATA[smilevchy]]></name>
+    <email><![CDATA[smilevchy@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Today's Shock]]></title>
+    <link href="http://smilevchy.github.io/blog/2014/10/19/todays-shock/"/>
+    <updated>2014-10-19T22:12:30+08:00</updated>
+    <id>http://smilevchy.github.io/blog/2014/10/19/todays-shock</id>
+    <content type="html"><![CDATA[<p>在看《Ruby 编程语言》时，看到一个概念，叫做 Shebang 注释。
+一开始以为是那本书籍打印出错了，因为 ”Shebang“ 看起来怎么也不像英文单词，而且直觉上能发成中文的音。
+但是还是觉得不对，所以就搜索了一下。</p>
+
+<p>&ndash;_&ndash; 结果显示，维基百科上真的有叫 Shebang 的条目。
+看了条目内容，才知道原来 Shebang 指的就是平常 unix shell 文件开头第一行的那句话（#!/bin/sh）的前两个字符。
+而一般把形如 #!XXXXX 的语句叫做 Shebang 注释。</p>
+
+<p>我真是孤陋寡闻&hellip;&hellip;</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Let Android Talk to Computer With Socket]]></title>
+    <link href="http://smilevchy.github.io/blog/2014/09/16/let-android-talk-to-computer-with-socket/"/>
+    <updated>2014-09-16T21:45:17+08:00</updated>
+    <id>http://smilevchy.github.io/blog/2014/09/16/let-android-talk-to-computer-with-socket</id>
+    <content type="html"><![CDATA[<p>在没有公网/wifi的情况下让 Android 手机通过 USB 或者让虚拟机里的 Android 系统与电脑进行通信。</p>
+
+<!-- more -->
+
+
+<p>基本原理是当 Android 手机通过 USB 连接电脑时，两者之间就形成了一个局域网（具体是由 ADB 实现的）。
+嗯，看到这里只要了解网络编程的同学就知道怎么做了。
+就是把 Android 手机作为服务器，监听某个端口来获取客户端连接,而 PC 可以作为客户端。
+这里的问题是客户端要怎么连接到服务器的端口，这个需要运行 adb shell 指令 ：</p>
+
+<pre><code>adb.exe forward tcp:[port1] tcp:[port2]  // port1: PC 上的端口; port2: Android 上的端口。此处会把 PC 上发往 port1 的信息转发至 Android 的 port2
+</code></pre>
+
+<p>Android 服务器代码：</p>
+
+<pre><code>void startServer() {
+    ServerSocket serverSocket = null;
+
+    try {
+        Log.e("Android", "start to accpet");
+
+        serverSocket = new ServerSocket(SERVER_PORT); // 即 port2
+
+        while (true) {
+            Socket client = serverSocket.accept();
+
+            Log.e("Android", "receive client");
+
+            try {
+                BufferedReader in = new BufferedReader(new InputStreamReader(client.getInputStream()));
+                final String str = in.readLine();
+
+                Log.e("Android", str);
+
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        show.setText(str);
+                    }
+                });
+
+                PrintWriter out = new PrintWriter(new BufferedWriter(new OutputStreamWriter(client.getOutputStream())),true);
+                out.println("I'm Android");
+                in.close();
+                out.close();
+            } catch (Exception e) {
+                Log.e("Android", "");
+                e.printStackTrace();
+            } finally {
+                client.close();
+                Log.e("Android", "");
+            }
+            Thread.sleep(3000);
+        }
+    } catch (Exception e) {
+        Log.e("Android", "");
+        e.printStackTrace();
+    } finally {
+        if (serverSocket != null) {
+            try {
+                serverSocket.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+}
+</code></pre>
+
+<p>PC 客户端代码：</p>
+
+<pre><code>try {
+        // 6665是 PC 端的端口，通过运行该 Shell 命令重定向到 Android Device 的6666端口 (端口自己定，不得超过1023)
+        Runtime.getRuntime().exec("[Your Android SDK's Dir]\\platform-tools\\adb.exe forward tcp:6665 tcp:6666");
+    } catch (IOException e) {
+        e.printStackTrace();
+        return;
+    }
+
+    Socket socket = null;
+    try {
+        InetAddress serverAddr = null;
+        serverAddr = InetAddress.getByName("127.0.0.1");
+        System.out.println("Start to connect android");
+
+        socket = new Socket(serverAddr, 6665);
+
+        String message = "I'm pc";
+        System.out.println("Pc is sending message: " + message);
+        PrintWriter out = new PrintWriter(new BufferedWriter(new OutputStreamWriter(socket.getOutputStream())), true);
+        out.println(message);
+        Thread.sleep(5000);
+
+        // receive message from server (Android Device)
+        BufferedReader br = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+        String msg = br.readLine();
+        System.out.println(msg);
+    } catch (UnknownHostException e) {
+        System.out.println(e);
+    } catch (IOException e) {
+        System.out.println(e);
+    } finally {
+        try {
+            if (socket != null) {
+                socket.close();
+            }
+        } catch (IOException e) {
+            System.out.println(e);
+        }
+    }
+}
+</code></pre>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Problem With JQuery's Html() Function in IE]]></title>
+    <link href="http://smilevchy.github.io/blog/2014/09/16/jquerys-html-function-in-ie/"/>
+    <updated>2014-09-16T21:20:02+08:00</updated>
+    <id>http://smilevchy.github.io/blog/2014/09/16/jquerys-html-function-in-ie</id>
+    <content type="html"><![CDATA[<pre><code>&lt;div id="container"&gt;
+&lt;/div&gt;
+&lt;div id="btnArea"&gt;
+    &lt;input type="button" value="clear" id="clearBtn" /&gt;
+    &lt;input type="button" value="add" id="addBtn" /&gt;
+&lt;/div&gt;
+</code></pre>
+
+<!-- more -->
+
+
+<pre><code>&lt;script&gt;
+    $(function() {
+        var tempDom = $("&lt;span&gt;hello world&lt;/span&gt;");
+        $("#container").append(tempDom);
+
+        $("#btnArea").delegate("#clearBtn", "click", function(evt) {
+            $("#container").html("");
+        });
+
+        $("#btnArea").delegate("#addBtn", "click", function(evt) {
+            $("#container").append(tempDom);               
+        });
+    });
+&lt;/script&gt;   
+</code></pre>
+
+<p>上面那段代码在 Chrome、Firefox 下运行时，能够得到期望的结果，而如果在 IE 浏览器下运行时，其输出行为与预料中的不一样(此时 tempDom 的文本节点会被删除掉，感觉像在tempDom 上调用了 html())。
+为了 hack 这个问题，可以写成，预先把节点保存起来，在需要的时候就 clone 该节点来进行操作。</p>
+
+<p>即：</p>
+
+<pre><code>&lt;script&gt;
+    $(function() {
+        var tempDom = $("&lt;span&gt;hello world&lt;/span&gt;");
+        $("#container").append(tempDom.clone());
+
+        $("#btnArea").delegate("#clearBtn", "click", function(evt) {
+            $("#container").html("");
+        });
+
+        $("#btnArea").delegate("#addBtn", "click", function(evt) {
+            $("#container").append(tempDom.clone());               
+        });
+    });
+&lt;/script&gt;
+</code></pre>
+
+<p>这样没有什么效率，可以改成按需显示隐藏的方式(前提是符合项目需求)。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Today's Shock]]></title>
+    <link href="http://smilevchy.github.io/blog/2014/08/27/todays-shock/"/>
+    <updated>2014-08-27T21:04:45+08:00</updated>
+    <id>http://smilevchy.github.io/blog/2014/08/27/todays-shock</id>
+    <content type="html"><![CDATA[<p>今天在阅读论文 &lt;Architectural Styles and the Design of Network-based Software Architectures&gt; 中，里面谈到了 HTTP 协议的定义。它明确指出了一个观点：“HTTP 并不是一种传输协议”。HTTP 并不是被设计为一种传输协议（transport protocol），它是一种转移协议（transfer protocol）。</p>
+
+<!-- more -->
+
+
+<p>这都是因为HTTP 在刚刚传入中国时被翻译成了“超文本传输协议”，然后大家都互相传播，造成了现在大家对 HTTP 的表述就是 “超文本传输协议”。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Thinking in Whether Programmers Should Stay Up Late]]></title>
+    <link href="http://smilevchy.github.io/blog/2014/08/23/thinking-in-whether-programmers-should-stay-up-late/"/>
+    <updated>2014-08-23T10:31:39+08:00</updated>
+    <id>http://smilevchy.github.io/blog/2014/08/23/thinking-in-whether-programmers-should-stay-up-late</id>
+    <content type="html"><![CDATA[<p>&ldquo;你平时几点睡觉啊&rdquo;</p>
+
+<p>“11点左右吧”</p>
+
+<p>“啊，那么早啊，不是说程序员都要熬夜吗”</p>
+
+<p>“&hellip;&hellip;”</p>
+
+<p>“你这样还是程序员吗？”</p>
+
+<p>“&hellip;&hellip;”</p>
+
+<!-- more -->
+
+
+<p>周围很多人都认为：“程序员就要熬夜，不熬夜的不是程序员”。
+不仅很多非 IT 人士持有这种观点，而且很多 IT 人士也不知怎么地也认同这一观点并且付诸以实践。</p>
+
+<p>对于这个问题，我感到很不解。
+熬夜和是否是程序员真的有那么深刻的相关关系吗？
+是谁说一定要熬夜才能算是程序员的。
+我不知道那些随口就说出“程序员就需要熬夜”的人是否有经过自己的思考的，或许因为周围的环境都那样，很多人都那样说，所以他们也糊里糊涂地跟风，然后就经常快乐地在夜深人静的时空里和自己的电脑进行思想的交流。</p>
+
+<p>至于我自己，则是进行了一定的思考的。</p>
+
+<p>我在此鲜明并独立地断言，“熬夜和是否是程序员没有深刻的相关关系”。</p>
+
+<p>程序员的使命是充当机器与现实世界的连接层，他们负责把现实世界的问题建模并诉诸机器。
+所以说，只要能完成这一连接，就是程序员。至于完成的时间点，这些根本就构不成关键因素。</p>
+
+<p>这个问题也类似于“求最优解”。现在，在可能集里有两个解：</p>
+
+<pre><code>一个是熬夜，通宵赶代码，获得的 side effect(bad)则是第二天精疲力尽，头脑不清晰，影响当天的工作，给自己的身体积累了不良性；
+
+另一个则是 10 点睡觉，然后早上 6 - 7 点醒， 获得的 side effect(good) 则是精力充沛，头脑清晰，符合养生之道，而且照样有那段安静的时间可以写代码。
+</code></pre>
+
+<p>明明就有多种组合，为什么一定要选择那条性价比最低的呢？当然，有些人的 side effect 是不一样的，或许他熬夜之后还能保持战斗力甚至更甚之。</p>
+
+<p>我只是想说，如果有另一条更好的方法可选，为什么一定要选择那条不好的，就因为周围大家都那么做，然后就跟着做了？</p>
+
+<p>程序员这一职业本来就就要脑力和体力，为了能够更加持续性地发挥自己的智力，应该多注意体力的保持，而不是爆发性地榨干自身体力。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Reaction to &lt;Code Complete&gt;]]></title>
+    <link href="http://smilevchy.github.io/blog/2014/08/02/reaction-to-code-complete/"/>
+    <updated>2014-08-02T15:25:54+08:00</updated>
+    <id>http://smilevchy.github.io/blog/2014/08/02/reaction-to-code-complete</id>
+    <content type="html"><![CDATA[<p>终于把 &lt;Code Complete>.2nd 读完了，1000多页的量。由于是电子版的，因此没有那种一看到很厚的一本书就被吓倒的感觉，但也少了那种消灭完一本大书的成就感。</p>
+
+<p>以下是自己对一些有趣的章节的简短的笔记流记录&hellip;&hellip;</p>
+
+<!-- more -->
+
+
+<p><em>Guidelines about ADT</em></p>
+
+<ol>
+<li>把常见的底层数据类型创建为 ADT 并使用这些 ADT, 而不再使用底层数据类型</li>
+<li>把像文件这样的常用对象当作 ADT</li>
+<li>简单的事物也可当作 ADT</li>
+<li>不要让 ADT 依赖于其存储介质</li>
+</ol>
+
+
+<p><em>Thinking about Class</em></p>
+
+<p>Class is based on definition of ADT</p>
+
+<p><em>Defensive Programming</em></p>
+
+<ol>
+<li>检查所有非法输入数据</li>
+<li>使用 Assertions</li>
+<li>Error-Handling Techniques
+
+<ul>
+<li>返回中立值</li>
+<li>换用下一个正确的数据</li>
+<li>返回与前次相同的数据</li>
+<li>换用最接近的合法值</li>
+<li>把警告信息记录到日志文件中</li>
+<li>返回一个错误码</li>
+<li>调用错误处理子程序或对象</li>
+<li>当错误发生时显示出错误消息</li>
+<li>用最妥当的方式在局部处理错误</li>
+<li>关闭程序</li>
+</ul>
+</li>
+<li>Compromise between Robustness and Correctness</li>
+<li>隔离程序，使之包容由错误造成的损害
+
+<blockquote><p>选择某些接口作为安全区域的边界，对穿越安全区域边界的数据进行合法性校验
+当数据非法时做出相应的反映；
+输入数据时将其转换为恰当的类型</p></blockquote></li>
+<li>使用调试助手（辅助调试的代码）</li>
+<li>使用进攻式编程</li>
+<li>避免过度防御式编程</li>
+</ol>
+
+
+<p>以下是一部分整理的此书所推荐的书籍简短记录&hellip;&hellip;</p>
+
+<p><em>Fault Tolerance</em></p>
+
+<ol>
+<li>IEEE Software 2001.07</li>
+<li>Agile Database Techniques (Ambler 2003)</li>
+<li>On the design and development of program families (Parnas 1976)</li>
+</ol>
+
+
+<p><em>Software Design, General</em></p>
+
+<ol>
+<li>The Object-Oriented Thought Process</li>
+<li>Object-Oriented Design Heuristics</li>
+<li><strong>Programming on Purpose: Essays on Software Design (Plauger)</strong></li>
+<li>The Art of UNIX Programming</li>
+</ol>
+
+
+<p><em>Software Design Theory</em></p>
+
+<ol>
+<li>A Rational Design Process: How and Why to Fake it (Parnas)</li>
+<li>On the Criteria to Be Used in Decomposing Systems into Modules</li>
+<li>Designing Software for Ease of Extension and Contraction (Parnas 1979)</li>
+<li>The Modular Structure of Complex Systems</li>
+</ol>
+
+
+<p><em>Design Patterns</em></p>
+
+<ol>
+<li>Design Patterns Explained</li>
+</ol>
+
+
+<p><em>Design in General</em></p>
+
+<ol>
+<li>Conceptual Blockbusting: A Guide to Better Ideas (Adams 2001)</li>
+<li>How to Solve It: A New Aspect of Mathematical Method</li>
+<li>How to Solve It: Modern Heuristics</li>
+<li>The Sciences of the Artificial</li>
+<li>Software Creativity</li>
+</ol>
+
+
+<p><em>Assorted</em></p>
+
+<ol>
+<li>Pragmatic Programmer</li>
+<li>Applied UML and Patterns</li>
+<li>Fundamentals of Object-Oriented Design in UML</li>
+<li>High Output Management</li>
+<li>Test-Driven Development: By Example (Beck)</li>
+<li>Software Engineering Metrics and Models</li>
+<li>C Programming Guidelines (Plum)</li>
+<li>The Elements of Java Style</li>
+<li>Professional Software Development</li>
+<li>Principles of software Engineering</li>
+<li>Design and Code Inspections to Reduce Errors in Program Development</li>
+<li>The Psychology of Computer Programming</li>
+<li>Managing the Software Process</li>
+<li>Refactoring: Improving the Design of Existing Code</li>
+<li>Rapid Development</li>
+<li>Code Reading: The Open Source Perspective</li>
+<li>Programmers at Work</li>
+</ol>
+
+
+<p><em>Classes in General</em></p>
+
+<ol>
+<li><strong>Object-Oriented Software Construction</strong></li>
+<li>Effective Java Programming Language Guide</li>
+</ol>
+
+
+<p><em>Defensive Programming</em></p>
+
+<ol>
+<li>Assertions
+
+<ul>
+<li>Writing Solid Code(Maguire)</li>
+</ul>
+</li>
+<li>Secure
+
+<ul>
+<li>Writing Secure Code</li>
+</ul>
+</li>
+</ol>
+
+
+<p><em>Data Structure</em></p>
+
+<ol>
+<li>Introduction to Algorithms (Cormen,H.Thomas, Charles E.Leiseron, Ronald L.Rivest)</li>
+<li>Algorithms in C++ (Sedgewick, Robert), Parts 1-4, Parts 5</li>
+<li>Algorithms in Java, Parts 1-4</li>
+<li>Algorithms in Java, Parts 5</li>
+</ol>
+
+
+<p><em>Software Complexity</em></p>
+
+<ol>
+<li>A Complexity Measure (Tom McCabe)</li>
+<li>Software Engineering Metrics and Models</li>
+</ol>
+
+
+<p><em>Software Testing</em></p>
+
+<ol>
+<li>Testing Computer Software</li>
+<li>Lessons Learned in Software Testing</li>
+<li>Introducing Software Testing</li>
+<li>How to Break Software : A Practical Guide to Testing</li>
+<li>What is Software Testing? And Why Is It So Hard?</li>
+<li>The Art of Software Testing</li>
+<li>Test-Driven Development: By Example</li>
+<li>Bug Patterns in Java</li>
+</ol>
+
+
+<p><em>Performance Tuning</em></p>
+
+<ol>
+<li>Performance Solutions: A Practical Guide to Creating Responsive, Scalable Software</li>
+<li>&ldquo;Optimization: Your Worst Enemy&rdquo; (<a href="http://www.flounder.com/optimization.htm">http://www.flounder.com/optimization.htm</a>)</li>
+<li><strong>Writing Efficient Programs</strong></li>
+<li>Web Performance Tuning</li>
+<li>Java Performance Tuning</li>
+<li>Java Platform Performance: Strategies and Tactics</li>
+</ol>
+
+
+<p><em>Programming Tools</em></p>
+
+<ol>
+<li>www.sdmagazine.com/jolts <Software Development Magazine></li>
+</ol>
+
+
+<p><em>Program Style</em></p>
+
+<ol>
+<li>The Practice of Programming</li>
+<li>The Elements of Java Style</li>
+<li><strong>The Elements of Programming Style</strong></li>
+<li><strong>Literate Programming</strong></li>
+</ol>
+
+
+<p><em>Personal Characteristics</em></p>
+
+<ol>
+<li>The Humble Programmer</li>
+<li>The Psychology of Computer Programming: Silver Anniversary Edition</li>
+<li>Tutorial: Human Factors in Software Development</li>
+</ol>
+
+
+<p><em>Software Engineering</em></p>
+
+<ol>
+<li>Facts and Fallacies of Software Engineering</li>
+<li>Professional Software Development</li>
+<li>The Mythical Man-Month</li>
+<li>PeopleWare</li>
+<li><strong>Software Creativity</strong></li>
+<li>Software Engineering: A Practitioner&rsquo;s Approach</li>
+<li>Software Engineering (Ian Sommerville)</li>
+</ol>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Octopress 下中文的处理]]></title>
+    <link href="http://smilevchy.github.io/blog/2014/07/20/octopresss-handling-chinese-character/"/>
+    <updated>2014-07-20T21:24:11+08:00</updated>
+    <id>http://smilevchy.github.io/blog/2014/07/20/octopresss-handling-chinese-character</id>
+    <content type="html"><![CDATA[<p>安装好 Octopress 后，想要发布一篇带有中文字符的文章，结果发现在 &ldquo;rake generate&rdquo; 阶段就遇到错误。
+在网上搜寻一番，大家给出的几种处理方式大致如下：</p>
+
+<ol>
+<li><p>设置环境变量</p>
+
+<blockquote><p>LC_ALL=zh_CN.UTF-8</p>
+
+<p>LANG=zh_CN.UTF-8</p></blockquote>
+
+<p> 或者</p>
+
+<blockquote><p>LC_ALL=en_US.UTF-8</p>
+
+<p>LANG=en_US.UTF-8</p></blockquote>
+
+<p> <!-- more --></p></li>
+<li><p>修改 Ruby 安装目录下的 convertible.rb 和 include.rb</p>
+
+<p> 分别在其中找到一句代码类似 self.content = File.read(File.join(base, name), &hellip;) 的，这句代码的行数依据不同版本会不一样的。
+ 将其改为self.content = File.read(File.join(base, name), :encoding => &lsquo;utf-8&rsquo;)</p></li>
+<li>转换该文章的编码格式为 UTF-8 无 BOM 编码格式</li>
+</ol>
+
+
+<p>本人都试验了以上的方法，发现 1 和 2 对于我的配置不设置也可以，而 3 则是必须的。这个可能看个人的配置而有所变化。</p>
+
+<p>目前也只是一种 workaround，具体的处理还需要花点时间学习下这个框架。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Nginx_config_url_match]]></title>
+    <link href="http://smilevchy.github.io/blog/2014/07/20/nginx-config-url-match/"/>
+    <updated>2014-07-20T15:15:10+08:00</updated>
+    <id>http://smilevchy.github.io/blog/2014/07/20/nginx-config-url-match</id>
+    <content type="html"><![CDATA[<p>location smiley_019.png {</p>
+
+<pre><code>root html/image;
+</code></pre>
+
+<p>}</p>
+
+<p>location ~.(gif|jpg|png)$ {</p>
+
+<pre><code>root E:/Pictures;
+</code></pre>
+
+<p>}</p>
+
+<p>In this condition, it will just match the latter, nor the former, which lacks a slash( must be added if it is not regex description)</p>
+
+<hr />
+
+<!-- more -->
+
+
+<p>after you add it:</p>
+
+<p>location /smiley_019.png {</p>
+
+<pre><code>root html/image;
+</code></pre>
+
+<p>}</p>
+
+<p>location ~.(gif|jpg|png)$ {</p>
+
+<pre><code>root E:/Pictures;
+</code></pre>
+
+<p>}</p>
+
+<p>In this condition, it will not match the former again because of nginx&rsquo;s matching rules about location.
+Here, the latter will override the former.</p>
+
+<hr />
+
+<p>So, you need</p>
+
+<p>1.Exact Match</p>
+
+<p>location = /smiley_019.png {</p>
+
+<pre><code>root html/image;
+</code></pre>
+
+<p>}</p>
+
+<p>2.Override the match of latter regex match</p>
+
+<p>location ^~ /smiley_019.png {</p>
+
+<pre><code>root html/image;
+</code></pre>
+
+<p>}</p>
+
+<p>Thus, the former match will not be overrided by the latter.</p>
+]]></content>
+  </entry>
+  
+</feed>

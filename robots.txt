@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: 
+
+Sitemap: http://smilevchy.github.io/sitemap.xml 
