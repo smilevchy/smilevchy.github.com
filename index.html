@@ -9,8 +9,8 @@
   <meta name="author" content="smilevchy">
 
   
-  <meta name="description" content="今天重构几个月前的代码过程中，感觉到种种阻力。
-原因在于代码的耦合度过高，信息过于具体、过于分散，导致修改一处代码时，常常要联动修改很多处地方。 感悟一：代码还是抽象化程度高一点才好。 现在写代码的感觉比以前好一点，以前只会堆砌功能，不懂得整体架构设计，写出来的代码可以说是存在于 ”开发时“。 &hellip;">
+  <meta name="description" content="在设计模块接口时，入口参数绝对要设计成数值形式啊，之前居然设计成了字符串形式，由于有其他模块也调用到，现在造成的局面就是根本没有扩展性，而且要修改的话还要让其他调用模块也进行相应修改。 悲剧&hellip;&hellip;
+">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -66,6 +66,47 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/10/22/todays-understanding/">Today&#8217;s Understanding</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-10-22T15:37:26+08:00" pubdate data-updated="true">Oct 22<sup>nd</sup>, 2014</time>
+        
+           | <a href="/blog/2014/10/22/todays-understanding/#disqus_thread"
+             data-disqus-identifier="http://smilevchy.github.io/blog/2014/10/22/todays-understanding/">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>在设计模块接口时，入口参数绝对要设计成数值形式啊，之前居然设计成了字符串形式，由于有其他模块也调用到，现在造成的局面就是根本没有扩展性，而且要修改的话还要让其他调用模块也进行相应修改。</p>
+
+<p>悲剧&hellip;&hellip;</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -541,12 +582,16 @@
 <li class='category'><a href='/blog/categories/shock/'>shock (2)</a></li>
 <li class='category'><a href='/blog/categories/software-engineering/'>software-engineering (1)</a></li>
 <li class='category'><a href='/blog/categories/thinking/'>thinking (1)</a></li>
-<li class='category'><a href='/blog/categories/understanding/'>understanding (1)</a></li>
+<li class='category'><a href='/blog/categories/understanding/'>understanding (2)</a></li>
 
   </ul>
 </section><section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2014/10/22/todays-understanding/">Today&#8217;s Understanding</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2014/10/21/todays-understanding/">Today&#8217;s Understanding</a>
@@ -562,10 +607,6 @@
     
       <li class="post">
         <a href="/blog/2014/09/16/jquerys-html-function-in-ie/">Problem With JQuery&#8217;s Html() Function in IE</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/08/27/todays-shock/">Today&#8217;s Shock</a>
       </li>
     
   </ul>
