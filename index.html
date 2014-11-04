@@ -9,8 +9,7 @@
   <meta name="author" content="smilevchy">
 
   
-  <meta name="description" content="在设计模块接口时，入口参数绝对要设计成数值形式啊，之前居然设计成了字符串形式，由于有其他模块也调用到，现在造成的局面就是根本没有扩展性，而且要修改的话还要让其他调用模块也进行相应修改。 悲剧&hellip;&hellip;
-">
+  <meta name="description" content="原题链接: https://oj.leetcode.com/problems/jump-game/ ~_~ 这道题是看别人的解法的（当然，我不是照抄那种，看过理解了自己再写的） public boolean canJump(int[] A) { if (A == null || A.length &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -72,7 +71,7 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2014/10/22/todays-understanding/">Today&#8217;s Understanding</a></h1>
+      <h1 class="entry-title"><a href="/blog/2014/11/04/leetcode-jump-game/">Leetcode_Jump Game</a></h1>
     
     
       <p class="meta">
@@ -88,210 +87,43 @@
   
 
 
-<time datetime="2014-10-22T15:37:26+08:00" pubdate data-updated="true">Oct 22<sup>nd</sup>, 2014</time>
+<time datetime="2014-11-04T21:34:32+08:00" pubdate data-updated="true">Nov 4<sup>th</sup>, 2014</time>
         
-           | <a href="/blog/2014/10/22/todays-understanding/#disqus_thread"
-             data-disqus-identifier="http://smilevchy.github.io/blog/2014/10/22/todays-understanding/">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>在设计模块接口时，入口参数绝对要设计成数值形式啊，之前居然设计成了字符串形式，由于有其他模块也调用到，现在造成的局面就是根本没有扩展性，而且要修改的话还要让其他调用模块也进行相应修改。</p>
-
-<p>悲剧&hellip;&hellip;</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/10/21/todays-understanding/">Today&#8217;s Understanding</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-10-21T20:32:06+08:00" pubdate data-updated="true">Oct 21<sup>st</sup>, 2014</time>
-        
-           | <a href="/blog/2014/10/21/todays-understanding/#disqus_thread"
-             data-disqus-identifier="http://smilevchy.github.io/blog/2014/10/21/todays-understanding/">Comments</a>
+           | <a href="/blog/2014/11/04/leetcode-jump-game/#disqus_thread"
+             data-disqus-identifier="http://smilevchy.github.io/blog/2014/11/04/leetcode-jump-game/">Comments</a>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><p>今天重构几个月前的代码过程中，感觉到种种阻力。
-原因在于代码的耦合度过高，信息过于具体、过于分散，导致修改一处代码时，常常要联动修改很多处地方。</p>
+  <div class="entry-content"><p>原题链接: <a href="https://oj.leetcode.com/problems/jump-game/">https://oj.leetcode.com/problems/jump-game/</a></p>
 
-<p><strong>感悟一：代码还是抽象化程度高一点才好。</strong></p>
+<p>~_~ 这道题是看别人的解法的（当然，我不是照抄那种，看过理解了自己再写的）</p>
 
-<p>现在写代码的感觉比以前好一点，以前只会堆砌功能，不懂得整体架构设计，写出来的代码可以说是存在于 ”开发时“。
-现在开始有意识注意整体的设计，代码的可阅读性，力求让代码不仅存在于”开发时“，也存在于”阅读时“、”维护时“。</p>
+<pre><code>public boolean canJump(int[] A) {
+    if (A == null || A.length == 0) {
+        return false;
+    }
 
-<p><strong>感悟二：像写作文一样写代码，让非代码作者阅读时就像在读一篇文章一样，有整体架构，有段落意思，尽量让代码的内涵浮出海平面。</strong></p>
-</div>
-  
-  
+    int size = A.length;
+    int dstPosition = size - 1;
+    int maxReachPosition = 0;
 
+    for (int i = 0; i &lt;= maxReachPosition &amp;&amp; i &lt; size; i++) {
+        maxReachPosition = Math.max(i + A[i], maxReachPosition);
+    }
 
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/10/19/todays-shock/">Today&#8217;s Shock</a></h1>
-    
-    
-      <p class="meta">
-        
+    if (maxReachPosition &lt; dstPosition) {
+        return false;
+    }
 
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-10-19T22:12:30+08:00" pubdate data-updated="true">Oct 19<sup>th</sup>, 2014</time>
-        
-           | <a href="/blog/2014/10/19/todays-shock/#disqus_thread"
-             data-disqus-identifier="http://smilevchy.github.io/blog/2014/10/19/todays-shock/">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>在看《Ruby 编程语言》时，看到一个概念，叫做 Shebang 注释。
-一开始以为是那本书籍打印出错了，因为 ”Shebang“ 看起来怎么也不像英文单词，而且直觉上能发成中文的音。
-但是还是觉得不对，所以就搜索了一下。</p>
-
-<p>&ndash;_&ndash; 结果显示，维基百科上真的有叫 Shebang 的条目。
-看了条目内容，才知道原来 Shebang 指的就是平常 unix shell 文件开头第一行的那句话（#!/bin/sh）的前两个字符。
-而一般把形如 #!XXXXX 的语句叫做 Shebang 注释。</p>
-
-<p>我真是孤陋寡闻&hellip;&hellip;</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/09/16/let-android-talk-to-computer-with-socket/">Let Android Talk to Computer With Socket</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-09-16T21:45:17+08:00" pubdate data-updated="true">Sep 16<sup>th</sup>, 2014</time>
-        
-           | <a href="/blog/2014/09/16/let-android-talk-to-computer-with-socket/#disqus_thread"
-             data-disqus-identifier="http://smilevchy.github.io/blog/2014/09/16/let-android-talk-to-computer-with-socket/">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>在没有公网/wifi的情况下让 Android 手机通过 USB 或者让虚拟机里的 Android 系统与电脑进行通信。</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2014/09/16/let-android-talk-to-computer-with-socket/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/09/16/jquerys-html-function-in-ie/">Problem With JQuery&#8217;s Html() Function in IE</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-09-16T21:20:02+08:00" pubdate data-updated="true">Sep 16<sup>th</sup>, 2014</time>
-        
-           | <a href="/blog/2014/09/16/jquerys-html-function-in-ie/#disqus_thread"
-             data-disqus-identifier="http://smilevchy.github.io/blog/2014/09/16/jquerys-html-function-in-ie/">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><pre><code>&lt;div id="container"&gt;
-&lt;/div&gt;
-&lt;div id="btnArea"&gt;
-    &lt;input type="button" value="clear" id="clearBtn" /&gt;
-    &lt;input type="button" value="add" id="addBtn" /&gt;
-&lt;/div&gt;
+    return true;
+}
 </code></pre>
-
 </div>
   
   
-    <footer>
-      <a rel="full-article" href="/blog/2014/09/16/jquerys-html-function-in-ie/">Read on &rarr;</a>
-    </footer>
-  
 
 
     </article>
@@ -301,7 +133,7 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2014/08/27/todays-shock/">Today&#8217;s Shock</a></h1>
+      <h1 class="entry-title"><a href="/blog/2014/11/04/leetcode-rotate-list/">Leetcode_Rotate List</a></h1>
     
     
       <p class="meta">
@@ -317,248 +149,624 @@
   
 
 
-<time datetime="2014-08-27T21:04:45+08:00" pubdate data-updated="true">Aug 27<sup>th</sup>, 2014</time>
+<time datetime="2014-11-04T21:32:39+08:00" pubdate data-updated="true">Nov 4<sup>th</sup>, 2014</time>
         
-           | <a href="/blog/2014/08/27/todays-shock/#disqus_thread"
-             data-disqus-identifier="http://smilevchy.github.io/blog/2014/08/27/todays-shock/">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>今天在阅读论文 &lt;Architectural Styles and the Design of Network-based Software Architectures&gt; 中，里面谈到了 HTTP 协议的定义。它明确指出了一个观点：“HTTP 并不是一种传输协议”。HTTP 并不是被设计为一种传输协议（transport protocol），它是一种转移协议（transfer protocol）。</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2014/08/27/todays-shock/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/08/23/thinking-in-whether-programmers-should-stay-up-late/">Thinking in Whether Programmers Should Stay Up Late</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-08-23T10:31:39+08:00" pubdate data-updated="true">Aug 23<sup>rd</sup>, 2014</time>
-        
-           | <a href="/blog/2014/08/23/thinking-in-whether-programmers-should-stay-up-late/#disqus_thread"
-             data-disqus-identifier="http://smilevchy.github.io/blog/2014/08/23/thinking-in-whether-programmers-should-stay-up-late/">Comments</a>
+           | <a href="/blog/2014/11/04/leetcode-rotate-list/#disqus_thread"
+             data-disqus-identifier="http://smilevchy.github.io/blog/2014/11/04/leetcode-rotate-list/">Comments</a>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><p>&ldquo;你平时几点睡觉啊&rdquo;</p>
+  <div class="entry-content"><p>原题链接: <a href="https://oj.leetcode.com/problems/rotate-list/">https://oj.leetcode.com/problems/rotate-list/</a></p>
 
-<p>“11点左右吧”</p>
+<pre><code>public ListNode rotateRight(ListNode head, int n) {
+    if (head == null) {
+        return head;
+    }
 
-<p>“啊，那么早啊，不是说程序员都要熬夜吗”</p>
+    ListNode cursor = head;
 
-<p>“&hellip;&hellip;”</p>
+    int length = 0;
+    while (cursor != null) {
+        cursor = cursor.next;
+        length++;
+    }
 
-<p>“你这样还是程序员吗？”</p>
+    if (n % length == 0) {
+        return head;
+    }
 
-<p>“&hellip;&hellip;”</p>
+    int targetIndex = length - n % length;
 
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2014/08/23/thinking-in-whether-programmers-should-stay-up-late/">Read on &rarr;</a>
-    </footer>
-  
+    int currentIndex = 0;
+    cursor = head;
+    ListNode prev = null;
 
+    while (currentIndex &lt; targetIndex) {
+        prev = cursor;
+        cursor = cursor.next;
+        currentIndex++;
+    }
 
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/08/02/reaction-to-code-complete/">Reaction to &lt;Code Complete&gt;</a></h1>
-    
-    
-      <p class="meta">
-        
+    ListNode cursorTail = cursor;
+    while (cursorTail.next != null) {
+        cursorTail = cursorTail.next;
+    }
 
+    prev.next = null;
+    cursorTail.next = head;
+    head = cursor;
 
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-08-02T15:25:54+08:00" pubdate data-updated="true">Aug 2<sup>nd</sup>, 2014</time>
-        
-           | <a href="/blog/2014/08/02/reaction-to-code-complete/#disqus_thread"
-             data-disqus-identifier="http://smilevchy.github.io/blog/2014/08/02/reaction-to-code-complete/">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>终于把 &lt;Code Complete>.2nd 读完了，1000多页的量。由于是电子版的，因此没有那种一看到很厚的一本书就被吓倒的感觉，但也少了那种消灭完一本大书的成就感。</p>
-
-<p>以下是自己对一些有趣的章节的简短的笔记流记录&hellip;&hellip;</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2014/08/02/reaction-to-code-complete/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/07/20/octopresss-handling-chinese-character/">Octopress 下中文的处理</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-07-20T21:24:11+08:00" pubdate data-updated="true">Jul 20<sup>th</sup>, 2014</time>
-        
-           | <a href="/blog/2014/07/20/octopresss-handling-chinese-character/#disqus_thread"
-             data-disqus-identifier="http://smilevchy.github.io/blog/2014/07/20/octopresss-handling-chinese-character/">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>安装好 Octopress 后，想要发布一篇带有中文字符的文章，结果发现在 &ldquo;rake generate&rdquo; 阶段就遇到错误。
-在网上搜寻一番，大家给出的几种处理方式大致如下：</p>
-
-<ol>
-<li><p>设置环境变量</p>
-
-<blockquote><p>LC_ALL=zh_CN.UTF-8</p>
-
-<p>LANG=zh_CN.UTF-8</p></blockquote>
-
-<p> 或者</p>
-
-<blockquote><p>LC_ALL=en_US.UTF-8</p>
-
-<p>LANG=en_US.UTF-8</p></blockquote>
-
-<p> </div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2014/07/20/octopresss-handling-chinese-character/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/07/20/nginx-config-url-match/">Nginx_config_url_match</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-07-20T15:15:10+08:00" pubdate data-updated="true">Jul 20<sup>th</sup>, 2014</time>
-        
-           | <a href="/blog/2014/07/20/nginx-config-url-match/#disqus_thread"
-             data-disqus-identifier="http://smilevchy.github.io/blog/2014/07/20/nginx-config-url-match/">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>location smiley_019.png {</p>
-
-<pre><code>root html/image;
+    return head;
+}
 </code></pre>
-
-<p>}</p>
-
-<p>location ~.(gif|jpg|png)$ {</p>
-
-<pre><code>root E:/Pictures;
-</code></pre>
-
-<p>}</p>
-
-<p>In this condition, it will just match the latter, nor the former, which lacks a slash( must be added if it is not regex description)</p>
-
-<hr />
-
 </div>
   
   
-    <footer>
-      <a rel="full-article" href="/blog/2014/07/20/nginx-config-url-match/">Read on &rarr;</a>
-    </footer>
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/11/04/leetcode-reverse-words-in-a-string/">Leetcode_Reverse Words in a String</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-11-04T21:30:38+08:00" pubdate data-updated="true">Nov 4<sup>th</sup>, 2014</time>
+        
+           | <a href="/blog/2014/11/04/leetcode-reverse-words-in-a-string/#disqus_thread"
+             data-disqus-identifier="http://smilevchy.github.io/blog/2014/11/04/leetcode-reverse-words-in-a-string/">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>原题链接: <a href="https://oj.leetcode.com/problems/reverse-words-in-a-string/">https://oj.leetcode.com/problems/reverse-words-in-a-string/</a></p>
+
+<pre><code>public String reverseWords(String s) {
+    String[] words = s.trim().split("\\s+");
+    StringBuilder sb = new StringBuilder("");
+
+    for (int i = words.length - 1; i &gt;= 0; i--) {
+        sb.append(words[i]);
+
+        if (i &gt;= 1) {
+            sb.append(" ");
+        }
+    }
+
+    return sb.toString();
+}
+</code></pre>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/11/04/leetcode-reorder-list/">Leetcode_Reorder List</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-11-04T21:23:58+08:00" pubdate data-updated="true">Nov 4<sup>th</sup>, 2014</time>
+        
+           | <a href="/blog/2014/11/04/leetcode-reorder-list/#disqus_thread"
+             data-disqus-identifier="http://smilevchy.github.io/blog/2014/11/04/leetcode-reorder-list/">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>原题链接: <a href="https://oj.leetcode.com/problems/reorder-list/">https://oj.leetcode.com/problems/reorder-list/</a></p>
+
+<p>正是这道题，让我知道了有 “快慢指针” 这种好东西。以前每当要做类似遍历链表的操作时，比如取中点，总是先遍历完一遍链表来获得长度，求得中点再遍历一次，实在是不雅观。而通过 “快慢指针”，只要写一次遍历就可以拿到中点。</p>
+
+<pre><code>public void reorderList(ListNode head) {
+    if (head == null || head.next == null) {
+        return;
+    }
+
+    ListNode slowCursor = head;
+    ListNode quickCursor = head;
+
+    while (quickCursor != null &amp;&amp; quickCursor.next != null &amp;&amp; quickCursor.next.next != null &amp;&amp; slowCursor != null &amp;&amp; slowCursor.next != null) {
+        slowCursor = slowCursor.next;
+        quickCursor = quickCursor.next.next;
+    }
+
+    ListNode head1 = head;
+    ListNode head2 = slowCursor.next;
+
+    head2 = reverseList(head2);
+
+    while (head1 != null &amp;&amp; head2 != null) {
+        ListNode head2Next = head2.next;
+        head2.next = head1.next;
+        head1.next = head2;
+        head1 = head2.next;
+        head2 = head2Next;
+
+        if (head2 == null) {
+            head1.next = null;
+        }
+    }
+}
+
+public ListNode reverseList(ListNode head) {
+    ListNode prev = null;
+    ListNode cursor = head;
+    ListNode next = null;
+
+    while (cursor != null) {
+        next = cursor.next;
+        cursor.next = prev;
+        prev = cursor;
+        cursor = next;
+    }
+
+    return prev;
+}
+</code></pre>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/11/04/leetcode-add-two-numbers/">Leetcode_Add Two Numbers</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-11-04T21:21:13+08:00" pubdate data-updated="true">Nov 4<sup>th</sup>, 2014</time>
+        
+           | <a href="/blog/2014/11/04/leetcode-add-two-numbers/#disqus_thread"
+             data-disqus-identifier="http://smilevchy.github.io/blog/2014/11/04/leetcode-add-two-numbers/">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>原题链接: <a href="https://oj.leetcode.com/problems/add-two-numbers/">https://oj.leetcode.com/problems/add-two-numbers/</a></p>
+
+<pre><code>public ListNode addTwoNumbers(ListNode left, ListNode right) {
+    if (left == null &amp;&amp; right == null) {
+        return null;
+    }
+
+    ListNode result = new ListNode(0);
+    ListNode cursor = result;
+    int carry = 0;
+
+    while (left != null || right != null) {
+        int val = 0;
+
+        if (left != null) {
+            val += left.val;
+            left = left.next;
+        }
+
+        if (right != null) {
+            val += right.val;
+            right = right.next;
+        }
+
+        val += carry;
+        int digit = val % 10;
+        carry = val / 10;
+
+        cursor.val = digit;
+
+        if (left != null || right != null) {
+            cursor.next = new ListNode(0);
+            cursor = cursor.next;               
+        }
+    }
+
+    if (carry &gt; 0) {
+        cursor.next = new ListNode(1);
+    }
+
+    return result;
+}
+</code></pre>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/11/04/leetcode-plus-one/">Leetcode_Plus One</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-11-04T21:19:18+08:00" pubdate data-updated="true">Nov 4<sup>th</sup>, 2014</time>
+        
+           | <a href="/blog/2014/11/04/leetcode-plus-one/#disqus_thread"
+             data-disqus-identifier="http://smilevchy.github.io/blog/2014/11/04/leetcode-plus-one/">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>原题链接: <a href="https://oj.leetcode.com/problems/plus-one/">https://oj.leetcode.com/problems/plus-one/</a></p>
+
+<pre><code>public byte[] plusOne(byte[] num) {
+    if (num == null || num.length == 0) {
+        return num;
+    }
+
+    byte[] result = num.clone();
+    int length = num.length;
+
+    for (int i = length - 1; i &gt;= 0; i--) {
+        byte digit = result[i];
+        result[i] = (byte) (digit + 1);
+
+        if (result[i] &lt; 10) {
+            break;
+        } else {
+            result[i] = 0;
+
+            if (i == 0) {
+
+                byte[] expandedNum = new byte[length + 1];
+                expandedNum[0] = 1;
+
+                return expandedNum;
+            }
+        }
+    }
+
+    return result;
+}
+</code></pre>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/11/04/leetcode-reverse-integer/">Leetcode_Reverse Integer</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-11-04T21:16:33+08:00" pubdate data-updated="true">Nov 4<sup>th</sup>, 2014</time>
+        
+           | <a href="/blog/2014/11/04/leetcode-reverse-integer/#disqus_thread"
+             data-disqus-identifier="http://smilevchy.github.io/blog/2014/11/04/leetcode-reverse-integer/">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>原题链接: <a href="https://oj.leetcode.com/problems/reverse-integer/">https://oj.leetcode.com/problems/reverse-integer/</a></p>
+
+<pre><code>public int reverse(int x) {
+    String str = Integer.toString(x);
+    StringBuilder sb = new StringBuilder(str.length());
+    char c;
+
+    if (str.indexOf('-') == 0) {
+        sb.append('-');
+    }
+    for (int i = str.length() - 1; i &gt;= 0; i--) {
+        c = str.charAt(i);
+
+        if (c == '-') {
+            break;
+        }
+
+        sb.append(c);
+    }
+
+    return Integer.parseInt(sb.toString());
+}
+</code></pre>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/11/04/leetcode-string-to-integer-atoi/">Leetcode_String to Integer(atoi)</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-11-04T21:10:18+08:00" pubdate data-updated="true">Nov 4<sup>th</sup>, 2014</time>
+        
+           | <a href="/blog/2014/11/04/leetcode-string-to-integer-atoi/#disqus_thread"
+             data-disqus-identifier="http://smilevchy.github.io/blog/2014/11/04/leetcode-string-to-integer-atoi/">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>原题链接: <a href="https://oj.leetcode.com/problems/string-to-integer-atoi/">https://oj.leetcode.com/problems/string-to-integer-atoi/</a></p>
+
+<p>这道题目着重点是 corner case 的处理，一串字符串在转换为整数时，需要考虑它的正负号，以及是否溢出。</p>
+
+<pre><code>public int atoi(String str) {
+    long resultNum = 0; 
+
+    if (str == null || str.equals("")) {
+        return (int) resultNum;
+    } 
+
+    str = str.trim();
+    boolean negative = false;
+    char c;
+
+    for (int i = 0, length = str.length(); i &lt; length; i++) {
+        c = str.charAt(i);
+
+        if (i == 0 &amp;&amp; (c == '-' || c == '+')) {
+            if (c == '-') {
+                negative = true;                
+            }
+        } else if ('0' &lt;= c &amp;&amp; c &lt;= '9') {
+            resultNum = resultNum * 10 + (c - '0');
+
+            if (resultNum &gt; Integer.MAX_VALUE &amp;&amp; !negative) {
+                resultNum = Integer.MAX_VALUE;
+            } else if (negative &amp;&amp; resultNum * -1 &lt; Integer.MIN_VALUE) {
+                resultNum = Integer.MIN_VALUE;
+            }
+        } else {
+            break;
+        }
+    }
+
+    return (int) (negative == true ? resultNum * -1 : resultNum);           
+}
+</code></pre>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/11/04/leetcode-same-tree/">Leetcode_Same Tree</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-11-04T21:08:15+08:00" pubdate data-updated="true">Nov 4<sup>th</sup>, 2014</time>
+        
+           | <a href="/blog/2014/11/04/leetcode-same-tree/#disqus_thread"
+             data-disqus-identifier="http://smilevchy.github.io/blog/2014/11/04/leetcode-same-tree/">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>原题链接: <a href="https://oj.leetcode.com/problems/same-tree/">https://oj.leetcode.com/problems/same-tree/</a></p>
+
+<pre><code>public boolean isSameTree(TreeNode p, TreeNode q) {
+    if (p == null &amp;&amp; q == null || p == q) {
+        return true;
+    } else if (p == null || q == null) {
+        return false;
+    }
+
+    if (!isSameTree(p.left, q.left)) return false;
+    if (!isSameTree(p.right, q.right)) return false;
+    if (p.val == q.val) return true;
+
+    return false;
+}
+</code></pre>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/11/04/leetcode-symmetric-tree/">Leetcode_Symmetric Tree</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-11-04T21:00:07+08:00" pubdate data-updated="true">Nov 4<sup>th</sup>, 2014</time>
+        
+           | <a href="/blog/2014/11/04/leetcode-symmetric-tree/#disqus_thread"
+             data-disqus-identifier="http://smilevchy.github.io/blog/2014/11/04/leetcode-symmetric-tree/">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>原题链接: <a href="https://oj.leetcode.com/problems/symmetric-tree/">https://oj.leetcode.com/problems/symmetric-tree/</a></p>
+
+<p>一般涉及到树的问题我都喜欢用递归解法。</p>
+
+<pre><code>public boolean isSymmetric(TreeNode root) {
+    if (null == root) {
+        return true;
+    }
+
+    if (root.left == null &amp;&amp; root.right == null) {
+        return true;
+    } 
+
+    if (root.left == null || root.right == null) {
+        return false;
+    }
+
+    TreeNode mirrorRootNodeOfLeft = new TreeNode(0);
+    mirrorRootNodeOfLeft.left = root.left.left;
+    mirrorRootNodeOfLeft.right = root.right.right;
+    if (!isSymmetric(mirrorRootNodeOfLeft)) return false;
+
+    TreeNode mirrorRootNodeOfRight = new TreeNode(0);
+    mirrorRootNodeOfRight.left = root.left.right;
+    mirrorRootNodeOfRight.right = root.right.left;
+    if (!isSymmetric(mirrorRootNodeOfRight)) return false;
+
+    if (root.left.val == root.right.val) return true; 
+
+    return false;
+}
+</code></pre>
+</div>
+  
   
 
 
     </article>
   
   <div class="pagination">
+    
+      <a class="prev" href="/posts/2">&larr; Older</a>
     
     <a href="/blog/archives">Blog Archives</a>
     
@@ -576,7 +784,8 @@
 <section>
   <h1>Categories</h1>
   <ul id="categories">
-    <li class='category'><a href='/blog/categories/android/'>android (1)</a></li>
+    <li class='category'><a href='/blog/categories/algorithm/'>algorithm (10)</a></li>
+<li class='category'><a href='/blog/categories/android/'>android (1)</a></li>
 <li class='category'><a href='/blog/categories/jquery/'>jquery (1)</a></li>
 <li class='category'><a href='/blog/categories/nginx/'>nginx (1)</a></li>
 <li class='category'><a href='/blog/categories/shock/'>shock (2)</a></li>
@@ -590,23 +799,23 @@
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/blog/2014/10/22/todays-understanding/">Today&#8217;s Understanding</a>
+        <a href="/blog/2014/11/04/leetcode-jump-game/">Leetcode_Jump Game</a>
       </li>
     
       <li class="post">
-        <a href="/blog/2014/10/21/todays-understanding/">Today&#8217;s Understanding</a>
+        <a href="/blog/2014/11/04/leetcode-rotate-list/">Leetcode_Rotate List</a>
       </li>
     
       <li class="post">
-        <a href="/blog/2014/10/19/todays-shock/">Today&#8217;s Shock</a>
+        <a href="/blog/2014/11/04/leetcode-reverse-words-in-a-string/">Leetcode_Reverse Words in a String</a>
       </li>
     
       <li class="post">
-        <a href="/blog/2014/09/16/let-android-talk-to-computer-with-socket/">Let Android Talk to Computer With Socket</a>
+        <a href="/blog/2014/11/04/leetcode-reorder-list/">Leetcode_Reorder List</a>
       </li>
     
       <li class="post">
-        <a href="/blog/2014/09/16/jquerys-html-function-in-ie/">Problem With JQuery&#8217;s Html() Function in IE</a>
+        <a href="/blog/2014/11/04/leetcode-add-two-numbers/">Leetcode_Add Two Numbers</a>
       </li>
     
   </ul>

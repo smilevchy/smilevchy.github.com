@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Algorithm | smilevchy's blog]]></title>
+  <link href="http://smilevchy.github.io/blog/categories/algorithm/atom.xml" rel="self"/>
+  <link href="http://smilevchy.github.io/"/>
+  <updated>2014-11-04T21:43:06+08:00</updated>
+  <id>http://smilevchy.github.io/</id>
+  <author>
+    <name><![CDATA[smilevchy]]></name>
+    <email><![CDATA[smilevchy@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Leetcode_Jump Game]]></title>
+    <link href="http://smilevchy.github.io/blog/2014/11/04/leetcode-jump-game/"/>
+    <updated>2014-11-04T21:34:32+08:00</updated>
+    <id>http://smilevchy.github.io/blog/2014/11/04/leetcode-jump-game</id>
+    <content type="html"><![CDATA[<p>原题链接: <a href="https://oj.leetcode.com/problems/jump-game/">https://oj.leetcode.com/problems/jump-game/</a></p>
+
+<p>~_~ 这道题是看别人的解法的（当然，我不是照抄那种，看过理解了自己再写的）</p>
+
+<pre><code>public boolean canJump(int[] A) {
+    if (A == null || A.length == 0) {
+        return false;
+    }
+
+    int size = A.length;
+    int dstPosition = size - 1;
+    int maxReachPosition = 0;
+
+    for (int i = 0; i &lt;= maxReachPosition &amp;&amp; i &lt; size; i++) {
+        maxReachPosition = Math.max(i + A[i], maxReachPosition);
+    }
+
+    if (maxReachPosition &lt; dstPosition) {
+        return false;
+    }
+
+    return true;
+}
+</code></pre>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Leetcode_Rotate List]]></title>
+    <link href="http://smilevchy.github.io/blog/2014/11/04/leetcode-rotate-list/"/>
+    <updated>2014-11-04T21:32:39+08:00</updated>
+    <id>http://smilevchy.github.io/blog/2014/11/04/leetcode-rotate-list</id>
+    <content type="html"><![CDATA[<p>原题链接: <a href="https://oj.leetcode.com/problems/rotate-list/">https://oj.leetcode.com/problems/rotate-list/</a></p>
+
+<pre><code>public ListNode rotateRight(ListNode head, int n) {
+    if (head == null) {
+        return head;
+    }
+
+    ListNode cursor = head;
+
+    int length = 0;
+    while (cursor != null) {
+        cursor = cursor.next;
+        length++;
+    }
+
+    if (n % length == 0) {
+        return head;
+    }
+
+    int targetIndex = length - n % length;
+
+    int currentIndex = 0;
+    cursor = head;
+    ListNode prev = null;
+
+    while (currentIndex &lt; targetIndex) {
+        prev = cursor;
+        cursor = cursor.next;
+        currentIndex++;
+    }
+
+    ListNode cursorTail = cursor;
+    while (cursorTail.next != null) {
+        cursorTail = cursorTail.next;
+    }
+
+    prev.next = null;
+    cursorTail.next = head;
+    head = cursor;
+
+    return head;
+}
+</code></pre>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Leetcode_Reverse Words in a String]]></title>
+    <link href="http://smilevchy.github.io/blog/2014/11/04/leetcode-reverse-words-in-a-string/"/>
+    <updated>2014-11-04T21:30:38+08:00</updated>
+    <id>http://smilevchy.github.io/blog/2014/11/04/leetcode-reverse-words-in-a-string</id>
+    <content type="html"><![CDATA[<p>原题链接: <a href="https://oj.leetcode.com/problems/reverse-words-in-a-string/">https://oj.leetcode.com/problems/reverse-words-in-a-string/</a></p>
+
+<pre><code>public String reverseWords(String s) {
+    String[] words = s.trim().split("\\s+");
+    StringBuilder sb = new StringBuilder("");
+
+    for (int i = words.length - 1; i &gt;= 0; i--) {
+        sb.append(words[i]);
+
+        if (i &gt;= 1) {
+            sb.append(" ");
+        }
+    }
+
+    return sb.toString();
+}
+</code></pre>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Leetcode_Reorder List]]></title>
+    <link href="http://smilevchy.github.io/blog/2014/11/04/leetcode-reorder-list/"/>
+    <updated>2014-11-04T21:23:58+08:00</updated>
+    <id>http://smilevchy.github.io/blog/2014/11/04/leetcode-reorder-list</id>
+    <content type="html"><![CDATA[<p>原题链接: <a href="https://oj.leetcode.com/problems/reorder-list/">https://oj.leetcode.com/problems/reorder-list/</a></p>
+
+<p>正是这道题，让我知道了有 “快慢指针” 这种好东西。以前每当要做类似遍历链表的操作时，比如取中点，总是先遍历完一遍链表来获得长度，求得中点再遍历一次，实在是不雅观。而通过 “快慢指针”，只要写一次遍历就可以拿到中点。</p>
+
+<pre><code>public void reorderList(ListNode head) {
+    if (head == null || head.next == null) {
+        return;
+    }
+
+    ListNode slowCursor = head;
+    ListNode quickCursor = head;
+
+    while (quickCursor != null &amp;&amp; quickCursor.next != null &amp;&amp; quickCursor.next.next != null &amp;&amp; slowCursor != null &amp;&amp; slowCursor.next != null) {
+        slowCursor = slowCursor.next;
+        quickCursor = quickCursor.next.next;
+    }
+
+    ListNode head1 = head;
+    ListNode head2 = slowCursor.next;
+
+    head2 = reverseList(head2);
+
+    while (head1 != null &amp;&amp; head2 != null) {
+        ListNode head2Next = head2.next;
+        head2.next = head1.next;
+        head1.next = head2;
+        head1 = head2.next;
+        head2 = head2Next;
+
+        if (head2 == null) {
+            head1.next = null;
+        }
+    }
+}
+
+public ListNode reverseList(ListNode head) {
+    ListNode prev = null;
+    ListNode cursor = head;
+    ListNode next = null;
+
+    while (cursor != null) {
+        next = cursor.next;
+        cursor.next = prev;
+        prev = cursor;
+        cursor = next;
+    }
+
+    return prev;
+}
+</code></pre>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Leetcode_Add Two Numbers]]></title>
+    <link href="http://smilevchy.github.io/blog/2014/11/04/leetcode-add-two-numbers/"/>
+    <updated>2014-11-04T21:21:13+08:00</updated>
+    <id>http://smilevchy.github.io/blog/2014/11/04/leetcode-add-two-numbers</id>
+    <content type="html"><![CDATA[<p>原题链接: <a href="https://oj.leetcode.com/problems/add-two-numbers/">https://oj.leetcode.com/problems/add-two-numbers/</a></p>
+
+<pre><code>public ListNode addTwoNumbers(ListNode left, ListNode right) {
+    if (left == null &amp;&amp; right == null) {
+        return null;
+    }
+
+    ListNode result = new ListNode(0);
+    ListNode cursor = result;
+    int carry = 0;
+
+    while (left != null || right != null) {
+        int val = 0;
+
+        if (left != null) {
+            val += left.val;
+            left = left.next;
+        }
+
+        if (right != null) {
+            val += right.val;
+            right = right.next;
+        }
+
+        val += carry;
+        int digit = val % 10;
+        carry = val / 10;
+
+        cursor.val = digit;
+
+        if (left != null || right != null) {
+            cursor.next = new ListNode(0);
+            cursor = cursor.next;               
+        }
+    }
+
+    if (carry &gt; 0) {
+        cursor.next = new ListNode(1);
+    }
+
+    return result;
+}
+</code></pre>
+]]></content>
+  </entry>
+  
+</feed>
