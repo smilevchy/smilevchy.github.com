@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Category: Algorithm - smilevchy's blog</title>
+  <title>Leetcode_Valid Number - smilevchy's blog</title>
   <meta name="author" content="smilevchy">
 
   
-  <meta name="description" content="Category: algorithm">
+  <meta name="description" content="原题链接：https://oj.leetcode.com/problems/valid-number/ 这道题主要是注意 &ldquo;+&rdquo;/&ldquo;&ndash;&rdquo;/&ldquo;e&rdquo;/&ldquo;E&rdquo;/&ldquo;.&rdquo; &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://smilevchy.github.io/blog/categories/algorithm">
+  <link rel="canonical" href="http://smilevchy.github.io/blog/2014/11/05/leetcode-valid-number">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="smilevchy's blog" type="application/atom+xml">
@@ -64,176 +64,167 @@
   <div id="main">
     <div id="content">
       <div>
-<article role="article">
+<article class="hentry" role="article">
   
   <header>
-    <h1 class="entry-title">Category: Algorithm</h1>
+    
+      <h1 class="entry-title">Leetcode_Valid Number</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-11-05T18:29:57+08:00" pubdate data-updated="true">Nov 5<sup>th</sup>, 2014</time>
+        
+           | <a href="#disqus_thread"
+             data-disqus-identifier="http://smilevchy.github.io">Comments</a>
+        
+      </p>
     
   </header>
-  
-  <div id="blog-archives" class="category">
 
 
+<div class="entry-content"><p>原题链接：<a href="https://oj.leetcode.com/problems/valid-number/">https://oj.leetcode.com/problems/valid-number/</a></p>
 
-  
-  <h2>2014</h2>
+<p>这道题主要是注意 &ldquo;+&rdquo;/&ldquo;&ndash;&rdquo;/&ldquo;e&rdquo;/&ldquo;E&rdquo;/&ldquo;.&rdquo; 的位置，遍历字符串，当遇到上述几种符号时就判断位置是否正确，不正确则退出遍历过程，正确则继续，遇到非数字则退出遍历过程。</p>
 
-<article>
-  
-<h1><a href="/blog/2014/11/05/leetcode-valid-number/">Leetcode_Valid Number</a></h1>
-<time datetime="2014-11-05T18:29:57+08:00" pubdate><span class='month'>Nov</span> <span class='day'>05</span> <span class='year'>2014</span></time>
+<pre><code>public boolean isNumber(String s) {
+    if (s == null) {
+        return false;
+    }
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/algorithm/'>algorithm</a></span>
-</footer>
+    String str = s.trim();
 
+    if (str.length() == 0) {
+        return false;
+    }
 
-</article>
+    boolean result = true;
+    int length = str.length();
+    char c;
+    boolean exponentialExisted = false;
+    boolean dotExisted = false;
+    boolean quitLoop = false;
+    boolean digitExisted = false;
 
+    for (int i = 0; i &lt; length; i++) {
+        c = str.charAt(i);
 
+        if ('0' &lt;= c &amp;&amp; c &lt;= '9') {
+            digitExisted = true;
+        } else {
+            switch (c) {
+                case '+':
+                case '-':
+                    if (i == length - 1 || i != 0 &amp;&amp; str.charAt(i - 1) != 'e' &amp;&amp; str.charAt(i - 1) != 'E') {
+                        result = false;
 
-<article>
-  
-<h1><a href="/blog/2014/11/04/leetcode-jump-game/">Leetcode_Jump Game</a></h1>
-<time datetime="2014-11-04T21:34:32+08:00" pubdate><span class='month'>Nov</span> <span class='day'>04</span> <span class='year'>2014</span></time>
+                        quitLoop = true;
+                    }
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/algorithm/'>algorithm</a></span>
-</footer>
+                    break;
 
+                case 'e':
+                case 'E':
+                    if (exponentialExisted || i == 0 || i == length - 1 || ((str.charAt(i - 1) &lt; '0' || str.charAt(i - 1) &gt; '9') &amp;&amp; str.charAt(i - 1) != '.') || !digitExisted) {
+                        result = false;
 
-</article>
+                        quitLoop = true;
+                    }
 
+                    exponentialExisted = true;
 
+                    break;
 
-<article>
-  
-<h1><a href="/blog/2014/11/04/leetcode-rotate-list/">Leetcode_Rotate List</a></h1>
-<time datetime="2014-11-04T21:32:39+08:00" pubdate><span class='month'>Nov</span> <span class='day'>04</span> <span class='year'>2014</span></time>
+                case '.':
+                    if (dotExisted || exponentialExisted || length == 1 || (i == length - 1 &amp;&amp; (str.charAt(i - 1) &lt; '0' || str.charAt(i - 1) &gt; '9')) || 
+                        (i == 0 &amp;&amp; ((str.charAt(i + 1) &lt; '0' || str.charAt(i + 1) &gt; '9') &amp;&amp; (str.charAt(i + 1) != 'e' &amp;&amp; str.charAt(i + 1) != 'E')))) {
+                        result =  false;
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/algorithm/'>algorithm</a></span>
-</footer>
+                        quitLoop = true;
+                    }
 
+                    dotExisted = true;
 
-</article>
+                    break;
 
+                default:
+                    result = false;
+                    quitLoop = true;
+            }
+        }
 
+        if (quitLoop) break;
+    }
 
-<article>
-  
-<h1><a href="/blog/2014/11/04/leetcode-reverse-words-in-a-string/">Leetcode_Reverse Words in a String</a></h1>
-<time datetime="2014-11-04T21:30:38+08:00" pubdate><span class='month'>Nov</span> <span class='day'>04</span> <span class='year'>2014</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/algorithm/'>algorithm</a></span>
-</footer>
-
-
-</article>
-
-
-
-<article>
-  
-<h1><a href="/blog/2014/11/04/leetcode-reorder-list/">Leetcode_Reorder List</a></h1>
-<time datetime="2014-11-04T21:23:58+08:00" pubdate><span class='month'>Nov</span> <span class='day'>04</span> <span class='year'>2014</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/algorithm/'>algorithm</a></span>
-</footer>
-
-
-</article>
-
-
-
-<article>
-  
-<h1><a href="/blog/2014/11/04/leetcode-add-two-numbers/">Leetcode_Add Two Numbers</a></h1>
-<time datetime="2014-11-04T21:21:13+08:00" pubdate><span class='month'>Nov</span> <span class='day'>04</span> <span class='year'>2014</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/algorithm/'>algorithm</a></span>
-</footer>
-
-
-</article>
-
-
-
-<article>
-  
-<h1><a href="/blog/2014/11/04/leetcode-plus-one/">Leetcode_Plus One</a></h1>
-<time datetime="2014-11-04T21:19:18+08:00" pubdate><span class='month'>Nov</span> <span class='day'>04</span> <span class='year'>2014</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/algorithm/'>algorithm</a></span>
-</footer>
-
-
-</article>
-
-
-
-<article>
-  
-<h1><a href="/blog/2014/11/04/leetcode-reverse-integer/">Leetcode_Reverse Integer</a></h1>
-<time datetime="2014-11-04T21:16:33+08:00" pubdate><span class='month'>Nov</span> <span class='day'>04</span> <span class='year'>2014</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/algorithm/'>algorithm</a></span>
-</footer>
-
-
-</article>
-
-
-
-<article>
-  
-<h1><a href="/blog/2014/11/04/leetcode-string-to-integer-atoi/">Leetcode_String to Integer(atoi)</a></h1>
-<time datetime="2014-11-04T21:10:18+08:00" pubdate><span class='month'>Nov</span> <span class='day'>04</span> <span class='year'>2014</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/algorithm/'>algorithm</a></span>
-</footer>
-
-
-</article>
-
-
-
-<article>
-  
-<h1><a href="/blog/2014/11/04/leetcode-same-tree/">Leetcode_Same Tree</a></h1>
-<time datetime="2014-11-04T21:08:15+08:00" pubdate><span class='month'>Nov</span> <span class='day'>04</span> <span class='year'>2014</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/algorithm/'>algorithm</a></span>
-</footer>
-
-
-</article>
-
-
-
-<article>
-  
-<h1><a href="/blog/2014/11/04/leetcode-symmetric-tree/">Leetcode_Symmetric Tree</a></h1>
-<time datetime="2014-11-04T21:00:07+08:00" pubdate><span class='month'>Nov</span> <span class='day'>04</span> <span class='year'>2014</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/algorithm/'>algorithm</a></span>
-</footer>
-
-
-</article>
-
+    return result;
+}
+</code></pre>
 </div>
 
+
+  <footer>
+    <p class="meta">
+      
   
+
+<span class="byline author vcard">Posted by <span class="fn">smilevchy</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-11-05T18:29:57+08:00" pubdate data-updated="true">Nov 5<sup>th</sup>, 2014</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/algorithm/'>algorithm</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2014/11/04/leetcode-jump-game/" title="Previous Post: Leetcode_Jump Game">&laquo; Leetcode_Jump Game</a>
+      
+      
+    </p>
+  </footer>
 </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
 
 </div>
 
@@ -341,7 +332,10 @@
       var disqus_shortname = 'smilevchy';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://smilevchy.github.io/blog/2014/11/05/leetcode-valid-number/';
+        var disqus_url = 'http://smilevchy.github.io/blog/2014/11/05/leetcode-valid-number/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
