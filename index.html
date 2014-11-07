@@ -9,7 +9,7 @@
   <meta name="author" content="smilevchy">
 
   
-  <meta name="description" content="原题链接: https://oj.leetcode.com/problems/count-and-say/ public String countAndSay(int n) { if (n &lt; 0) return ""; StringBuilder sb = new &hellip;">
+  <meta name="description" content="原题链接: https://oj.leetcode.com/problems/valid-palindrome/ public boolean isPalindrome(String s) { if (s == null) return false; s = s.trim(); if (s. &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -65,6 +65,86 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/11/07/leetcode-valid-palindrome/">Leetcode_Valid Palindrome</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-11-07T16:28:29+08:00" pubdate data-updated="true">Nov 7<sup>th</sup>, 2014</time>
+        
+           | <a href="/blog/2014/11/07/leetcode-valid-palindrome/#disqus_thread"
+             data-disqus-identifier="http://smilevchy.github.io/blog/2014/11/07/leetcode-valid-palindrome/">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>原题链接: <a href="https://oj.leetcode.com/problems/valid-palindrome/">https://oj.leetcode.com/problems/valid-palindrome/</a></p>
+
+<pre><code>public boolean isPalindrome(String s) {
+    if (s == null) return false;
+
+    s = s.trim();
+
+    if (s.equals("")) return true;
+
+    int i = 0;
+    int j = s.length() - 1;
+    char leftChar;
+    char rightChar;
+
+    while (i &lt; j) {
+        leftChar = s.charAt(i);
+
+        if ((leftChar &lt; 'a' || leftChar &gt; 'z') &amp;&amp; (leftChar &lt; 'A' || leftChar &gt; 'Z') &amp;&amp; (leftChar &lt; '0' || leftChar &gt; '9')) {
+            i++;
+            continue;
+        }
+
+        rightChar = s.charAt(j);
+
+        if ((rightChar &lt; 'a' || rightChar &gt; 'z') &amp;&amp; (rightChar &lt; 'A' || rightChar &gt; 'Z') &amp;&amp; (rightChar &lt; '0' || rightChar &gt; '9')) {
+            j--;
+            continue;
+        }
+
+        if (leftChar &gt; rightChar) {
+            if (leftChar - 32 != rightChar) return false;
+        } else if (leftChar &lt; rightChar) {
+            if (leftChar + 32 != rightChar) return false;
+        }
+
+        i++;
+        j--;
+    }
+
+    return true;
+}
+</code></pre>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -755,67 +835,6 @@ public ListNode reverseList(ListNode head) {
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/11/04/leetcode-reverse-integer/">Leetcode_Reverse Integer</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-11-04T21:16:33+08:00" pubdate data-updated="true">Nov 4<sup>th</sup>, 2014</time>
-        
-           | <a href="/blog/2014/11/04/leetcode-reverse-integer/#disqus_thread"
-             data-disqus-identifier="http://smilevchy.github.io/blog/2014/11/04/leetcode-reverse-integer/">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>原题链接: <a href="https://oj.leetcode.com/problems/reverse-integer/">https://oj.leetcode.com/problems/reverse-integer/</a></p>
-
-<pre><code>public int reverse(int x) {
-    String str = Integer.toString(x);
-    StringBuilder sb = new StringBuilder(str.length());
-    char c;
-
-    if (str.indexOf('-') == 0) {
-        sb.append('-');
-    }
-    for (int i = str.length() - 1; i &gt;= 0; i--) {
-        c = str.charAt(i);
-
-        if (c == '-') {
-            break;
-        }
-
-        sb.append(c);
-    }
-
-    return Integer.parseInt(sb.toString());
-}
-</code></pre>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/2">&larr; Older</a>
@@ -836,7 +855,7 @@ public ListNode reverseList(ListNode head) {
 <section>
   <h1>Categories</h1>
   <ul id="categories">
-    <li class='category'><a href='/blog/categories/algorithm/'>algorithm (13)</a></li>
+    <li class='category'><a href='/blog/categories/algorithm/'>algorithm (14)</a></li>
 <li class='category'><a href='/blog/categories/android/'>android (1)</a></li>
 <li class='category'><a href='/blog/categories/jquery/'>jquery (1)</a></li>
 <li class='category'><a href='/blog/categories/nginx/'>nginx (1)</a></li>
@@ -849,6 +868,10 @@ public ListNode reverseList(ListNode head) {
 </section><section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2014/11/07/leetcode-valid-palindrome/">Leetcode_Valid Palindrome</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2014/11/07/leetcode-count-and-say/">Leetcode_Count and Say</a>
@@ -864,10 +887,6 @@ public ListNode reverseList(ListNode head) {
     
       <li class="post">
         <a href="/blog/2014/11/04/leetcode-jump-game/">Leetcode_Jump Game</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/11/04/leetcode-rotate-list/">Leetcode_Rotate List</a>
       </li>
     
   </ul>

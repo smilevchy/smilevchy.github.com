@@ -9,7 +9,7 @@
   <meta name="author" content="smilevchy">
 
   
-  <meta name="description" content="原题链接: https://oj.leetcode.com/problems/string-to-integer-atoi/ 这道题目着重点是 corner case 的处理，一串字符串在转换为整数时，需要考虑它的正负号，以及是否溢出。 public int atoi(String str) { &hellip;">
+  <meta name="description" content="原题链接: https://oj.leetcode.com/problems/reverse-integer/ public int reverse(int x) { String str = Integer.toString(x); StringBuilder sb = new &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -65,6 +65,67 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/11/04/leetcode-reverse-integer/">Leetcode_Reverse Integer</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-11-04T21:16:33+08:00" pubdate data-updated="true">Nov 4<sup>th</sup>, 2014</time>
+        
+           | <a href="/blog/2014/11/04/leetcode-reverse-integer/#disqus_thread"
+             data-disqus-identifier="http://smilevchy.github.io/blog/2014/11/04/leetcode-reverse-integer/">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>原题链接: <a href="https://oj.leetcode.com/problems/reverse-integer/">https://oj.leetcode.com/problems/reverse-integer/</a></p>
+
+<pre><code>public int reverse(int x) {
+    String str = Integer.toString(x);
+    StringBuilder sb = new StringBuilder(str.length());
+    char c;
+
+    if (str.indexOf('-') == 0) {
+        sb.append('-');
+    }
+    for (int i = str.length() - 1; i &gt;= 0; i--) {
+        c = str.charAt(i);
+
+        if (c == '-') {
+            break;
+        }
+
+        sb.append(c);
+    }
+
+    return Integer.parseInt(sb.toString());
+}
+</code></pre>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -539,60 +600,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/08/23/thinking-in-whether-programmers-should-stay-up-late/">Thinking in Whether Programmers Should Stay Up Late</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-08-23T10:31:39+08:00" pubdate data-updated="true">Aug 23<sup>rd</sup>, 2014</time>
-        
-           | <a href="/blog/2014/08/23/thinking-in-whether-programmers-should-stay-up-late/#disqus_thread"
-             data-disqus-identifier="http://smilevchy.github.io/blog/2014/08/23/thinking-in-whether-programmers-should-stay-up-late/">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>&ldquo;你平时几点睡觉啊&rdquo;</p>
-
-<p>“11点左右吧”</p>
-
-<p>“啊，那么早啊，不是说程序员都要熬夜吗”</p>
-
-<p>“&hellip;&hellip;”</p>
-
-<p>“你这样还是程序员吗？”</p>
-
-<p>“&hellip;&hellip;”</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2014/08/23/thinking-in-whether-programmers-should-stay-up-late/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/3">&larr; Older</a>
@@ -615,7 +622,7 @@
 <section>
   <h1>Categories</h1>
   <ul id="categories">
-    <li class='category'><a href='/blog/categories/algorithm/'>algorithm (13)</a></li>
+    <li class='category'><a href='/blog/categories/algorithm/'>algorithm (14)</a></li>
 <li class='category'><a href='/blog/categories/android/'>android (1)</a></li>
 <li class='category'><a href='/blog/categories/jquery/'>jquery (1)</a></li>
 <li class='category'><a href='/blog/categories/nginx/'>nginx (1)</a></li>
@@ -628,6 +635,10 @@
 </section><section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2014/11/07/leetcode-valid-palindrome/">Leetcode_Valid Palindrome</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2014/11/07/leetcode-count-and-say/">Leetcode_Count and Say</a>
@@ -643,10 +654,6 @@
     
       <li class="post">
         <a href="/blog/2014/11/04/leetcode-jump-game/">Leetcode_Jump Game</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/11/04/leetcode-rotate-list/">Leetcode_Rotate List</a>
       </li>
     
   </ul>

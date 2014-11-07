@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Algorithm | smilevchy's blog]]></title>
   <link href="http://smilevchy.github.io/blog/categories/algorithm/atom.xml" rel="self"/>
   <link href="http://smilevchy.github.io/"/>
-  <updated>2014-11-07T15:55:13+08:00</updated>
+  <updated>2014-11-07T16:29:46+08:00</updated>
   <id>http://smilevchy.github.io/</id>
   <author>
     <name><![CDATA[smilevchy]]></name>
@@ -12,6 +12,56 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Leetcode_Valid Palindrome]]></title>
+    <link href="http://smilevchy.github.io/blog/2014/11/07/leetcode-valid-palindrome/"/>
+    <updated>2014-11-07T16:28:29+08:00</updated>
+    <id>http://smilevchy.github.io/blog/2014/11/07/leetcode-valid-palindrome</id>
+    <content type="html"><![CDATA[<p>原题链接: <a href="https://oj.leetcode.com/problems/valid-palindrome/">https://oj.leetcode.com/problems/valid-palindrome/</a></p>
+
+<pre><code>public boolean isPalindrome(String s) {
+    if (s == null) return false;
+
+    s = s.trim();
+
+    if (s.equals("")) return true;
+
+    int i = 0;
+    int j = s.length() - 1;
+    char leftChar;
+    char rightChar;
+
+    while (i &lt; j) {
+        leftChar = s.charAt(i);
+
+        if ((leftChar &lt; 'a' || leftChar &gt; 'z') &amp;&amp; (leftChar &lt; 'A' || leftChar &gt; 'Z') &amp;&amp; (leftChar &lt; '0' || leftChar &gt; '9')) {
+            i++;
+            continue;
+        }
+
+        rightChar = s.charAt(j);
+
+        if ((rightChar &lt; 'a' || rightChar &gt; 'z') &amp;&amp; (rightChar &lt; 'A' || rightChar &gt; 'Z') &amp;&amp; (rightChar &lt; '0' || rightChar &gt; '9')) {
+            j--;
+            continue;
+        }
+
+        if (leftChar &gt; rightChar) {
+            if (leftChar - 32 != rightChar) return false;
+        } else if (leftChar &lt; rightChar) {
+            if (leftChar + 32 != rightChar) return false;
+        }
+
+        i++;
+        j--;
+    }
+
+    return true;
+}
+</code></pre>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Leetcode_Count and Say]]></title>
@@ -202,57 +252,6 @@
     }
 
     return true;
-}
-</code></pre>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Leetcode_Rotate List]]></title>
-    <link href="http://smilevchy.github.io/blog/2014/11/04/leetcode-rotate-list/"/>
-    <updated>2014-11-04T21:32:39+08:00</updated>
-    <id>http://smilevchy.github.io/blog/2014/11/04/leetcode-rotate-list</id>
-    <content type="html"><![CDATA[<p>原题链接: <a href="https://oj.leetcode.com/problems/rotate-list/">https://oj.leetcode.com/problems/rotate-list/</a></p>
-
-<pre><code>public ListNode rotateRight(ListNode head, int n) {
-    if (head == null) {
-        return head;
-    }
-
-    ListNode cursor = head;
-
-    int length = 0;
-    while (cursor != null) {
-        cursor = cursor.next;
-        length++;
-    }
-
-    if (n % length == 0) {
-        return head;
-    }
-
-    int targetIndex = length - n % length;
-
-    int currentIndex = 0;
-    cursor = head;
-    ListNode prev = null;
-
-    while (currentIndex &lt; targetIndex) {
-        prev = cursor;
-        cursor = cursor.next;
-        currentIndex++;
-    }
-
-    ListNode cursorTail = cursor;
-    while (cursorTail.next != null) {
-        cursorTail = cursorTail.next;
-    }
-
-    prev.next = null;
-    cursorTail.next = head;
-    head = cursor;
-
-    return head;
 }
 </code></pre>
 ]]></content>
