@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Algorithm | smilevchy's blog]]></title>
   <link href="http://smilevchy.github.io/blog/categories/algorithm/atom.xml" rel="self"/>
   <link href="http://smilevchy.github.io/"/>
-  <updated>2014-11-06T16:01:32+08:00</updated>
+  <updated>2014-11-07T15:55:13+08:00</updated>
   <id>http://smilevchy.github.io/</id>
   <author>
     <name><![CDATA[smilevchy]]></name>
@@ -12,6 +12,54 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Leetcode_Count and Say]]></title>
+    <link href="http://smilevchy.github.io/blog/2014/11/07/leetcode-count-and-say/"/>
+    <updated>2014-11-07T15:53:37+08:00</updated>
+    <id>http://smilevchy.github.io/blog/2014/11/07/leetcode-count-and-say</id>
+    <content type="html"><![CDATA[<p>原题链接: <a href="https://oj.leetcode.com/problems/count-and-say/">https://oj.leetcode.com/problems/count-and-say/</a></p>
+
+<pre><code>public String countAndSay(int n) {
+    if (n &lt; 0) return "";
+
+    StringBuilder sb = new StringBuilder();
+
+    if (n == 1) {
+        return sb.append("1").toString();
+    }
+
+    String prevStr = countAndSay(n - 1);
+    int length = prevStr.length();
+    char prevChar = ' '; 
+    int accumulator = 0;
+
+    for (int i = 0; i &lt; length; i++) {
+        char c = prevStr.charAt(i);
+
+        if (c == prevChar) {
+            accumulator++;
+        } else {
+            if (prevChar == ' ') {
+                prevChar = c;
+                accumulator = 1;
+                continue;
+            }
+
+            sb.append("" + accumulator + prevChar);
+
+            prevChar = c;
+            accumulator = 1;
+        }
+    }
+
+    if (accumulator &gt; 0) sb.append("" + accumulator + prevChar);
+
+    return sb.toString();
+}
+</code></pre>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Leetcode_Palindrome Number]]></title>
@@ -205,31 +253,6 @@
     head = cursor;
 
     return head;
-}
-</code></pre>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Leetcode_Reverse Words in a String]]></title>
-    <link href="http://smilevchy.github.io/blog/2014/11/04/leetcode-reverse-words-in-a-string/"/>
-    <updated>2014-11-04T21:30:38+08:00</updated>
-    <id>http://smilevchy.github.io/blog/2014/11/04/leetcode-reverse-words-in-a-string</id>
-    <content type="html"><![CDATA[<p>原题链接: <a href="https://oj.leetcode.com/problems/reverse-words-in-a-string/">https://oj.leetcode.com/problems/reverse-words-in-a-string/</a></p>
-
-<pre><code>public String reverseWords(String s) {
-    String[] words = s.trim().split("\\s+");
-    StringBuilder sb = new StringBuilder("");
-
-    for (int i = words.length - 1; i &gt;= 0; i--) {
-        sb.append(words[i]);
-
-        if (i &gt;= 1) {
-            sb.append(" ");
-        }
-    }
-
-    return sb.toString();
 }
 </code></pre>
 ]]></content>
