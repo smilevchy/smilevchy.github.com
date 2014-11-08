@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Algorithm | smilevchy's blog]]></title>
   <link href="http://smilevchy.github.io/blog/categories/algorithm/atom.xml" rel="self"/>
   <link href="http://smilevchy.github.io/"/>
-  <updated>2014-11-07T16:29:46+08:00</updated>
+  <updated>2014-11-08T13:52:49+08:00</updated>
   <id>http://smilevchy.github.io/</id>
   <author>
     <name><![CDATA[smilevchy]]></name>
@@ -12,6 +12,56 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Leetcode_Longest Common Prefix]]></title>
+    <link href="http://smilevchy.github.io/blog/2014/11/08/leetcode-longest-common-prefix/"/>
+    <updated>2014-11-08T13:51:55+08:00</updated>
+    <id>http://smilevchy.github.io/blog/2014/11/08/leetcode-longest-common-prefix</id>
+    <content type="html"><![CDATA[<p>原题链接: <a href="https://oj.leetcode.com/problems/longest-common-prefix/">https://oj.leetcode.com/problems/longest-common-prefix/</a></p>
+
+<pre><code>public String longestCommonPrefix(String[] strs) {
+    if (strs == null) return null;
+    if (strs.length == 0) return "";
+
+    String shortestStr = null;
+
+    // find the shortest string element
+    for (int i = 0, s = strs.length; i &lt; s; i++) {
+        if (shortestStr == null) {
+            shortestStr = strs[i];
+        } else if (strs[i].length() &lt; shortestStr.length()) {
+            shortestStr = strs[i];
+        }
+    }
+
+    StringBuilder longestCommonPrefix = new StringBuilder("");
+    int shortestStrLen = shortestStr.length();
+    char c;
+    boolean quitMatch = false;
+
+    for (int i = 0; i &lt; shortestStrLen; i++) {
+        c = shortestStr.charAt(i);
+
+        for (int j = 0, s = strs.length; j &lt; s; j++) {
+            if (strs[j].charAt(i) != c) {
+                quitMatch = true;
+                break;
+            }
+
+            if (j == strs.length - 1) {
+                longestCommonPrefix.append(c);
+            }
+        }
+
+        if (quitMatch) break;
+    }
+
+    return longestCommonPrefix.toString();
+}
+</code></pre>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Leetcode_Valid Palindrome]]></title>
@@ -220,38 +270,6 @@
     }
 
     return result;
-}
-</code></pre>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Leetcode_Jump Game]]></title>
-    <link href="http://smilevchy.github.io/blog/2014/11/04/leetcode-jump-game/"/>
-    <updated>2014-11-04T21:34:32+08:00</updated>
-    <id>http://smilevchy.github.io/blog/2014/11/04/leetcode-jump-game</id>
-    <content type="html"><![CDATA[<p>原题链接: <a href="https://oj.leetcode.com/problems/jump-game/">https://oj.leetcode.com/problems/jump-game/</a></p>
-
-<p>~_~ 这道题是看别人的解法的（当然，我不是照抄那种，看过理解了自己再写的）</p>
-
-<pre><code>public boolean canJump(int[] A) {
-    if (A == null || A.length == 0) {
-        return false;
-    }
-
-    int size = A.length;
-    int dstPosition = size - 1;
-    int maxReachPosition = 0;
-
-    for (int i = 0; i &lt;= maxReachPosition &amp;&amp; i &lt; size; i++) {
-        maxReachPosition = Math.max(i + A[i], maxReachPosition);
-    }
-
-    if (maxReachPosition &lt; dstPosition) {
-        return false;
-    }
-
-    return true;
 }
 </code></pre>
 ]]></content>

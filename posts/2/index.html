@@ -9,7 +9,7 @@
   <meta name="author" content="smilevchy">
 
   
-  <meta name="description" content="原题链接: https://oj.leetcode.com/problems/reverse-integer/ public int reverse(int x) { String str = Integer.toString(x); StringBuilder sb = new &hellip;">
+  <meta name="description" content="原题链接: https://oj.leetcode.com/problems/plus-one/ public byte[] plusOne(byte[] num) { if (num == null || num.length == 0) { return num; } byte[] &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -65,6 +65,76 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/11/04/leetcode-plus-one/">Leetcode_Plus One</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-11-04T21:19:18+08:00" pubdate data-updated="true">Nov 4<sup>th</sup>, 2014</time>
+        
+           | <a href="/blog/2014/11/04/leetcode-plus-one/#disqus_thread"
+             data-disqus-identifier="http://smilevchy.github.io/blog/2014/11/04/leetcode-plus-one/">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>原题链接: <a href="https://oj.leetcode.com/problems/plus-one/">https://oj.leetcode.com/problems/plus-one/</a></p>
+
+<pre><code>public byte[] plusOne(byte[] num) {
+    if (num == null || num.length == 0) {
+        return num;
+    }
+
+    byte[] result = num.clone();
+    int length = num.length;
+
+    for (int i = length - 1; i &gt;= 0; i--) {
+        byte digit = result[i];
+        result[i] = (byte) (digit + 1);
+
+        if (result[i] &lt; 10) {
+            break;
+        } else {
+            result[i] = 0;
+
+            if (i == 0) {
+
+                byte[] expandedNum = new byte[length + 1];
+                expandedNum[0] = 1;
+
+                return expandedNum;
+            }
+        }
+    }
+
+    return result;
+}
+</code></pre>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -556,50 +626,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/08/27/todays-shock/">Today&#8217;s Shock</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-08-27T21:04:45+08:00" pubdate data-updated="true">Aug 27<sup>th</sup>, 2014</time>
-        
-           | <a href="/blog/2014/08/27/todays-shock/#disqus_thread"
-             data-disqus-identifier="http://smilevchy.github.io/blog/2014/08/27/todays-shock/">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>今天在阅读论文 &lt;Architectural Styles and the Design of Network-based Software Architectures&gt; 中，里面谈到了 HTTP 协议的定义。它明确指出了一个观点：“HTTP 并不是一种传输协议”。HTTP 并不是被设计为一种传输协议（transport protocol），它是一种转移协议（transfer protocol）。</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2014/08/27/todays-shock/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/3">&larr; Older</a>
@@ -622,7 +648,7 @@
 <section>
   <h1>Categories</h1>
   <ul id="categories">
-    <li class='category'><a href='/blog/categories/algorithm/'>algorithm (14)</a></li>
+    <li class='category'><a href='/blog/categories/algorithm/'>algorithm (15)</a></li>
 <li class='category'><a href='/blog/categories/android/'>android (1)</a></li>
 <li class='category'><a href='/blog/categories/jquery/'>jquery (1)</a></li>
 <li class='category'><a href='/blog/categories/nginx/'>nginx (1)</a></li>
@@ -635,6 +661,10 @@
 </section><section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2014/11/08/leetcode-longest-common-prefix/">Leetcode_Longest Common Prefix</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2014/11/07/leetcode-valid-palindrome/">Leetcode_Valid Palindrome</a>
@@ -650,10 +680,6 @@
     
       <li class="post">
         <a href="/blog/2014/11/05/leetcode-valid-number/">Leetcode_Valid Number</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/11/04/leetcode-jump-game/">Leetcode_Jump Game</a>
       </li>
     
   </ul>
