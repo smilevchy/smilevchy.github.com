@@ -9,7 +9,7 @@
   <meta name="author" content="smilevchy">
 
   
-  <meta name="description" content="原题链接: https://oj.leetcode.com/problems/plus-one/ public byte[] plusOne(byte[] num) { if (num == null || num.length == 0) { return num; } byte[] &hellip;">
+  <meta name="description" content="原题链接: https://oj.leetcode.com/problems/add-two-numbers/ public ListNode addTwoNumbers(ListNode left, ListNode right) { if (left == null &amp;&amp; &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -65,6 +65,87 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/11/04/leetcode-add-two-numbers/">Leetcode_Add Two Numbers</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-11-04T21:21:13+08:00" pubdate data-updated="true">Nov 4<sup>th</sup>, 2014</time>
+        
+           | <a href="/blog/2014/11/04/leetcode-add-two-numbers/#disqus_thread"
+             data-disqus-identifier="http://smilevchy.github.io/blog/2014/11/04/leetcode-add-two-numbers/">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>原题链接: <a href="https://oj.leetcode.com/problems/add-two-numbers/">https://oj.leetcode.com/problems/add-two-numbers/</a></p>
+
+<pre><code>public ListNode addTwoNumbers(ListNode left, ListNode right) {
+    if (left == null &amp;&amp; right == null) {
+        return null;
+    }
+
+    ListNode result = new ListNode(0);
+    ListNode cursor = result;
+    int carry = 0;
+
+    while (left != null || right != null) {
+        int val = 0;
+
+        if (left != null) {
+            val += left.val;
+            left = left.next;
+        }
+
+        if (right != null) {
+            val += right.val;
+            right = right.next;
+        }
+
+        val += carry;
+        int digit = val % 10;
+        carry = val / 10;
+
+        cursor.val = digit;
+
+        if (left != null || right != null) {
+            cursor.next = new ListNode(0);
+            cursor = cursor.next;               
+        }
+    }
+
+    if (carry &gt; 0) {
+        cursor.next = new ListNode(1);
+    }
+
+    return result;
+}
+</code></pre>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -576,56 +657,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/09/16/jquerys-html-function-in-ie/">Problem With JQuery&#8217;s Html() Function in IE</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-09-16T21:20:02+08:00" pubdate data-updated="true">Sep 16<sup>th</sup>, 2014</time>
-        
-           | <a href="/blog/2014/09/16/jquerys-html-function-in-ie/#disqus_thread"
-             data-disqus-identifier="http://smilevchy.github.io/blog/2014/09/16/jquerys-html-function-in-ie/">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><pre><code>&lt;div id="container"&gt;
-&lt;/div&gt;
-&lt;div id="btnArea"&gt;
-    &lt;input type="button" value="clear" id="clearBtn" /&gt;
-    &lt;input type="button" value="add" id="addBtn" /&gt;
-&lt;/div&gt;
-</code></pre>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2014/09/16/jquerys-html-function-in-ie/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/3">&larr; Older</a>
@@ -650,6 +681,7 @@
   <ul id="categories">
     <li class='category'><a href='/blog/categories/algorithm/'>algorithm (15)</a></li>
 <li class='category'><a href='/blog/categories/android/'>android (1)</a></li>
+<li class='category'><a href='/blog/categories/babble/'>babble (1)</a></li>
 <li class='category'><a href='/blog/categories/jquery/'>jquery (1)</a></li>
 <li class='category'><a href='/blog/categories/nginx/'>nginx (1)</a></li>
 <li class='category'><a href='/blog/categories/shock/'>shock (2)</a></li>
@@ -661,6 +693,10 @@
 </section><section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2014/11/10/the-sorrow-of-individual-game-developer/">The Sorrow of Individual Game Developer</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2014/11/08/leetcode-longest-common-prefix/">Leetcode_Longest Common Prefix</a>
@@ -676,10 +712,6 @@
     
       <li class="post">
         <a href="/blog/2014/11/06/leetcode-palindrome-number/">Leetcode_Palindrome Number</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/11/05/leetcode-valid-number/">Leetcode_Valid Number</a>
       </li>
     
   </ul>

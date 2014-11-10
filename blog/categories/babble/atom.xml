@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Babble | smilevchy's blog]]></title>
+  <link href="http://smilevchy.github.io/blog/categories/babble/atom.xml" rel="self"/>
+  <link href="http://smilevchy.github.io/"/>
+  <updated>2014-11-10T22:23:31+08:00</updated>
+  <id>http://smilevchy.github.io/</id>
+  <author>
+    <name><![CDATA[smilevchy]]></name>
+    <email><![CDATA[smilevchy@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[The Sorrow of Individual Game Developer]]></title>
+    <link href="http://smilevchy.github.io/blog/2014/11/10/the-sorrow-of-individual-game-developer/"/>
+    <updated>2014-11-10T22:16:38+08:00</updated>
+    <id>http://smilevchy.github.io/blog/2014/11/10/the-sorrow-of-individual-game-developer</id>
+    <content type="html"><![CDATA[<p>想自己做个游戏，代码还好说，有困难的是各种图片资源、音效资源的创建。
+画家天赋、音乐天赋均没有点上&hellip;&hellip;</p>
+]]></content>
+  </entry>
+  
+</feed>

@@ -4,7 +4,7 @@
   <title><![CDATA[smilevchy's blog]]></title>
   <link href="http://smilevchy.github.io/atom.xml" rel="self"/>
   <link href="http://smilevchy.github.io/"/>
-  <updated>2014-11-08T13:52:49+08:00</updated>
+  <updated>2014-11-10T22:23:31+08:00</updated>
   <id>http://smilevchy.github.io/</id>
   <author>
     <name><![CDATA[smilevchy]]></name>
@@ -12,6 +12,16 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[The Sorrow of Individual Game Developer]]></title>
+    <link href="http://smilevchy.github.io/blog/2014/11/10/the-sorrow-of-individual-game-developer/"/>
+    <updated>2014-11-10T22:16:38+08:00</updated>
+    <id>http://smilevchy.github.io/blog/2014/11/10/the-sorrow-of-individual-game-developer</id>
+    <content type="html"><![CDATA[<p>想自己做个游戏，代码还好说，有困难的是各种图片资源、音效资源的创建。
+画家天赋、音乐天赋均没有点上&hellip;&hellip;</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Leetcode_Longest Common Prefix]]></title>
@@ -835,63 +845,6 @@ public ListNode reverseList(ListNode head) {
     }
 }
 </code></pre>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Problem With JQuery's Html() Function in IE]]></title>
-    <link href="http://smilevchy.github.io/blog/2014/09/16/jquerys-html-function-in-ie/"/>
-    <updated>2014-09-16T21:20:02+08:00</updated>
-    <id>http://smilevchy.github.io/blog/2014/09/16/jquerys-html-function-in-ie</id>
-    <content type="html"><![CDATA[<pre><code>&lt;div id="container"&gt;
-&lt;/div&gt;
-&lt;div id="btnArea"&gt;
-    &lt;input type="button" value="clear" id="clearBtn" /&gt;
-    &lt;input type="button" value="add" id="addBtn" /&gt;
-&lt;/div&gt;
-</code></pre>
-
-<!-- more -->
-
-
-<pre><code>&lt;script&gt;
-    $(function() {
-        var tempDom = $("&lt;span&gt;hello world&lt;/span&gt;");
-        $("#container").append(tempDom);
-
-        $("#btnArea").delegate("#clearBtn", "click", function(evt) {
-            $("#container").html("");
-        });
-
-        $("#btnArea").delegate("#addBtn", "click", function(evt) {
-            $("#container").append(tempDom);               
-        });
-    });
-&lt;/script&gt;   
-</code></pre>
-
-<p>上面那段代码在 Chrome、Firefox 下运行时，能够得到期望的结果，而如果在 IE 浏览器下运行时，其输出行为与预料中的不一样(此时 tempDom 的文本节点会被删除掉，感觉像在tempDom 上调用了 html())。
-为了 hack 这个问题，可以写成，预先把节点保存起来，在需要的时候就 clone 该节点来进行操作。</p>
-
-<p>即：</p>
-
-<pre><code>&lt;script&gt;
-    $(function() {
-        var tempDom = $("&lt;span&gt;hello world&lt;/span&gt;");
-        $("#container").append(tempDom.clone());
-
-        $("#btnArea").delegate("#clearBtn", "click", function(evt) {
-            $("#container").html("");
-        });
-
-        $("#btnArea").delegate("#addBtn", "click", function(evt) {
-            $("#container").append(tempDom.clone());               
-        });
-    });
-&lt;/script&gt;
-</code></pre>
-
-<p>这样没有什么效率，可以改成按需显示隐藏的方式(前提是符合项目需求)。</p>
 ]]></content>
   </entry>
   
