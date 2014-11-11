@@ -9,9 +9,8 @@
   <meta name="author" content="smilevchy">
 
   
-  <meta name="description" content="想自己做个游戏，代码还好说，有困难的是各种图片资源、音效资源的创建。
-画家天赋、音乐天赋均没有点上&hellip;&hellip;
-">
+  <meta name="description" content="原题链接: https://oj.leetcode.com/problems/roman-to-integer/ // I(1) V(5) X(10) L(50) C(100) D(500) M(1000)
+public int romanToInt(String s) { if (s == &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -67,6 +66,143 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/11/11/leetcode-roman-to-integer/">Leetcode_Roman to Integer</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-11-11T18:31:43+08:00" pubdate data-updated="true">Nov 11<sup>th</sup>, 2014</time>
+        
+           | <a href="/blog/2014/11/11/leetcode-roman-to-integer/#disqus_thread"
+             data-disqus-identifier="http://smilevchy.github.io/blog/2014/11/11/leetcode-roman-to-integer/">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>原题链接: <a href="https://oj.leetcode.com/problems/roman-to-integer/">https://oj.leetcode.com/problems/roman-to-integer/</a></p>
+
+<pre><code>// I(1) V(5) X(10) L(50) C(100) D(500) M(1000)
+public int romanToInt(String s) {
+    if (s == null) return 0;
+
+    s = s.trim();
+
+    if (s.equals("")) return 0;
+
+    int num = 0;
+    int length = s.length();
+    char cur;
+    char next;
+
+    for (int i = 0; i &lt; length; i++) {
+        cur = s.charAt(i);
+
+        switch (cur) {
+            case 'I':
+                if (i + 1 != length) {
+                    next = s.charAt(i + 1);
+
+                    if (next == 'V') {
+                        num += 4;
+                        i++;
+                        continue;
+                    } else if (next == 'X') {
+                        num += 9;
+                        i++;
+                        continue;
+                    }
+                }
+
+                num += 1;
+
+                break;
+
+            case 'V':
+                num += 5;
+
+                break;
+
+            case 'X':
+                if (i + 1 != length) {
+                    next = s.charAt(i + 1);
+
+                    if (next == 'L') {
+                        num += 40;
+                        i++;
+                        continue;
+                    } else if (next == 'C') {
+                        num += 90;
+                        i++;
+                        continue;
+                    }
+                }
+
+                num += 10;
+
+                break;
+
+            case 'L':
+                num += 50;
+
+                break;
+
+            case 'C':
+                if (i + 1 != length) {
+                    next = s.charAt(i + 1);
+
+                    if (next == 'D') {
+                        num += 400;
+                        i++;
+                        continue;
+                    } else if (next == 'M') {
+                        num += 900;
+                        i++;
+                        continue;
+                    }
+                }
+
+                num += 100;
+
+                break;
+
+            case 'D':
+                num += 500;
+                break;
+
+            case 'M':
+                num += 1000;
+                break;
+        }
+    }
+
+    return num;
+}
+</code></pre>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -718,94 +854,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/11/04/leetcode-reorder-list/">Leetcode_Reorder List</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-11-04T21:23:58+08:00" pubdate data-updated="true">Nov 4<sup>th</sup>, 2014</time>
-        
-           | <a href="/blog/2014/11/04/leetcode-reorder-list/#disqus_thread"
-             data-disqus-identifier="http://smilevchy.github.io/blog/2014/11/04/leetcode-reorder-list/">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>原题链接: <a href="https://oj.leetcode.com/problems/reorder-list/">https://oj.leetcode.com/problems/reorder-list/</a></p>
-
-<p>正是这道题，让我知道了有 “快慢指针” 这种好东西。以前每当要做类似遍历链表的操作时，比如取中点，总是先遍历完一遍链表来获得长度，求得中点再遍历一次，实在是不雅观。而通过 “快慢指针”，只要写一次遍历就可以拿到中点。</p>
-
-<pre><code>public void reorderList(ListNode head) {
-    if (head == null || head.next == null) {
-        return;
-    }
-
-    ListNode slowCursor = head;
-    ListNode quickCursor = head;
-
-    while (quickCursor != null &amp;&amp; quickCursor.next != null &amp;&amp; quickCursor.next.next != null &amp;&amp; slowCursor != null &amp;&amp; slowCursor.next != null) {
-        slowCursor = slowCursor.next;
-        quickCursor = quickCursor.next.next;
-    }
-
-    ListNode head1 = head;
-    ListNode head2 = slowCursor.next;
-
-    head2 = reverseList(head2);
-
-    while (head1 != null &amp;&amp; head2 != null) {
-        ListNode head2Next = head2.next;
-        head2.next = head1.next;
-        head1.next = head2;
-        head1 = head2.next;
-        head2 = head2Next;
-
-        if (head2 == null) {
-            head1.next = null;
-        }
-    }
-}
-
-public ListNode reverseList(ListNode head) {
-    ListNode prev = null;
-    ListNode cursor = head;
-    ListNode next = null;
-
-    while (cursor != null) {
-        next = cursor.next;
-        cursor.next = prev;
-        prev = cursor;
-        cursor = next;
-    }
-
-    return prev;
-}
-</code></pre>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/2">&larr; Older</a>
@@ -826,7 +874,7 @@ public ListNode reverseList(ListNode head) {
 <section>
   <h1>Categories</h1>
   <ul id="categories">
-    <li class='category'><a href='/blog/categories/algorithm/'>algorithm (15)</a></li>
+    <li class='category'><a href='/blog/categories/algorithm/'>algorithm (16)</a></li>
 <li class='category'><a href='/blog/categories/android/'>android (1)</a></li>
 <li class='category'><a href='/blog/categories/babble/'>babble (1)</a></li>
 <li class='category'><a href='/blog/categories/jquery/'>jquery (1)</a></li>
@@ -842,6 +890,10 @@ public ListNode reverseList(ListNode head) {
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/11/11/leetcode-roman-to-integer/">Leetcode_Roman to Integer</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/11/10/the-sorrow-of-individual-game-developer/">The Sorrow of Individual Game Developer</a>
       </li>
     
@@ -855,10 +907,6 @@ public ListNode reverseList(ListNode head) {
     
       <li class="post">
         <a href="/blog/2014/11/07/leetcode-count-and-say/">Leetcode_Count and Say</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/11/06/leetcode-palindrome-number/">Leetcode_Palindrome Number</a>
       </li>
     
   </ul>
