@@ -10,7 +10,7 @@ categories: Algorithm
 
 <!-- more -->
 
-1. 一开始的解法有考虑到当前待插节点的后续节点，其实是没必要的
+一开始的解法有考虑到当前待插节点的后续节点，其实是没必要的
 
     public ListNode insertionSortList(ListNode head) {
 		if (head == null) return null;
@@ -46,7 +46,8 @@ categories: Algorithm
 		}
     }
 
-2. 使用额外的一个节点来记录遍历位置
+	
+使用额外的一个节点来记录遍历位置
 
     public ListNode insertionSortList(ListNode head) {
 		if (head == null) return null;
@@ -69,5 +70,5 @@ categories: Algorithm
 		}
 		
 		return cursor.next;
-    }    		
+    } 		
   
