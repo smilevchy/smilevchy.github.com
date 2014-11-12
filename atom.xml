@@ -4,7 +4,7 @@
   <title><![CDATA[smilevchy's blog]]></title>
   <link href="http://smilevchy.github.io/atom.xml" rel="self"/>
   <link href="http://smilevchy.github.io/"/>
-  <updated>2014-11-11T18:32:51+08:00</updated>
+  <updated>2014-11-12T16:37:26+08:00</updated>
   <id>http://smilevchy.github.io/</id>
   <author>
     <name><![CDATA[smilevchy]]></name>
@@ -14,11 +14,93 @@
 
   
   <entry>
+    <title type="html"><![CDATA[Leetcode_Insertion Sort List]]></title>
+    <link href="http://smilevchy.github.io/blog/2014/11/12/leetcode-insertion-sort-list/"/>
+    <updated>2014-11-12T16:32:44+08:00</updated>
+    <id>http://smilevchy.github.io/blog/2014/11/12/leetcode-insertion-sort-list</id>
+    <content type="html"><![CDATA[<p>原题链接: <a href="https://oj.leetcode.com/problems/insertion-sort-list/">https://oj.leetcode.com/problems/insertion-sort-list/</a></p>
+
+<!-- more -->
+
+
+<ol>
+<li><p>一开始的解法有考虑到当前待插节点的后续节点，其实是没必要的</p>
+
+<p> public ListNode insertionSortList(ListNode head) {
+     if (head == null) return null;</p>
+
+<pre><code> ListNode cursorOut = head.next;
+ ListNode cursorOutPrev = head;
+
+ while (cursorOut != null) {
+     ListNode cursorIn = head;
+     ListNode cursorInPrev = null;
+     ListNode cursorOutNext = cursorOut.next;
+
+     while (cursorIn != null &amp;&amp; cursorIn != cursorOut) {
+         if (cursorIn.val &gt; cursorOut.val) {
+             if (cursorInPrev != null) {
+                 cursorInPrev.next = cursorOut;
+             } else {
+                 head = cursorOut;
+             }
+             cursorOutPrev.next = cursorOutNext;
+             cursorOut.next = cursorIn;
+             cursorOut = cursorOutPrev;
+
+             break;
+         }
+
+         cursorInPrev = cursorIn;
+         cursorIn = cursorIn.next;
+     }
+
+     cursorOutPrev = cursorOut;
+     cursorOut = cursorOutNext;
+ }
+</code></pre>
+
+<p> }</p></li>
+<li><p>使用额外的一个节点来记录遍历位置</p>
+
+<p> public ListNode insertionSortList(ListNode head) {
+     if (head == null) return null;</p>
+
+<pre><code> ListNode insertedNode = head;
+ ListNode cursor = new ListNode(0);
+ ListNode prev = null;
+
+ while (insertedNode != null) {
+     ListNode insertedNodeNext = insertedNode.next;
+     prev = cursor;
+
+     while (prev.next != null &amp;&amp; prev.next.val &lt;= insertedNode.val) {
+         prev = prev.next;
+     }
+
+     insertedNode.next = prev.next;
+     prev.next = insertedNode;
+     insertedNode = insertedNodeNext;
+ }
+
+ return cursor.next;
+</code></pre>
+
+<p> }</p></li>
+</ol>
+
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[Leetcode_Roman to Integer]]></title>
     <link href="http://smilevchy.github.io/blog/2014/11/11/leetcode-roman-to-integer/"/>
     <updated>2014-11-11T18:31:43+08:00</updated>
     <id>http://smilevchy.github.io/blog/2014/11/11/leetcode-roman-to-integer</id>
     <content type="html"><![CDATA[<p>原题链接: <a href="https://oj.leetcode.com/problems/roman-to-integer/">https://oj.leetcode.com/problems/roman-to-integer/</a></p>
+
+<!-- more -->
+
 
 <pre><code>// I(1) V(5) X(10) L(50) C(100) D(500) M(1000)
 public int romanToInt(String s) {
@@ -137,6 +219,9 @@ public int romanToInt(String s) {
     <id>http://smilevchy.github.io/blog/2014/11/08/leetcode-longest-common-prefix</id>
     <content type="html"><![CDATA[<p>原题链接: <a href="https://oj.leetcode.com/problems/longest-common-prefix/">https://oj.leetcode.com/problems/longest-common-prefix/</a></p>
 
+<!-- more -->
+
+
 <pre><code>public String longestCommonPrefix(String[] strs) {
     if (strs == null) return null;
     if (strs.length == 0) return "";
@@ -186,6 +271,9 @@ public int romanToInt(String s) {
     <updated>2014-11-07T16:28:29+08:00</updated>
     <id>http://smilevchy.github.io/blog/2014/11/07/leetcode-valid-palindrome</id>
     <content type="html"><![CDATA[<p>原题链接: <a href="https://oj.leetcode.com/problems/valid-palindrome/">https://oj.leetcode.com/problems/valid-palindrome/</a></p>
+
+<!-- more -->
+
 
 <pre><code>public boolean isPalindrome(String s) {
     if (s == null) return false;
@@ -237,6 +325,9 @@ public int romanToInt(String s) {
     <id>http://smilevchy.github.io/blog/2014/11/07/leetcode-count-and-say</id>
     <content type="html"><![CDATA[<p>原题链接: <a href="https://oj.leetcode.com/problems/count-and-say/">https://oj.leetcode.com/problems/count-and-say/</a></p>
 
+<!-- more -->
+
+
 <pre><code>public String countAndSay(int n) {
     if (n &lt; 0) return "";
 
@@ -285,6 +376,9 @@ public int romanToInt(String s) {
     <id>http://smilevchy.github.io/blog/2014/11/06/leetcode-palindrome-number</id>
     <content type="html"><![CDATA[<p>原题链接: <a href="https://oj.leetcode.com/problems/palindrome-number/">https://oj.leetcode.com/problems/palindrome-number/</a></p>
 
+<!-- more -->
+
+
 <pre><code>public boolean isPalindrome(int x) {
     if (x &lt; 0) return false;
 
@@ -314,6 +408,9 @@ public int romanToInt(String s) {
     <updated>2014-11-05T18:29:57+08:00</updated>
     <id>http://smilevchy.github.io/blog/2014/11/05/leetcode-valid-number</id>
     <content type="html"><![CDATA[<p>原题链接：<a href="https://oj.leetcode.com/problems/valid-number/">https://oj.leetcode.com/problems/valid-number/</a></p>
+
+<!-- more -->
+
 
 <p>这道题主要是注意 &ldquo;+&rdquo;/&ldquo;&ndash;&rdquo;/&ldquo;e&rdquo;/&ldquo;E&rdquo;/&ldquo;.&rdquo; 的位置，遍历字符串，当遇到上述几种符号时就判断位置是否正确，不正确则退出遍历过程，正确则继续，遇到非数字则退出遍历过程。</p>
 
@@ -399,6 +496,9 @@ public int romanToInt(String s) {
     <id>http://smilevchy.github.io/blog/2014/11/04/leetcode-jump-game</id>
     <content type="html"><![CDATA[<p>原题链接: <a href="https://oj.leetcode.com/problems/jump-game/">https://oj.leetcode.com/problems/jump-game/</a></p>
 
+<!-- more -->
+
+
 <p>~_~ 这道题是看别人的解法的（当然，我不是照抄那种，看过理解了自己再写的）</p>
 
 <pre><code>public boolean canJump(int[] A) {
@@ -430,6 +530,9 @@ public int romanToInt(String s) {
     <updated>2014-11-04T21:32:39+08:00</updated>
     <id>http://smilevchy.github.io/blog/2014/11/04/leetcode-rotate-list</id>
     <content type="html"><![CDATA[<p>原题链接: <a href="https://oj.leetcode.com/problems/rotate-list/">https://oj.leetcode.com/problems/rotate-list/</a></p>
+
+<!-- more -->
+
 
 <pre><code>public ListNode rotateRight(ListNode head, int n) {
     if (head == null) {
@@ -481,6 +584,9 @@ public int romanToInt(String s) {
     <updated>2014-11-04T21:30:38+08:00</updated>
     <id>http://smilevchy.github.io/blog/2014/11/04/leetcode-reverse-words-in-a-string</id>
     <content type="html"><![CDATA[<p>原题链接: <a href="https://oj.leetcode.com/problems/reverse-words-in-a-string/">https://oj.leetcode.com/problems/reverse-words-in-a-string/</a></p>
+
+<!-- more -->
+
 
 <pre><code>public String reverseWords(String s) {
     String[] words = s.trim().split("\\s+");
@@ -565,6 +671,9 @@ public ListNode reverseList(ListNode head) {
     <id>http://smilevchy.github.io/blog/2014/11/04/leetcode-add-two-numbers</id>
     <content type="html"><![CDATA[<p>原题链接: <a href="https://oj.leetcode.com/problems/add-two-numbers/">https://oj.leetcode.com/problems/add-two-numbers/</a></p>
 
+<!-- more -->
+
+
 <pre><code>public ListNode addTwoNumbers(ListNode left, ListNode right) {
     if (left == null &amp;&amp; right == null) {
         return null;
@@ -616,6 +725,9 @@ public ListNode reverseList(ListNode head) {
     <id>http://smilevchy.github.io/blog/2014/11/04/leetcode-plus-one</id>
     <content type="html"><![CDATA[<p>原题链接: <a href="https://oj.leetcode.com/problems/plus-one/">https://oj.leetcode.com/problems/plus-one/</a></p>
 
+<!-- more -->
+
+
 <pre><code>public byte[] plusOne(byte[] num) {
     if (num == null || num.length == 0) {
         return num;
@@ -656,6 +768,9 @@ public ListNode reverseList(ListNode head) {
     <id>http://smilevchy.github.io/blog/2014/11/04/leetcode-reverse-integer</id>
     <content type="html"><![CDATA[<p>原题链接: <a href="https://oj.leetcode.com/problems/reverse-integer/">https://oj.leetcode.com/problems/reverse-integer/</a></p>
 
+<!-- more -->
+
+
 <pre><code>public int reverse(int x) {
     String str = Integer.toString(x);
     StringBuilder sb = new StringBuilder(str.length());
@@ -686,6 +801,9 @@ public ListNode reverseList(ListNode head) {
     <updated>2014-11-04T21:10:18+08:00</updated>
     <id>http://smilevchy.github.io/blog/2014/11/04/leetcode-string-to-integer-atoi</id>
     <content type="html"><![CDATA[<p>原题链接: <a href="https://oj.leetcode.com/problems/string-to-integer-atoi/">https://oj.leetcode.com/problems/string-to-integer-atoi/</a></p>
+
+<!-- more -->
+
 
 <p>这道题目着重点是 corner case 的处理，一串字符串在转换为整数时，需要考虑它的正负号，以及是否溢出。</p>
 
@@ -733,6 +851,9 @@ public ListNode reverseList(ListNode head) {
     <id>http://smilevchy.github.io/blog/2014/11/04/leetcode-same-tree</id>
     <content type="html"><![CDATA[<p>原题链接: <a href="https://oj.leetcode.com/problems/same-tree/">https://oj.leetcode.com/problems/same-tree/</a></p>
 
+<!-- more -->
+
+
 <pre><code>public boolean isSameTree(TreeNode p, TreeNode q) {
     if (p == null &amp;&amp; q == null || p == q) {
         return true;
@@ -756,6 +877,9 @@ public ListNode reverseList(ListNode head) {
     <updated>2014-11-04T21:00:07+08:00</updated>
     <id>http://smilevchy.github.io/blog/2014/11/04/leetcode-symmetric-tree</id>
     <content type="html"><![CDATA[<p>原题链接: <a href="https://oj.leetcode.com/problems/symmetric-tree/">https://oj.leetcode.com/problems/symmetric-tree/</a></p>
+
+<!-- more -->
+
 
 <p>一般涉及到树的问题我都喜欢用递归解法。</p>
 
@@ -815,23 +939,6 @@ public ListNode reverseList(ListNode head) {
 现在开始有意识注意整体的设计，代码的可阅读性，力求让代码不仅存在于”开发时“，也存在于”阅读时“、”维护时“。</p>
 
 <p><strong>感悟二：像写作文一样写代码，让非代码作者阅读时就像在读一篇文章一样，有整体架构，有段落意思，尽量让代码的内涵浮出海平面。</strong></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Today's Shock]]></title>
-    <link href="http://smilevchy.github.io/blog/2014/10/19/todays-shock/"/>
-    <updated>2014-10-19T22:12:30+08:00</updated>
-    <id>http://smilevchy.github.io/blog/2014/10/19/todays-shock</id>
-    <content type="html"><![CDATA[<p>在看《Ruby 编程语言》时，看到一个概念，叫做 Shebang 注释。
-一开始以为是那本书籍打印出错了，因为 ”Shebang“ 看起来怎么也不像英文单词，而且直觉上能发成中文的音。
-但是还是觉得不对，所以就搜索了一下。</p>
-
-<p>&ndash;_&ndash; 结果显示，维基百科上真的有叫 Shebang 的条目。
-看了条目内容，才知道原来 Shebang 指的就是平常 unix shell 文件开头第一行的那句话（#!/bin/sh）的前两个字符。
-而一般把形如 #!XXXXX 的语句叫做 Shebang 注释。</p>
-
-<p>我真是孤陋寡闻&hellip;&hellip;</p>
 ]]></content>
   </entry>
   

@@ -9,8 +9,7 @@
   <meta name="author" content="smilevchy">
 
   
-  <meta name="description" content="原题链接: https://oj.leetcode.com/problems/roman-to-integer/ // I(1) V(5) X(10) L(50) C(100) D(500) M(1000)
-public int romanToInt(String s) { if (s == &hellip;">
+  <meta name="description" content="原题链接: https://oj.leetcode.com/problems/insertion-sort-list/ ">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -72,6 +71,50 @@ public int romanToInt(String s) { if (s == &hellip;">
       
   <header>
     
+      <h1 class="entry-title"><a href="/blog/2014/11/12/leetcode-insertion-sort-list/">Leetcode_Insertion Sort List</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-11-12T16:32:44+08:00" pubdate data-updated="true">Nov 12<sup>th</sup>, 2014</time>
+        
+           | <a href="/blog/2014/11/12/leetcode-insertion-sort-list/#disqus_thread"
+             data-disqus-identifier="http://smilevchy.github.io/blog/2014/11/12/leetcode-insertion-sort-list/">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>原题链接: <a href="https://oj.leetcode.com/problems/insertion-sort-list/">https://oj.leetcode.com/problems/insertion-sort-list/</a></p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2014/11/12/leetcode-insertion-sort-list/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/blog/2014/11/11/leetcode-roman-to-integer/">Leetcode_Roman to Integer</a></h1>
     
     
@@ -100,105 +143,12 @@ public int romanToInt(String s) { if (s == &hellip;">
 
   <div class="entry-content"><p>原题链接: <a href="https://oj.leetcode.com/problems/roman-to-integer/">https://oj.leetcode.com/problems/roman-to-integer/</a></p>
 
-<pre><code>// I(1) V(5) X(10) L(50) C(100) D(500) M(1000)
-public int romanToInt(String s) {
-    if (s == null) return 0;
-
-    s = s.trim();
-
-    if (s.equals("")) return 0;
-
-    int num = 0;
-    int length = s.length();
-    char cur;
-    char next;
-
-    for (int i = 0; i &lt; length; i++) {
-        cur = s.charAt(i);
-
-        switch (cur) {
-            case 'I':
-                if (i + 1 != length) {
-                    next = s.charAt(i + 1);
-
-                    if (next == 'V') {
-                        num += 4;
-                        i++;
-                        continue;
-                    } else if (next == 'X') {
-                        num += 9;
-                        i++;
-                        continue;
-                    }
-                }
-
-                num += 1;
-
-                break;
-
-            case 'V':
-                num += 5;
-
-                break;
-
-            case 'X':
-                if (i + 1 != length) {
-                    next = s.charAt(i + 1);
-
-                    if (next == 'L') {
-                        num += 40;
-                        i++;
-                        continue;
-                    } else if (next == 'C') {
-                        num += 90;
-                        i++;
-                        continue;
-                    }
-                }
-
-                num += 10;
-
-                break;
-
-            case 'L':
-                num += 50;
-
-                break;
-
-            case 'C':
-                if (i + 1 != length) {
-                    next = s.charAt(i + 1);
-
-                    if (next == 'D') {
-                        num += 400;
-                        i++;
-                        continue;
-                    } else if (next == 'M') {
-                        num += 900;
-                        i++;
-                        continue;
-                    }
-                }
-
-                num += 100;
-
-                break;
-
-            case 'D':
-                num += 500;
-                break;
-
-            case 'M':
-                num += 1000;
-                break;
-        }
-    }
-
-    return num;
-}
-</code></pre>
 </div>
   
+  
+    <footer>
+      <a rel="full-article" href="/blog/2014/11/11/leetcode-roman-to-integer/">Read on &rarr;</a>
+    </footer>
   
 
 
@@ -277,48 +227,12 @@ public int romanToInt(String s) {
 
   <div class="entry-content"><p>原题链接: <a href="https://oj.leetcode.com/problems/longest-common-prefix/">https://oj.leetcode.com/problems/longest-common-prefix/</a></p>
 
-<pre><code>public String longestCommonPrefix(String[] strs) {
-    if (strs == null) return null;
-    if (strs.length == 0) return "";
-
-    String shortestStr = null;
-
-    // find the shortest string element
-    for (int i = 0, s = strs.length; i &lt; s; i++) {
-        if (shortestStr == null) {
-            shortestStr = strs[i];
-        } else if (strs[i].length() &lt; shortestStr.length()) {
-            shortestStr = strs[i];
-        }
-    }
-
-    StringBuilder longestCommonPrefix = new StringBuilder("");
-    int shortestStrLen = shortestStr.length();
-    char c;
-    boolean quitMatch = false;
-
-    for (int i = 0; i &lt; shortestStrLen; i++) {
-        c = shortestStr.charAt(i);
-
-        for (int j = 0, s = strs.length; j &lt; s; j++) {
-            if (strs[j].charAt(i) != c) {
-                quitMatch = true;
-                break;
-            }
-
-            if (j == strs.length - 1) {
-                longestCommonPrefix.append(c);
-            }
-        }
-
-        if (quitMatch) break;
-    }
-
-    return longestCommonPrefix.toString();
-}
-</code></pre>
 </div>
   
+  
+    <footer>
+      <a rel="full-article" href="/blog/2014/11/08/leetcode-longest-common-prefix/">Read on &rarr;</a>
+    </footer>
   
 
 
@@ -357,48 +271,12 @@ public int romanToInt(String s) {
 
   <div class="entry-content"><p>原题链接: <a href="https://oj.leetcode.com/problems/valid-palindrome/">https://oj.leetcode.com/problems/valid-palindrome/</a></p>
 
-<pre><code>public boolean isPalindrome(String s) {
-    if (s == null) return false;
-
-    s = s.trim();
-
-    if (s.equals("")) return true;
-
-    int i = 0;
-    int j = s.length() - 1;
-    char leftChar;
-    char rightChar;
-
-    while (i &lt; j) {
-        leftChar = s.charAt(i);
-
-        if ((leftChar &lt; 'a' || leftChar &gt; 'z') &amp;&amp; (leftChar &lt; 'A' || leftChar &gt; 'Z') &amp;&amp; (leftChar &lt; '0' || leftChar &gt; '9')) {
-            i++;
-            continue;
-        }
-
-        rightChar = s.charAt(j);
-
-        if ((rightChar &lt; 'a' || rightChar &gt; 'z') &amp;&amp; (rightChar &lt; 'A' || rightChar &gt; 'Z') &amp;&amp; (rightChar &lt; '0' || rightChar &gt; '9')) {
-            j--;
-            continue;
-        }
-
-        if (leftChar &gt; rightChar) {
-            if (leftChar - 32 != rightChar) return false;
-        } else if (leftChar &lt; rightChar) {
-            if (leftChar + 32 != rightChar) return false;
-        }
-
-        i++;
-        j--;
-    }
-
-    return true;
-}
-</code></pre>
 </div>
   
+  
+    <footer>
+      <a rel="full-article" href="/blog/2014/11/07/leetcode-valid-palindrome/">Read on &rarr;</a>
+    </footer>
   
 
 
@@ -437,46 +315,12 @@ public int romanToInt(String s) {
 
   <div class="entry-content"><p>原题链接: <a href="https://oj.leetcode.com/problems/count-and-say/">https://oj.leetcode.com/problems/count-and-say/</a></p>
 
-<pre><code>public String countAndSay(int n) {
-    if (n &lt; 0) return "";
-
-    StringBuilder sb = new StringBuilder();
-
-    if (n == 1) {
-        return sb.append("1").toString();
-    }
-
-    String prevStr = countAndSay(n - 1);
-    int length = prevStr.length();
-    char prevChar = ' '; 
-    int accumulator = 0;
-
-    for (int i = 0; i &lt; length; i++) {
-        char c = prevStr.charAt(i);
-
-        if (c == prevChar) {
-            accumulator++;
-        } else {
-            if (prevChar == ' ') {
-                prevChar = c;
-                accumulator = 1;
-                continue;
-            }
-
-            sb.append("" + accumulator + prevChar);
-
-            prevChar = c;
-            accumulator = 1;
-        }
-    }
-
-    if (accumulator &gt; 0) sb.append("" + accumulator + prevChar);
-
-    return sb.toString();
-}
-</code></pre>
 </div>
   
+  
+    <footer>
+      <a rel="full-article" href="/blog/2014/11/07/leetcode-count-and-say/">Read on &rarr;</a>
+    </footer>
   
 
 
@@ -515,28 +359,12 @@ public int romanToInt(String s) {
 
   <div class="entry-content"><p>原题链接: <a href="https://oj.leetcode.com/problems/palindrome-number/">https://oj.leetcode.com/problems/palindrome-number/</a></p>
 
-<pre><code>public boolean isPalindrome(int x) {
-    if (x &lt; 0) return false;
-
-    // get length of digit
-    int carryLength = 1;
-    while (x / carryLength &gt;= 10) {
-        carryLength *= 10;
-    }
-
-    while (x &gt; 0) {
-        // test if the first and the end digit is equal; if not, return false
-        if (x / carryLength != x % 10) return false;
-
-        x = x % carryLength / 10;    // get the new number without the first and the end digit
-        carryLength /= 100;    // for cutting the first and the end digit, we need to shrink carry length by 2 times
-    }
-
-    return true;
-}
-</code></pre>
 </div>
   
+  
+    <footer>
+      <a rel="full-article" href="/blog/2014/11/06/leetcode-palindrome-number/">Read on &rarr;</a>
+    </footer>
   
 
 
@@ -575,82 +403,12 @@ public int romanToInt(String s) {
 
   <div class="entry-content"><p>原题链接：<a href="https://oj.leetcode.com/problems/valid-number/">https://oj.leetcode.com/problems/valid-number/</a></p>
 
-<p>这道题主要是注意 &ldquo;+&rdquo;/&ldquo;&ndash;&rdquo;/&ldquo;e&rdquo;/&ldquo;E&rdquo;/&ldquo;.&rdquo; 的位置，遍历字符串，当遇到上述几种符号时就判断位置是否正确，不正确则退出遍历过程，正确则继续，遇到非数字则退出遍历过程。</p>
-
-<pre><code>public boolean isNumber(String s) {
-    if (s == null) {
-        return false;
-    }
-
-    String str = s.trim();
-
-    if (str.length() == 0) {
-        return false;
-    }
-
-    boolean result = true;
-    int length = str.length();
-    char c;
-    boolean exponentialExisted = false;
-    boolean dotExisted = false;
-    boolean quitLoop = false;
-    boolean digitExisted = false;
-
-    for (int i = 0; i &lt; length; i++) {
-        c = str.charAt(i);
-
-        if ('0' &lt;= c &amp;&amp; c &lt;= '9') {
-            digitExisted = true;
-        } else {
-            switch (c) {
-                case '+':
-                case '-':
-                    if (i == length - 1 || i != 0 &amp;&amp; str.charAt(i - 1) != 'e' &amp;&amp; str.charAt(i - 1) != 'E') {
-                        result = false;
-
-                        quitLoop = true;
-                    }
-
-                    break;
-
-                case 'e':
-                case 'E':
-                    if (exponentialExisted || i == 0 || i == length - 1 || ((str.charAt(i - 1) &lt; '0' || str.charAt(i - 1) &gt; '9') &amp;&amp; str.charAt(i - 1) != '.') || !digitExisted) {
-                        result = false;
-
-                        quitLoop = true;
-                    }
-
-                    exponentialExisted = true;
-
-                    break;
-
-                case '.':
-                    if (dotExisted || exponentialExisted || length == 1 || (i == length - 1 &amp;&amp; (str.charAt(i - 1) &lt; '0' || str.charAt(i - 1) &gt; '9')) || 
-                        (i == 0 &amp;&amp; ((str.charAt(i + 1) &lt; '0' || str.charAt(i + 1) &gt; '9') &amp;&amp; (str.charAt(i + 1) != 'e' &amp;&amp; str.charAt(i + 1) != 'E')))) {
-                        result =  false;
-
-                        quitLoop = true;
-                    }
-
-                    dotExisted = true;
-
-                    break;
-
-                default:
-                    result = false;
-                    quitLoop = true;
-            }
-        }
-
-        if (quitLoop) break;
-    }
-
-    return result;
-}
-</code></pre>
 </div>
   
+  
+    <footer>
+      <a rel="full-article" href="/blog/2014/11/05/leetcode-valid-number/">Read on &rarr;</a>
+    </footer>
   
 
 
@@ -689,30 +447,12 @@ public int romanToInt(String s) {
 
   <div class="entry-content"><p>原题链接: <a href="https://oj.leetcode.com/problems/jump-game/">https://oj.leetcode.com/problems/jump-game/</a></p>
 
-<p>~_~ 这道题是看别人的解法的（当然，我不是照抄那种，看过理解了自己再写的）</p>
-
-<pre><code>public boolean canJump(int[] A) {
-    if (A == null || A.length == 0) {
-        return false;
-    }
-
-    int size = A.length;
-    int dstPosition = size - 1;
-    int maxReachPosition = 0;
-
-    for (int i = 0; i &lt;= maxReachPosition &amp;&amp; i &lt; size; i++) {
-        maxReachPosition = Math.max(i + A[i], maxReachPosition);
-    }
-
-    if (maxReachPosition &lt; dstPosition) {
-        return false;
-    }
-
-    return true;
-}
-</code></pre>
 </div>
   
+  
+    <footer>
+      <a rel="full-article" href="/blog/2014/11/04/leetcode-jump-game/">Read on &rarr;</a>
+    </footer>
   
 
 
@@ -751,104 +491,12 @@ public int romanToInt(String s) {
 
   <div class="entry-content"><p>原题链接: <a href="https://oj.leetcode.com/problems/rotate-list/">https://oj.leetcode.com/problems/rotate-list/</a></p>
 
-<pre><code>public ListNode rotateRight(ListNode head, int n) {
-    if (head == null) {
-        return head;
-    }
-
-    ListNode cursor = head;
-
-    int length = 0;
-    while (cursor != null) {
-        cursor = cursor.next;
-        length++;
-    }
-
-    if (n % length == 0) {
-        return head;
-    }
-
-    int targetIndex = length - n % length;
-
-    int currentIndex = 0;
-    cursor = head;
-    ListNode prev = null;
-
-    while (currentIndex &lt; targetIndex) {
-        prev = cursor;
-        cursor = cursor.next;
-        currentIndex++;
-    }
-
-    ListNode cursorTail = cursor;
-    while (cursorTail.next != null) {
-        cursorTail = cursorTail.next;
-    }
-
-    prev.next = null;
-    cursorTail.next = head;
-    head = cursor;
-
-    return head;
-}
-</code></pre>
 </div>
   
   
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/11/04/leetcode-reverse-words-in-a-string/">Leetcode_Reverse Words in a String</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-11-04T21:30:38+08:00" pubdate data-updated="true">Nov 4<sup>th</sup>, 2014</time>
-        
-           | <a href="/blog/2014/11/04/leetcode-reverse-words-in-a-string/#disqus_thread"
-             data-disqus-identifier="http://smilevchy.github.io/blog/2014/11/04/leetcode-reverse-words-in-a-string/">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>原题链接: <a href="https://oj.leetcode.com/problems/reverse-words-in-a-string/">https://oj.leetcode.com/problems/reverse-words-in-a-string/</a></p>
-
-<pre><code>public String reverseWords(String s) {
-    String[] words = s.trim().split("\\s+");
-    StringBuilder sb = new StringBuilder("");
-
-    for (int i = words.length - 1; i &gt;= 0; i--) {
-        sb.append(words[i]);
-
-        if (i &gt;= 1) {
-            sb.append(" ");
-        }
-    }
-
-    return sb.toString();
-}
-</code></pre>
-</div>
-  
+    <footer>
+      <a rel="full-article" href="/blog/2014/11/04/leetcode-rotate-list/">Read on &rarr;</a>
+    </footer>
   
 
 
@@ -874,7 +522,7 @@ public int romanToInt(String s) {
 <section>
   <h1>Categories</h1>
   <ul id="categories">
-    <li class='category'><a href='/blog/categories/algorithm/'>algorithm (16)</a></li>
+    <li class='category'><a href='/blog/categories/algorithm/'>algorithm (17)</a></li>
 <li class='category'><a href='/blog/categories/android/'>android (1)</a></li>
 <li class='category'><a href='/blog/categories/babble/'>babble (1)</a></li>
 <li class='category'><a href='/blog/categories/jquery/'>jquery (1)</a></li>
@@ -890,6 +538,10 @@ public int romanToInt(String s) {
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/11/12/leetcode-insertion-sort-list/">Leetcode_Insertion Sort List</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/11/11/leetcode-roman-to-integer/">Leetcode_Roman to Integer</a>
       </li>
     
@@ -903,10 +555,6 @@ public int romanToInt(String s) {
     
       <li class="post">
         <a href="/blog/2014/11/07/leetcode-valid-palindrome/">Leetcode_Valid Palindrome</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/11/07/leetcode-count-and-say/">Leetcode_Count and Say</a>
       </li>
     
   </ul>

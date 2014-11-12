@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Algorithm | smilevchy's blog]]></title>
   <link href="http://smilevchy.github.io/blog/categories/algorithm/atom.xml" rel="self"/>
   <link href="http://smilevchy.github.io/"/>
-  <updated>2014-11-11T18:32:51+08:00</updated>
+  <updated>2014-11-12T16:37:26+08:00</updated>
   <id>http://smilevchy.github.io/</id>
   <author>
     <name><![CDATA[smilevchy]]></name>
@@ -14,11 +14,93 @@
 
   
   <entry>
+    <title type="html"><![CDATA[Leetcode_Insertion Sort List]]></title>
+    <link href="http://smilevchy.github.io/blog/2014/11/12/leetcode-insertion-sort-list/"/>
+    <updated>2014-11-12T16:32:44+08:00</updated>
+    <id>http://smilevchy.github.io/blog/2014/11/12/leetcode-insertion-sort-list</id>
+    <content type="html"><![CDATA[<p>原题链接: <a href="https://oj.leetcode.com/problems/insertion-sort-list/">https://oj.leetcode.com/problems/insertion-sort-list/</a></p>
+
+<!-- more -->
+
+
+<ol>
+<li><p>一开始的解法有考虑到当前待插节点的后续节点，其实是没必要的</p>
+
+<p> public ListNode insertionSortList(ListNode head) {
+     if (head == null) return null;</p>
+
+<pre><code> ListNode cursorOut = head.next;
+ ListNode cursorOutPrev = head;
+
+ while (cursorOut != null) {
+     ListNode cursorIn = head;
+     ListNode cursorInPrev = null;
+     ListNode cursorOutNext = cursorOut.next;
+
+     while (cursorIn != null &amp;&amp; cursorIn != cursorOut) {
+         if (cursorIn.val &gt; cursorOut.val) {
+             if (cursorInPrev != null) {
+                 cursorInPrev.next = cursorOut;
+             } else {
+                 head = cursorOut;
+             }
+             cursorOutPrev.next = cursorOutNext;
+             cursorOut.next = cursorIn;
+             cursorOut = cursorOutPrev;
+
+             break;
+         }
+
+         cursorInPrev = cursorIn;
+         cursorIn = cursorIn.next;
+     }
+
+     cursorOutPrev = cursorOut;
+     cursorOut = cursorOutNext;
+ }
+</code></pre>
+
+<p> }</p></li>
+<li><p>使用额外的一个节点来记录遍历位置</p>
+
+<p> public ListNode insertionSortList(ListNode head) {
+     if (head == null) return null;</p>
+
+<pre><code> ListNode insertedNode = head;
+ ListNode cursor = new ListNode(0);
+ ListNode prev = null;
+
+ while (insertedNode != null) {
+     ListNode insertedNodeNext = insertedNode.next;
+     prev = cursor;
+
+     while (prev.next != null &amp;&amp; prev.next.val &lt;= insertedNode.val) {
+         prev = prev.next;
+     }
+
+     insertedNode.next = prev.next;
+     prev.next = insertedNode;
+     insertedNode = insertedNodeNext;
+ }
+
+ return cursor.next;
+</code></pre>
+
+<p> }</p></li>
+</ol>
+
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[Leetcode_Roman to Integer]]></title>
     <link href="http://smilevchy.github.io/blog/2014/11/11/leetcode-roman-to-integer/"/>
     <updated>2014-11-11T18:31:43+08:00</updated>
     <id>http://smilevchy.github.io/blog/2014/11/11/leetcode-roman-to-integer</id>
     <content type="html"><![CDATA[<p>原题链接: <a href="https://oj.leetcode.com/problems/roman-to-integer/">https://oj.leetcode.com/problems/roman-to-integer/</a></p>
+
+<!-- more -->
+
 
 <pre><code>// I(1) V(5) X(10) L(50) C(100) D(500) M(1000)
 public int romanToInt(String s) {
@@ -127,6 +209,9 @@ public int romanToInt(String s) {
     <id>http://smilevchy.github.io/blog/2014/11/08/leetcode-longest-common-prefix</id>
     <content type="html"><![CDATA[<p>原题链接: <a href="https://oj.leetcode.com/problems/longest-common-prefix/">https://oj.leetcode.com/problems/longest-common-prefix/</a></p>
 
+<!-- more -->
+
+
 <pre><code>public String longestCommonPrefix(String[] strs) {
     if (strs == null) return null;
     if (strs.length == 0) return "";
@@ -176,6 +261,9 @@ public int romanToInt(String s) {
     <updated>2014-11-07T16:28:29+08:00</updated>
     <id>http://smilevchy.github.io/blog/2014/11/07/leetcode-valid-palindrome</id>
     <content type="html"><![CDATA[<p>原题链接: <a href="https://oj.leetcode.com/problems/valid-palindrome/">https://oj.leetcode.com/problems/valid-palindrome/</a></p>
+
+<!-- more -->
+
 
 <pre><code>public boolean isPalindrome(String s) {
     if (s == null) return false;
@@ -227,6 +315,9 @@ public int romanToInt(String s) {
     <id>http://smilevchy.github.io/blog/2014/11/07/leetcode-count-and-say</id>
     <content type="html"><![CDATA[<p>原题链接: <a href="https://oj.leetcode.com/problems/count-and-say/">https://oj.leetcode.com/problems/count-and-say/</a></p>
 
+<!-- more -->
+
+
 <pre><code>public String countAndSay(int n) {
     if (n &lt; 0) return "";
 
@@ -263,36 +354,6 @@ public int romanToInt(String s) {
     if (accumulator &gt; 0) sb.append("" + accumulator + prevChar);
 
     return sb.toString();
-}
-</code></pre>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Leetcode_Palindrome Number]]></title>
-    <link href="http://smilevchy.github.io/blog/2014/11/06/leetcode-palindrome-number/"/>
-    <updated>2014-11-06T15:59:14+08:00</updated>
-    <id>http://smilevchy.github.io/blog/2014/11/06/leetcode-palindrome-number</id>
-    <content type="html"><![CDATA[<p>原题链接: <a href="https://oj.leetcode.com/problems/palindrome-number/">https://oj.leetcode.com/problems/palindrome-number/</a></p>
-
-<pre><code>public boolean isPalindrome(int x) {
-    if (x &lt; 0) return false;
-
-    // get length of digit
-    int carryLength = 1;
-    while (x / carryLength &gt;= 10) {
-        carryLength *= 10;
-    }
-
-    while (x &gt; 0) {
-        // test if the first and the end digit is equal; if not, return false
-        if (x / carryLength != x % 10) return false;
-
-        x = x % carryLength / 10;    // get the new number without the first and the end digit
-        carryLength /= 100;    // for cutting the first and the end digit, we need to shrink carry length by 2 times
-    }
-
-    return true;
 }
 </code></pre>
 ]]></content>

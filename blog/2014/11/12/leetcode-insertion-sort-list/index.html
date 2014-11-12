@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Leetcode_Longest Common Prefix - smilevchy's blog</title>
+  <title>Leetcode_Insertion Sort List - smilevchy's blog</title>
   <meta name="author" content="smilevchy">
 
   
-  <meta name="description" content="原题链接: https://oj.leetcode.com/problems/longest-common-prefix/ public String longestCommonPrefix(String[] strs) { if (strs == null) return null; if ( &hellip;">
+  <meta name="description" content="原题链接: https://oj.leetcode.com/problems/insertion-sort-list/ 一开始的解法有考虑到当前待插节点的后续节点，其实是没必要的 public ListNode insertionSortList(ListNode head) { if (head &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://smilevchy.github.io/blog/2014/11/08/leetcode-longest-common-prefix">
+  <link rel="canonical" href="http://smilevchy.github.io/blog/2014/11/12/leetcode-insertion-sort-list">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="smilevchy's blog" type="application/atom+xml">
@@ -68,7 +68,7 @@
   
   <header>
     
-      <h1 class="entry-title">Leetcode_Longest Common Prefix</h1>
+      <h1 class="entry-title">Leetcode_Insertion Sort List</h1>
     
     
       <p class="meta">
@@ -84,7 +84,7 @@
   
 
 
-<time datetime="2014-11-08T13:51:55+08:00" pubdate data-updated="true">Nov 8<sup>th</sup>, 2014</time>
+<time datetime="2014-11-12T16:32:44+08:00" pubdate data-updated="true">Nov 12<sup>th</sup>, 2014</time>
         
            | <a href="#disqus_thread"
              data-disqus-identifier="http://smilevchy.github.io">Comments</a>
@@ -94,51 +94,77 @@
   </header>
 
 
-<div class="entry-content"><p>原题链接: <a href="https://oj.leetcode.com/problems/longest-common-prefix/">https://oj.leetcode.com/problems/longest-common-prefix/</a></p>
+<div class="entry-content"><p>原题链接: <a href="https://oj.leetcode.com/problems/insertion-sort-list/">https://oj.leetcode.com/problems/insertion-sort-list/</a></p>
 
 <!-- more -->
 
 
-<pre><code>public String longestCommonPrefix(String[] strs) {
-    if (strs == null) return null;
-    if (strs.length == 0) return "";
+<ol>
+<li><p>一开始的解法有考虑到当前待插节点的后续节点，其实是没必要的</p>
 
-    String shortestStr = null;
+<p> public ListNode insertionSortList(ListNode head) {
+     if (head == null) return null;</p>
 
-    // find the shortest string element
-    for (int i = 0, s = strs.length; i &lt; s; i++) {
-        if (shortestStr == null) {
-            shortestStr = strs[i];
-        } else if (strs[i].length() &lt; shortestStr.length()) {
-            shortestStr = strs[i];
-        }
-    }
+<pre><code> ListNode cursorOut = head.next;
+ ListNode cursorOutPrev = head;
 
-    StringBuilder longestCommonPrefix = new StringBuilder("");
-    int shortestStrLen = shortestStr.length();
-    char c;
-    boolean quitMatch = false;
+ while (cursorOut != null) {
+     ListNode cursorIn = head;
+     ListNode cursorInPrev = null;
+     ListNode cursorOutNext = cursorOut.next;
 
-    for (int i = 0; i &lt; shortestStrLen; i++) {
-        c = shortestStr.charAt(i);
+     while (cursorIn != null &amp;&amp; cursorIn != cursorOut) {
+         if (cursorIn.val &gt; cursorOut.val) {
+             if (cursorInPrev != null) {
+                 cursorInPrev.next = cursorOut;
+             } else {
+                 head = cursorOut;
+             }
+             cursorOutPrev.next = cursorOutNext;
+             cursorOut.next = cursorIn;
+             cursorOut = cursorOutPrev;
 
-        for (int j = 0, s = strs.length; j &lt; s; j++) {
-            if (strs[j].charAt(i) != c) {
-                quitMatch = true;
-                break;
-            }
+             break;
+         }
 
-            if (j == strs.length - 1) {
-                longestCommonPrefix.append(c);
-            }
-        }
+         cursorInPrev = cursorIn;
+         cursorIn = cursorIn.next;
+     }
 
-        if (quitMatch) break;
-    }
-
-    return longestCommonPrefix.toString();
-}
+     cursorOutPrev = cursorOut;
+     cursorOut = cursorOutNext;
+ }
 </code></pre>
+
+<p> }</p></li>
+<li><p>使用额外的一个节点来记录遍历位置</p>
+
+<p> public ListNode insertionSortList(ListNode head) {
+     if (head == null) return null;</p>
+
+<pre><code> ListNode insertedNode = head;
+ ListNode cursor = new ListNode(0);
+ ListNode prev = null;
+
+ while (insertedNode != null) {
+     ListNode insertedNodeNext = insertedNode.next;
+     prev = cursor;
+
+     while (prev.next != null &amp;&amp; prev.next.val &lt;= insertedNode.val) {
+         prev = prev.next;
+     }
+
+     insertedNode.next = prev.next;
+     prev.next = insertedNode;
+     insertedNode = insertedNodeNext;
+ }
+
+ return cursor.next;
+</code></pre>
+
+<p> }</p></li>
+</ol>
+
 </div>
 
 
@@ -161,7 +187,7 @@
   
 
 
-<time datetime="2014-11-08T13:51:55+08:00" pubdate data-updated="true">Nov 8<sup>th</sup>, 2014</time>
+<time datetime="2014-11-12T16:32:44+08:00" pubdate data-updated="true">Nov 12<sup>th</sup>, 2014</time>
       
 
 <span class="categories">
@@ -182,10 +208,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2014/11/07/leetcode-valid-palindrome/" title="Previous Post: Leetcode_Valid Palindrome">&laquo; Leetcode_Valid Palindrome</a>
+        <a class="basic-alignment left" href="/blog/2014/11/11/leetcode-roman-to-integer/" title="Previous Post: Leetcode_Roman to Integer">&laquo; Leetcode_Roman to Integer</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2014/11/10/the-sorrow-of-individual-game-developer/" title="Next Post: The Sorrow of Individual Game Developer">The Sorrow of Individual Game Developer &raquo;</a>
       
     </p>
   </footer>
@@ -305,8 +329,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://smilevchy.github.io/blog/2014/11/08/leetcode-longest-common-prefix/';
-        var disqus_url = 'http://smilevchy.github.io/blog/2014/11/08/leetcode-longest-common-prefix/';
+        var disqus_identifier = 'http://smilevchy.github.io/blog/2014/11/12/leetcode-insertion-sort-list/';
+        var disqus_url = 'http://smilevchy.github.io/blog/2014/11/12/leetcode-insertion-sort-list/';
         var disqus_script = 'embed.js';
       
     (function () {
