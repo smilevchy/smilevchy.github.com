@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Algorithm | smilevchy's blog]]></title>
   <link href="http://smilevchy.github.io/blog/categories/algorithm/atom.xml" rel="self"/>
   <link href="http://smilevchy.github.io/"/>
-  <updated>2014-11-12T16:37:26+08:00</updated>
+  <updated>2014-11-12T21:37:11+08:00</updated>
   <id>http://smilevchy.github.io/</id>
   <author>
     <name><![CDATA[smilevchy]]></name>
@@ -23,72 +23,68 @@
 <!-- more -->
 
 
-<ol>
-<li><p>一开始的解法有考虑到当前待插节点的后续节点，其实是没必要的</p>
+<p>一开始的解法有考虑到当前待插节点的后续节点，其实是没必要的</p>
 
-<p> public ListNode insertionSortList(ListNode head) {
-     if (head == null) return null;</p>
+<pre><code>public ListNode insertionSortList(ListNode head) {
+    if (head == null) return null;
 
-<pre><code> ListNode cursorOut = head.next;
- ListNode cursorOutPrev = head;
+    ListNode cursorOut = head.next;
+    ListNode cursorOutPrev = head;
 
- while (cursorOut != null) {
-     ListNode cursorIn = head;
-     ListNode cursorInPrev = null;
-     ListNode cursorOutNext = cursorOut.next;
+    while (cursorOut != null) {
+        ListNode cursorIn = head;
+        ListNode cursorInPrev = null;
+        ListNode cursorOutNext = cursorOut.next;
 
-     while (cursorIn != null &amp;&amp; cursorIn != cursorOut) {
-         if (cursorIn.val &gt; cursorOut.val) {
-             if (cursorInPrev != null) {
-                 cursorInPrev.next = cursorOut;
-             } else {
-                 head = cursorOut;
-             }
-             cursorOutPrev.next = cursorOutNext;
-             cursorOut.next = cursorIn;
-             cursorOut = cursorOutPrev;
+        while (cursorIn != null &amp;&amp; cursorIn != cursorOut) {
+            if (cursorIn.val &gt; cursorOut.val) {
+                if (cursorInPrev != null) {
+                    cursorInPrev.next = cursorOut;
+                } else {
+                    head = cursorOut;
+                }
+                cursorOutPrev.next = cursorOutNext;
+                cursorOut.next = cursorIn;
+                cursorOut = cursorOutPrev;
 
-             break;
-         }
+                break;
+            }
 
-         cursorInPrev = cursorIn;
-         cursorIn = cursorIn.next;
-     }
+            cursorInPrev = cursorIn;
+            cursorIn = cursorIn.next;
+        }
 
-     cursorOutPrev = cursorOut;
-     cursorOut = cursorOutNext;
- }
+        cursorOutPrev = cursorOut;
+        cursorOut = cursorOutNext;
+    }
+}
 </code></pre>
 
-<p> }</p></li>
-<li><p>使用额外的一个节点来记录遍历位置</p>
+<p>使用额外的一个节点来记录遍历位置</p>
 
-<p> public ListNode insertionSortList(ListNode head) {
-     if (head == null) return null;</p>
+<pre><code>public ListNode insertionSortList(ListNode head) {
+    if (head == null) return null;
 
-<pre><code> ListNode insertedNode = head;
- ListNode cursor = new ListNode(0);
- ListNode prev = null;
+    ListNode insertedNode = head;
+    ListNode cursor = new ListNode(0);
+    ListNode prev = null;
 
- while (insertedNode != null) {
-     ListNode insertedNodeNext = insertedNode.next;
-     prev = cursor;
+    while (insertedNode != null) {
+        ListNode insertedNodeNext = insertedNode.next;
+        prev = cursor;
 
-     while (prev.next != null &amp;&amp; prev.next.val &lt;= insertedNode.val) {
-         prev = prev.next;
-     }
+        while (prev.next != null &amp;&amp; prev.next.val &lt;= insertedNode.val) {
+            prev = prev.next;
+        }
 
-     insertedNode.next = prev.next;
-     prev.next = insertedNode;
-     insertedNode = insertedNodeNext;
- }
+        insertedNode.next = prev.next;
+        prev.next = insertedNode;
+        insertedNode = insertedNodeNext;
+    }
 
- return cursor.next;
+    return cursor.next;
+}       
 </code></pre>
-
-<p> }</p></li>
-</ol>
-
 ]]></content>
   </entry>
   
