@@ -8,6 +8,8 @@ categories: Algorithm
 
 原题链接: https://oj.leetcode.com/problems/reverse-integer/
 
+<!-- more -->
+
     public int reverse(int x) {
 		String str = Integer.toString(x);
 		StringBuilder sb = new StringBuilder(str.length());

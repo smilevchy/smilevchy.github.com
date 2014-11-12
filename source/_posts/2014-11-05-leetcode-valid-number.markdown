@@ -8,6 +8,8 @@ categories: Algorithm
 
 原题链接：https://oj.leetcode.com/problems/valid-number/
 
+<!-- more -->
+
 这道题主要是注意 "+"/"-"/"e"/"E"/"." 的位置，遍历字符串，当遇到上述几种符号时就判断位置是否正确，不正确则退出遍历过程，正确则继续，遇到非数字则退出遍历过程。
 
     public boolean isNumber(String s) {

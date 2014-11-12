@@ -8,6 +8,8 @@ categories: Algorithm
 
 原题链接: https://oj.leetcode.com/problems/add-two-numbers/
 
+<!-- more -->
+
     public ListNode addTwoNumbers(ListNode left, ListNode right) {
     	if (left == null && right == null) {
     		return null;

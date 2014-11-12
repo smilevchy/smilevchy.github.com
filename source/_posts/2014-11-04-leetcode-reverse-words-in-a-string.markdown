@@ -8,6 +8,8 @@ categories: Algorithm
 
 原题链接: https://oj.leetcode.com/problems/reverse-words-in-a-string/
 
+<!-- more -->
+
     public String reverseWords(String s) {
 		String[] words = s.trim().split("\\s+");
 		StringBuilder sb = new StringBuilder("");

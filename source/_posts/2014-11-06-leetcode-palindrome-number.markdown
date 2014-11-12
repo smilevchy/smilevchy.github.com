@@ -8,6 +8,8 @@ categories: Algorithm
 
 原题链接: https://oj.leetcode.com/problems/palindrome-number/
 
+<!-- more -->
+
     public boolean isPalindrome(int x) {
 		if (x < 0) return false;
 

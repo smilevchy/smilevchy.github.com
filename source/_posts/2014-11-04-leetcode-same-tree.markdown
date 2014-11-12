@@ -8,6 +8,8 @@ categories: Algorithm
 
 原题链接: https://oj.leetcode.com/problems/same-tree/
 
+<!-- more -->
+
     public boolean isSameTree(TreeNode p, TreeNode q) {
         if (p == null && q == null || p == q) {
         	return true;

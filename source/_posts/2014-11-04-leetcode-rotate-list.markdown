@@ -8,6 +8,8 @@ categories: Algorithm
 
 原题链接: https://oj.leetcode.com/problems/rotate-list/
 
+<!-- more -->
+
     public ListNode rotateRight(ListNode head, int n) {
 		if (head == null) {
 			return head;

@@ -8,6 +8,8 @@ categories: Algorithm
 
 原题链接: https://oj.leetcode.com/problems/plus-one/
 
+<!-- more -->
+
     public byte[] plusOne(byte[] num) {
     	if (num == null || num.length == 0) {
     		return num;

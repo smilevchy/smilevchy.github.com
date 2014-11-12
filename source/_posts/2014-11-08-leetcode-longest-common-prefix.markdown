@@ -8,6 +8,8 @@ categories: Algorithm
 
 原题链接: https://oj.leetcode.com/problems/longest-common-prefix/
 
+<!-- more -->
+
     public String longestCommonPrefix(String[] strs) {
 		if (strs == null) return null;
 		if (strs.length == 0) return "";

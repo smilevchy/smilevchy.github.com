@@ -8,6 +8,8 @@ categories: Algorithm
 
 原题链接: https://oj.leetcode.com/problems/string-to-integer-atoi/
 
+<!-- more -->
+
 这道题目着重点是 corner case 的处理，一串字符串在转换为整数时，需要考虑它的正负号，以及是否溢出。
 
     public int atoi(String str) {

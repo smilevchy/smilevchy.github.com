@@ -8,6 +8,8 @@ categories: Algorithm
 
 原题链接: https://oj.leetcode.com/problems/valid-palindrome/
 
+<!-- more -->
+
     public boolean isPalindrome(String s) {
 		if (s == null) return false;
 		

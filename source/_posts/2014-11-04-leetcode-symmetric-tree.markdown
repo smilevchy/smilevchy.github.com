@@ -8,6 +8,8 @@ categories: Algorithm
 
 原题链接: https://oj.leetcode.com/problems/symmetric-tree/
 
+<!-- more -->
+
 一般涉及到树的问题我都喜欢用递归解法。
 
     public boolean isSymmetric(TreeNode root) {

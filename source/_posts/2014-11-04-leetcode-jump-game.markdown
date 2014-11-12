@@ -8,6 +8,8 @@ categories: Algorithm
 
 原题链接: https://oj.leetcode.com/problems/jump-game/
 
+<!-- more -->
+
 ~_~ 这道题是看别人的解法的（当然，我不是照抄那种，看过理解了自己再写的）
     
 	public boolean canJump(int[] A) {

@@ -8,6 +8,8 @@ categories: Algorithm
 
 原题链接: https://oj.leetcode.com/problems/count-and-say/
 
+<!-- more -->
+
     public String countAndSay(int n) {
 		if (n < 0) return "";
 		
