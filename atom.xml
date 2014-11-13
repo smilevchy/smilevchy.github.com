@@ -4,7 +4,7 @@
   <title><![CDATA[smilevchy's blog]]></title>
   <link href="http://smilevchy.github.io/atom.xml" rel="self"/>
   <link href="http://smilevchy.github.io/"/>
-  <updated>2014-11-13T14:20:30+08:00</updated>
+  <updated>2014-11-13T15:38:32+08:00</updated>
   <id>http://smilevchy.github.io/</id>
   <author>
     <name><![CDATA[smilevchy]]></name>
@@ -21,6 +21,9 @@
     <content type="html"><![CDATA[<p>Need to sort some values which are Chinese.</p>
 
 <p>Firstly, I am thinking to find some third-party libraries to finish this job. However, this may seems to be &ldquo;heavy&rdquo; for project.</p>
+
+<!-- more -->
+
 
 <p>So I turn to find some useful algorithms.</p>
 
