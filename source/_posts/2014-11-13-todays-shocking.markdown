@@ -10,6 +10,8 @@ Need to sort some values which are Chinese.
 
 Firstly, I am thinking to find some third-party libraries to finish this job. However, this may seems to be "heavy" for project. 
 
+<!-- more -->
+
 So I turn to find some useful algorithms.
 
 On Internet, I have found some solutions about how to do this. But some of them look like too bulk. So wandering and wandering, at last I found a sulution which looks the best currently. Some guy say we can use javascript's function : localeCompare(). 
