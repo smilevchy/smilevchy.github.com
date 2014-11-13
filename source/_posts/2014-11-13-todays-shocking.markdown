@@ -1,9 +1,9 @@
 ---
 layout: post
-title: "Today's Shocking"
+title: "Today's Shock"
 date: 2014-11-13 14:12:18 +0800
 comments: true
-categories: javascript
+categories: javascript Shock
 ---
 
 Need to sort some values which are Chinese. 
