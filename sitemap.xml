@@ -3,6 +3,12 @@
   
   
   <url>
+    <loc>http://smilevchy.github.io/blog/2014/11/13/todays-shocking/</loc>
+    <lastmod>2014-11-13T14:12:18+08:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
     <loc>http://smilevchy.github.io/blog/2014/11/12/leetcode-insertion-sort-list/</loc>
     <lastmod>2014-11-12T16:32:44+08:00</lastmod>
     <priority>0.8</priority>
@@ -173,14 +179,14 @@
   
   <url>
     <loc>http://smilevchy.github.io/blog/archives/</loc>
-    <lastmod>2014-11-12T21:37:11+08:00</lastmod>
+    <lastmod>2014-11-13T14:20:30+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   
   <url>
     <loc>http://smilevchy.github.io/</loc>
-    <lastmod>2014-11-12T21:37:11+08:00</lastmod>
+    <lastmod>2014-11-13T14:20:30+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>

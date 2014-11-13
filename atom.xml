@@ -4,7 +4,7 @@
   <title><![CDATA[smilevchy's blog]]></title>
   <link href="http://smilevchy.github.io/atom.xml" rel="self"/>
   <link href="http://smilevchy.github.io/"/>
-  <updated>2014-11-12T21:37:11+08:00</updated>
+  <updated>2014-11-13T14:20:30+08:00</updated>
   <id>http://smilevchy.github.io/</id>
   <author>
     <name><![CDATA[smilevchy]]></name>
@@ -12,6 +12,25 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Today's Shocking]]></title>
+    <link href="http://smilevchy.github.io/blog/2014/11/13/todays-shocking/"/>
+    <updated>2014-11-13T14:12:18+08:00</updated>
+    <id>http://smilevchy.github.io/blog/2014/11/13/todays-shocking</id>
+    <content type="html"><![CDATA[<p>Need to sort some values which are Chinese.</p>
+
+<p>Firstly, I am thinking to find some third-party libraries to finish this job. However, this may seems to be &ldquo;heavy&rdquo; for project.</p>
+
+<p>So I turn to find some useful algorithms.</p>
+
+<p>On Internet, I have found some solutions about how to do this. But some of them look like too bulk. So wandering and wandering, at last I found a sulution which looks the best currently. Some guy say we can use javascript&rsquo;s function : localeCompare().</p>
+
+<p>So, it is what I want to get. Currently it works well, but maybe it will have some drawbacks.</p>
+
+<p>Anyhow, it is a work around now.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Leetcode_Insertion Sort List]]></title>
@@ -918,23 +937,6 @@ public ListNode reverseList(ListNode head) {
     <content type="html"><![CDATA[<p>在设计模块接口时，入口参数绝对要设计成数值形式啊，之前居然设计成了字符串形式，由于有其他模块也调用到，现在造成的局面就是根本没有扩展性，而且要修改的话还要让其他调用模块也进行相应修改。</p>
 
 <p>悲剧&hellip;&hellip;</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Today's Understanding]]></title>
-    <link href="http://smilevchy.github.io/blog/2014/10/21/todays-understanding/"/>
-    <updated>2014-10-21T20:32:06+08:00</updated>
-    <id>http://smilevchy.github.io/blog/2014/10/21/todays-understanding</id>
-    <content type="html"><![CDATA[<p>今天重构几个月前的代码过程中，感觉到种种阻力。
-原因在于代码的耦合度过高，信息过于具体、过于分散，导致修改一处代码时，常常要联动修改很多处地方。</p>
-
-<p><strong>感悟一：代码还是抽象化程度高一点才好。</strong></p>
-
-<p>现在写代码的感觉比以前好一点，以前只会堆砌功能，不懂得整体架构设计，写出来的代码可以说是存在于 ”开发时“。
-现在开始有意识注意整体的设计，代码的可阅读性，力求让代码不仅存在于”开发时“，也存在于”阅读时“、”维护时“。</p>
-
-<p><strong>感悟二：像写作文一样写代码，让非代码作者阅读时就像在读一篇文章一样，有整体架构，有段落意思，尽量让代码的内涵浮出海平面。</strong></p>
 ]]></content>
   </entry>
   
