@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Shock | smilevchy's blog]]></title>
   <link href="http://smilevchy.github.io/blog/categories/shock/atom.xml" rel="self"/>
   <link href="http://smilevchy.github.io/"/>
-  <updated>2014-11-13T15:38:32+08:00</updated>
+  <updated>2014-11-13T19:46:35+08:00</updated>
   <id>http://smilevchy.github.io/</id>
   <author>
     <name><![CDATA[smilevchy]]></name>
@@ -12,6 +12,28 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Today's Shock]]></title>
+    <link href="http://smilevchy.github.io/blog/2014/11/13/todays-shocking/"/>
+    <updated>2014-11-13T14:12:18+08:00</updated>
+    <id>http://smilevchy.github.io/blog/2014/11/13/todays-shocking</id>
+    <content type="html"><![CDATA[<p>Need to sort some values which are Chinese.</p>
+
+<p>Firstly, I am thinking to find some third-party libraries to finish this job. However, this may seems to be &ldquo;heavy&rdquo; for project.</p>
+
+<!-- more -->
+
+
+<p>So I turn to find some useful algorithms.</p>
+
+<p>On Internet, I have found some solutions about how to do this. But some of them look like too bulk. So wandering and wandering, at last I found a sulution which looks the best currently. Some guy say we can use javascript&rsquo;s function : localeCompare().</p>
+
+<p>So, it is what I want to get. Currently it works well, but maybe it will have some drawbacks.</p>
+
+<p>Anyhow, it is a work around now.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Today's Shock]]></title>
