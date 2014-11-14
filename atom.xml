@@ -4,7 +4,7 @@
   <title><![CDATA[smilevchy's blog]]></title>
   <link href="http://smilevchy.github.io/atom.xml" rel="self"/>
   <link href="http://smilevchy.github.io/"/>
-  <updated>2014-11-14T17:50:06+08:00</updated>
+  <updated>2014-11-14T20:07:03+08:00</updated>
   <id>http://smilevchy.github.io/</id>
   <author>
     <name><![CDATA[smilevchy]]></name>
@@ -23,7 +23,7 @@
 <!-- more -->
 
 
-<p>&ndash;_&ndash; 一开始用的是穷举法，结果遇到超长字符串时 online-judege system 就会报 limited time exceed 的错。</p>
+<p>&ndash;_&ndash; 一开始用的是穷举法，结果遇到超长字符串时 online-judge system 就会报 limited time exceed 的错。</p>
 
 <pre><code>public boolean wordBreak(String s, Set&lt;String&gt; dict) {
     if (s == null || s.length() == 0) return true;
