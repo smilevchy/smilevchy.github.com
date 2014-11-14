@@ -10,7 +10,7 @@ categories: Algorithm
 
 <!-- more -->
 
--_- 一开始用的是穷举法，结果遇到超长字符串时 online-judege system 就会报 limited time exceed 的错。
+-_- 一开始用的是穷举法，结果遇到超长字符串时 online-judge system 就会报 limited time exceed 的错。
 
     public boolean wordBreak(String s, Set<String> dict) {
 		if (s == null || s.length() == 0) return true;
