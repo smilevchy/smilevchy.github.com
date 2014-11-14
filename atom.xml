@@ -4,7 +4,7 @@
   <title><![CDATA[smilevchy's blog]]></title>
   <link href="http://smilevchy.github.io/atom.xml" rel="self"/>
   <link href="http://smilevchy.github.io/"/>
-  <updated>2014-11-13T19:46:35+08:00</updated>
+  <updated>2014-11-14T17:49:01+08:00</updated>
   <id>http://smilevchy.github.io/</id>
   <author>
     <name><![CDATA[smilevchy]]></name>
@@ -12,6 +12,42 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Leetcode_Word Break]]></title>
+    <link href="http://smilevchy.github.io/blog/2014/11/14/leetcode-word-break/"/>
+    <updated>2014-11-14T17:45:56+08:00</updated>
+    <id>http://smilevchy.github.io/blog/2014/11/14/leetcode-word-break</id>
+    <content type="html"><![CDATA[<p>原题链接：<a href="https://oj.leetcode.com/problems/word-break/">https://oj.leetcode.com/problems/word-break/</a></p>
+
+<p>&ndash;_&ndash; 一开始用的是穷举法，结果遇到超长字符串时 online-judege system 就会报 limited time exceed 的错。</p>
+
+<pre><code>public boolean wordBreak(String s, Set&lt;String&gt; dict) {
+    if (s == null || s.length() == 0) return true;
+
+    int length = s.length();
+    boolean[] res = new boolean[length + 1];
+    res[0] = true;
+
+    for (int i = 0; i &lt; length; i++) {
+        StringBuilder sb = new StringBuilder(s.substring(0, i + 1));
+
+        for (int j = 0; j &lt;= i; j++) {
+            if (res[j] &amp;&amp; dict.contains(sb.toString())) {
+                res[i + 1] = true;
+
+                break;
+            }
+
+            sb.deleteCharAt(0);
+        }
+    }
+
+    return res[length];
+}
+</code></pre>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Today's Shock]]></title>
@@ -929,17 +965,6 @@ public ListNode reverseList(ListNode head) {
     return false;
 }
 </code></pre>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Today's Understanding]]></title>
-    <link href="http://smilevchy.github.io/blog/2014/10/22/todays-understanding/"/>
-    <updated>2014-10-22T15:37:26+08:00</updated>
-    <id>http://smilevchy.github.io/blog/2014/10/22/todays-understanding</id>
-    <content type="html"><![CDATA[<p>在设计模块接口时，入口参数绝对要设计成数值形式啊，之前居然设计成了字符串形式，由于有其他模块也调用到，现在造成的局面就是根本没有扩展性，而且要修改的话还要让其他调用模块也进行相应修改。</p>
-
-<p>悲剧&hellip;&hellip;</p>
 ]]></content>
   </entry>
   
