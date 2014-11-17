@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Algorithm | smilevchy's blog]]></title>
   <link href="http://smilevchy.github.io/blog/categories/algorithm/atom.xml" rel="self"/>
   <link href="http://smilevchy.github.io/"/>
-  <updated>2014-11-17T17:26:03+08:00</updated>
+  <updated>2014-11-17T18:20:04+08:00</updated>
   <id>http://smilevchy.github.io/</id>
   <author>
     <name><![CDATA[smilevchy]]></name>
@@ -14,11 +14,39 @@
 
   
   <entry>
+    <title type="html"><![CDATA[Leetcode_Path Sum]]></title>
+    <link href="http://smilevchy.github.io/blog/2014/11/17/leetcode-path-sum/"/>
+    <updated>2014-11-17T18:18:32+08:00</updated>
+    <id>http://smilevchy.github.io/blog/2014/11/17/leetcode-path-sum</id>
+    <content type="html"><![CDATA[<p>原题链接: <a href="https://oj.leetcode.com/problems/path-sum/">https://oj.leetcode.com/problems/path-sum/</a></p>
+
+<!-- more -->
+
+
+<pre><code>public boolean hasPathSum(TreeNode root, int sum) {
+    if (root == null) return false;
+
+    if (root.left == null &amp;&amp; root.right == null &amp;&amp; root.val == sum) {
+        return true;
+    } if (hasPathSum(root.left, sum - root.val) || hasPathSum(root.right, sum - root.val)) {
+        return true;
+    }
+
+    return false;
+}
+</code></pre>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[Leetcode_Remove Duplicates From Sorted List]]></title>
     <link href="http://smilevchy.github.io/blog/2014/11/17/leetcode-remove-duplicates-from-sorted-list/"/>
     <updated>2014-11-17T17:25:01+08:00</updated>
     <id>http://smilevchy.github.io/blog/2014/11/17/leetcode-remove-duplicates-from-sorted-list</id>
     <content type="html"><![CDATA[<p>原题链接: <a href="https://oj.leetcode.com/problems/remove-duplicates-from-sorted-list/">https://oj.leetcode.com/problems/remove-duplicates-from-sorted-list/</a></p>
+
+<!-- more -->
+
 
 <pre><code>public ListNode deleteDuplicates(ListNode head) {
     if (head == null) return null;
@@ -50,6 +78,9 @@
     <updated>2014-11-17T17:08:01+08:00</updated>
     <id>http://smilevchy.github.io/blog/2014/11/17/leetcode-triangle</id>
     <content type="html"><![CDATA[<p>原题链接: <a href="https://oj.leetcode.com/problems/triangle/">https://oj.leetcode.com/problems/triangle/</a></p>
+
+<!-- more -->
+
 
 <pre><code>public int minimumTotal(List&lt;List&lt;Integer&gt;&gt; triangle) {
     if (triangle == null) return 0;
@@ -183,116 +214,6 @@
 
     return cursor.next;
 }       
-</code></pre>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Leetcode_Roman to Integer]]></title>
-    <link href="http://smilevchy.github.io/blog/2014/11/11/leetcode-roman-to-integer/"/>
-    <updated>2014-11-11T18:31:43+08:00</updated>
-    <id>http://smilevchy.github.io/blog/2014/11/11/leetcode-roman-to-integer</id>
-    <content type="html"><![CDATA[<p>原题链接: <a href="https://oj.leetcode.com/problems/roman-to-integer/">https://oj.leetcode.com/problems/roman-to-integer/</a></p>
-
-<!-- more -->
-
-
-<pre><code>// I(1) V(5) X(10) L(50) C(100) D(500) M(1000)
-public int romanToInt(String s) {
-    if (s == null) return 0;
-
-    s = s.trim();
-
-    if (s.equals("")) return 0;
-
-    int num = 0;
-    int length = s.length();
-    char cur;
-    char next;
-
-    for (int i = 0; i &lt; length; i++) {
-        cur = s.charAt(i);
-
-        switch (cur) {
-            case 'I':
-                if (i + 1 != length) {
-                    next = s.charAt(i + 1);
-
-                    if (next == 'V') {
-                        num += 4;
-                        i++;
-                        continue;
-                    } else if (next == 'X') {
-                        num += 9;
-                        i++;
-                        continue;
-                    }
-                }
-
-                num += 1;
-
-                break;
-
-            case 'V':
-                num += 5;
-
-                break;
-
-            case 'X':
-                if (i + 1 != length) {
-                    next = s.charAt(i + 1);
-
-                    if (next == 'L') {
-                        num += 40;
-                        i++;
-                        continue;
-                    } else if (next == 'C') {
-                        num += 90;
-                        i++;
-                        continue;
-                    }
-                }
-
-                num += 10;
-
-                break;
-
-            case 'L':
-                num += 50;
-
-                break;
-
-            case 'C':
-                if (i + 1 != length) {
-                    next = s.charAt(i + 1);
-
-                    if (next == 'D') {
-                        num += 400;
-                        i++;
-                        continue;
-                    } else if (next == 'M') {
-                        num += 900;
-                        i++;
-                        continue;
-                    }
-                }
-
-                num += 100;
-
-                break;
-
-            case 'D':
-                num += 500;
-                break;
-
-            case 'M':
-                num += 1000;
-                break;
-        }
-    }
-
-    return num;
-}
 </code></pre>
 ]]></content>
   </entry>

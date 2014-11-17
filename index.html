@@ -9,7 +9,7 @@
   <meta name="author" content="smilevchy">
 
   
-  <meta name="description" content="原题链接: https://oj.leetcode.com/problems/remove-duplicates-from-sorted-list/ public ListNode deleteDuplicates(ListNode head) { if (head == null) return &hellip;">
+  <meta name="description" content="原题链接: https://oj.leetcode.com/problems/path-sum/ ">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -71,6 +71,50 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/blog/2014/11/17/leetcode-path-sum/">Leetcode_Path Sum</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-11-17T18:18:32+08:00" pubdate data-updated="true">Nov 17<sup>th</sup>, 2014</time>
+        
+           | <a href="/blog/2014/11/17/leetcode-path-sum/#disqus_thread"
+             data-disqus-identifier="http://smilevchy.github.io/blog/2014/11/17/leetcode-path-sum/">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>原题链接: <a href="https://oj.leetcode.com/problems/path-sum/">https://oj.leetcode.com/problems/path-sum/</a></p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2014/11/17/leetcode-path-sum/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/blog/2014/11/17/leetcode-remove-duplicates-from-sorted-list/">Leetcode_Remove Duplicates From Sorted List</a></h1>
     
     
@@ -99,29 +143,12 @@
 
   <div class="entry-content"><p>原题链接: <a href="https://oj.leetcode.com/problems/remove-duplicates-from-sorted-list/">https://oj.leetcode.com/problems/remove-duplicates-from-sorted-list/</a></p>
 
-<pre><code>public ListNode deleteDuplicates(ListNode head) {
-    if (head == null) return null;
-
-    ListNode slowCursor = head;
-    ListNode quickCursor = head.next;
-
-    while (quickCursor != null) {
-        if (quickCursor.val != slowCursor.val) {
-            slowCursor = slowCursor.next;
-            quickCursor = quickCursor.next;
-
-            continue;
-        }
-
-        slowCursor.next = quickCursor.next;
-        quickCursor = quickCursor.next;
-    }
-
-    return head;
-}
-</code></pre>
 </div>
   
+  
+    <footer>
+      <a rel="full-article" href="/blog/2014/11/17/leetcode-remove-duplicates-from-sorted-list/">Read on &rarr;</a>
+    </footer>
   
 
 
@@ -160,27 +187,12 @@
 
   <div class="entry-content"><p>原题链接: <a href="https://oj.leetcode.com/problems/triangle/">https://oj.leetcode.com/problems/triangle/</a></p>
 
-<pre><code>public int minimumTotal(List&lt;List&lt;Integer&gt;&gt; triangle) {
-    if (triangle == null) return 0;
-
-    int size = triangle.size();
-    int[] res = new int[triangle.get(size - 1).size()];
-
-    for (int i = 0, s = triangle.get(size - 1).size(); i &lt; s; i++) {
-        res[i] = triangle.get(size - 1).get(i);
-    }
-
-    for (int i = size - 2; i &gt;= 0; i--) {
-        for (int j = 0; j &lt;= i; j++) {
-            res[j] = Math.min(res[j], res[j + 1]) + triangle.get(i).get(j);
-        }
-    }
-
-    return res[0];
-}
-</code></pre>
 </div>
   
+  
+    <footer>
+      <a rel="full-article" href="/blog/2014/11/17/leetcode-triangle/">Read on &rarr;</a>
+    </footer>
   
 
 
@@ -492,50 +504,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/11/07/leetcode-count-and-say/">Leetcode_Count and Say</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-11-07T15:53:37+08:00" pubdate data-updated="true">Nov 7<sup>th</sup>, 2014</time>
-        
-           | <a href="/blog/2014/11/07/leetcode-count-and-say/#disqus_thread"
-             data-disqus-identifier="http://smilevchy.github.io/blog/2014/11/07/leetcode-count-and-say/">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>原题链接: <a href="https://oj.leetcode.com/problems/count-and-say/">https://oj.leetcode.com/problems/count-and-say/</a></p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2014/11/07/leetcode-count-and-say/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/2">&larr; Older</a>
@@ -556,7 +524,7 @@
 <section>
   <h1>Categories</h1>
   <ul id="categories">
-    <li class='category'><a href='/blog/categories/algorithm/'>algorithm (20)</a></li>
+    <li class='category'><a href='/blog/categories/algorithm/'>algorithm (21)</a></li>
 <li class='category'><a href='/blog/categories/android/'>android (1)</a></li>
 <li class='category'><a href='/blog/categories/babble/'>babble (1)</a></li>
 <li class='category'><a href='/blog/categories/javascript/'>javascript (1)</a></li>
@@ -573,6 +541,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/11/17/leetcode-path-sum/">Leetcode_Path Sum</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/11/17/leetcode-remove-duplicates-from-sorted-list/">Leetcode_Remove Duplicates From Sorted List</a>
       </li>
     
@@ -586,10 +558,6 @@
     
       <li class="post">
         <a href="/blog/2014/11/13/todays-shocking/">Today&#8217;s Shock</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/11/12/leetcode-insertion-sort-list/">Leetcode_Insertion Sort List</a>
       </li>
     
   </ul>

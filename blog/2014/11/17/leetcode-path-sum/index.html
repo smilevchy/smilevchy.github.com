@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Leetcode_Insertion Sort List - smilevchy's blog</title>
+  <title>Leetcode_Path Sum - smilevchy's blog</title>
   <meta name="author" content="smilevchy">
 
   
-  <meta name="description" content="原题链接: https://oj.leetcode.com/problems/insertion-sort-list/ 一开始的解法有考虑到当前待插节点的后续节点，其实是没必要的 public ListNode insertionSortList(ListNode head) { if (head &hellip;">
+  <meta name="description" content="原题链接: https://oj.leetcode.com/problems/path-sum/ public boolean hasPathSum(TreeNode root, int sum) { if (root == null) return false; if (root.left &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://smilevchy.github.io/blog/2014/11/12/leetcode-insertion-sort-list">
+  <link rel="canonical" href="http://smilevchy.github.io/blog/2014/11/17/leetcode-path-sum">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="smilevchy's blog" type="application/atom+xml">
@@ -68,7 +68,7 @@
   
   <header>
     
-      <h1 class="entry-title">Leetcode_Insertion Sort List</h1>
+      <h1 class="entry-title">Leetcode_Path Sum</h1>
     
     
       <p class="meta">
@@ -84,7 +84,7 @@
   
 
 
-<time datetime="2014-11-12T16:32:44+08:00" pubdate data-updated="true">Nov 12<sup>th</sup>, 2014</time>
+<time datetime="2014-11-17T18:18:32+08:00" pubdate data-updated="true">Nov 17<sup>th</sup>, 2014</time>
         
            | <a href="#disqus_thread"
              data-disqus-identifier="http://smilevchy.github.io">Comments</a>
@@ -94,72 +94,22 @@
   </header>
 
 
-<div class="entry-content"><p>原题链接: <a href="https://oj.leetcode.com/problems/insertion-sort-list/">https://oj.leetcode.com/problems/insertion-sort-list/</a></p>
+<div class="entry-content"><p>原题链接: <a href="https://oj.leetcode.com/problems/path-sum/">https://oj.leetcode.com/problems/path-sum/</a></p>
 
 <!-- more -->
 
 
-<p>一开始的解法有考虑到当前待插节点的后续节点，其实是没必要的</p>
+<pre><code>public boolean hasPathSum(TreeNode root, int sum) {
+    if (root == null) return false;
 
-<pre><code>public ListNode insertionSortList(ListNode head) {
-    if (head == null) return null;
-
-    ListNode cursorOut = head.next;
-    ListNode cursorOutPrev = head;
-
-    while (cursorOut != null) {
-        ListNode cursorIn = head;
-        ListNode cursorInPrev = null;
-        ListNode cursorOutNext = cursorOut.next;
-
-        while (cursorIn != null &amp;&amp; cursorIn != cursorOut) {
-            if (cursorIn.val &gt; cursorOut.val) {
-                if (cursorInPrev != null) {
-                    cursorInPrev.next = cursorOut;
-                } else {
-                    head = cursorOut;
-                }
-                cursorOutPrev.next = cursorOutNext;
-                cursorOut.next = cursorIn;
-                cursorOut = cursorOutPrev;
-
-                break;
-            }
-
-            cursorInPrev = cursorIn;
-            cursorIn = cursorIn.next;
-        }
-
-        cursorOutPrev = cursorOut;
-        cursorOut = cursorOutNext;
+    if (root.left == null &amp;&amp; root.right == null &amp;&amp; root.val == sum) {
+        return true;
+    } if (hasPathSum(root.left, sum - root.val) || hasPathSum(root.right, sum - root.val)) {
+        return true;
     }
+
+    return false;
 }
-</code></pre>
-
-<p>使用额外的一个节点来记录遍历位置</p>
-
-<pre><code>public ListNode insertionSortList(ListNode head) {
-    if (head == null) return null;
-
-    ListNode insertedNode = head;
-    ListNode cursor = new ListNode(0);
-    ListNode prev = null;
-
-    while (insertedNode != null) {
-        ListNode insertedNodeNext = insertedNode.next;
-        prev = cursor;
-
-        while (prev.next != null &amp;&amp; prev.next.val &lt;= insertedNode.val) {
-            prev = prev.next;
-        }
-
-        insertedNode.next = prev.next;
-        prev.next = insertedNode;
-        insertedNode = insertedNodeNext;
-    }
-
-    return cursor.next;
-}       
 </code></pre>
 </div>
 
@@ -183,7 +133,7 @@
   
 
 
-<time datetime="2014-11-12T16:32:44+08:00" pubdate data-updated="true">Nov 12<sup>th</sup>, 2014</time>
+<time datetime="2014-11-17T18:18:32+08:00" pubdate data-updated="true">Nov 17<sup>th</sup>, 2014</time>
       
 
 <span class="categories">
@@ -204,10 +154,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2014/11/11/leetcode-roman-to-integer/" title="Previous Post: Leetcode_Roman to Integer">&laquo; Leetcode_Roman to Integer</a>
+        <a class="basic-alignment left" href="/blog/2014/11/17/leetcode-remove-duplicates-from-sorted-list/" title="Previous Post: Leetcode_Remove Duplicates from Sorted List">&laquo; Leetcode_Remove Duplicates from Sorted List</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2014/11/13/todays-shocking/" title="Next Post: Today's Shock">Today's Shock &raquo;</a>
       
     </p>
   </footer>
@@ -328,8 +276,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://smilevchy.github.io/blog/2014/11/12/leetcode-insertion-sort-list/';
-        var disqus_url = 'http://smilevchy.github.io/blog/2014/11/12/leetcode-insertion-sort-list/';
+        var disqus_identifier = 'http://smilevchy.github.io/blog/2014/11/17/leetcode-path-sum/';
+        var disqus_url = 'http://smilevchy.github.io/blog/2014/11/17/leetcode-path-sum/';
         var disqus_script = 'embed.js';
       
     (function () {
