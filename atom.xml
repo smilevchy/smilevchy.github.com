@@ -4,7 +4,7 @@
   <title><![CDATA[smilevchy's blog]]></title>
   <link href="http://smilevchy.github.io/atom.xml" rel="self"/>
   <link href="http://smilevchy.github.io/"/>
-  <updated>2014-11-14T20:07:03+08:00</updated>
+  <updated>2014-11-17T17:09:46+08:00</updated>
   <id>http://smilevchy.github.io/</id>
   <author>
     <name><![CDATA[smilevchy]]></name>
@@ -12,6 +12,35 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Leetcode_Triangle]]></title>
+    <link href="http://smilevchy.github.io/blog/2014/11/17/leetcode-triangle/"/>
+    <updated>2014-11-17T17:08:01+08:00</updated>
+    <id>http://smilevchy.github.io/blog/2014/11/17/leetcode-triangle</id>
+    <content type="html"><![CDATA[<p>原题链接: <a href="https://oj.leetcode.com/problems/triangle/">https://oj.leetcode.com/problems/triangle/</a></p>
+
+<pre><code>public int minimumTotal(List&lt;List&lt;Integer&gt;&gt; triangle) {
+    if (triangle == null) return 0;
+
+    int size = triangle.size();
+    int[] res = new int[triangle.get(size - 1).size()];
+
+    for (int i = 0, s = triangle.get(size - 1).size(); i &lt; s; i++) {
+        res[i] = triangle.get(size - 1).get(i);
+    }
+
+    for (int i = size - 2; i &gt;= 0; i--) {
+        for (int j = 0; j &lt;= i; j++) {
+            res[j] = Math.min(res[j], res[j + 1]) + triangle.get(i).get(j);
+        }
+    }
+
+    return res[0];
+}
+</code></pre>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Leetcode_Word Break]]></title>
@@ -921,49 +950,6 @@ public ListNode reverseList(ListNode head) {
     if (!isSameTree(p.left, q.left)) return false;
     if (!isSameTree(p.right, q.right)) return false;
     if (p.val == q.val) return true;
-
-    return false;
-}
-</code></pre>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Leetcode_Symmetric Tree]]></title>
-    <link href="http://smilevchy.github.io/blog/2014/11/04/leetcode-symmetric-tree/"/>
-    <updated>2014-11-04T21:00:07+08:00</updated>
-    <id>http://smilevchy.github.io/blog/2014/11/04/leetcode-symmetric-tree</id>
-    <content type="html"><![CDATA[<p>原题链接: <a href="https://oj.leetcode.com/problems/symmetric-tree/">https://oj.leetcode.com/problems/symmetric-tree/</a></p>
-
-<!-- more -->
-
-
-<p>一般涉及到树的问题我都喜欢用递归解法。</p>
-
-<pre><code>public boolean isSymmetric(TreeNode root) {
-    if (null == root) {
-        return true;
-    }
-
-    if (root.left == null &amp;&amp; root.right == null) {
-        return true;
-    } 
-
-    if (root.left == null || root.right == null) {
-        return false;
-    }
-
-    TreeNode mirrorRootNodeOfLeft = new TreeNode(0);
-    mirrorRootNodeOfLeft.left = root.left.left;
-    mirrorRootNodeOfLeft.right = root.right.right;
-    if (!isSymmetric(mirrorRootNodeOfLeft)) return false;
-
-    TreeNode mirrorRootNodeOfRight = new TreeNode(0);
-    mirrorRootNodeOfRight.left = root.left.right;
-    mirrorRootNodeOfRight.right = root.right.left;
-    if (!isSymmetric(mirrorRootNodeOfRight)) return false;
-
-    if (root.left.val == root.right.val) return true; 
 
     return false;
 }

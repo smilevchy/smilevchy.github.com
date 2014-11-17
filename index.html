@@ -9,7 +9,7 @@
   <meta name="author" content="smilevchy">
 
   
-  <meta name="description" content="原题链接：https://oj.leetcode.com/problems/word-break/ ">
+  <meta name="description" content="原题链接: https://oj.leetcode.com/problems/triangle/ public int minimumTotal(List&lt;List&lt;Integer&gt;&gt; triangle) { if (triangle == null) return 0; &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -65,6 +65,65 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/11/17/leetcode-triangle/">Leetcode_Triangle</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-11-17T17:08:01+08:00" pubdate data-updated="true">Nov 17<sup>th</sup>, 2014</time>
+        
+           | <a href="/blog/2014/11/17/leetcode-triangle/#disqus_thread"
+             data-disqus-identifier="http://smilevchy.github.io/blog/2014/11/17/leetcode-triangle/">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>原题链接: <a href="https://oj.leetcode.com/problems/triangle/">https://oj.leetcode.com/problems/triangle/</a></p>
+
+<pre><code>public int minimumTotal(List&lt;List&lt;Integer&gt;&gt; triangle) {
+    if (triangle == null) return 0;
+
+    int size = triangle.size();
+    int[] res = new int[triangle.get(size - 1).size()];
+
+    for (int i = 0, s = triangle.get(size - 1).size(); i &lt; s; i++) {
+        res[i] = triangle.get(size - 1).get(i);
+    }
+
+    for (int i = size - 2; i &gt;= 0; i--) {
+        for (int j = 0; j &lt;= i; j++) {
+            res[j] = Math.min(res[j], res[j + 1]) + triangle.get(i).get(j);
+        }
+    }
+
+    return res[0];
+}
+</code></pre>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -460,50 +519,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/11/05/leetcode-valid-number/">Leetcode_Valid Number</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-11-05T18:29:57+08:00" pubdate data-updated="true">Nov 5<sup>th</sup>, 2014</time>
-        
-           | <a href="/blog/2014/11/05/leetcode-valid-number/#disqus_thread"
-             data-disqus-identifier="http://smilevchy.github.io/blog/2014/11/05/leetcode-valid-number/">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>原题链接：<a href="https://oj.leetcode.com/problems/valid-number/">https://oj.leetcode.com/problems/valid-number/</a></p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2014/11/05/leetcode-valid-number/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/2">&larr; Older</a>
@@ -524,7 +539,7 @@
 <section>
   <h1>Categories</h1>
   <ul id="categories">
-    <li class='category'><a href='/blog/categories/algorithm/'>algorithm (18)</a></li>
+    <li class='category'><a href='/blog/categories/algorithm/'>algorithm (19)</a></li>
 <li class='category'><a href='/blog/categories/android/'>android (1)</a></li>
 <li class='category'><a href='/blog/categories/babble/'>babble (1)</a></li>
 <li class='category'><a href='/blog/categories/javascript/'>javascript (1)</a></li>
@@ -541,6 +556,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/11/17/leetcode-triangle/">Leetcode_Triangle</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/11/14/leetcode-word-break/">Leetcode_Word Break</a>
       </li>
     
@@ -554,10 +573,6 @@
     
       <li class="post">
         <a href="/blog/2014/11/11/leetcode-roman-to-integer/">Leetcode_Roman to Integer</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/11/10/the-sorrow-of-individual-game-developer/">The Sorrow of Individual Game Developer</a>
       </li>
     
   </ul>

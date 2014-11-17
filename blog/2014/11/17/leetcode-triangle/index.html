@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Leetcode_Insertion Sort List - smilevchy's blog</title>
+  <title>Leetcode_Triangle - smilevchy's blog</title>
   <meta name="author" content="smilevchy">
 
   
-  <meta name="description" content="原题链接: https://oj.leetcode.com/problems/insertion-sort-list/ 一开始的解法有考虑到当前待插节点的后续节点，其实是没必要的 public ListNode insertionSortList(ListNode head) { if (head &hellip;">
+  <meta name="description" content="原题链接: https://oj.leetcode.com/problems/triangle/ public int minimumTotal(List&lt;List&lt;Integer&gt;&gt; triangle) { if (triangle == null) return 0; &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://smilevchy.github.io/blog/2014/11/12/leetcode-insertion-sort-list">
+  <link rel="canonical" href="http://smilevchy.github.io/blog/2014/11/17/leetcode-triangle">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="smilevchy's blog" type="application/atom+xml">
@@ -68,7 +68,7 @@
   
   <header>
     
-      <h1 class="entry-title">Leetcode_Insertion Sort List</h1>
+      <h1 class="entry-title">Leetcode_Triangle</h1>
     
     
       <p class="meta">
@@ -84,7 +84,7 @@
   
 
 
-<time datetime="2014-11-12T16:32:44+08:00" pubdate data-updated="true">Nov 12<sup>th</sup>, 2014</time>
+<time datetime="2014-11-17T17:08:01+08:00" pubdate data-updated="true">Nov 17<sup>th</sup>, 2014</time>
         
            | <a href="#disqus_thread"
              data-disqus-identifier="http://smilevchy.github.io">Comments</a>
@@ -94,72 +94,26 @@
   </header>
 
 
-<div class="entry-content"><p>原题链接: <a href="https://oj.leetcode.com/problems/insertion-sort-list/">https://oj.leetcode.com/problems/insertion-sort-list/</a></p>
+<div class="entry-content"><p>原题链接: <a href="https://oj.leetcode.com/problems/triangle/">https://oj.leetcode.com/problems/triangle/</a></p>
 
-<!-- more -->
+<pre><code>public int minimumTotal(List&lt;List&lt;Integer&gt;&gt; triangle) {
+    if (triangle == null) return 0;
 
+    int size = triangle.size();
+    int[] res = new int[triangle.get(size - 1).size()];
 
-<p>一开始的解法有考虑到当前待插节点的后续节点，其实是没必要的</p>
-
-<pre><code>public ListNode insertionSortList(ListNode head) {
-    if (head == null) return null;
-
-    ListNode cursorOut = head.next;
-    ListNode cursorOutPrev = head;
-
-    while (cursorOut != null) {
-        ListNode cursorIn = head;
-        ListNode cursorInPrev = null;
-        ListNode cursorOutNext = cursorOut.next;
-
-        while (cursorIn != null &amp;&amp; cursorIn != cursorOut) {
-            if (cursorIn.val &gt; cursorOut.val) {
-                if (cursorInPrev != null) {
-                    cursorInPrev.next = cursorOut;
-                } else {
-                    head = cursorOut;
-                }
-                cursorOutPrev.next = cursorOutNext;
-                cursorOut.next = cursorIn;
-                cursorOut = cursorOutPrev;
-
-                break;
-            }
-
-            cursorInPrev = cursorIn;
-            cursorIn = cursorIn.next;
-        }
-
-        cursorOutPrev = cursorOut;
-        cursorOut = cursorOutNext;
+    for (int i = 0, s = triangle.get(size - 1).size(); i &lt; s; i++) {
+        res[i] = triangle.get(size - 1).get(i);
     }
+
+    for (int i = size - 2; i &gt;= 0; i--) {
+        for (int j = 0; j &lt;= i; j++) {
+            res[j] = Math.min(res[j], res[j + 1]) + triangle.get(i).get(j);
+        }
+    }
+
+    return res[0];
 }
-</code></pre>
-
-<p>使用额外的一个节点来记录遍历位置</p>
-
-<pre><code>public ListNode insertionSortList(ListNode head) {
-    if (head == null) return null;
-
-    ListNode insertedNode = head;
-    ListNode cursor = new ListNode(0);
-    ListNode prev = null;
-
-    while (insertedNode != null) {
-        ListNode insertedNodeNext = insertedNode.next;
-        prev = cursor;
-
-        while (prev.next != null &amp;&amp; prev.next.val &lt;= insertedNode.val) {
-            prev = prev.next;
-        }
-
-        insertedNode.next = prev.next;
-        prev.next = insertedNode;
-        insertedNode = insertedNodeNext;
-    }
-
-    return cursor.next;
-}       
 </code></pre>
 </div>
 
@@ -183,7 +137,7 @@
   
 
 
-<time datetime="2014-11-12T16:32:44+08:00" pubdate data-updated="true">Nov 12<sup>th</sup>, 2014</time>
+<time datetime="2014-11-17T17:08:01+08:00" pubdate data-updated="true">Nov 17<sup>th</sup>, 2014</time>
       
 
 <span class="categories">
@@ -204,10 +158,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2014/11/11/leetcode-roman-to-integer/" title="Previous Post: Leetcode_Roman to Integer">&laquo; Leetcode_Roman to Integer</a>
+        <a class="basic-alignment left" href="/blog/2014/11/14/leetcode-word-break/" title="Previous Post: Leetcode_Word Break">&laquo; Leetcode_Word Break</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2014/11/13/todays-shocking/" title="Next Post: Today's Shock">Today's Shock &raquo;</a>
       
     </p>
   </footer>
@@ -328,8 +280,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://smilevchy.github.io/blog/2014/11/12/leetcode-insertion-sort-list/';
-        var disqus_url = 'http://smilevchy.github.io/blog/2014/11/12/leetcode-insertion-sort-list/';
+        var disqus_identifier = 'http://smilevchy.github.io/blog/2014/11/17/leetcode-triangle/';
+        var disqus_url = 'http://smilevchy.github.io/blog/2014/11/17/leetcode-triangle/';
         var disqus_script = 'embed.js';
       
     (function () {
