@@ -8,6 +8,8 @@ categories: Algorithm
 
 原题链接: https://oj.leetcode.com/problems/triangle/
 
+<!-- more -->
+
     public int minimumTotal(List<List<Integer>> triangle) {
 		if (triangle == null) return 0;
 		

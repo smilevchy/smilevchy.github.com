@@ -8,6 +8,8 @@ categories: Algorithm
 
 原题链接: https://oj.leetcode.com/problems/remove-duplicates-from-sorted-list/
 
+<!-- more -->
+
     public ListNode deleteDuplicates(ListNode head) {
 		if (head == null) return null;
 		
