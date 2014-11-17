@@ -9,7 +9,8 @@
   <meta name="author" content="smilevchy">
 
   
-  <meta name="description" content="location smiley_019.png { root html/image; } location ~.(gif|jpg|png)$ { root E:/Pictures; } In this condition, it will just match the latter, nor &hellip;">
+  <meta name="description" content="安装好 Octopress 后，想要发布一篇带有中文字符的文章，结果发现在 &ldquo;rake generate&rdquo; 阶段就遇到错误。
+在网上搜寻一番，大家给出的几种处理方式大致如下： 设置环境变量 LC_ALL=zh_CN.UTF-8 LANG=zh_CN.UTF-8 或者 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -65,6 +66,64 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/07/20/octopresss-handling-chinese-character/">Octopress 下中文的处理</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-07-20T21:24:11+08:00" pubdate data-updated="true">Jul 20<sup>th</sup>, 2014</time>
+        
+           | <a href="/blog/2014/07/20/octopresss-handling-chinese-character/#disqus_thread"
+             data-disqus-identifier="http://smilevchy.github.io/blog/2014/07/20/octopresss-handling-chinese-character/">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>安装好 Octopress 后，想要发布一篇带有中文字符的文章，结果发现在 &ldquo;rake generate&rdquo; 阶段就遇到错误。
+在网上搜寻一番，大家给出的几种处理方式大致如下：</p>
+
+<ol>
+<li><p>设置环境变量</p>
+
+<blockquote><p>LC_ALL=zh_CN.UTF-8</p>
+
+<p>LANG=zh_CN.UTF-8</p></blockquote>
+
+<p> 或者</p>
+
+<blockquote><p>LC_ALL=en_US.UTF-8</p>
+
+<p>LANG=en_US.UTF-8</p></blockquote>
+
+<p> </div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2014/07/20/octopresss-handling-chinese-character/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -146,7 +205,7 @@
 <section>
   <h1>Categories</h1>
   <ul id="categories">
-    <li class='category'><a href='/blog/categories/algorithm/'>algorithm (19)</a></li>
+    <li class='category'><a href='/blog/categories/algorithm/'>algorithm (20)</a></li>
 <li class='category'><a href='/blog/categories/android/'>android (1)</a></li>
 <li class='category'><a href='/blog/categories/babble/'>babble (1)</a></li>
 <li class='category'><a href='/blog/categories/javascript/'>javascript (1)</a></li>
@@ -163,6 +222,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/11/17/leetcode-remove-duplicates-from-sorted-list/">Leetcode_Remove Duplicates From Sorted List</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/11/17/leetcode-triangle/">Leetcode_Triangle</a>
       </li>
     
@@ -176,10 +239,6 @@
     
       <li class="post">
         <a href="/blog/2014/11/12/leetcode-insertion-sort-list/">Leetcode_Insertion Sort List</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/11/11/leetcode-roman-to-integer/">Leetcode_Roman to Integer</a>
       </li>
     
   </ul>

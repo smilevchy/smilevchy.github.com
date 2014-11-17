@@ -9,7 +9,7 @@
   <meta name="author" content="smilevchy">
 
   
-  <meta name="description" content="原题链接: https://oj.leetcode.com/problems/triangle/ public int minimumTotal(List&lt;List&lt;Integer&gt;&gt; triangle) { if (triangle == null) return 0; &hellip;">
+  <meta name="description" content="原题链接: https://oj.leetcode.com/problems/remove-duplicates-from-sorted-list/ public ListNode deleteDuplicates(ListNode head) { if (head == null) return &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -65,6 +65,67 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/11/17/leetcode-remove-duplicates-from-sorted-list/">Leetcode_Remove Duplicates From Sorted List</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-11-17T17:25:01+08:00" pubdate data-updated="true">Nov 17<sup>th</sup>, 2014</time>
+        
+           | <a href="/blog/2014/11/17/leetcode-remove-duplicates-from-sorted-list/#disqus_thread"
+             data-disqus-identifier="http://smilevchy.github.io/blog/2014/11/17/leetcode-remove-duplicates-from-sorted-list/">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>原题链接: <a href="https://oj.leetcode.com/problems/remove-duplicates-from-sorted-list/">https://oj.leetcode.com/problems/remove-duplicates-from-sorted-list/</a></p>
+
+<pre><code>public ListNode deleteDuplicates(ListNode head) {
+    if (head == null) return null;
+
+    ListNode slowCursor = head;
+    ListNode quickCursor = head.next;
+
+    while (quickCursor != null) {
+        if (quickCursor.val != slowCursor.val) {
+            slowCursor = slowCursor.next;
+            quickCursor = quickCursor.next;
+
+            continue;
+        }
+
+        slowCursor.next = quickCursor.next;
+        quickCursor = quickCursor.next;
+    }
+
+    return head;
+}
+</code></pre>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -475,50 +536,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/11/06/leetcode-palindrome-number/">Leetcode_Palindrome Number</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-11-06T15:59:14+08:00" pubdate data-updated="true">Nov 6<sup>th</sup>, 2014</time>
-        
-           | <a href="/blog/2014/11/06/leetcode-palindrome-number/#disqus_thread"
-             data-disqus-identifier="http://smilevchy.github.io/blog/2014/11/06/leetcode-palindrome-number/">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>原题链接: <a href="https://oj.leetcode.com/problems/palindrome-number/">https://oj.leetcode.com/problems/palindrome-number/</a></p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2014/11/06/leetcode-palindrome-number/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/2">&larr; Older</a>
@@ -539,7 +556,7 @@
 <section>
   <h1>Categories</h1>
   <ul id="categories">
-    <li class='category'><a href='/blog/categories/algorithm/'>algorithm (19)</a></li>
+    <li class='category'><a href='/blog/categories/algorithm/'>algorithm (20)</a></li>
 <li class='category'><a href='/blog/categories/android/'>android (1)</a></li>
 <li class='category'><a href='/blog/categories/babble/'>babble (1)</a></li>
 <li class='category'><a href='/blog/categories/javascript/'>javascript (1)</a></li>
@@ -556,6 +573,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/11/17/leetcode-remove-duplicates-from-sorted-list/">Leetcode_Remove Duplicates From Sorted List</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/11/17/leetcode-triangle/">Leetcode_Triangle</a>
       </li>
     
@@ -569,10 +590,6 @@
     
       <li class="post">
         <a href="/blog/2014/11/12/leetcode-insertion-sort-list/">Leetcode_Insertion Sort List</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/11/11/leetcode-roman-to-integer/">Leetcode_Roman to Integer</a>
       </li>
     
   </ul>

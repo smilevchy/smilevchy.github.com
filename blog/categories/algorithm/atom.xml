@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Algorithm | smilevchy's blog]]></title>
   <link href="http://smilevchy.github.io/blog/categories/algorithm/atom.xml" rel="self"/>
   <link href="http://smilevchy.github.io/"/>
-  <updated>2014-11-17T17:09:46+08:00</updated>
+  <updated>2014-11-17T17:26:03+08:00</updated>
   <id>http://smilevchy.github.io/</id>
   <author>
     <name><![CDATA[smilevchy]]></name>
@@ -12,6 +12,37 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Leetcode_Remove Duplicates From Sorted List]]></title>
+    <link href="http://smilevchy.github.io/blog/2014/11/17/leetcode-remove-duplicates-from-sorted-list/"/>
+    <updated>2014-11-17T17:25:01+08:00</updated>
+    <id>http://smilevchy.github.io/blog/2014/11/17/leetcode-remove-duplicates-from-sorted-list</id>
+    <content type="html"><![CDATA[<p>原题链接: <a href="https://oj.leetcode.com/problems/remove-duplicates-from-sorted-list/">https://oj.leetcode.com/problems/remove-duplicates-from-sorted-list/</a></p>
+
+<pre><code>public ListNode deleteDuplicates(ListNode head) {
+    if (head == null) return null;
+
+    ListNode slowCursor = head;
+    ListNode quickCursor = head.next;
+
+    while (quickCursor != null) {
+        if (quickCursor.val != slowCursor.val) {
+            slowCursor = slowCursor.next;
+            quickCursor = quickCursor.next;
+
+            continue;
+        }
+
+        slowCursor.next = quickCursor.next;
+        quickCursor = quickCursor.next;
+    }
+
+    return head;
+}
+</code></pre>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Leetcode_Triangle]]></title>
@@ -261,59 +292,6 @@ public int romanToInt(String s) {
     }
 
     return num;
-}
-</code></pre>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Leetcode_Longest Common Prefix]]></title>
-    <link href="http://smilevchy.github.io/blog/2014/11/08/leetcode-longest-common-prefix/"/>
-    <updated>2014-11-08T13:51:55+08:00</updated>
-    <id>http://smilevchy.github.io/blog/2014/11/08/leetcode-longest-common-prefix</id>
-    <content type="html"><![CDATA[<p>原题链接: <a href="https://oj.leetcode.com/problems/longest-common-prefix/">https://oj.leetcode.com/problems/longest-common-prefix/</a></p>
-
-<!-- more -->
-
-
-<pre><code>public String longestCommonPrefix(String[] strs) {
-    if (strs == null) return null;
-    if (strs.length == 0) return "";
-
-    String shortestStr = null;
-
-    // find the shortest string element
-    for (int i = 0, s = strs.length; i &lt; s; i++) {
-        if (shortestStr == null) {
-            shortestStr = strs[i];
-        } else if (strs[i].length() &lt; shortestStr.length()) {
-            shortestStr = strs[i];
-        }
-    }
-
-    StringBuilder longestCommonPrefix = new StringBuilder("");
-    int shortestStrLen = shortestStr.length();
-    char c;
-    boolean quitMatch = false;
-
-    for (int i = 0; i &lt; shortestStrLen; i++) {
-        c = shortestStr.charAt(i);
-
-        for (int j = 0, s = strs.length; j &lt; s; j++) {
-            if (strs[j].charAt(i) != c) {
-                quitMatch = true;
-                break;
-            }
-
-            if (j == strs.length - 1) {
-                longestCommonPrefix.append(c);
-            }
-        }
-
-        if (quitMatch) break;
-    }
-
-    return longestCommonPrefix.toString();
 }
 </code></pre>
 ]]></content>
