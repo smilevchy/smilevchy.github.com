@@ -4,7 +4,7 @@
   <title><![CDATA[smilevchy's blog]]></title>
   <link href="http://smilevchy.github.io/atom.xml" rel="self"/>
   <link href="http://smilevchy.github.io/"/>
-  <updated>2014-11-17T18:20:04+08:00</updated>
+  <updated>2014-11-17T18:43:07+08:00</updated>
   <id>http://smilevchy.github.io/</id>
   <author>
     <name><![CDATA[smilevchy]]></name>
@@ -12,6 +12,47 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Leetcode_Pascal's Triangle]]></title>
+    <link href="http://smilevchy.github.io/blog/2014/11/17/leetcode-pascals-triangle/"/>
+    <updated>2014-11-17T18:42:09+08:00</updated>
+    <id>http://smilevchy.github.io/blog/2014/11/17/leetcode-pascals-triangle</id>
+    <content type="html"><![CDATA[<p>原题链接: <a href="https://oj.leetcode.com/problems/pascals-triangle/">https://oj.leetcode.com/problems/pascals-triangle/</a></p>
+
+<!-- more -->
+
+
+<pre><code>public List&lt;List&lt;Integer&gt;&gt; generate(int numRows) {
+    if (numRows &lt;= 0) return new ArrayList&lt;List&lt;Integer&gt;&gt;();
+
+    List&lt;List&lt;Integer&gt;&gt; pascalNums = new ArrayList&lt;List&lt;Integer&gt;&gt;(numRows);
+
+    List&lt;Integer&gt; row = new ArrayList&lt;Integer&gt;(1);
+    row.add(1);
+    pascalNums.add(row);
+
+    for (int i = 1; i &lt; numRows; i++) {
+        row = new ArrayList&lt;Integer&gt;(i + 1);
+
+        for (int j = 0; j &lt;= i; j++) {
+            if (j == 0) {
+                row.add(pascalNums.get(i - 1).get(0));
+            } else if (j == i) {
+                row.add(pascalNums.get(i - 1).get(pascalNums.get(i - 1).size() - 1));
+            } else {
+                row.add(pascalNums.get(i - 1).get(j - 1) + pascalNums.get(i - 1).get(j));
+            }
+        }
+
+        pascalNums.add(row);
+    }
+
+    return pascalNums;
+}
+</code></pre>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Leetcode_Path Sum]]></title>
@@ -904,40 +945,6 @@ public ListNode reverseList(ListNode head) {
     }
 
     return result;
-}
-</code></pre>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Leetcode_Reverse Integer]]></title>
-    <link href="http://smilevchy.github.io/blog/2014/11/04/leetcode-reverse-integer/"/>
-    <updated>2014-11-04T21:16:33+08:00</updated>
-    <id>http://smilevchy.github.io/blog/2014/11/04/leetcode-reverse-integer</id>
-    <content type="html"><![CDATA[<p>原题链接: <a href="https://oj.leetcode.com/problems/reverse-integer/">https://oj.leetcode.com/problems/reverse-integer/</a></p>
-
-<!-- more -->
-
-
-<pre><code>public int reverse(int x) {
-    String str = Integer.toString(x);
-    StringBuilder sb = new StringBuilder(str.length());
-    char c;
-
-    if (str.indexOf('-') == 0) {
-        sb.append('-');
-    }
-    for (int i = str.length() - 1; i &gt;= 0; i--) {
-        c = str.charAt(i);
-
-        if (c == '-') {
-            break;
-        }
-
-        sb.append(c);
-    }
-
-    return Integer.parseInt(sb.toString());
 }
 </code></pre>
 ]]></content>

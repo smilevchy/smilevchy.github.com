@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Algorithm | smilevchy's blog]]></title>
   <link href="http://smilevchy.github.io/blog/categories/algorithm/atom.xml" rel="self"/>
   <link href="http://smilevchy.github.io/"/>
-  <updated>2014-11-17T18:20:04+08:00</updated>
+  <updated>2014-11-17T18:43:07+08:00</updated>
   <id>http://smilevchy.github.io/</id>
   <author>
     <name><![CDATA[smilevchy]]></name>
@@ -12,6 +12,47 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Leetcode_Pascal's Triangle]]></title>
+    <link href="http://smilevchy.github.io/blog/2014/11/17/leetcode-pascals-triangle/"/>
+    <updated>2014-11-17T18:42:09+08:00</updated>
+    <id>http://smilevchy.github.io/blog/2014/11/17/leetcode-pascals-triangle</id>
+    <content type="html"><![CDATA[<p>原题链接: <a href="https://oj.leetcode.com/problems/pascals-triangle/">https://oj.leetcode.com/problems/pascals-triangle/</a></p>
+
+<!-- more -->
+
+
+<pre><code>public List&lt;List&lt;Integer&gt;&gt; generate(int numRows) {
+    if (numRows &lt;= 0) return new ArrayList&lt;List&lt;Integer&gt;&gt;();
+
+    List&lt;List&lt;Integer&gt;&gt; pascalNums = new ArrayList&lt;List&lt;Integer&gt;&gt;(numRows);
+
+    List&lt;Integer&gt; row = new ArrayList&lt;Integer&gt;(1);
+    row.add(1);
+    pascalNums.add(row);
+
+    for (int i = 1; i &lt; numRows; i++) {
+        row = new ArrayList&lt;Integer&gt;(i + 1);
+
+        for (int j = 0; j &lt;= i; j++) {
+            if (j == 0) {
+                row.add(pascalNums.get(i - 1).get(0));
+            } else if (j == i) {
+                row.add(pascalNums.get(i - 1).get(pascalNums.get(i - 1).size() - 1));
+            } else {
+                row.add(pascalNums.get(i - 1).get(j - 1) + pascalNums.get(i - 1).get(j));
+            }
+        }
+
+        pascalNums.add(row);
+    }
+
+    return pascalNums;
+}
+</code></pre>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Leetcode_Path Sum]]></title>
@@ -139,81 +180,6 @@
 
     return res[length];
 }
-</code></pre>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Leetcode_Insertion Sort List]]></title>
-    <link href="http://smilevchy.github.io/blog/2014/11/12/leetcode-insertion-sort-list/"/>
-    <updated>2014-11-12T16:32:44+08:00</updated>
-    <id>http://smilevchy.github.io/blog/2014/11/12/leetcode-insertion-sort-list</id>
-    <content type="html"><![CDATA[<p>原题链接: <a href="https://oj.leetcode.com/problems/insertion-sort-list/">https://oj.leetcode.com/problems/insertion-sort-list/</a></p>
-
-<!-- more -->
-
-
-<p>一开始的解法有考虑到当前待插节点的后续节点，其实是没必要的</p>
-
-<pre><code>public ListNode insertionSortList(ListNode head) {
-    if (head == null) return null;
-
-    ListNode cursorOut = head.next;
-    ListNode cursorOutPrev = head;
-
-    while (cursorOut != null) {
-        ListNode cursorIn = head;
-        ListNode cursorInPrev = null;
-        ListNode cursorOutNext = cursorOut.next;
-
-        while (cursorIn != null &amp;&amp; cursorIn != cursorOut) {
-            if (cursorIn.val &gt; cursorOut.val) {
-                if (cursorInPrev != null) {
-                    cursorInPrev.next = cursorOut;
-                } else {
-                    head = cursorOut;
-                }
-                cursorOutPrev.next = cursorOutNext;
-                cursorOut.next = cursorIn;
-                cursorOut = cursorOutPrev;
-
-                break;
-            }
-
-            cursorInPrev = cursorIn;
-            cursorIn = cursorIn.next;
-        }
-
-        cursorOutPrev = cursorOut;
-        cursorOut = cursorOutNext;
-    }
-}
-</code></pre>
-
-<p>使用额外的一个节点来记录遍历位置</p>
-
-<pre><code>public ListNode insertionSortList(ListNode head) {
-    if (head == null) return null;
-
-    ListNode insertedNode = head;
-    ListNode cursor = new ListNode(0);
-    ListNode prev = null;
-
-    while (insertedNode != null) {
-        ListNode insertedNodeNext = insertedNode.next;
-        prev = cursor;
-
-        while (prev.next != null &amp;&amp; prev.next.val &lt;= insertedNode.val) {
-            prev = prev.next;
-        }
-
-        insertedNode.next = prev.next;
-        prev.next = insertedNode;
-        insertedNode = insertedNodeNext;
-    }
-
-    return cursor.next;
-}       
 </code></pre>
 ]]></content>
   </entry>
