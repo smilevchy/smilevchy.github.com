@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Algorithm | smilevchy's blog]]></title>
   <link href="http://smilevchy.github.io/blog/categories/algorithm/atom.xml" rel="self"/>
   <link href="http://smilevchy.github.io/"/>
-  <updated>2014-11-18T10:40:11+08:00</updated>
+  <updated>2014-11-18T11:37:55+08:00</updated>
   <id>http://smilevchy.github.io/</id>
   <author>
     <name><![CDATA[smilevchy]]></name>
@@ -12,6 +12,42 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Leetcode_Balanced Binary Tree]]></title>
+    <link href="http://smilevchy.github.io/blog/2014/11/18/leetcode-balanced-binary-tree/"/>
+    <updated>2014-11-18T11:36:33+08:00</updated>
+    <id>http://smilevchy.github.io/blog/2014/11/18/leetcode-balanced-binary-tree</id>
+    <content type="html"><![CDATA[<p>原题链接: <a href="https://oj.leetcode.com/problems/balanced-binary-tree/">https://oj.leetcode.com/problems/balanced-binary-tree/</a></p>
+
+<!-- more -->
+
+
+<pre><code>public boolean isBalanced(TreeNode root) {
+    if (root == null) return true;
+
+    int left = maxDepth(root.left);
+    int right = maxDepth(root.right);
+
+    if (Math.abs(left - right) &gt; 1) {
+        return false;
+    }
+
+    return isBalanced(root.left) &amp;&amp; isBalanced(root.right);
+}
+
+public int maxDepth(TreeNode root) {
+    if (root == null) return 0;
+
+    if (root.left == null &amp;&amp; root.right == null) {
+        return 1;
+    }
+
+    return Math.max(maxDepth(root.left), maxDepth(root.right)) + 1;
+}
+</code></pre>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Leetcode_Maximum Depth of Binary Tree]]></title>
@@ -134,31 +170,6 @@
     }
 
     return pascalNums;
-}
-</code></pre>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Leetcode_Path Sum]]></title>
-    <link href="http://smilevchy.github.io/blog/2014/11/17/leetcode-path-sum/"/>
-    <updated>2014-11-17T18:18:32+08:00</updated>
-    <id>http://smilevchy.github.io/blog/2014/11/17/leetcode-path-sum</id>
-    <content type="html"><![CDATA[<p>原题链接: <a href="https://oj.leetcode.com/problems/path-sum/">https://oj.leetcode.com/problems/path-sum/</a></p>
-
-<!-- more -->
-
-
-<pre><code>public boolean hasPathSum(TreeNode root, int sum) {
-    if (root == null) return false;
-
-    if (root.left == null &amp;&amp; root.right == null &amp;&amp; root.val == sum) {
-        return true;
-    } if (hasPathSum(root.left, sum - root.val) || hasPathSum(root.right, sum - root.val)) {
-        return true;
-    }
-
-    return false;
 }
 </code></pre>
 ]]></content>

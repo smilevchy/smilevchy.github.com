@@ -5,12 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Today's Understanding - smilevchy's blog</title>
+  <title>Leetcode_Balanced Binary Tree - smilevchy's blog</title>
   <meta name="author" content="smilevchy">
 
   
-  <meta name="description" content="在设计模块接口时，入口参数绝对要设计成数值形式啊，之前居然设计成了字符串形式，由于有其他模块也调用到，现在造成的局面就是根本没有扩展性，而且要修改的话还要让其他调用模块也进行相应修改。 悲剧&hellip;&hellip;
-">
+  <meta name="description" content="原题链接: https://oj.leetcode.com/problems/balanced-binary-tree/ public boolean isBalanced(TreeNode root) { if (root == null) return true; int left = &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -19,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://smilevchy.github.io/blog/2014/10/22/todays-understanding">
+  <link rel="canonical" href="http://smilevchy.github.io/blog/2014/11/18/leetcode-balanced-binary-tree">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="smilevchy's blog" type="application/atom+xml">
@@ -69,7 +68,7 @@
   
   <header>
     
-      <h1 class="entry-title">Today's Understanding</h1>
+      <h1 class="entry-title">Leetcode_Balanced Binary Tree</h1>
     
     
       <p class="meta">
@@ -85,7 +84,7 @@
   
 
 
-<time datetime="2014-10-22T15:37:26+08:00" pubdate data-updated="true">Oct 22<sup>nd</sup>, 2014</time>
+<time datetime="2014-11-18T11:36:33+08:00" pubdate data-updated="true">Nov 18<sup>th</sup>, 2014</time>
         
            | <a href="#disqus_thread"
              data-disqus-identifier="http://smilevchy.github.io">Comments</a>
@@ -95,9 +94,34 @@
   </header>
 
 
-<div class="entry-content"><p>在设计模块接口时，入口参数绝对要设计成数值形式啊，之前居然设计成了字符串形式，由于有其他模块也调用到，现在造成的局面就是根本没有扩展性，而且要修改的话还要让其他调用模块也进行相应修改。</p>
+<div class="entry-content"><p>原题链接: <a href="https://oj.leetcode.com/problems/balanced-binary-tree/">https://oj.leetcode.com/problems/balanced-binary-tree/</a></p>
 
-<p>悲剧&hellip;&hellip;</p>
+<!-- more -->
+
+
+<pre><code>public boolean isBalanced(TreeNode root) {
+    if (root == null) return true;
+
+    int left = maxDepth(root.left);
+    int right = maxDepth(root.right);
+
+    if (Math.abs(left - right) &gt; 1) {
+        return false;
+    }
+
+    return isBalanced(root.left) &amp;&amp; isBalanced(root.right);
+}
+
+public int maxDepth(TreeNode root) {
+    if (root == null) return 0;
+
+    if (root.left == null &amp;&amp; root.right == null) {
+        return 1;
+    }
+
+    return Math.max(maxDepth(root.left), maxDepth(root.right)) + 1;
+}
+</code></pre>
 </div>
 
 
@@ -120,12 +144,12 @@
   
 
 
-<time datetime="2014-10-22T15:37:26+08:00" pubdate data-updated="true">Oct 22<sup>nd</sup>, 2014</time>
+<time datetime="2014-11-18T11:36:33+08:00" pubdate data-updated="true">Nov 18<sup>th</sup>, 2014</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/understanding/'>understanding</a>
+    <a class='category' href='/blog/categories/algorithm/'>algorithm</a>
   
 </span>
 
@@ -141,10 +165,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2014/10/21/todays-understanding/" title="Previous Post: Today's Understanding">&laquo; Today's Understanding</a>
+        <a class="basic-alignment left" href="/blog/2014/11/18/leetcode-maximum-depth-of-binary-tree/" title="Previous Post: Leetcode_Maximum Depth of Binary Tree">&laquo; Leetcode_Maximum Depth of Binary Tree</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2014/11/04/leetcode-symmetric-tree/" title="Next Post: Leetcode_Symmetric Tree">Leetcode_Symmetric Tree &raquo;</a>
       
     </p>
   </footer>
@@ -265,8 +287,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://smilevchy.github.io/blog/2014/10/22/todays-understanding/';
-        var disqus_url = 'http://smilevchy.github.io/blog/2014/10/22/todays-understanding/';
+        var disqus_identifier = 'http://smilevchy.github.io/blog/2014/11/18/leetcode-balanced-binary-tree/';
+        var disqus_url = 'http://smilevchy.github.io/blog/2014/11/18/leetcode-balanced-binary-tree/';
         var disqus_script = 'embed.js';
       
     (function () {
