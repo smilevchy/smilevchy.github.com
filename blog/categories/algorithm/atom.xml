@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Algorithm | smilevchy's blog]]></title>
   <link href="http://smilevchy.github.io/blog/categories/algorithm/atom.xml" rel="self"/>
   <link href="http://smilevchy.github.io/"/>
-  <updated>2014-11-17T18:43:07+08:00</updated>
+  <updated>2014-11-18T10:13:28+08:00</updated>
   <id>http://smilevchy.github.io/</id>
   <author>
     <name><![CDATA[smilevchy]]></name>
@@ -12,6 +12,41 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Leetcode_Pascal's Triangle II]]></title>
+    <link href="http://smilevchy.github.io/blog/2014/11/18/leetcode-pascals-triangle-ii/"/>
+    <updated>2014-11-18T10:11:53+08:00</updated>
+    <id>http://smilevchy.github.io/blog/2014/11/18/leetcode-pascals-triangle-ii</id>
+    <content type="html"><![CDATA[<p>原题链接: <a href="https://oj.leetcode.com/problems/pascals-triangle-ii/">https://oj.leetcode.com/problems/pascals-triangle-ii/</a></p>
+
+<!-- more -->
+
+
+<pre><code>public List&lt;Integer&gt; getRow(int rowIndex) {
+    if (rowIndex &lt; 0) return new ArrayList&lt;Integer&gt;();
+
+    List&lt;Integer&gt; row = new ArrayList&lt;Integer&gt;(rowIndex + 1);
+
+    if (rowIndex == 0) {
+        row.add(1);
+    } else {
+        List&lt;Integer&gt; upRow = getRow(rowIndex - 1);
+
+        for (int i = 0; i &lt;= rowIndex; i++) {
+            if (i == 0 || i == rowIndex) {
+                row.add(1);
+            } else {
+                row.add(upRow.get(i - 1) + upRow.get(i));
+            }
+        }
+    }
+
+    return row;
+}
+</code></pre>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Leetcode_Pascal's Triangle]]></title>
@@ -140,45 +175,6 @@
     }
 
     return res[0];
-}
-</code></pre>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Leetcode_Word Break]]></title>
-    <link href="http://smilevchy.github.io/blog/2014/11/14/leetcode-word-break/"/>
-    <updated>2014-11-14T17:45:56+08:00</updated>
-    <id>http://smilevchy.github.io/blog/2014/11/14/leetcode-word-break</id>
-    <content type="html"><![CDATA[<p>原题链接：<a href="https://oj.leetcode.com/problems/word-break/">https://oj.leetcode.com/problems/word-break/</a></p>
-
-<!-- more -->
-
-
-<p>&ndash;_&ndash; 一开始用的是穷举法，结果遇到超长字符串时 online-judge system 就会报 limited time exceed 的错。</p>
-
-<pre><code>public boolean wordBreak(String s, Set&lt;String&gt; dict) {
-    if (s == null || s.length() == 0) return true;
-
-    int length = s.length();
-    boolean[] res = new boolean[length + 1];
-    res[0] = true;
-
-    for (int i = 0; i &lt; length; i++) {
-        StringBuilder sb = new StringBuilder(s.substring(0, i + 1));
-
-        for (int j = 0; j &lt;= i; j++) {
-            if (res[j] &amp;&amp; dict.contains(sb.toString())) {
-                res[i + 1] = true;
-
-                break;
-            }
-
-            sb.deleteCharAt(0);
-        }
-    }
-
-    return res[length];
 }
 </code></pre>
 ]]></content>

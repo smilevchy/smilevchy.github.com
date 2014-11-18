@@ -4,7 +4,7 @@
   <title><![CDATA[smilevchy's blog]]></title>
   <link href="http://smilevchy.github.io/atom.xml" rel="self"/>
   <link href="http://smilevchy.github.io/"/>
-  <updated>2014-11-17T18:43:07+08:00</updated>
+  <updated>2014-11-18T10:13:28+08:00</updated>
   <id>http://smilevchy.github.io/</id>
   <author>
     <name><![CDATA[smilevchy]]></name>
@@ -12,6 +12,41 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Leetcode_Pascal's Triangle II]]></title>
+    <link href="http://smilevchy.github.io/blog/2014/11/18/leetcode-pascals-triangle-ii/"/>
+    <updated>2014-11-18T10:11:53+08:00</updated>
+    <id>http://smilevchy.github.io/blog/2014/11/18/leetcode-pascals-triangle-ii</id>
+    <content type="html"><![CDATA[<p>原题链接: <a href="https://oj.leetcode.com/problems/pascals-triangle-ii/">https://oj.leetcode.com/problems/pascals-triangle-ii/</a></p>
+
+<!-- more -->
+
+
+<pre><code>public List&lt;Integer&gt; getRow(int rowIndex) {
+    if (rowIndex &lt; 0) return new ArrayList&lt;Integer&gt;();
+
+    List&lt;Integer&gt; row = new ArrayList&lt;Integer&gt;(rowIndex + 1);
+
+    if (rowIndex == 0) {
+        row.add(1);
+    } else {
+        List&lt;Integer&gt; upRow = getRow(rowIndex - 1);
+
+        for (int i = 0; i &lt;= rowIndex; i++) {
+            if (i == 0 || i == rowIndex) {
+                row.add(1);
+            } else {
+                row.add(upRow.get(i - 1) + upRow.get(i));
+            }
+        }
+    }
+
+    return row;
+}
+</code></pre>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Leetcode_Pascal's Triangle]]></title>
@@ -899,49 +934,6 @@ public ListNode reverseList(ListNode head) {
 
     if (carry &gt; 0) {
         cursor.next = new ListNode(1);
-    }
-
-    return result;
-}
-</code></pre>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Leetcode_Plus One]]></title>
-    <link href="http://smilevchy.github.io/blog/2014/11/04/leetcode-plus-one/"/>
-    <updated>2014-11-04T21:19:18+08:00</updated>
-    <id>http://smilevchy.github.io/blog/2014/11/04/leetcode-plus-one</id>
-    <content type="html"><![CDATA[<p>原题链接: <a href="https://oj.leetcode.com/problems/plus-one/">https://oj.leetcode.com/problems/plus-one/</a></p>
-
-<!-- more -->
-
-
-<pre><code>public byte[] plusOne(byte[] num) {
-    if (num == null || num.length == 0) {
-        return num;
-    }
-
-    byte[] result = num.clone();
-    int length = num.length;
-
-    for (int i = length - 1; i &gt;= 0; i--) {
-        byte digit = result[i];
-        result[i] = (byte) (digit + 1);
-
-        if (result[i] &lt; 10) {
-            break;
-        } else {
-            result[i] = 0;
-
-            if (i == 0) {
-
-                byte[] expandedNum = new byte[length + 1];
-                expandedNum[0] = 1;
-
-                return expandedNum;
-            }
-        }
     }
 
     return result;
