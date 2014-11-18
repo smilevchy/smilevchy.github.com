@@ -4,7 +4,7 @@
   <title><![CDATA[smilevchy's blog]]></title>
   <link href="http://smilevchy.github.io/atom.xml" rel="self"/>
   <link href="http://smilevchy.github.io/"/>
-  <updated>2014-11-18T10:31:50+08:00</updated>
+  <updated>2014-11-18T10:40:11+08:00</updated>
   <id>http://smilevchy.github.io/</id>
   <author>
     <name><![CDATA[smilevchy]]></name>
@@ -12,6 +12,29 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Leetcode_Maximum Depth of Binary Tree]]></title>
+    <link href="http://smilevchy.github.io/blog/2014/11/18/leetcode-maximum-depth-of-binary-tree/"/>
+    <updated>2014-11-18T10:39:00+08:00</updated>
+    <id>http://smilevchy.github.io/blog/2014/11/18/leetcode-maximum-depth-of-binary-tree</id>
+    <content type="html"><![CDATA[<p>原题链接: <a href="https://oj.leetcode.com/problems/maximum-depth-of-binary-tree/">https://oj.leetcode.com/problems/maximum-depth-of-binary-tree/</a></p>
+
+<!-- more -->
+
+
+<pre><code>public int maxDepth(TreeNode root) {
+    if (root == null) return 0;
+
+    if (root.left == null &amp;&amp; root.right == null) {
+        return 1;
+    }
+
+    return Math.max(maxDepth(root.left), maxDepth(root.right)) + 1;
+}
+</code></pre>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Leetcode_Minimum Depth of Binary Tree]]></title>
@@ -852,64 +875,6 @@ public int romanToInt(String s) {
     }
 
     return sb.toString();
-}
-</code></pre>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Leetcode_Reorder List]]></title>
-    <link href="http://smilevchy.github.io/blog/2014/11/04/leetcode-reorder-list/"/>
-    <updated>2014-11-04T21:23:58+08:00</updated>
-    <id>http://smilevchy.github.io/blog/2014/11/04/leetcode-reorder-list</id>
-    <content type="html"><![CDATA[<p>原题链接: <a href="https://oj.leetcode.com/problems/reorder-list/">https://oj.leetcode.com/problems/reorder-list/</a></p>
-
-<p>正是这道题，让我知道了有 “快慢指针” 这种好东西。以前每当要做类似遍历链表的操作时，比如取中点，总是先遍历完一遍链表来获得长度，求得中点再遍历一次，实在是不雅观。而通过 “快慢指针”，只要写一次遍历就可以拿到中点。</p>
-
-<pre><code>public void reorderList(ListNode head) {
-    if (head == null || head.next == null) {
-        return;
-    }
-
-    ListNode slowCursor = head;
-    ListNode quickCursor = head;
-
-    while (quickCursor != null &amp;&amp; quickCursor.next != null &amp;&amp; quickCursor.next.next != null &amp;&amp; slowCursor != null &amp;&amp; slowCursor.next != null) {
-        slowCursor = slowCursor.next;
-        quickCursor = quickCursor.next.next;
-    }
-
-    ListNode head1 = head;
-    ListNode head2 = slowCursor.next;
-
-    head2 = reverseList(head2);
-
-    while (head1 != null &amp;&amp; head2 != null) {
-        ListNode head2Next = head2.next;
-        head2.next = head1.next;
-        head1.next = head2;
-        head1 = head2.next;
-        head2 = head2Next;
-
-        if (head2 == null) {
-            head1.next = null;
-        }
-    }
-}
-
-public ListNode reverseList(ListNode head) {
-    ListNode prev = null;
-    ListNode cursor = head;
-    ListNode next = null;
-
-    while (cursor != null) {
-        next = cursor.next;
-        cursor.next = prev;
-        prev = cursor;
-        cursor = next;
-    }
-
-    return prev;
 }
 </code></pre>
 ]]></content>
