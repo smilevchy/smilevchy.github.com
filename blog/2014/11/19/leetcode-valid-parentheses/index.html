@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Leetcode_Path Sum - smilevchy's blog</title>
+  <title>Leetcode_Valid Parentheses - smilevchy's blog</title>
   <meta name="author" content="smilevchy">
 
   
-  <meta name="description" content="原题链接: https://oj.leetcode.com/problems/path-sum/ public boolean hasPathSum(TreeNode root, int sum) { if (root == null) return false; if (root.left &hellip;">
+  <meta name="description" content="原题链接: https://oj.leetcode.com/problems/valid-parentheses/ public boolean isValid(String s) { if (s == null) return false; int length = s.length(); &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://smilevchy.github.io/blog/2014/11/17/leetcode-path-sum">
+  <link rel="canonical" href="http://smilevchy.github.io/blog/2014/11/19/leetcode-valid-parentheses">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="smilevchy's blog" type="application/atom+xml">
@@ -68,7 +68,7 @@
   
   <header>
     
-      <h1 class="entry-title">Leetcode_Path Sum</h1>
+      <h1 class="entry-title">Leetcode_Valid Parentheses</h1>
     
     
       <p class="meta">
@@ -84,7 +84,7 @@
   
 
 
-<time datetime="2014-11-17T18:18:32+08:00" pubdate data-updated="true">Nov 17<sup>th</sup>, 2014</time>
+<time datetime="2014-11-19T18:19:46+08:00" pubdate data-updated="true">Nov 19<sup>th</sup>, 2014</time>
         
            | <a href="#disqus_thread"
              data-disqus-identifier="http://smilevchy.github.io">Comments</a>
@@ -94,21 +94,67 @@
   </header>
 
 
-<div class="entry-content"><p>原题链接: <a href="https://oj.leetcode.com/problems/path-sum/">https://oj.leetcode.com/problems/path-sum/</a></p>
+<div class="entry-content"><p>原题链接: <a href="https://oj.leetcode.com/problems/valid-parentheses/">https://oj.leetcode.com/problems/valid-parentheses/</a></p>
 
 <!-- more -->
 
 
-<pre><code>public boolean hasPathSum(TreeNode root, int sum) {
-    if (root == null) return false;
+<pre><code>public boolean isValid(String s) {
+    if (s == null) return false;
 
-    if (root.left == null &amp;&amp; root.right == null &amp;&amp; root.val == sum) {
-        return true;
-    } if (hasPathSum(root.left, sum - root.val) || hasPathSum(root.right, sum - root.val)) {
-        return true;
+    int length = s.length();
+    char c;
+    Stack&lt;Character&gt; stack = new Stack&lt;Character&gt;();
+
+    for (int i = 0; i &lt; length; i++) {
+        c = s.charAt(i);
+
+        switch (c) {
+            case '(':
+            case '{':
+            case '[':
+                stack.push(c);
+
+                break;
+
+            case ')':
+                try {
+                    char prevChar = stack.pop();
+                    if (prevChar != '(') return false;  
+                } catch (Exception e) {
+                    return false;
+                }
+
+                break;
+
+            case '}':
+                try {
+                    char prevChar = stack.pop();
+                    if (prevChar != '{') return false;  
+                } catch (Exception e) {
+                    return false;
+                }
+
+                break;
+
+            case ']':
+                try {
+                    char prevChar = stack.pop();
+                    if (prevChar != '[') return false;  
+                } catch (Exception e) {
+                    return false;
+                }
+
+                break;
+
+            default:
+                return false;
+        }
     }
 
-    return false;
+    if (!stack.isEmpty()) return false;
+
+    return true;
 }
 </code></pre>
 </div>
@@ -133,7 +179,7 @@
   
 
 
-<time datetime="2014-11-17T18:18:32+08:00" pubdate data-updated="true">Nov 17<sup>th</sup>, 2014</time>
+<time datetime="2014-11-19T18:19:46+08:00" pubdate data-updated="true">Nov 19<sup>th</sup>, 2014</time>
       
 
 <span class="categories">
@@ -154,10 +200,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2014/11/17/leetcode-remove-duplicates-from-sorted-list/" title="Previous Post: Leetcode_Remove Duplicates from Sorted List">&laquo; Leetcode_Remove Duplicates from Sorted List</a>
+        <a class="basic-alignment left" href="/blog/2014/11/19/leetcode-remove-nth-node-from-end-of-list/" title="Previous Post: Leetcode_Remove Nth Node From End of List">&laquo; Leetcode_Remove Nth Node From End of List</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2014/11/17/leetcode-pascals-triangle/" title="Next Post: Leetcode_Pascal's Triangle">Leetcode_Pascal's Triangle &raquo;</a>
       
     </p>
   </footer>
@@ -278,8 +322,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://smilevchy.github.io/blog/2014/11/17/leetcode-path-sum/';
-        var disqus_url = 'http://smilevchy.github.io/blog/2014/11/17/leetcode-path-sum/';
+        var disqus_identifier = 'http://smilevchy.github.io/blog/2014/11/19/leetcode-valid-parentheses/';
+        var disqus_url = 'http://smilevchy.github.io/blog/2014/11/19/leetcode-valid-parentheses/';
         var disqus_script = 'embed.js';
       
     (function () {

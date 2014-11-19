@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Algorithm | smilevchy's blog]]></title>
   <link href="http://smilevchy.github.io/blog/categories/algorithm/atom.xml" rel="self"/>
   <link href="http://smilevchy.github.io/"/>
-  <updated>2014-11-19T17:55:59+08:00</updated>
+  <updated>2014-11-19T18:20:37+08:00</updated>
   <id>http://smilevchy.github.io/</id>
   <author>
     <name><![CDATA[smilevchy]]></name>
@@ -12,6 +12,77 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Leetcode_Valid Parentheses]]></title>
+    <link href="http://smilevchy.github.io/blog/2014/11/19/leetcode-valid-parentheses/"/>
+    <updated>2014-11-19T18:19:46+08:00</updated>
+    <id>http://smilevchy.github.io/blog/2014/11/19/leetcode-valid-parentheses</id>
+    <content type="html"><![CDATA[<p>原题链接: <a href="https://oj.leetcode.com/problems/valid-parentheses/">https://oj.leetcode.com/problems/valid-parentheses/</a></p>
+
+<!-- more -->
+
+
+<pre><code>public boolean isValid(String s) {
+    if (s == null) return false;
+
+    int length = s.length();
+    char c;
+    Stack&lt;Character&gt; stack = new Stack&lt;Character&gt;();
+
+    for (int i = 0; i &lt; length; i++) {
+        c = s.charAt(i);
+
+        switch (c) {
+            case '(':
+            case '{':
+            case '[':
+                stack.push(c);
+
+                break;
+
+            case ')':
+                try {
+                    char prevChar = stack.pop();
+                    if (prevChar != '(') return false;  
+                } catch (Exception e) {
+                    return false;
+                }
+
+                break;
+
+            case '}':
+                try {
+                    char prevChar = stack.pop();
+                    if (prevChar != '{') return false;  
+                } catch (Exception e) {
+                    return false;
+                }
+
+                break;
+
+            case ']':
+                try {
+                    char prevChar = stack.pop();
+                    if (prevChar != '[') return false;  
+                } catch (Exception e) {
+                    return false;
+                }
+
+                break;
+
+            default:
+                return false;
+        }
+    }
+
+    if (!stack.isEmpty()) return false;
+
+    return true;
+}
+</code></pre>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Leetcode_Remove Nth Node From End of List]]></title>
@@ -220,42 +291,6 @@
     }
 
     return result;
-}
-</code></pre>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Leetcode_Balanced Binary Tree]]></title>
-    <link href="http://smilevchy.github.io/blog/2014/11/18/leetcode-balanced-binary-tree/"/>
-    <updated>2014-11-18T11:36:33+08:00</updated>
-    <id>http://smilevchy.github.io/blog/2014/11/18/leetcode-balanced-binary-tree</id>
-    <content type="html"><![CDATA[<p>原题链接: <a href="https://oj.leetcode.com/problems/balanced-binary-tree/">https://oj.leetcode.com/problems/balanced-binary-tree/</a></p>
-
-<!-- more -->
-
-
-<pre><code>public boolean isBalanced(TreeNode root) {
-    if (root == null) return true;
-
-    int left = maxDepth(root.left);
-    int right = maxDepth(root.right);
-
-    if (Math.abs(left - right) &gt; 1) {
-        return false;
-    }
-
-    return isBalanced(root.left) &amp;&amp; isBalanced(root.right);
-}
-
-public int maxDepth(TreeNode root) {
-    if (root == null) return 0;
-
-    if (root.left == null &amp;&amp; root.right == null) {
-        return 1;
-    }
-
-    return Math.max(maxDepth(root.left), maxDepth(root.right)) + 1;
 }
 </code></pre>
 ]]></content>
