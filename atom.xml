@@ -4,7 +4,7 @@
   <title><![CDATA[smilevchy's blog]]></title>
   <link href="http://smilevchy.github.io/atom.xml" rel="self"/>
   <link href="http://smilevchy.github.io/"/>
-  <updated>2014-11-19T15:47:38+08:00</updated>
+  <updated>2014-11-19T17:01:12+08:00</updated>
   <id>http://smilevchy.github.io/</id>
   <author>
     <name><![CDATA[smilevchy]]></name>
@@ -12,6 +12,48 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Leetcode_Merge Sorted Array]]></title>
+    <link href="http://smilevchy.github.io/blog/2014/11/19/leetcode-merge-sorted-array/"/>
+    <updated>2014-11-19T17:00:17+08:00</updated>
+    <id>http://smilevchy.github.io/blog/2014/11/19/leetcode-merge-sorted-array</id>
+    <content type="html"><![CDATA[<p>原题链接: <a href="https://oj.leetcode.com/problems/merge-sorted-array/">https://oj.leetcode.com/problems/merge-sorted-array/</a></p>
+
+<!-- more -->
+
+
+<pre><code>public void merge(int A[], int m, int B[], int n) {
+    int size = m + n;
+    int[] workspace = new int[size];
+
+    int i = 0;
+    int j = 0;
+    int k = 0;
+
+    while (i &lt; m &amp;&amp; j &lt; n) {
+        if (A[i] &lt; B[j]) {
+            workspace[k++] = A[i++];
+        } else {
+            workspace[k++] = B[j++];
+        }
+    }
+
+    while (i &lt; m) {
+        workspace[k++] = A[i++];
+    }
+
+    while (j &lt; n) {
+        workspace[k++] = B[j++];
+    }
+
+    for (k = 0; k &lt; size; k++) {
+        A[k] = workspace[k];
+    }
+}
+</code></pre>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Leetcode_Binary Tree Level Order Traversal II]]></title>
@@ -832,93 +874,6 @@ public int romanToInt(String s) {
     }
 
     return true;
-}
-</code></pre>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Leetcode_Valid Number]]></title>
-    <link href="http://smilevchy.github.io/blog/2014/11/05/leetcode-valid-number/"/>
-    <updated>2014-11-05T18:29:57+08:00</updated>
-    <id>http://smilevchy.github.io/blog/2014/11/05/leetcode-valid-number</id>
-    <content type="html"><![CDATA[<p>原题链接：<a href="https://oj.leetcode.com/problems/valid-number/">https://oj.leetcode.com/problems/valid-number/</a></p>
-
-<!-- more -->
-
-
-<p>这道题主要是注意 &ldquo;+&rdquo;/&ldquo;&ndash;&rdquo;/&ldquo;e&rdquo;/&ldquo;E&rdquo;/&ldquo;.&rdquo; 的位置，遍历字符串，当遇到上述几种符号时就判断位置是否正确，不正确则退出遍历过程，正确则继续，遇到非数字则退出遍历过程。</p>
-
-<pre><code>public boolean isNumber(String s) {
-    if (s == null) {
-        return false;
-    }
-
-    String str = s.trim();
-
-    if (str.length() == 0) {
-        return false;
-    }
-
-    boolean result = true;
-    int length = str.length();
-    char c;
-    boolean exponentialExisted = false;
-    boolean dotExisted = false;
-    boolean quitLoop = false;
-    boolean digitExisted = false;
-
-    for (int i = 0; i &lt; length; i++) {
-        c = str.charAt(i);
-
-        if ('0' &lt;= c &amp;&amp; c &lt;= '9') {
-            digitExisted = true;
-        } else {
-            switch (c) {
-                case '+':
-                case '-':
-                    if (i == length - 1 || i != 0 &amp;&amp; str.charAt(i - 1) != 'e' &amp;&amp; str.charAt(i - 1) != 'E') {
-                        result = false;
-
-                        quitLoop = true;
-                    }
-
-                    break;
-
-                case 'e':
-                case 'E':
-                    if (exponentialExisted || i == 0 || i == length - 1 || ((str.charAt(i - 1) &lt; '0' || str.charAt(i - 1) &gt; '9') &amp;&amp; str.charAt(i - 1) != '.') || !digitExisted) {
-                        result = false;
-
-                        quitLoop = true;
-                    }
-
-                    exponentialExisted = true;
-
-                    break;
-
-                case '.':
-                    if (dotExisted || exponentialExisted || length == 1 || (i == length - 1 &amp;&amp; (str.charAt(i - 1) &lt; '0' || str.charAt(i - 1) &gt; '9')) || 
-                        (i == 0 &amp;&amp; ((str.charAt(i + 1) &lt; '0' || str.charAt(i + 1) &gt; '9') &amp;&amp; (str.charAt(i + 1) != 'e' &amp;&amp; str.charAt(i + 1) != 'E')))) {
-                        result =  false;
-
-                        quitLoop = true;
-                    }
-
-                    dotExisted = true;
-
-                    break;
-
-                default:
-                    result = false;
-                    quitLoop = true;
-            }
-        }
-
-        if (quitLoop) break;
-    }
-
-    return result;
 }
 </code></pre>
 ]]></content>
