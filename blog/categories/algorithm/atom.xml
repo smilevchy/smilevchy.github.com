@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Algorithm | smilevchy's blog]]></title>
   <link href="http://smilevchy.github.io/blog/categories/algorithm/atom.xml" rel="self"/>
   <link href="http://smilevchy.github.io/"/>
-  <updated>2014-11-19T15:23:14+08:00</updated>
+  <updated>2014-11-19T15:47:38+08:00</updated>
   <id>http://smilevchy.github.io/</id>
   <author>
     <name><![CDATA[smilevchy]]></name>
@@ -12,6 +12,60 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Leetcode_Binary Tree Level Order Traversal II]]></title>
+    <link href="http://smilevchy.github.io/blog/2014/11/19/leetcode-binary-tree-level-order-traversal-ii/"/>
+    <updated>2014-11-19T15:46:19+08:00</updated>
+    <id>http://smilevchy.github.io/blog/2014/11/19/leetcode-binary-tree-level-order-traversal-ii</id>
+    <content type="html"><![CDATA[<p>原题链接: <a href="https://oj.leetcode.com/problems/binary-tree-level-order-traversal-ii/">https://oj.leetcode.com/problems/binary-tree-level-order-traversal-ii/</a></p>
+
+<!-- more -->
+
+
+<pre><code>public List&lt;List&lt;Integer&gt;&gt; levelOrderBottom(TreeNode root) {
+    LinkedList&lt;List&lt;Integer&gt;&gt; result = new LinkedList&lt;List&lt;Integer&gt;&gt;();
+
+    if (root == null) return result;
+
+    ArrayDeque&lt;TreeNode&gt; queue = new ArrayDeque&lt;TreeNode&gt;();
+
+    queue.offer(root);
+
+    int lastNum = 1;
+    int curNum = 0;
+    List&lt;Integer&gt; row = new LinkedList&lt;Integer&gt;();
+
+    while (!queue.isEmpty()) {
+        lastNum--;
+
+        TreeNode node = queue.poll();
+        row.add(node.val);
+
+        if (node.left != null) {
+            curNum++;
+            queue.offer(node.left);
+        }
+
+        if (node.right != null) {
+            curNum++;
+            queue.offer(node.right);
+        }
+
+        if (lastNum == 0) {
+            result.addFirst(row);
+
+            lastNum = curNum;
+            curNum = 0;
+            row = new LinkedList&lt;Integer&gt;();
+        }
+    }
+
+    return result;
+}
+</code></pre>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Leetcode_Binary Tree Level Order Traversal]]></title>
@@ -165,41 +219,6 @@ public int maxDepth(TreeNode root) {
     } else {
         return minDepth(root.right) + 1;
     }
-}
-</code></pre>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Leetcode_Pascal's Triangle II]]></title>
-    <link href="http://smilevchy.github.io/blog/2014/11/18/leetcode-pascals-triangle-ii/"/>
-    <updated>2014-11-18T10:11:53+08:00</updated>
-    <id>http://smilevchy.github.io/blog/2014/11/18/leetcode-pascals-triangle-ii</id>
-    <content type="html"><![CDATA[<p>原题链接: <a href="https://oj.leetcode.com/problems/pascals-triangle-ii/">https://oj.leetcode.com/problems/pascals-triangle-ii/</a></p>
-
-<!-- more -->
-
-
-<pre><code>public List&lt;Integer&gt; getRow(int rowIndex) {
-    if (rowIndex &lt; 0) return new ArrayList&lt;Integer&gt;();
-
-    List&lt;Integer&gt; row = new ArrayList&lt;Integer&gt;(rowIndex + 1);
-
-    if (rowIndex == 0) {
-        row.add(1);
-    } else {
-        List&lt;Integer&gt; upRow = getRow(rowIndex - 1);
-
-        for (int i = 0; i &lt;= rowIndex; i++) {
-            if (i == 0 || i == rowIndex) {
-                row.add(1);
-            } else {
-                row.add(upRow.get(i - 1) + upRow.get(i));
-            }
-        }
-    }
-
-    return row;
 }
 </code></pre>
 ]]></content>

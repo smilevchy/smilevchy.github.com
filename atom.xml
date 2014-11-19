@@ -4,7 +4,7 @@
   <title><![CDATA[smilevchy's blog]]></title>
   <link href="http://smilevchy.github.io/atom.xml" rel="self"/>
   <link href="http://smilevchy.github.io/"/>
-  <updated>2014-11-19T15:23:14+08:00</updated>
+  <updated>2014-11-19T15:47:38+08:00</updated>
   <id>http://smilevchy.github.io/</id>
   <author>
     <name><![CDATA[smilevchy]]></name>
@@ -12,6 +12,60 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Leetcode_Binary Tree Level Order Traversal II]]></title>
+    <link href="http://smilevchy.github.io/blog/2014/11/19/leetcode-binary-tree-level-order-traversal-ii/"/>
+    <updated>2014-11-19T15:46:19+08:00</updated>
+    <id>http://smilevchy.github.io/blog/2014/11/19/leetcode-binary-tree-level-order-traversal-ii</id>
+    <content type="html"><![CDATA[<p>原题链接: <a href="https://oj.leetcode.com/problems/binary-tree-level-order-traversal-ii/">https://oj.leetcode.com/problems/binary-tree-level-order-traversal-ii/</a></p>
+
+<!-- more -->
+
+
+<pre><code>public List&lt;List&lt;Integer&gt;&gt; levelOrderBottom(TreeNode root) {
+    LinkedList&lt;List&lt;Integer&gt;&gt; result = new LinkedList&lt;List&lt;Integer&gt;&gt;();
+
+    if (root == null) return result;
+
+    ArrayDeque&lt;TreeNode&gt; queue = new ArrayDeque&lt;TreeNode&gt;();
+
+    queue.offer(root);
+
+    int lastNum = 1;
+    int curNum = 0;
+    List&lt;Integer&gt; row = new LinkedList&lt;Integer&gt;();
+
+    while (!queue.isEmpty()) {
+        lastNum--;
+
+        TreeNode node = queue.poll();
+        row.add(node.val);
+
+        if (node.left != null) {
+            curNum++;
+            queue.offer(node.left);
+        }
+
+        if (node.right != null) {
+            curNum++;
+            queue.offer(node.right);
+        }
+
+        if (lastNum == 0) {
+            result.addFirst(row);
+
+            lastNum = curNum;
+            curNum = 0;
+            row = new LinkedList&lt;Integer&gt;();
+        }
+    }
+
+    return result;
+}
+</code></pre>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Leetcode_Binary Tree Level Order Traversal]]></title>
@@ -865,41 +919,6 @@ public int romanToInt(String s) {
     }
 
     return result;
-}
-</code></pre>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Leetcode_Jump Game]]></title>
-    <link href="http://smilevchy.github.io/blog/2014/11/04/leetcode-jump-game/"/>
-    <updated>2014-11-04T21:34:32+08:00</updated>
-    <id>http://smilevchy.github.io/blog/2014/11/04/leetcode-jump-game</id>
-    <content type="html"><![CDATA[<p>原题链接: <a href="https://oj.leetcode.com/problems/jump-game/">https://oj.leetcode.com/problems/jump-game/</a></p>
-
-<!-- more -->
-
-
-<p>~_~ 这道题是看别人的解法的（当然，我不是照抄那种，看过理解了自己再写的）</p>
-
-<pre><code>public boolean canJump(int[] A) {
-    if (A == null || A.length == 0) {
-        return false;
-    }
-
-    int size = A.length;
-    int dstPosition = size - 1;
-    int maxReachPosition = 0;
-
-    for (int i = 0; i &lt;= maxReachPosition &amp;&amp; i &lt; size; i++) {
-        maxReachPosition = Math.max(i + A[i], maxReachPosition);
-    }
-
-    if (maxReachPosition &lt; dstPosition) {
-        return false;
-    }
-
-    return true;
 }
 </code></pre>
 ]]></content>
