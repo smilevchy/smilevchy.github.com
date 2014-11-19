@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Algorithm | smilevchy's blog]]></title>
   <link href="http://smilevchy.github.io/blog/categories/algorithm/atom.xml" rel="self"/>
   <link href="http://smilevchy.github.io/"/>
-  <updated>2014-11-19T17:01:12+08:00</updated>
+  <updated>2014-11-19T17:55:59+08:00</updated>
   <id>http://smilevchy.github.io/</id>
   <author>
     <name><![CDATA[smilevchy]]></name>
@@ -12,6 +12,51 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Leetcode_Remove Nth Node From End of List]]></title>
+    <link href="http://smilevchy.github.io/blog/2014/11/19/leetcode-remove-nth-node-from-end-of-list/"/>
+    <updated>2014-11-19T17:55:05+08:00</updated>
+    <id>http://smilevchy.github.io/blog/2014/11/19/leetcode-remove-nth-node-from-end-of-list</id>
+    <content type="html"><![CDATA[<p>原题链接: <a href="https://oj.leetcode.com/problems/remove-nth-node-from-end-of-list/">https://oj.leetcode.com/problems/remove-nth-node-from-end-of-list/</a></p>
+
+<!-- more -->
+
+
+<pre><code>public ListNode removeNthFromEnd(ListNode head, int n) {
+    if (head == null) return null;
+    if (n == 0) return head;
+
+    ListNode cursor = head;
+    int size = 0;
+
+    while (cursor != null) {
+        cursor = cursor.next;
+        size++;
+    }
+
+    cursor = head;
+    int targetIndex = size - n;
+    int cursorIndex = 0;
+    ListNode prevNode = null;
+
+    while (cursorIndex &lt; targetIndex) {
+        prevNode = cursor;
+        cursor = cursor.next;
+        cursorIndex++;
+    }
+
+    if (prevNode == null) {
+        head = cursor.next;
+    } else {
+        prevNode.next = cursor.next;
+    }
+
+    return head;
+}
+</code></pre>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Leetcode_Merge Sorted Array]]></title>
@@ -204,29 +249,6 @@
 }
 
 public int maxDepth(TreeNode root) {
-    if (root == null) return 0;
-
-    if (root.left == null &amp;&amp; root.right == null) {
-        return 1;
-    }
-
-    return Math.max(maxDepth(root.left), maxDepth(root.right)) + 1;
-}
-</code></pre>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Leetcode_Maximum Depth of Binary Tree]]></title>
-    <link href="http://smilevchy.github.io/blog/2014/11/18/leetcode-maximum-depth-of-binary-tree/"/>
-    <updated>2014-11-18T10:39:00+08:00</updated>
-    <id>http://smilevchy.github.io/blog/2014/11/18/leetcode-maximum-depth-of-binary-tree</id>
-    <content type="html"><![CDATA[<p>原题链接: <a href="https://oj.leetcode.com/problems/maximum-depth-of-binary-tree/">https://oj.leetcode.com/problems/maximum-depth-of-binary-tree/</a></p>
-
-<!-- more -->
-
-
-<pre><code>public int maxDepth(TreeNode root) {
     if (root == null) return 0;
 
     if (root.left == null &amp;&amp; root.right == null) {

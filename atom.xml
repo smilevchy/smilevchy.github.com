@@ -4,7 +4,7 @@
   <title><![CDATA[smilevchy's blog]]></title>
   <link href="http://smilevchy.github.io/atom.xml" rel="self"/>
   <link href="http://smilevchy.github.io/"/>
-  <updated>2014-11-19T17:01:12+08:00</updated>
+  <updated>2014-11-19T17:55:59+08:00</updated>
   <id>http://smilevchy.github.io/</id>
   <author>
     <name><![CDATA[smilevchy]]></name>
@@ -12,6 +12,51 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Leetcode_Remove Nth Node From End of List]]></title>
+    <link href="http://smilevchy.github.io/blog/2014/11/19/leetcode-remove-nth-node-from-end-of-list/"/>
+    <updated>2014-11-19T17:55:05+08:00</updated>
+    <id>http://smilevchy.github.io/blog/2014/11/19/leetcode-remove-nth-node-from-end-of-list</id>
+    <content type="html"><![CDATA[<p>原题链接: <a href="https://oj.leetcode.com/problems/remove-nth-node-from-end-of-list/">https://oj.leetcode.com/problems/remove-nth-node-from-end-of-list/</a></p>
+
+<!-- more -->
+
+
+<pre><code>public ListNode removeNthFromEnd(ListNode head, int n) {
+    if (head == null) return null;
+    if (n == 0) return head;
+
+    ListNode cursor = head;
+    int size = 0;
+
+    while (cursor != null) {
+        cursor = cursor.next;
+        size++;
+    }
+
+    cursor = head;
+    int targetIndex = size - n;
+    int cursorIndex = 0;
+    ListNode prevNode = null;
+
+    while (cursorIndex &lt; targetIndex) {
+        prevNode = cursor;
+        cursor = cursor.next;
+        cursorIndex++;
+    }
+
+    if (prevNode == null) {
+        head = cursor.next;
+    } else {
+        prevNode.next = cursor.next;
+    }
+
+    return head;
+}
+</code></pre>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Leetcode_Merge Sorted Array]]></title>
@@ -841,39 +886,6 @@ public int romanToInt(String s) {
     if (accumulator &gt; 0) sb.append("" + accumulator + prevChar);
 
     return sb.toString();
-}
-</code></pre>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Leetcode_Palindrome Number]]></title>
-    <link href="http://smilevchy.github.io/blog/2014/11/06/leetcode-palindrome-number/"/>
-    <updated>2014-11-06T15:59:14+08:00</updated>
-    <id>http://smilevchy.github.io/blog/2014/11/06/leetcode-palindrome-number</id>
-    <content type="html"><![CDATA[<p>原题链接: <a href="https://oj.leetcode.com/problems/palindrome-number/">https://oj.leetcode.com/problems/palindrome-number/</a></p>
-
-<!-- more -->
-
-
-<pre><code>public boolean isPalindrome(int x) {
-    if (x &lt; 0) return false;
-
-    // get length of digit
-    int carryLength = 1;
-    while (x / carryLength &gt;= 10) {
-        carryLength *= 10;
-    }
-
-    while (x &gt; 0) {
-        // test if the first and the end digit is equal; if not, return false
-        if (x / carryLength != x % 10) return false;
-
-        x = x % carryLength / 10;    // get the new number without the first and the end digit
-        carryLength /= 100;    // for cutting the first and the end digit, we need to shrink carry length by 2 times
-    }
-
-    return true;
 }
 </code></pre>
 ]]></content>
