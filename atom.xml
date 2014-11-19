@@ -4,7 +4,7 @@
   <title><![CDATA[smilevchy's blog]]></title>
   <link href="http://smilevchy.github.io/atom.xml" rel="self"/>
   <link href="http://smilevchy.github.io/"/>
-  <updated>2014-11-18T11:37:55+08:00</updated>
+  <updated>2014-11-19T15:23:14+08:00</updated>
   <id>http://smilevchy.github.io/</id>
   <author>
     <name><![CDATA[smilevchy]]></name>
@@ -12,6 +12,77 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Leetcode_Binary Tree Level Order Traversal]]></title>
+    <link href="http://smilevchy.github.io/blog/2014/11/19/leetcode-binary-tree-level-order-traversal/"/>
+    <updated>2014-11-19T15:22:05+08:00</updated>
+    <id>http://smilevchy.github.io/blog/2014/11/19/leetcode-binary-tree-level-order-traversal</id>
+    <content type="html"><![CDATA[<p>原题链接: <a href="https://oj.leetcode.com/problems/binary-tree-level-order-traversal/">https://oj.leetcode.com/problems/binary-tree-level-order-traversal/</a></p>
+
+<!-- more -->
+
+
+<pre><code>public List&lt;List&lt;Integer&gt;&gt; levelOrder(TreeNode root) {
+    if (root == null) return new ArrayList&lt;List&lt;Integer&gt;&gt;();
+
+    List&lt;List&lt;Integer&gt;&gt; result = new ArrayList&lt;List&lt;Integer&gt;&gt;();
+    List&lt;Integer&gt; row = new ArrayList&lt;Integer&gt;();
+
+    row.add(root.val);
+    result.add(row);
+
+    row = new ArrayList&lt;Integer&gt;();
+
+    List&lt;List&lt;Integer&gt;&gt; leftList = null;
+    if (root.left != null) {
+        row.add(root.left.val);
+        leftList = levelOrder(root.left);
+    }
+
+    List&lt;List&lt;Integer&gt;&gt; rightList = null;
+    if (root.right != null) {
+        row.add(root.right.val);
+        rightList = levelOrder(root.right);
+    }
+
+    if (row.size() &gt; 0) {
+        result.add(row);
+    }
+
+    if (leftList != null) {
+        leftList = leftList.subList(1, leftList.size());
+    }
+
+    if (rightList != null) {
+        rightList = rightList.subList(1, rightList.size());
+    }
+
+    int i = 0;
+    int leftSize = leftList != null ? leftList.size() : 0;
+    int rightSize = rightList != null ? rightList.size() : 0;
+
+    for (; i &lt; leftSize; i++) {
+        row = new ArrayList&lt;Integer&gt;();
+
+        row.addAll(leftList.get(i));
+        if (i &lt; rightSize) row.addAll(rightList.get(i)); 
+
+        result.add(row);
+    }
+    for (; i &lt; rightSize; i++) {
+        row = new ArrayList&lt;Integer&gt;();
+
+        row.addAll(rightList.get(i));
+
+        result.add(row);
+    }
+
+    return result;
+}
+</code></pre>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Leetcode_Balanced Binary Tree]]></title>
@@ -829,60 +900,6 @@ public int romanToInt(String s) {
     }
 
     return true;
-}
-</code></pre>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Leetcode_Rotate List]]></title>
-    <link href="http://smilevchy.github.io/blog/2014/11/04/leetcode-rotate-list/"/>
-    <updated>2014-11-04T21:32:39+08:00</updated>
-    <id>http://smilevchy.github.io/blog/2014/11/04/leetcode-rotate-list</id>
-    <content type="html"><![CDATA[<p>原题链接: <a href="https://oj.leetcode.com/problems/rotate-list/">https://oj.leetcode.com/problems/rotate-list/</a></p>
-
-<!-- more -->
-
-
-<pre><code>public ListNode rotateRight(ListNode head, int n) {
-    if (head == null) {
-        return head;
-    }
-
-    ListNode cursor = head;
-
-    int length = 0;
-    while (cursor != null) {
-        cursor = cursor.next;
-        length++;
-    }
-
-    if (n % length == 0) {
-        return head;
-    }
-
-    int targetIndex = length - n % length;
-
-    int currentIndex = 0;
-    cursor = head;
-    ListNode prev = null;
-
-    while (currentIndex &lt; targetIndex) {
-        prev = cursor;
-        cursor = cursor.next;
-        currentIndex++;
-    }
-
-    ListNode cursorTail = cursor;
-    while (cursorTail.next != null) {
-        cursorTail = cursorTail.next;
-    }
-
-    prev.next = null;
-    cursorTail.next = head;
-    head = cursor;
-
-    return head;
 }
 </code></pre>
 ]]></content>

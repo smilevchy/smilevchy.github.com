@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Algorithm | smilevchy's blog]]></title>
   <link href="http://smilevchy.github.io/blog/categories/algorithm/atom.xml" rel="self"/>
   <link href="http://smilevchy.github.io/"/>
-  <updated>2014-11-18T11:37:55+08:00</updated>
+  <updated>2014-11-19T15:23:14+08:00</updated>
   <id>http://smilevchy.github.io/</id>
   <author>
     <name><![CDATA[smilevchy]]></name>
@@ -12,6 +12,77 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Leetcode_Binary Tree Level Order Traversal]]></title>
+    <link href="http://smilevchy.github.io/blog/2014/11/19/leetcode-binary-tree-level-order-traversal/"/>
+    <updated>2014-11-19T15:22:05+08:00</updated>
+    <id>http://smilevchy.github.io/blog/2014/11/19/leetcode-binary-tree-level-order-traversal</id>
+    <content type="html"><![CDATA[<p>原题链接: <a href="https://oj.leetcode.com/problems/binary-tree-level-order-traversal/">https://oj.leetcode.com/problems/binary-tree-level-order-traversal/</a></p>
+
+<!-- more -->
+
+
+<pre><code>public List&lt;List&lt;Integer&gt;&gt; levelOrder(TreeNode root) {
+    if (root == null) return new ArrayList&lt;List&lt;Integer&gt;&gt;();
+
+    List&lt;List&lt;Integer&gt;&gt; result = new ArrayList&lt;List&lt;Integer&gt;&gt;();
+    List&lt;Integer&gt; row = new ArrayList&lt;Integer&gt;();
+
+    row.add(root.val);
+    result.add(row);
+
+    row = new ArrayList&lt;Integer&gt;();
+
+    List&lt;List&lt;Integer&gt;&gt; leftList = null;
+    if (root.left != null) {
+        row.add(root.left.val);
+        leftList = levelOrder(root.left);
+    }
+
+    List&lt;List&lt;Integer&gt;&gt; rightList = null;
+    if (root.right != null) {
+        row.add(root.right.val);
+        rightList = levelOrder(root.right);
+    }
+
+    if (row.size() &gt; 0) {
+        result.add(row);
+    }
+
+    if (leftList != null) {
+        leftList = leftList.subList(1, leftList.size());
+    }
+
+    if (rightList != null) {
+        rightList = rightList.subList(1, rightList.size());
+    }
+
+    int i = 0;
+    int leftSize = leftList != null ? leftList.size() : 0;
+    int rightSize = rightList != null ? rightList.size() : 0;
+
+    for (; i &lt; leftSize; i++) {
+        row = new ArrayList&lt;Integer&gt;();
+
+        row.addAll(leftList.get(i));
+        if (i &lt; rightSize) row.addAll(rightList.get(i)); 
+
+        result.add(row);
+    }
+    for (; i &lt; rightSize; i++) {
+        row = new ArrayList&lt;Integer&gt;();
+
+        row.addAll(rightList.get(i));
+
+        result.add(row);
+    }
+
+    return result;
+}
+</code></pre>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Leetcode_Balanced Binary Tree]]></title>
@@ -129,47 +200,6 @@ public int maxDepth(TreeNode root) {
     }
 
     return row;
-}
-</code></pre>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Leetcode_Pascal's Triangle]]></title>
-    <link href="http://smilevchy.github.io/blog/2014/11/17/leetcode-pascals-triangle/"/>
-    <updated>2014-11-17T18:42:09+08:00</updated>
-    <id>http://smilevchy.github.io/blog/2014/11/17/leetcode-pascals-triangle</id>
-    <content type="html"><![CDATA[<p>原题链接: <a href="https://oj.leetcode.com/problems/pascals-triangle/">https://oj.leetcode.com/problems/pascals-triangle/</a></p>
-
-<!-- more -->
-
-
-<pre><code>public List&lt;List&lt;Integer&gt;&gt; generate(int numRows) {
-    if (numRows &lt;= 0) return new ArrayList&lt;List&lt;Integer&gt;&gt;();
-
-    List&lt;List&lt;Integer&gt;&gt; pascalNums = new ArrayList&lt;List&lt;Integer&gt;&gt;(numRows);
-
-    List&lt;Integer&gt; row = new ArrayList&lt;Integer&gt;(1);
-    row.add(1);
-    pascalNums.add(row);
-
-    for (int i = 1; i &lt; numRows; i++) {
-        row = new ArrayList&lt;Integer&gt;(i + 1);
-
-        for (int j = 0; j &lt;= i; j++) {
-            if (j == 0) {
-                row.add(pascalNums.get(i - 1).get(0));
-            } else if (j == i) {
-                row.add(pascalNums.get(i - 1).get(pascalNums.get(i - 1).size() - 1));
-            } else {
-                row.add(pascalNums.get(i - 1).get(j - 1) + pascalNums.get(i - 1).get(j));
-            }
-        }
-
-        pascalNums.add(row);
-    }
-
-    return pascalNums;
 }
 </code></pre>
 ]]></content>

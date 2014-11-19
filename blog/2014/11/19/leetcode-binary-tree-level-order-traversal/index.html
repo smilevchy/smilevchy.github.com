@@ -5,13 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Problem With JQuery's Html() Function in IE - smilevchy's blog</title>
+  <title>Leetcode_Binary Tree Level Order Traversal - smilevchy's blog</title>
   <meta name="author" content="smilevchy">
 
   
-  <meta name="description" content="&lt;div id="container"&gt;
-&lt;/div&gt;
-&lt;div id="btnArea"&gt; &lt;input type="button" value="clear" id="clearBtn" /&gt; &lt;input type="button" &hellip;">
+  <meta name="description" content="原题链接: https://oj.leetcode.com/problems/binary-tree-level-order-traversal/ public List&lt;List&lt;Integer&gt;&gt; levelOrder(TreeNode root) { if (root &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -20,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://smilevchy.github.io/blog/2014/09/16/jquerys-html-function-in-ie">
+  <link rel="canonical" href="http://smilevchy.github.io/blog/2014/11/19/leetcode-binary-tree-level-order-traversal">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="smilevchy's blog" type="application/atom+xml">
@@ -70,7 +68,7 @@
   
   <header>
     
-      <h1 class="entry-title">Problem With JQuery's Html() Function in IE</h1>
+      <h1 class="entry-title">Leetcode_Binary Tree Level Order Traversal</h1>
     
     
       <p class="meta">
@@ -86,7 +84,7 @@
   
 
 
-<time datetime="2014-09-16T21:20:02+08:00" pubdate data-updated="true">Sep 16<sup>th</sup>, 2014</time>
+<time datetime="2014-11-19T15:22:05+08:00" pubdate data-updated="true">Nov 19<sup>th</sup>, 2014</time>
         
            | <a href="#disqus_thread"
              data-disqus-identifier="http://smilevchy.github.io">Comments</a>
@@ -96,55 +94,69 @@
   </header>
 
 
-<div class="entry-content"><pre><code>&lt;div id="container"&gt;
-&lt;/div&gt;
-&lt;div id="btnArea"&gt;
-    &lt;input type="button" value="clear" id="clearBtn" /&gt;
-    &lt;input type="button" value="add" id="addBtn" /&gt;
-&lt;/div&gt;
-</code></pre>
+<div class="entry-content"><p>原题链接: <a href="https://oj.leetcode.com/problems/binary-tree-level-order-traversal/">https://oj.leetcode.com/problems/binary-tree-level-order-traversal/</a></p>
 
 <!-- more -->
 
 
-<pre><code>&lt;script&gt;
-    $(function() {
-        var tempDom = $("&lt;span&gt;hello world&lt;/span&gt;");
-        $("#container").append(tempDom);
+<pre><code>public List&lt;List&lt;Integer&gt;&gt; levelOrder(TreeNode root) {
+    if (root == null) return new ArrayList&lt;List&lt;Integer&gt;&gt;();
 
-        $("#btnArea").delegate("#clearBtn", "click", function(evt) {
-            $("#container").html("");
-        });
+    List&lt;List&lt;Integer&gt;&gt; result = new ArrayList&lt;List&lt;Integer&gt;&gt;();
+    List&lt;Integer&gt; row = new ArrayList&lt;Integer&gt;();
 
-        $("#btnArea").delegate("#addBtn", "click", function(evt) {
-            $("#container").append(tempDom);               
-        });
-    });
-&lt;/script&gt;   
+    row.add(root.val);
+    result.add(row);
+
+    row = new ArrayList&lt;Integer&gt;();
+
+    List&lt;List&lt;Integer&gt;&gt; leftList = null;
+    if (root.left != null) {
+        row.add(root.left.val);
+        leftList = levelOrder(root.left);
+    }
+
+    List&lt;List&lt;Integer&gt;&gt; rightList = null;
+    if (root.right != null) {
+        row.add(root.right.val);
+        rightList = levelOrder(root.right);
+    }
+
+    if (row.size() &gt; 0) {
+        result.add(row);
+    }
+
+    if (leftList != null) {
+        leftList = leftList.subList(1, leftList.size());
+    }
+
+    if (rightList != null) {
+        rightList = rightList.subList(1, rightList.size());
+    }
+
+    int i = 0;
+    int leftSize = leftList != null ? leftList.size() : 0;
+    int rightSize = rightList != null ? rightList.size() : 0;
+
+    for (; i &lt; leftSize; i++) {
+        row = new ArrayList&lt;Integer&gt;();
+
+        row.addAll(leftList.get(i));
+        if (i &lt; rightSize) row.addAll(rightList.get(i)); 
+
+        result.add(row);
+    }
+    for (; i &lt; rightSize; i++) {
+        row = new ArrayList&lt;Integer&gt;();
+
+        row.addAll(rightList.get(i));
+
+        result.add(row);
+    }
+
+    return result;
+}
 </code></pre>
-
-<p>上面那段代码在 Chrome、Firefox 下运行时，能够得到期望的结果，而如果在 IE 浏览器下运行时，其输出行为与预料中的不一样(此时 tempDom 的文本节点会被删除掉，感觉像在tempDom 上调用了 html())。
-为了 hack 这个问题，可以写成，预先把节点保存起来，在需要的时候就 clone 该节点来进行操作。</p>
-
-<p>即：</p>
-
-<pre><code>&lt;script&gt;
-    $(function() {
-        var tempDom = $("&lt;span&gt;hello world&lt;/span&gt;");
-        $("#container").append(tempDom.clone());
-
-        $("#btnArea").delegate("#clearBtn", "click", function(evt) {
-            $("#container").html("");
-        });
-
-        $("#btnArea").delegate("#addBtn", "click", function(evt) {
-            $("#container").append(tempDom.clone());               
-        });
-    });
-&lt;/script&gt;
-</code></pre>
-
-<p>这样没有什么效率，可以改成按需显示隐藏的方式(前提是符合项目需求)。</p>
 </div>
 
 
@@ -167,12 +179,12 @@
   
 
 
-<time datetime="2014-09-16T21:20:02+08:00" pubdate data-updated="true">Sep 16<sup>th</sup>, 2014</time>
+<time datetime="2014-11-19T15:22:05+08:00" pubdate data-updated="true">Nov 19<sup>th</sup>, 2014</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/jquery/'>jquery</a>
+    <a class='category' href='/blog/categories/algorithm/'>algorithm</a>
   
 </span>
 
@@ -188,10 +200,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2014/08/27/todays-shock/" title="Previous Post: Today's Shock">&laquo; Today's Shock</a>
+        <a class="basic-alignment left" href="/blog/2014/11/18/leetcode-balanced-binary-tree/" title="Previous Post: Leetcode_Balanced Binary Tree">&laquo; Leetcode_Balanced Binary Tree</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2014/09/16/let-android-talk-to-computer-with-socket/" title="Next Post: Let Android Talk to Computer with Socket">Let Android Talk to Computer with Socket &raquo;</a>
       
     </p>
   </footer>
@@ -312,8 +322,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://smilevchy.github.io/blog/2014/09/16/jquerys-html-function-in-ie/';
-        var disqus_url = 'http://smilevchy.github.io/blog/2014/09/16/jquerys-html-function-in-ie/';
+        var disqus_identifier = 'http://smilevchy.github.io/blog/2014/11/19/leetcode-binary-tree-level-order-traversal/';
+        var disqus_url = 'http://smilevchy.github.io/blog/2014/11/19/leetcode-binary-tree-level-order-traversal/';
         var disqus_script = 'embed.js';
       
     (function () {
