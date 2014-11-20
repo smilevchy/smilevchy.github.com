@@ -4,7 +4,7 @@
   <title><![CDATA[smilevchy's blog]]></title>
   <link href="http://smilevchy.github.io/atom.xml" rel="self"/>
   <link href="http://smilevchy.github.io/"/>
-  <updated>2014-11-20T15:42:02+08:00</updated>
+  <updated>2014-11-20T17:53:29+08:00</updated>
   <id>http://smilevchy.github.io/</id>
   <author>
     <name><![CDATA[smilevchy]]></name>
@@ -12,6 +12,63 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Leetcode_Sort List]]></title>
+    <link href="http://smilevchy.github.io/blog/2014/11/20/leetcode-sort-list/"/>
+    <updated>2014-11-20T17:51:47+08:00</updated>
+    <id>http://smilevchy.github.io/blog/2014/11/20/leetcode-sort-list</id>
+    <content type="html"><![CDATA[<p>原题链接: <a href="https://oj.leetcode.com/problems/sort-list/">https://oj.leetcode.com/problems/sort-list/</a></p>
+
+<!-- more -->
+
+
+<pre><code>public ListNode sortList(ListNode head) {
+    if (head == null) return null;
+    if (head.next == null) return head;
+
+    ListNode slowCursor = head;
+    ListNode quickCursor = head;
+
+    while (quickCursor.next != null &amp;&amp; quickCursor.next.next != null) {
+        slowCursor = slowCursor.next;
+        quickCursor = quickCursor.next.next;
+    }
+
+    ListNode headRight = slowCursor.next;
+    ListNode headLeft = head;
+    slowCursor.next = null;
+
+    return mergeTwoLists(sortList(headLeft), sortList(headRight));
+}
+
+private ListNode mergeTwoLists(ListNode l1, ListNode l2) {
+    ListNode helper = new ListNode(0);
+    helper.next = l1;
+    ListNode pre = helper;
+
+    while (l1 != null &amp;&amp; l2 != null) {
+        if (l1.val &lt; l2.val) {
+            l1 = l1.next;
+        } else {
+            ListNode next = l2.next;
+            l2.next = pre.next;
+            pre.next = l2;
+            l2 = next;
+        }
+
+        pre = pre.next;
+    }
+
+    if (l2 != null) {
+        pre.next = l2;
+    }
+
+    return helper.next;
+}
+</code></pre>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Leetcode_Merge Two Sorted Lists]]></title>
@@ -786,28 +843,6 @@ public int maxDepth(TreeNode root) {
     return res[length];
 }
 </code></pre>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Today's Shock]]></title>
-    <link href="http://smilevchy.github.io/blog/2014/11/13/todays-shocking/"/>
-    <updated>2014-11-13T14:12:18+08:00</updated>
-    <id>http://smilevchy.github.io/blog/2014/11/13/todays-shocking</id>
-    <content type="html"><![CDATA[<p>Need to sort some values which are Chinese.</p>
-
-<p>Firstly, I am thinking to find some third-party libraries to finish this job. However, this may seems to be &ldquo;heavy&rdquo; for project.</p>
-
-<!-- more -->
-
-
-<p>So I turn to find some useful algorithms.</p>
-
-<p>On Internet, I have found some solutions about how to do this. But some of them look like too bulk. So wandering and wandering, at last I found a sulution which looks the best currently. Some guy say we can use javascript&rsquo;s function : localeCompare().</p>
-
-<p>So, it is what I want to get. Currently it works well, but maybe it will have some drawbacks.</p>
-
-<p>Anyhow, it is a work around now.</p>
 ]]></content>
   </entry>
   
