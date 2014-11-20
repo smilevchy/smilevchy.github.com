@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Algorithm | smilevchy's blog]]></title>
   <link href="http://smilevchy.github.io/blog/categories/algorithm/atom.xml" rel="self"/>
   <link href="http://smilevchy.github.io/"/>
-  <updated>2014-11-20T17:53:29+08:00</updated>
+  <updated>2014-11-20T18:19:02+08:00</updated>
   <id>http://smilevchy.github.io/</id>
   <author>
     <name><![CDATA[smilevchy]]></name>
@@ -12,6 +12,52 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Leetcode_Binary Tree Preorder Traversal]]></title>
+    <link href="http://smilevchy.github.io/blog/2014/11/20/leetcode-binary-tree-preorder-traversal/"/>
+    <updated>2014-11-20T18:17:38+08:00</updated>
+    <id>http://smilevchy.github.io/blog/2014/11/20/leetcode-binary-tree-preorder-traversal</id>
+    <content type="html"><![CDATA[<p>原题链接: <a href="https://oj.leetcode.com/problems/binary-tree-preorder-traversal/">https://oj.leetcode.com/problems/binary-tree-preorder-traversal/</a></p>
+
+<!-- more -->
+
+
+<pre><code>public List&lt;Integer&gt; preorderTraversal(TreeNode root) {
+    List&lt;Integer&gt; result = new ArrayList&lt;Integer&gt;();
+
+    if (root == null) return result;
+
+    LinkedList&lt;TreeNode&gt; stack = new LinkedList&lt;TreeNode&gt;();
+
+    while (root != null || !stack.isEmpty()) {
+        if (root != null) {
+            result.add(root.val);
+            stack.push(root);
+            root = root.left;
+        } else {
+            root = stack.pop();
+            root = root.right;
+        }
+    }
+
+    return result;
+}
+
+public List&lt;Integer&gt; preorderTraversal(TreeNode root) {
+    List&lt;Integer&gt; result = new ArrayList&lt;Integer&gt;();
+
+    if (root == null) return result;
+
+    result.add(root.val);
+    result.addAll(preorderTraversal(root.left));
+    result.addAll(preorderTraversal(root.right));
+
+    return result;
+}
+</code></pre>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Leetcode_Sort List]]></title>
@@ -206,38 +252,6 @@ private ListNode mergeTwoLists(ListNode l1, ListNode l2) {
     }
 
     return c;
-}
-</code></pre>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Leetcode_Remove Element]]></title>
-    <link href="http://smilevchy.github.io/blog/2014/11/20/leetcode-remove-element/"/>
-    <updated>2014-11-20T11:19:55+08:00</updated>
-    <id>http://smilevchy.github.io/blog/2014/11/20/leetcode-remove-element</id>
-    <content type="html"><![CDATA[<p>原题链接: <a href="https://oj.leetcode.com/problems/remove-element/">https://oj.leetcode.com/problems/remove-element/</a></p>
-
-<!-- more -->
-
-
-<pre><code>public int removeElement(int[] A, int elem) {
-    if (A == null || A.length == 0) return 0;
-
-    int length = A.length;
-    int index = 0;
-
-    for (int i = 0; i &lt; length; i++) {
-        if (A[i] == elem) {
-            A[index] = A[length - 1];
-            i--;
-            length--;
-        } else {
-            index++;
-        }
-    }
-
-    return index;
 }
 </code></pre>
 ]]></content>
