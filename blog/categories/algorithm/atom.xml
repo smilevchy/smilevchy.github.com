@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Algorithm | smilevchy's blog]]></title>
   <link href="http://smilevchy.github.io/blog/categories/algorithm/atom.xml" rel="self"/>
   <link href="http://smilevchy.github.io/"/>
-  <updated>2014-11-20T10:25:44+08:00</updated>
+  <updated>2014-11-20T11:20:58+08:00</updated>
   <id>http://smilevchy.github.io/</id>
   <author>
     <name><![CDATA[smilevchy]]></name>
@@ -12,6 +12,38 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Leetcode_Remove Element]]></title>
+    <link href="http://smilevchy.github.io/blog/2014/11/20/leetcode-remove-element/"/>
+    <updated>2014-11-20T11:19:55+08:00</updated>
+    <id>http://smilevchy.github.io/blog/2014/11/20/leetcode-remove-element</id>
+    <content type="html"><![CDATA[<p>原题链接: <a href="https://oj.leetcode.com/problems/remove-element/">https://oj.leetcode.com/problems/remove-element/</a></p>
+
+<!-- more -->
+
+
+<pre><code>public int removeElement(int[] A, int elem) {
+    if (A == null || A.length == 0) return 0;
+
+    int length = A.length;
+    int index = 0;
+
+    for (int i = 0; i &lt; length; i++) {
+        if (A[i] == elem) {
+            A[index] = A[length - 1];
+            i--;
+            length--;
+        } else {
+            index++;
+        }
+    }
+
+    return index;
+}
+</code></pre>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Leetcode_Remove Duplicates From Sorted Array]]></title>
@@ -194,60 +226,6 @@
     for (k = 0; k &lt; size; k++) {
         A[k] = workspace[k];
     }
-}
-</code></pre>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Leetcode_Binary Tree Level Order Traversal II]]></title>
-    <link href="http://smilevchy.github.io/blog/2014/11/19/leetcode-binary-tree-level-order-traversal-ii/"/>
-    <updated>2014-11-19T15:46:19+08:00</updated>
-    <id>http://smilevchy.github.io/blog/2014/11/19/leetcode-binary-tree-level-order-traversal-ii</id>
-    <content type="html"><![CDATA[<p>原题链接: <a href="https://oj.leetcode.com/problems/binary-tree-level-order-traversal-ii/">https://oj.leetcode.com/problems/binary-tree-level-order-traversal-ii/</a></p>
-
-<!-- more -->
-
-
-<pre><code>public List&lt;List&lt;Integer&gt;&gt; levelOrderBottom(TreeNode root) {
-    LinkedList&lt;List&lt;Integer&gt;&gt; result = new LinkedList&lt;List&lt;Integer&gt;&gt;();
-
-    if (root == null) return result;
-
-    ArrayDeque&lt;TreeNode&gt; queue = new ArrayDeque&lt;TreeNode&gt;();
-
-    queue.offer(root);
-
-    int lastNum = 1;
-    int curNum = 0;
-    List&lt;Integer&gt; row = new LinkedList&lt;Integer&gt;();
-
-    while (!queue.isEmpty()) {
-        lastNum--;
-
-        TreeNode node = queue.poll();
-        row.add(node.val);
-
-        if (node.left != null) {
-            curNum++;
-            queue.offer(node.left);
-        }
-
-        if (node.right != null) {
-            curNum++;
-            queue.offer(node.right);
-        }
-
-        if (lastNum == 0) {
-            result.addFirst(row);
-
-            lastNum = curNum;
-            curNum = 0;
-            row = new LinkedList&lt;Integer&gt;();
-        }
-    }
-
-    return result;
 }
 </code></pre>
 ]]></content>

@@ -4,7 +4,7 @@
   <title><![CDATA[smilevchy's blog]]></title>
   <link href="http://smilevchy.github.io/atom.xml" rel="self"/>
   <link href="http://smilevchy.github.io/"/>
-  <updated>2014-11-20T10:25:44+08:00</updated>
+  <updated>2014-11-20T11:20:58+08:00</updated>
   <id>http://smilevchy.github.io/</id>
   <author>
     <name><![CDATA[smilevchy]]></name>
@@ -12,6 +12,38 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Leetcode_Remove Element]]></title>
+    <link href="http://smilevchy.github.io/blog/2014/11/20/leetcode-remove-element/"/>
+    <updated>2014-11-20T11:19:55+08:00</updated>
+    <id>http://smilevchy.github.io/blog/2014/11/20/leetcode-remove-element</id>
+    <content type="html"><![CDATA[<p>原题链接: <a href="https://oj.leetcode.com/problems/remove-element/">https://oj.leetcode.com/problems/remove-element/</a></p>
+
+<!-- more -->
+
+
+<pre><code>public int removeElement(int[] A, int elem) {
+    if (A == null || A.length == 0) return 0;
+
+    int length = A.length;
+    int index = 0;
+
+    for (int i = 0; i &lt; length; i++) {
+        if (A[i] == elem) {
+            A[index] = A[length - 1];
+            i--;
+            length--;
+        } else {
+            index++;
+        }
+    }
+
+    return index;
+}
+</code></pre>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Leetcode_Remove Duplicates From Sorted Array]]></title>
@@ -830,59 +862,6 @@ public int romanToInt(String s) {
     <id>http://smilevchy.github.io/blog/2014/11/10/the-sorrow-of-individual-game-developer</id>
     <content type="html"><![CDATA[<p>想自己做个游戏，代码还好说，有困难的是各种图片资源、音效资源的创建。
 画家天赋、音乐天赋均没有点上&hellip;&hellip;</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Leetcode_Longest Common Prefix]]></title>
-    <link href="http://smilevchy.github.io/blog/2014/11/08/leetcode-longest-common-prefix/"/>
-    <updated>2014-11-08T13:51:55+08:00</updated>
-    <id>http://smilevchy.github.io/blog/2014/11/08/leetcode-longest-common-prefix</id>
-    <content type="html"><![CDATA[<p>原题链接: <a href="https://oj.leetcode.com/problems/longest-common-prefix/">https://oj.leetcode.com/problems/longest-common-prefix/</a></p>
-
-<!-- more -->
-
-
-<pre><code>public String longestCommonPrefix(String[] strs) {
-    if (strs == null) return null;
-    if (strs.length == 0) return "";
-
-    String shortestStr = null;
-
-    // find the shortest string element
-    for (int i = 0, s = strs.length; i &lt; s; i++) {
-        if (shortestStr == null) {
-            shortestStr = strs[i];
-        } else if (strs[i].length() &lt; shortestStr.length()) {
-            shortestStr = strs[i];
-        }
-    }
-
-    StringBuilder longestCommonPrefix = new StringBuilder("");
-    int shortestStrLen = shortestStr.length();
-    char c;
-    boolean quitMatch = false;
-
-    for (int i = 0; i &lt; shortestStrLen; i++) {
-        c = shortestStr.charAt(i);
-
-        for (int j = 0, s = strs.length; j &lt; s; j++) {
-            if (strs[j].charAt(i) != c) {
-                quitMatch = true;
-                break;
-            }
-
-            if (j == strs.length - 1) {
-                longestCommonPrefix.append(c);
-            }
-        }
-
-        if (quitMatch) break;
-    }
-
-    return longestCommonPrefix.toString();
-}
-</code></pre>
 ]]></content>
   </entry>
   
