@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Algorithm | smilevchy's blog]]></title>
   <link href="http://smilevchy.github.io/blog/categories/algorithm/atom.xml" rel="self"/>
   <link href="http://smilevchy.github.io/"/>
-  <updated>2014-11-19T18:20:37+08:00</updated>
+  <updated>2014-11-20T10:25:44+08:00</updated>
   <id>http://smilevchy.github.io/</id>
   <author>
     <name><![CDATA[smilevchy]]></name>
@@ -12,6 +12,34 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Leetcode_Remove Duplicates From Sorted Array]]></title>
+    <link href="http://smilevchy.github.io/blog/2014/11/20/leetcode-remove-duplicates-from-sorted-array/"/>
+    <updated>2014-11-20T10:24:22+08:00</updated>
+    <id>http://smilevchy.github.io/blog/2014/11/20/leetcode-remove-duplicates-from-sorted-array</id>
+    <content type="html"><![CDATA[<p>原题链接: <a href="https://oj.leetcode.com/problems/remove-duplicates-from-sorted-array/">https://oj.leetcode.com/problems/remove-duplicates-from-sorted-array/</a></p>
+
+<!-- more -->
+
+
+<pre><code>public int removeDuplicates(int[] A) {
+    if (A == null || A.length == 0) return 0;
+
+    int index = 1;
+
+    for (int i = 1, length = A.length; i &lt; length; i++) {
+        if (A[i] != A[i - 1]) {
+            A[index] = A[i];
+            index++;
+        }
+    }
+
+    return index;
+}
+</code></pre>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Leetcode_Valid Parentheses]]></title>
@@ -217,77 +245,6 @@
             curNum = 0;
             row = new LinkedList&lt;Integer&gt;();
         }
-    }
-
-    return result;
-}
-</code></pre>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Leetcode_Binary Tree Level Order Traversal]]></title>
-    <link href="http://smilevchy.github.io/blog/2014/11/19/leetcode-binary-tree-level-order-traversal/"/>
-    <updated>2014-11-19T15:22:05+08:00</updated>
-    <id>http://smilevchy.github.io/blog/2014/11/19/leetcode-binary-tree-level-order-traversal</id>
-    <content type="html"><![CDATA[<p>原题链接: <a href="https://oj.leetcode.com/problems/binary-tree-level-order-traversal/">https://oj.leetcode.com/problems/binary-tree-level-order-traversal/</a></p>
-
-<!-- more -->
-
-
-<pre><code>public List&lt;List&lt;Integer&gt;&gt; levelOrder(TreeNode root) {
-    if (root == null) return new ArrayList&lt;List&lt;Integer&gt;&gt;();
-
-    List&lt;List&lt;Integer&gt;&gt; result = new ArrayList&lt;List&lt;Integer&gt;&gt;();
-    List&lt;Integer&gt; row = new ArrayList&lt;Integer&gt;();
-
-    row.add(root.val);
-    result.add(row);
-
-    row = new ArrayList&lt;Integer&gt;();
-
-    List&lt;List&lt;Integer&gt;&gt; leftList = null;
-    if (root.left != null) {
-        row.add(root.left.val);
-        leftList = levelOrder(root.left);
-    }
-
-    List&lt;List&lt;Integer&gt;&gt; rightList = null;
-    if (root.right != null) {
-        row.add(root.right.val);
-        rightList = levelOrder(root.right);
-    }
-
-    if (row.size() &gt; 0) {
-        result.add(row);
-    }
-
-    if (leftList != null) {
-        leftList = leftList.subList(1, leftList.size());
-    }
-
-    if (rightList != null) {
-        rightList = rightList.subList(1, rightList.size());
-    }
-
-    int i = 0;
-    int leftSize = leftList != null ? leftList.size() : 0;
-    int rightSize = rightList != null ? rightList.size() : 0;
-
-    for (; i &lt; leftSize; i++) {
-        row = new ArrayList&lt;Integer&gt;();
-
-        row.addAll(leftList.get(i));
-        if (i &lt; rightSize) row.addAll(rightList.get(i)); 
-
-        result.add(row);
-    }
-    for (; i &lt; rightSize; i++) {
-        row = new ArrayList&lt;Integer&gt;();
-
-        row.addAll(rightList.get(i));
-
-        result.add(row);
     }
 
     return result;

@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Nginx_config_url_match - smilevchy's blog</title>
+  <title>Leetcode_Remove Duplicates From Sorted Array - smilevchy's blog</title>
   <meta name="author" content="smilevchy">
 
   
-  <meta name="description" content="location smiley_019.png { root html/image; } location ~.(gif|jpg|png)$ { root E:/Pictures; } In this condition, it will just match the latter, nor &hellip;">
+  <meta name="description" content="原题链接: https://oj.leetcode.com/problems/remove-duplicates-from-sorted-array/ public int removeDuplicates(int[] A) { if (A == null || A.length == 0) &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://smilevchy.github.io/blog/2014/07/20/nginx-config-url-match">
+  <link rel="canonical" href="http://smilevchy.github.io/blog/2014/11/20/leetcode-remove-duplicates-from-sorted-array">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="smilevchy's blog" type="application/atom+xml">
@@ -68,7 +68,7 @@
   
   <header>
     
-      <h1 class="entry-title">Nginx_config_url_match</h1>
+      <h1 class="entry-title">Leetcode_Remove Duplicates From Sorted Array</h1>
     
     
       <p class="meta">
@@ -84,7 +84,7 @@
   
 
 
-<time datetime="2014-07-20T15:15:10+08:00" pubdate data-updated="true">Jul 20<sup>th</sup>, 2014</time>
+<time datetime="2014-11-20T10:24:22+08:00" pubdate data-updated="true">Nov 20<sup>th</sup>, 2014</time>
         
            | <a href="#disqus_thread"
              data-disqus-identifier="http://smilevchy.github.io">Comments</a>
@@ -94,69 +94,26 @@
   </header>
 
 
-<div class="entry-content"><p>location smiley_019.png {</p>
-
-<pre><code>root html/image;
-</code></pre>
-
-<p>}</p>
-
-<p>location ~.(gif|jpg|png)$ {</p>
-
-<pre><code>root E:/Pictures;
-</code></pre>
-
-<p>}</p>
-
-<p>In this condition, it will just match the latter, nor the former, which lacks a slash( must be added if it is not regex description)</p>
-
-<hr />
+<div class="entry-content"><p>原题链接: <a href="https://oj.leetcode.com/problems/remove-duplicates-from-sorted-array/">https://oj.leetcode.com/problems/remove-duplicates-from-sorted-array/</a></p>
 
 <!-- more -->
 
 
-<p>after you add it:</p>
+<pre><code>public int removeDuplicates(int[] A) {
+    if (A == null || A.length == 0) return 0;
 
-<p>location /smiley_019.png {</p>
+    int index = 1;
 
-<pre><code>root html/image;
+    for (int i = 1, length = A.length; i &lt; length; i++) {
+        if (A[i] != A[i - 1]) {
+            A[index] = A[i];
+            index++;
+        }
+    }
+
+    return index;
+}
 </code></pre>
-
-<p>}</p>
-
-<p>location ~.(gif|jpg|png)$ {</p>
-
-<pre><code>root E:/Pictures;
-</code></pre>
-
-<p>}</p>
-
-<p>In this condition, it will not match the former again because of nginx&rsquo;s matching rules about location.
-Here, the latter will override the former.</p>
-
-<hr />
-
-<p>So, you need</p>
-
-<p>1.Exact Match</p>
-
-<p>location = /smiley_019.png {</p>
-
-<pre><code>root html/image;
-</code></pre>
-
-<p>}</p>
-
-<p>2.Override the match of latter regex match</p>
-
-<p>location ^~ /smiley_019.png {</p>
-
-<pre><code>root html/image;
-</code></pre>
-
-<p>}</p>
-
-<p>Thus, the former match will not be overrided by the latter.</p>
 </div>
 
 
@@ -179,12 +136,12 @@ Here, the latter will override the former.</p>
   
 
 
-<time datetime="2014-07-20T15:15:10+08:00" pubdate data-updated="true">Jul 20<sup>th</sup>, 2014</time>
+<time datetime="2014-11-20T10:24:22+08:00" pubdate data-updated="true">Nov 20<sup>th</sup>, 2014</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/nginx/'>nginx</a>
+    <a class='category' href='/blog/categories/algorithm/'>algorithm</a>
   
 </span>
 
@@ -200,8 +157,8 @@ Here, the latter will override the former.</p>
     
     <p class="meta">
       
+        <a class="basic-alignment left" href="/blog/2014/11/19/leetcode-valid-parentheses/" title="Previous Post: Leetcode_Valid Parentheses">&laquo; Leetcode_Valid Parentheses</a>
       
-        <a class="basic-alignment right" href="/blog/2014/07/20/octopresss-handling-chinese-character/" title="Next Post: octopress 下中文的处理">octopress 下中文的处理 &raquo;</a>
       
     </p>
   </footer>
@@ -322,8 +279,8 @@ Here, the latter will override the former.</p>
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://smilevchy.github.io/blog/2014/07/20/nginx-config-url-match/';
-        var disqus_url = 'http://smilevchy.github.io/blog/2014/07/20/nginx-config-url-match/';
+        var disqus_identifier = 'http://smilevchy.github.io/blog/2014/11/20/leetcode-remove-duplicates-from-sorted-array/';
+        var disqus_url = 'http://smilevchy.github.io/blog/2014/11/20/leetcode-remove-duplicates-from-sorted-array/';
         var disqus_script = 'embed.js';
       
     (function () {
