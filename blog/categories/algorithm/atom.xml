@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Algorithm | smilevchy's blog]]></title>
   <link href="http://smilevchy.github.io/blog/categories/algorithm/atom.xml" rel="self"/>
   <link href="http://smilevchy.github.io/"/>
-  <updated>2014-11-20T14:54:27+08:00</updated>
+  <updated>2014-11-20T15:42:02+08:00</updated>
   <id>http://smilevchy.github.io/</id>
   <author>
     <name><![CDATA[smilevchy]]></name>
@@ -12,6 +12,56 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Leetcode_Merge Two Sorted Lists]]></title>
+    <link href="http://smilevchy.github.io/blog/2014/11/20/leetcode-merge-two-sorted-lists/"/>
+    <updated>2014-11-20T15:41:09+08:00</updated>
+    <id>http://smilevchy.github.io/blog/2014/11/20/leetcode-merge-two-sorted-lists</id>
+    <content type="html"><![CDATA[<p>原题链接: <a href="https://oj.leetcode.com/problems/merge-two-sorted-lists/">https://oj.leetcode.com/problems/merge-two-sorted-lists/</a></p>
+
+<!-- more -->
+
+
+<pre><code>public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
+    if (l1 == null) return l2;
+    if (l2 == null) return l1;
+
+    ListNode cursorLeft = l1;
+    ListNode cursorRight = l2;
+    ListNode prevLeft = null;
+
+    while (cursorRight != null) {
+        while (cursorLeft != null &amp;&amp; cursorLeft.val &lt;= cursorRight.val) {
+            prevLeft = cursorLeft;
+            cursorLeft = cursorLeft.next;
+        }
+
+        if (prevLeft == null) {
+            l2 = cursorRight.next;
+            cursorRight.next = l1;
+            l1 = cursorRight;
+            cursorRight = l2;
+        } else if (cursorLeft == null) {
+            l2 = cursorRight.next;
+            cursorRight.next = null;
+            prevLeft.next = cursorRight;
+            cursorRight = l2;
+        } else {
+            l2 = cursorRight.next;
+            cursorRight.next = cursorLeft;
+            prevLeft.next = cursorRight;
+            cursorRight = l2;
+        }
+
+        cursorLeft = l1;
+    }
+
+    return l1;
+}
+</code></pre>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Leetcode_Add Binary]]></title>
@@ -159,77 +209,6 @@
     }
 
     return index;
-}
-</code></pre>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Leetcode_Valid Parentheses]]></title>
-    <link href="http://smilevchy.github.io/blog/2014/11/19/leetcode-valid-parentheses/"/>
-    <updated>2014-11-19T18:19:46+08:00</updated>
-    <id>http://smilevchy.github.io/blog/2014/11/19/leetcode-valid-parentheses</id>
-    <content type="html"><![CDATA[<p>原题链接: <a href="https://oj.leetcode.com/problems/valid-parentheses/">https://oj.leetcode.com/problems/valid-parentheses/</a></p>
-
-<!-- more -->
-
-
-<pre><code>public boolean isValid(String s) {
-    if (s == null) return false;
-
-    int length = s.length();
-    char c;
-    Stack&lt;Character&gt; stack = new Stack&lt;Character&gt;();
-
-    for (int i = 0; i &lt; length; i++) {
-        c = s.charAt(i);
-
-        switch (c) {
-            case '(':
-            case '{':
-            case '[':
-                stack.push(c);
-
-                break;
-
-            case ')':
-                try {
-                    char prevChar = stack.pop();
-                    if (prevChar != '(') return false;  
-                } catch (Exception e) {
-                    return false;
-                }
-
-                break;
-
-            case '}':
-                try {
-                    char prevChar = stack.pop();
-                    if (prevChar != '{') return false;  
-                } catch (Exception e) {
-                    return false;
-                }
-
-                break;
-
-            case ']':
-                try {
-                    char prevChar = stack.pop();
-                    if (prevChar != '[') return false;  
-                } catch (Exception e) {
-                    return false;
-                }
-
-                break;
-
-            default:
-                return false;
-        }
-    }
-
-    if (!stack.isEmpty()) return false;
-
-    return true;
 }
 </code></pre>
 ]]></content>
