@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Leetcode_Rotate List - smilevchy's blog</title>
+  <title>Leetcode_Add Binary - smilevchy's blog</title>
   <meta name="author" content="smilevchy">
 
   
-  <meta name="description" content="原题链接: https://oj.leetcode.com/problems/rotate-list/ public ListNode rotateRight(ListNode head, int n) { if (head == null) { return head; } ListNode &hellip;">
+  <meta name="description" content="原题链接: https://oj.leetcode.com/problems/add-binary/ public String addBinary(String a, String b) { if (a == null &amp;&amp; b == null) return null; &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://smilevchy.github.io/blog/2014/11/04/leetcode-rotate-list">
+  <link rel="canonical" href="http://smilevchy.github.io/blog/2014/11/20/leetcode-add-binary">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="smilevchy's blog" type="application/atom+xml">
@@ -68,7 +68,7 @@
   
   <header>
     
-      <h1 class="entry-title">Leetcode_Rotate List</h1>
+      <h1 class="entry-title">Leetcode_Add Binary</h1>
     
     
       <p class="meta">
@@ -84,7 +84,7 @@
   
 
 
-<time datetime="2014-11-04T21:32:39+08:00" pubdate data-updated="true">Nov 4<sup>th</sup>, 2014</time>
+<time datetime="2014-11-20T14:51:16+08:00" pubdate data-updated="true">Nov 20<sup>th</sup>, 2014</time>
         
            | <a href="#disqus_thread"
              data-disqus-identifier="http://smilevchy.github.io">Comments</a>
@@ -94,50 +94,52 @@
   </header>
 
 
-<div class="entry-content"><p>原题链接: <a href="https://oj.leetcode.com/problems/rotate-list/">https://oj.leetcode.com/problems/rotate-list/</a></p>
+<div class="entry-content"><p>原题链接: <a href="https://oj.leetcode.com/problems/add-binary/">https://oj.leetcode.com/problems/add-binary/</a></p>
 
 <!-- more -->
 
 
-<pre><code>public ListNode rotateRight(ListNode head, int n) {
-    if (head == null) {
-        return head;
+<pre><code>public String addBinary(String a, String b) {
+    if (a == null &amp;&amp; b == null) return null;
+
+    StringBuilder sb = new StringBuilder(a);
+
+    int i = sb.length() - 1;
+    int j = b.length() - 1;
+    int carry = 0;
+    char ac;
+    char bc;
+
+    while (i &gt;= 0 &amp;&amp; j &gt;= 0) {
+        ac = sb.charAt(i);
+        bc = b.charAt(j);
+
+        sb.setCharAt(i, (char) ('0' + (ac - '0' + bc - '0' + carry) % 2));
+        carry = (ac - '0' + bc - '0' + carry) / 2;
+
+        i--;
+        j--;
     }
 
-    ListNode cursor = head;
-
-    int length = 0;
-    while (cursor != null) {
-        cursor = cursor.next;
-        length++;
+    while (i &gt;= 0) {
+        ac = sb.charAt(i);
+        sb.setCharAt(i, (char) ('0' + (ac - '0' + carry) % 2));
+        carry = (ac - '0' + carry) / 2;
+        i--;
     }
 
-    if (n % length == 0) {
-        return head;
+    while (j &gt;= 0) {
+        bc = b.charAt(j);
+        sb.insert(0, (char) ('0' + (bc - '0' + carry) % 2));
+        carry = (bc - '0' + carry) / 2;
+        j--;
     }
 
-    int targetIndex = length - n % length;
-
-    int currentIndex = 0;
-    cursor = head;
-    ListNode prev = null;
-
-    while (currentIndex &lt; targetIndex) {
-        prev = cursor;
-        cursor = cursor.next;
-        currentIndex++;
+    if (carry &gt; 0) {
+        sb.insert(0, '1');
     }
 
-    ListNode cursorTail = cursor;
-    while (cursorTail.next != null) {
-        cursorTail = cursorTail.next;
-    }
-
-    prev.next = null;
-    cursorTail.next = head;
-    head = cursor;
-
-    return head;
+    return sb.toString();
 }
 </code></pre>
 </div>
@@ -162,7 +164,7 @@
   
 
 
-<time datetime="2014-11-04T21:32:39+08:00" pubdate data-updated="true">Nov 4<sup>th</sup>, 2014</time>
+<time datetime="2014-11-20T14:51:16+08:00" pubdate data-updated="true">Nov 20<sup>th</sup>, 2014</time>
       
 
 <span class="categories">
@@ -183,10 +185,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2014/11/04/leetcode-reverse-words-in-a-string/" title="Previous Post: Leetcode_Reverse Words in a String">&laquo; Leetcode_Reverse Words in a String</a>
+        <a class="basic-alignment left" href="/blog/2014/11/20/leetcode-climbing-stairs/" title="Previous Post: Leetcode_Climbing Stairs">&laquo; Leetcode_Climbing Stairs</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2014/11/04/leetcode-jump-game/" title="Next Post: Leetcode_Jump Game">Leetcode_Jump Game &raquo;</a>
       
     </p>
   </footer>
@@ -307,8 +307,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://smilevchy.github.io/blog/2014/11/04/leetcode-rotate-list/';
-        var disqus_url = 'http://smilevchy.github.io/blog/2014/11/04/leetcode-rotate-list/';
+        var disqus_identifier = 'http://smilevchy.github.io/blog/2014/11/20/leetcode-add-binary/';
+        var disqus_url = 'http://smilevchy.github.io/blog/2014/11/20/leetcode-add-binary/';
         var disqus_script = 'embed.js';
       
     (function () {

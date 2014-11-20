@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Algorithm | smilevchy's blog]]></title>
   <link href="http://smilevchy.github.io/blog/categories/algorithm/atom.xml" rel="self"/>
   <link href="http://smilevchy.github.io/"/>
-  <updated>2014-11-20T11:53:50+08:00</updated>
+  <updated>2014-11-20T14:54:27+08:00</updated>
   <id>http://smilevchy.github.io/</id>
   <author>
     <name><![CDATA[smilevchy]]></name>
@@ -12,6 +12,62 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Leetcode_Add Binary]]></title>
+    <link href="http://smilevchy.github.io/blog/2014/11/20/leetcode-add-binary/"/>
+    <updated>2014-11-20T14:51:16+08:00</updated>
+    <id>http://smilevchy.github.io/blog/2014/11/20/leetcode-add-binary</id>
+    <content type="html"><![CDATA[<p>原题链接: <a href="https://oj.leetcode.com/problems/add-binary/">https://oj.leetcode.com/problems/add-binary/</a></p>
+
+<!-- more -->
+
+
+<pre><code>public String addBinary(String a, String b) {
+    if (a == null &amp;&amp; b == null) return null;
+
+    StringBuilder sb = new StringBuilder(a);
+
+    int i = sb.length() - 1;
+    int j = b.length() - 1;
+    int carry = 0;
+    char ac;
+    char bc;
+
+    while (i &gt;= 0 &amp;&amp; j &gt;= 0) {
+        ac = sb.charAt(i);
+        bc = b.charAt(j);
+
+        sb.setCharAt(i, (char) ('0' + (ac - '0' + bc - '0' + carry) % 2));
+        carry = (ac - '0' + bc - '0' + carry) / 2;
+
+        i--;
+        j--;
+    }
+
+    while (i &gt;= 0) {
+        ac = sb.charAt(i);
+        sb.setCharAt(i, (char) ('0' + (ac - '0' + carry) % 2));
+        carry = (ac - '0' + carry) / 2;
+        i--;
+    }
+
+    while (j &gt;= 0) {
+        bc = b.charAt(j);
+        sb.insert(0, (char) ('0' + (bc - '0' + carry) % 2));
+        carry = (bc - '0' + carry) / 2;
+        j--;
+    }
+
+    if (carry &gt; 0) {
+        sb.insert(0, '1');
+    }
+
+    return sb.toString();
+}
+</code></pre>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Leetcode_Climbing Stairs]]></title>
@@ -174,51 +230,6 @@
     if (!stack.isEmpty()) return false;
 
     return true;
-}
-</code></pre>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Leetcode_Remove Nth Node From End of List]]></title>
-    <link href="http://smilevchy.github.io/blog/2014/11/19/leetcode-remove-nth-node-from-end-of-list/"/>
-    <updated>2014-11-19T17:55:05+08:00</updated>
-    <id>http://smilevchy.github.io/blog/2014/11/19/leetcode-remove-nth-node-from-end-of-list</id>
-    <content type="html"><![CDATA[<p>原题链接: <a href="https://oj.leetcode.com/problems/remove-nth-node-from-end-of-list/">https://oj.leetcode.com/problems/remove-nth-node-from-end-of-list/</a></p>
-
-<!-- more -->
-
-
-<pre><code>public ListNode removeNthFromEnd(ListNode head, int n) {
-    if (head == null) return null;
-    if (n == 0) return head;
-
-    ListNode cursor = head;
-    int size = 0;
-
-    while (cursor != null) {
-        cursor = cursor.next;
-        size++;
-    }
-
-    cursor = head;
-    int targetIndex = size - n;
-    int cursorIndex = 0;
-    ListNode prevNode = null;
-
-    while (cursorIndex &lt; targetIndex) {
-        prevNode = cursor;
-        cursor = cursor.next;
-        cursorIndex++;
-    }
-
-    if (prevNode == null) {
-        head = cursor.next;
-    } else {
-        prevNode.next = cursor.next;
-    }
-
-    return head;
 }
 </code></pre>
 ]]></content>
