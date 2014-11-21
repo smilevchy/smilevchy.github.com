@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Algorithm | smilevchy's blog]]></title>
   <link href="http://smilevchy.github.io/blog/categories/algorithm/atom.xml" rel="self"/>
   <link href="http://smilevchy.github.io/"/>
-  <updated>2014-11-21T15:08:32+08:00</updated>
+  <updated>2014-11-21T15:25:16+08:00</updated>
   <id>http://smilevchy.github.io/</id>
   <author>
     <name><![CDATA[smilevchy]]></name>
@@ -12,6 +12,31 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Leetcode_Single Number]]></title>
+    <link href="http://smilevchy.github.io/blog/2014/11/21/leetcode-single-number/"/>
+    <updated>2014-11-21T15:23:48+08:00</updated>
+    <id>http://smilevchy.github.io/blog/2014/11/21/leetcode-single-number</id>
+    <content type="html"><![CDATA[<p>原题链接: <a href="https://oj.leetcode.com/problems/single-number/">https://oj.leetcode.com/problems/single-number/</a></p>
+
+<!-- more -->
+
+
+<pre><code>PS: 利用异或运算可以用来加解密.
+
+public int singleNumber(int[] A) {
+    int num = 0;
+
+    for (int i = 0, length = A.length; i &lt; length; i++) {
+        num ^= A[i];
+    }
+
+    return num;
+}
+</code></pre>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Leetcode_Length of Last Word]]></title>
@@ -198,63 +223,6 @@ public List&lt;Integer&gt; preorderTraversal(TreeNode root) {
     result.addAll(preorderTraversal(root.right));
 
     return result;
-}
-</code></pre>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Leetcode_Sort List]]></title>
-    <link href="http://smilevchy.github.io/blog/2014/11/20/leetcode-sort-list/"/>
-    <updated>2014-11-20T17:51:47+08:00</updated>
-    <id>http://smilevchy.github.io/blog/2014/11/20/leetcode-sort-list</id>
-    <content type="html"><![CDATA[<p>原题链接: <a href="https://oj.leetcode.com/problems/sort-list/">https://oj.leetcode.com/problems/sort-list/</a></p>
-
-<!-- more -->
-
-
-<pre><code>public ListNode sortList(ListNode head) {
-    if (head == null) return null;
-    if (head.next == null) return head;
-
-    ListNode slowCursor = head;
-    ListNode quickCursor = head;
-
-    while (quickCursor.next != null &amp;&amp; quickCursor.next.next != null) {
-        slowCursor = slowCursor.next;
-        quickCursor = quickCursor.next.next;
-    }
-
-    ListNode headRight = slowCursor.next;
-    ListNode headLeft = head;
-    slowCursor.next = null;
-
-    return mergeTwoLists(sortList(headLeft), sortList(headRight));
-}
-
-private ListNode mergeTwoLists(ListNode l1, ListNode l2) {
-    ListNode helper = new ListNode(0);
-    helper.next = l1;
-    ListNode pre = helper;
-
-    while (l1 != null &amp;&amp; l2 != null) {
-        if (l1.val &lt; l2.val) {
-            l1 = l1.next;
-        } else {
-            ListNode next = l2.next;
-            l2.next = pre.next;
-            pre.next = l2;
-            l2 = next;
-        }
-
-        pre = pre.next;
-    }
-
-    if (l2 != null) {
-        pre.next = l2;
-    }
-
-    return helper.next;
 }
 </code></pre>
 ]]></content>

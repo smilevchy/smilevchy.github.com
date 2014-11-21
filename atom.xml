@@ -4,7 +4,7 @@
   <title><![CDATA[smilevchy's blog]]></title>
   <link href="http://smilevchy.github.io/atom.xml" rel="self"/>
   <link href="http://smilevchy.github.io/"/>
-  <updated>2014-11-21T15:08:32+08:00</updated>
+  <updated>2014-11-21T15:25:16+08:00</updated>
   <id>http://smilevchy.github.io/</id>
   <author>
     <name><![CDATA[smilevchy]]></name>
@@ -12,6 +12,31 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Leetcode_Single Number]]></title>
+    <link href="http://smilevchy.github.io/blog/2014/11/21/leetcode-single-number/"/>
+    <updated>2014-11-21T15:23:48+08:00</updated>
+    <id>http://smilevchy.github.io/blog/2014/11/21/leetcode-single-number</id>
+    <content type="html"><![CDATA[<p>原题链接: <a href="https://oj.leetcode.com/problems/single-number/">https://oj.leetcode.com/problems/single-number/</a></p>
+
+<!-- more -->
+
+
+<pre><code>PS: 利用异或运算可以用来加解密.
+
+public int singleNumber(int[] A) {
+    int num = 0;
+
+    for (int i = 0, length = A.length; i &lt; length; i++) {
+        num ^= A[i];
+    }
+
+    return num;
+}
+</code></pre>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Leetcode_Length of Last Word]]></title>
@@ -860,47 +885,6 @@ public int maxDepth(TreeNode root) {
     }
 
     return row;
-}
-</code></pre>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Leetcode_Pascal's Triangle]]></title>
-    <link href="http://smilevchy.github.io/blog/2014/11/17/leetcode-pascals-triangle/"/>
-    <updated>2014-11-17T18:42:09+08:00</updated>
-    <id>http://smilevchy.github.io/blog/2014/11/17/leetcode-pascals-triangle</id>
-    <content type="html"><![CDATA[<p>原题链接: <a href="https://oj.leetcode.com/problems/pascals-triangle/">https://oj.leetcode.com/problems/pascals-triangle/</a></p>
-
-<!-- more -->
-
-
-<pre><code>public List&lt;List&lt;Integer&gt;&gt; generate(int numRows) {
-    if (numRows &lt;= 0) return new ArrayList&lt;List&lt;Integer&gt;&gt;();
-
-    List&lt;List&lt;Integer&gt;&gt; pascalNums = new ArrayList&lt;List&lt;Integer&gt;&gt;(numRows);
-
-    List&lt;Integer&gt; row = new ArrayList&lt;Integer&gt;(1);
-    row.add(1);
-    pascalNums.add(row);
-
-    for (int i = 1; i &lt; numRows; i++) {
-        row = new ArrayList&lt;Integer&gt;(i + 1);
-
-        for (int j = 0; j &lt;= i; j++) {
-            if (j == 0) {
-                row.add(pascalNums.get(i - 1).get(0));
-            } else if (j == i) {
-                row.add(pascalNums.get(i - 1).get(pascalNums.get(i - 1).size() - 1));
-            } else {
-                row.add(pascalNums.get(i - 1).get(j - 1) + pascalNums.get(i - 1).get(j));
-            }
-        }
-
-        pascalNums.add(row);
-    }
-
-    return pascalNums;
 }
 </code></pre>
 ]]></content>
