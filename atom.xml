@@ -4,7 +4,7 @@
   <title><![CDATA[smilevchy's blog]]></title>
   <link href="http://smilevchy.github.io/atom.xml" rel="self"/>
   <link href="http://smilevchy.github.io/"/>
-  <updated>2014-11-21T14:45:45+08:00</updated>
+  <updated>2014-11-21T15:08:32+08:00</updated>
   <id>http://smilevchy.github.io/</id>
   <author>
     <name><![CDATA[smilevchy]]></name>
@@ -12,6 +12,51 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Leetcode_Length of Last Word]]></title>
+    <link href="http://smilevchy.github.io/blog/2014/11/21/leetcode-length-of-last-word/"/>
+    <updated>2014-11-21T15:07:42+08:00</updated>
+    <id>http://smilevchy.github.io/blog/2014/11/21/leetcode-length-of-last-word</id>
+    <content type="html"><![CDATA[<p>原题链接: <a href="https://oj.leetcode.com/problems/length-of-last-word/">https://oj.leetcode.com/problems/length-of-last-word/</a></p>
+
+<!-- more -->
+
+
+<pre><code>public int lengthOfLastWord(String s) {
+    if (s == null) return 0;
+
+    int lengthOfLastWord = 0;
+    boolean meetSpace = false;
+    char c;
+
+    for (int i = 0, length = s.length(); i &lt; length; i++) {
+        c = s.charAt(i);
+
+        switch (c) {
+            case ' ':
+                meetSpace = true;
+
+                break;
+
+            default:
+                if (meetSpace) {
+                    lengthOfLastWord = 0;
+                    lengthOfLastWord++;
+                    meetSpace = false;
+                } else {
+                    lengthOfLastWord++;
+                }
+
+                break;
+        }
+    }
+
+    return lengthOfLastWord;
+}
+</code></pre>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Leetcode_Binary Tree Postorder Traversal]]></title>
@@ -856,31 +901,6 @@ public int maxDepth(TreeNode root) {
     }
 
     return pascalNums;
-}
-</code></pre>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Leetcode_Path Sum]]></title>
-    <link href="http://smilevchy.github.io/blog/2014/11/17/leetcode-path-sum/"/>
-    <updated>2014-11-17T18:18:32+08:00</updated>
-    <id>http://smilevchy.github.io/blog/2014/11/17/leetcode-path-sum</id>
-    <content type="html"><![CDATA[<p>原题链接: <a href="https://oj.leetcode.com/problems/path-sum/">https://oj.leetcode.com/problems/path-sum/</a></p>
-
-<!-- more -->
-
-
-<pre><code>public boolean hasPathSum(TreeNode root, int sum) {
-    if (root == null) return false;
-
-    if (root.left == null &amp;&amp; root.right == null &amp;&amp; root.val == sum) {
-        return true;
-    } if (hasPathSum(root.left, sum - root.val) || hasPathSum(root.right, sum - root.val)) {
-        return true;
-    }
-
-    return false;
 }
 </code></pre>
 ]]></content>

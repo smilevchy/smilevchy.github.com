@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Algorithm | smilevchy's blog]]></title>
   <link href="http://smilevchy.github.io/blog/categories/algorithm/atom.xml" rel="self"/>
   <link href="http://smilevchy.github.io/"/>
-  <updated>2014-11-21T14:45:45+08:00</updated>
+  <updated>2014-11-21T15:08:32+08:00</updated>
   <id>http://smilevchy.github.io/</id>
   <author>
     <name><![CDATA[smilevchy]]></name>
@@ -12,6 +12,51 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Leetcode_Length of Last Word]]></title>
+    <link href="http://smilevchy.github.io/blog/2014/11/21/leetcode-length-of-last-word/"/>
+    <updated>2014-11-21T15:07:42+08:00</updated>
+    <id>http://smilevchy.github.io/blog/2014/11/21/leetcode-length-of-last-word</id>
+    <content type="html"><![CDATA[<p>原题链接: <a href="https://oj.leetcode.com/problems/length-of-last-word/">https://oj.leetcode.com/problems/length-of-last-word/</a></p>
+
+<!-- more -->
+
+
+<pre><code>public int lengthOfLastWord(String s) {
+    if (s == null) return 0;
+
+    int lengthOfLastWord = 0;
+    boolean meetSpace = false;
+    char c;
+
+    for (int i = 0, length = s.length(); i &lt; length; i++) {
+        c = s.charAt(i);
+
+        switch (c) {
+            case ' ':
+                meetSpace = true;
+
+                break;
+
+            default:
+                if (meetSpace) {
+                    lengthOfLastWord = 0;
+                    lengthOfLastWord++;
+                    meetSpace = false;
+                } else {
+                    lengthOfLastWord++;
+                }
+
+                break;
+        }
+    }
+
+    return lengthOfLastWord;
+}
+</code></pre>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Leetcode_Binary Tree Postorder Traversal]]></title>
@@ -210,56 +255,6 @@ private ListNode mergeTwoLists(ListNode l1, ListNode l2) {
     }
 
     return helper.next;
-}
-</code></pre>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Leetcode_Merge Two Sorted Lists]]></title>
-    <link href="http://smilevchy.github.io/blog/2014/11/20/leetcode-merge-two-sorted-lists/"/>
-    <updated>2014-11-20T15:41:09+08:00</updated>
-    <id>http://smilevchy.github.io/blog/2014/11/20/leetcode-merge-two-sorted-lists</id>
-    <content type="html"><![CDATA[<p>原题链接: <a href="https://oj.leetcode.com/problems/merge-two-sorted-lists/">https://oj.leetcode.com/problems/merge-two-sorted-lists/</a></p>
-
-<!-- more -->
-
-
-<pre><code>public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
-    if (l1 == null) return l2;
-    if (l2 == null) return l1;
-
-    ListNode cursorLeft = l1;
-    ListNode cursorRight = l2;
-    ListNode prevLeft = null;
-
-    while (cursorRight != null) {
-        while (cursorLeft != null &amp;&amp; cursorLeft.val &lt;= cursorRight.val) {
-            prevLeft = cursorLeft;
-            cursorLeft = cursorLeft.next;
-        }
-
-        if (prevLeft == null) {
-            l2 = cursorRight.next;
-            cursorRight.next = l1;
-            l1 = cursorRight;
-            cursorRight = l2;
-        } else if (cursorLeft == null) {
-            l2 = cursorRight.next;
-            cursorRight.next = null;
-            prevLeft.next = cursorRight;
-            cursorRight = l2;
-        } else {
-            l2 = cursorRight.next;
-            cursorRight.next = cursorLeft;
-            prevLeft.next = cursorRight;
-            cursorRight = l2;
-        }
-
-        cursorLeft = l1;
-    }
-
-    return l1;
 }
 </code></pre>
 ]]></content>
