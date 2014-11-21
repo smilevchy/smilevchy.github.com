@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Algorithm | smilevchy's blog]]></title>
   <link href="http://smilevchy.github.io/blog/categories/algorithm/atom.xml" rel="self"/>
   <link href="http://smilevchy.github.io/"/>
-  <updated>2014-11-21T15:25:16+08:00</updated>
+  <updated>2014-11-21T16:18:47+08:00</updated>
   <id>http://smilevchy.github.io/</id>
   <author>
     <name><![CDATA[smilevchy]]></name>
@@ -12,6 +12,37 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Leetcode_Linked List Cycle]]></title>
+    <link href="http://smilevchy.github.io/blog/2014/11/21/leetcode-linked-list-cycle/"/>
+    <updated>2014-11-21T16:17:54+08:00</updated>
+    <id>http://smilevchy.github.io/blog/2014/11/21/leetcode-linked-list-cycle</id>
+    <content type="html"><![CDATA[<p>原题链接: <a href="https://oj.leetcode.com/problems/linked-list-cycle/">https://oj.leetcode.com/problems/linked-list-cycle/</a></p>
+
+<!-- more -->
+
+
+<pre><code>public boolean hasCycle(ListNode head) {
+    if (head == null) return false;
+
+    ListNode slowCursor = head;
+    ListNode quickCursor = head;
+
+    while (quickCursor.next != null &amp;&amp; quickCursor.next.next != null) {
+        slowCursor = slowCursor.next;
+        quickCursor = quickCursor.next.next;
+
+        if (slowCursor != null &amp;&amp; quickCursor != null &amp;&amp; (quickCursor == slowCursor || quickCursor.next == slowCursor)) {
+            return true;
+        }
+    }
+
+    return false;
+}
+</code></pre>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Leetcode_Single Number]]></title>
@@ -175,52 +206,6 @@ public List&lt;Integer&gt; inorderTraversal(TreeNode root) {
     result.addAll(inorderTraversal(root.left));
     result.add(root.val);
     result.addAll(inorderTraversal(root.right));
-
-    return result;
-}
-</code></pre>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Leetcode_Binary Tree Preorder Traversal]]></title>
-    <link href="http://smilevchy.github.io/blog/2014/11/20/leetcode-binary-tree-preorder-traversal/"/>
-    <updated>2014-11-20T18:17:38+08:00</updated>
-    <id>http://smilevchy.github.io/blog/2014/11/20/leetcode-binary-tree-preorder-traversal</id>
-    <content type="html"><![CDATA[<p>原题链接: <a href="https://oj.leetcode.com/problems/binary-tree-preorder-traversal/">https://oj.leetcode.com/problems/binary-tree-preorder-traversal/</a></p>
-
-<!-- more -->
-
-
-<pre><code>public List&lt;Integer&gt; preorderTraversal(TreeNode root) {
-    List&lt;Integer&gt; result = new ArrayList&lt;Integer&gt;();
-
-    if (root == null) return result;
-
-    LinkedList&lt;TreeNode&gt; stack = new LinkedList&lt;TreeNode&gt;();
-
-    while (root != null || !stack.isEmpty()) {
-        if (root != null) {
-            result.add(root.val);
-            stack.push(root);
-            root = root.left;
-        } else {
-            root = stack.pop();
-            root = root.right;
-        }
-    }
-
-    return result;
-}
-
-public List&lt;Integer&gt; preorderTraversal(TreeNode root) {
-    List&lt;Integer&gt; result = new ArrayList&lt;Integer&gt;();
-
-    if (root == null) return result;
-
-    result.add(root.val);
-    result.addAll(preorderTraversal(root.left));
-    result.addAll(preorderTraversal(root.right));
 
     return result;
 }
