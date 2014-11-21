@@ -4,7 +4,7 @@
   <title><![CDATA[smilevchy's blog]]></title>
   <link href="http://smilevchy.github.io/atom.xml" rel="self"/>
   <link href="http://smilevchy.github.io/"/>
-  <updated>2014-11-20T18:19:02+08:00</updated>
+  <updated>2014-11-21T11:28:05+08:00</updated>
   <id>http://smilevchy.github.io/</id>
   <author>
     <name><![CDATA[smilevchy]]></name>
@@ -12,6 +12,52 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Leetcode_Binary Tree Inorder Traversal]]></title>
+    <link href="http://smilevchy.github.io/blog/2014/11/21/leetcode-binary-tree-inorder-traversal/"/>
+    <updated>2014-11-21T11:26:30+08:00</updated>
+    <id>http://smilevchy.github.io/blog/2014/11/21/leetcode-binary-tree-inorder-traversal</id>
+    <content type="html"><![CDATA[<p>原题链接: <a href="https://oj.leetcode.com/problems/binary-tree-inorder-traversal/">https://oj.leetcode.com/problems/binary-tree-inorder-traversal/</a></p>
+
+<!-- more -->
+
+
+<pre><code>public List&lt;Integer&gt; inorderTraversal(TreeNode root) {
+    List&lt;Integer&gt; result = new ArrayList&lt;Integer&gt;();
+
+    if (root == null) return result;
+
+    LinkedList&lt;TreeNode&gt; stack = new LinkedList&lt;TreeNode&gt;();
+
+    while (root != null || !stack.isEmpty()) {
+        if (root != null) {
+            stack.push(root);
+            root = root.left;
+        } else {
+            root = stack.pop();
+            result.add(root.val);
+            root = root.right;
+        }
+    }
+
+    return result;
+}
+
+public List&lt;Integer&gt; inorderTraversal(TreeNode root) {
+    List&lt;Integer&gt; result = new ArrayList&lt;Integer&gt;();
+
+    if (root == null) return result;
+
+    result.addAll(inorderTraversal(root.left));
+    result.add(root.val);
+    result.addAll(inorderTraversal(root.right));
+
+    return result;
+}
+</code></pre>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Leetcode_Binary Tree Preorder Traversal]]></title>
@@ -816,38 +862,6 @@ public int maxDepth(TreeNode root) {
     }
 
     return head;
-}
-</code></pre>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Leetcode_Triangle]]></title>
-    <link href="http://smilevchy.github.io/blog/2014/11/17/leetcode-triangle/"/>
-    <updated>2014-11-17T17:08:01+08:00</updated>
-    <id>http://smilevchy.github.io/blog/2014/11/17/leetcode-triangle</id>
-    <content type="html"><![CDATA[<p>原题链接: <a href="https://oj.leetcode.com/problems/triangle/">https://oj.leetcode.com/problems/triangle/</a></p>
-
-<!-- more -->
-
-
-<pre><code>public int minimumTotal(List&lt;List&lt;Integer&gt;&gt; triangle) {
-    if (triangle == null) return 0;
-
-    int size = triangle.size();
-    int[] res = new int[triangle.get(size - 1).size()];
-
-    for (int i = 0, s = triangle.get(size - 1).size(); i &lt; s; i++) {
-        res[i] = triangle.get(size - 1).get(i);
-    }
-
-    for (int i = size - 2; i &gt;= 0; i--) {
-        for (int j = 0; j &lt;= i; j++) {
-            res[j] = Math.min(res[j], res[j + 1]) + triangle.get(i).get(j);
-        }
-    }
-
-    return res[0];
 }
 </code></pre>
 ]]></content>

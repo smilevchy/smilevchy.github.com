@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Leetcode_Pascal's Triangle - smilevchy's blog</title>
+  <title>smilevchy's blog</title>
   <meta name="author" content="smilevchy">
 
   
-  <meta name="description" content="原题链接: https://oj.leetcode.com/problems/pascals-triangle/ public List&lt;List&lt;Integer&gt;&gt; generate(int numRows) { if (numRows &lt;= 0) return &hellip;">
+  <meta name="description" content="location smiley_019.png { root html/image; } location ~.(gif|jpg|png)$ { root E:/Pictures; } In this condition, it will just match the latter, nor &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://smilevchy.github.io/blog/2014/11/17/leetcode-pascals-triangle">
+  <link rel="canonical" href="http://smilevchy.github.io/posts/6">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="smilevchy's blog" type="application/atom+xml">
@@ -63,12 +63,15 @@
 </nav>
   <div id="main">
     <div id="content">
-      <div>
-<article class="hentry" role="article">
+      <div class="blog-index">
   
+  
+  
+    <article>
+      
   <header>
     
-      <h1 class="entry-title">Leetcode_Pascal's Triangle</h1>
+      <h1 class="entry-title"><a href="/blog/2014/07/20/nginx-config-url-match/">Nginx_config_url_match</a></h1>
     
     
       <p class="meta">
@@ -84,109 +87,53 @@
   
 
 
-<time datetime="2014-11-17T18:42:09+08:00" pubdate data-updated="true">Nov 17<sup>th</sup>, 2014</time>
+<time datetime="2014-07-20T15:15:10+08:00" pubdate data-updated="true">Jul 20<sup>th</sup>, 2014</time>
         
-           | <a href="#disqus_thread"
-             data-disqus-identifier="http://smilevchy.github.io">Comments</a>
+           | <a href="/blog/2014/07/20/nginx-config-url-match/#disqus_thread"
+             data-disqus-identifier="http://smilevchy.github.io/blog/2014/07/20/nginx-config-url-match/">Comments</a>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p>原题链接: <a href="https://oj.leetcode.com/problems/pascals-triangle/">https://oj.leetcode.com/problems/pascals-triangle/</a></p>
+  <div class="entry-content"><p>location smiley_019.png {</p>
 
-<!-- more -->
-
-
-<pre><code>public List&lt;List&lt;Integer&gt;&gt; generate(int numRows) {
-    if (numRows &lt;= 0) return new ArrayList&lt;List&lt;Integer&gt;&gt;();
-
-    List&lt;List&lt;Integer&gt;&gt; pascalNums = new ArrayList&lt;List&lt;Integer&gt;&gt;(numRows);
-
-    List&lt;Integer&gt; row = new ArrayList&lt;Integer&gt;(1);
-    row.add(1);
-    pascalNums.add(row);
-
-    for (int i = 1; i &lt; numRows; i++) {
-        row = new ArrayList&lt;Integer&gt;(i + 1);
-
-        for (int j = 0; j &lt;= i; j++) {
-            if (j == 0) {
-                row.add(pascalNums.get(i - 1).get(0));
-            } else if (j == i) {
-                row.add(pascalNums.get(i - 1).get(pascalNums.get(i - 1).size() - 1));
-            } else {
-                row.add(pascalNums.get(i - 1).get(j - 1) + pascalNums.get(i - 1).get(j));
-            }
-        }
-
-        pascalNums.add(row);
-    }
-
-    return pascalNums;
-}
+<pre><code>root html/image;
 </code></pre>
+
+<p>}</p>
+
+<p>location ~.(gif|jpg|png)$ {</p>
+
+<pre><code>root E:/Pictures;
+</code></pre>
+
+<p>}</p>
+
+<p>In this condition, it will just match the latter, nor the former, which lacks a slash( must be added if it is not regex description)</p>
+
+<hr />
+
 </div>
-
-
-  <footer>
-    <p class="meta">
-      
   
-
-<span class="byline author vcard">Posted by <span class="fn">smilevchy</span></span>
-
-      
-
-
-
-
-
-
-
-
+  
+    <footer>
+      <a rel="full-article" href="/blog/2014/07/20/nginx-config-url-match/">Read on &rarr;</a>
+    </footer>
   
 
 
-<time datetime="2014-11-17T18:42:09+08:00" pubdate data-updated="true">Nov 17<sup>th</sup>, 2014</time>
-      
-
-<span class="categories">
+    </article>
   
-    <a class='category' href='/blog/categories/algorithm/'>algorithm</a>
-  
-</span>
-
-
-    </p>
+  <div class="pagination">
     
-      <div class="sharing">
-  
-  
-  
-</div>
-
+    <a href="/blog/archives">Blog Archives</a>
     
-    <p class="meta">
-      
-        <a class="basic-alignment left" href="/blog/2014/11/17/leetcode-path-sum/" title="Previous Post: Leetcode_Path Sum">&laquo; Leetcode_Path Sum</a>
-      
-      
-        <a class="basic-alignment right" href="/blog/2014/11/18/leetcode-pascals-triangle-ii/" title="Next Post: Leetcode_Pascal's Triangle II">Leetcode_Pascal's Triangle II &raquo;</a>
-      
-    </p>
-  </footer>
-</article>
-
-  <section>
-    <h1>Comments</h1>
-    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a class="next" href="/posts/5">Newer &rarr;</a>
+    
+  </div>
 </div>
-  </section>
-
-</div>
-
 <aside class="sidebar">
   
     <section>
@@ -241,7 +188,7 @@
 <section>
   <h1>GitHub Repos</h1>
   <ul id="gh_repos">
-    <li class="loading">Status updating...</li>
+    <li class="loading">Status updating&#8230;</li>
   </ul>
   
   <a href="https://github.com/smilevchy">@smilevchy</a> on GitHub
@@ -268,7 +215,7 @@
 </section>
 
 <section>
-  <h1>smilevchy's douban</h1>
+  <h1>smilevchy&#8217;s douban</h1>
   <div>
 	<script type="text/javascript" src="http://www.douban.com/service/badge/90371463/?selection=latest&amp;picsize=small&amp;show=collection&amp;n=8&amp;hidelogo=on&amp;cat=drama%7Cmovie%7Cbook%7Cmusic&amp;columns=2"></script>
   </div>
@@ -277,7 +224,6 @@
 
   
 </aside>
-
 
     </div>
   </div>
@@ -293,10 +239,7 @@
       var disqus_shortname = 'smilevchy';
       
         
-        // var disqus_developer = 1;
-        var disqus_identifier = 'http://smilevchy.github.io/blog/2014/11/17/leetcode-pascals-triangle/';
-        var disqus_url = 'http://smilevchy.github.io/blog/2014/11/17/leetcode-pascals-triangle/';
-        var disqus_script = 'embed.js';
+        var disqus_script = 'count.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
