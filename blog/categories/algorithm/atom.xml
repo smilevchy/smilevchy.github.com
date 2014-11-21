@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Algorithm | smilevchy's blog]]></title>
   <link href="http://smilevchy.github.io/blog/categories/algorithm/atom.xml" rel="self"/>
   <link href="http://smilevchy.github.io/"/>
-  <updated>2014-11-21T11:28:05+08:00</updated>
+  <updated>2014-11-21T14:45:45+08:00</updated>
   <id>http://smilevchy.github.io/</id>
   <author>
     <name><![CDATA[smilevchy]]></name>
@@ -12,6 +12,59 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Leetcode_Binary Tree Postorder Traversal]]></title>
+    <link href="http://smilevchy.github.io/blog/2014/11/21/leetcode-binary-tree-postorder-traversal/"/>
+    <updated>2014-11-21T14:44:22+08:00</updated>
+    <id>http://smilevchy.github.io/blog/2014/11/21/leetcode-binary-tree-postorder-traversal</id>
+    <content type="html"><![CDATA[<p>原题链接: <a href="https://oj.leetcode.com/problems/binary-tree-postorder-traversal/">https://oj.leetcode.com/problems/binary-tree-postorder-traversal/</a></p>
+
+<!-- more -->
+
+
+<pre><code>public List&lt;Integer&gt; postorderTraversal(TreeNode root) {
+    List&lt;Integer&gt; result = new ArrayList&lt;Integer&gt;();
+
+    if (root == null) return result;
+
+    LinkedList&lt;TreeNode&gt; stack = new LinkedList&lt;TreeNode&gt;();
+    TreeNode prev = null;
+
+    while (root != null || !stack.isEmpty()) {
+        if (root != null) {
+            stack.push(root);
+            root = root.left;
+        } else {
+            TreeNode peek = stack.peek();
+
+            if (peek.right != null &amp;&amp; peek.right != prev) {
+                root = peek.right;
+            } else {
+                stack.pop();
+                result.add(peek.val);
+                prev = peek;
+            }
+        }
+    }
+
+    return result;
+}
+
+public List&lt;Integer&gt; postorderTraversal(TreeNode root) {
+    List&lt;Integer&gt; result = new ArrayList&lt;Integer&gt;();
+
+    if (root == null) return result;
+
+    result.addAll(postorderTraversal(root.left));
+    result.addAll(postorderTraversal(root.right));
+    result.add(root.val);
+
+    return result;
+}
+</code></pre>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Leetcode_Binary Tree Inorder Traversal]]></title>
@@ -207,62 +260,6 @@ private ListNode mergeTwoLists(ListNode l1, ListNode l2) {
     }
 
     return l1;
-}
-</code></pre>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Leetcode_Add Binary]]></title>
-    <link href="http://smilevchy.github.io/blog/2014/11/20/leetcode-add-binary/"/>
-    <updated>2014-11-20T14:51:16+08:00</updated>
-    <id>http://smilevchy.github.io/blog/2014/11/20/leetcode-add-binary</id>
-    <content type="html"><![CDATA[<p>原题链接: <a href="https://oj.leetcode.com/problems/add-binary/">https://oj.leetcode.com/problems/add-binary/</a></p>
-
-<!-- more -->
-
-
-<pre><code>public String addBinary(String a, String b) {
-    if (a == null &amp;&amp; b == null) return null;
-
-    StringBuilder sb = new StringBuilder(a);
-
-    int i = sb.length() - 1;
-    int j = b.length() - 1;
-    int carry = 0;
-    char ac;
-    char bc;
-
-    while (i &gt;= 0 &amp;&amp; j &gt;= 0) {
-        ac = sb.charAt(i);
-        bc = b.charAt(j);
-
-        sb.setCharAt(i, (char) ('0' + (ac - '0' + bc - '0' + carry) % 2));
-        carry = (ac - '0' + bc - '0' + carry) / 2;
-
-        i--;
-        j--;
-    }
-
-    while (i &gt;= 0) {
-        ac = sb.charAt(i);
-        sb.setCharAt(i, (char) ('0' + (ac - '0' + carry) % 2));
-        carry = (ac - '0' + carry) / 2;
-        i--;
-    }
-
-    while (j &gt;= 0) {
-        bc = b.charAt(j);
-        sb.insert(0, (char) ('0' + (bc - '0' + carry) % 2));
-        carry = (bc - '0' + carry) / 2;
-        j--;
-    }
-
-    if (carry &gt; 0) {
-        sb.insert(0, '1');
-    }
-
-    return sb.toString();
 }
 </code></pre>
 ]]></content>

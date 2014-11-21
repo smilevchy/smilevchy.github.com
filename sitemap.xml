@@ -3,6 +3,12 @@
   
   
   <url>
+    <loc>http://smilevchy.github.io/blog/2014/11/21/leetcode-binary-tree-postorder-traversal/</loc>
+    <lastmod>2014-11-21T14:44:22+08:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
     <loc>http://smilevchy.github.io/blog/2014/11/21/leetcode-binary-tree-inorder-traversal/</loc>
     <lastmod>2014-11-21T11:26:30+08:00</lastmod>
     <priority>0.8</priority>
@@ -311,14 +317,14 @@
   
   <url>
     <loc>http://smilevchy.github.io/blog/archives/</loc>
-    <lastmod>2014-11-21T11:28:05+08:00</lastmod>
+    <lastmod>2014-11-21T14:45:45+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   
   <url>
     <loc>http://smilevchy.github.io/</loc>
-    <lastmod>2014-11-21T11:28:05+08:00</lastmod>
+    <lastmod>2014-11-21T14:45:45+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>

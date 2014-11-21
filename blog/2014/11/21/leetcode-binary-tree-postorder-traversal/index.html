@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Leetcode_Valid Palindrome - smilevchy's blog</title>
+  <title>Leetcode_Binary Tree Postorder Traversal - smilevchy's blog</title>
   <meta name="author" content="smilevchy">
 
   
-  <meta name="description" content="原题链接: https://oj.leetcode.com/problems/valid-palindrome/ public boolean isPalindrome(String s) { if (s == null) return false; s = s.trim(); if (s. &hellip;">
+  <meta name="description" content="原题链接: https://oj.leetcode.com/problems/binary-tree-postorder-traversal/ public List&lt;Integer&gt; postorderTraversal(TreeNode root) { List&lt; &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://smilevchy.github.io/blog/2014/11/07/leetcode-valid-palindrome">
+  <link rel="canonical" href="http://smilevchy.github.io/blog/2014/11/21/leetcode-binary-tree-postorder-traversal">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="smilevchy's blog" type="application/atom+xml">
@@ -68,7 +68,7 @@
   
   <header>
     
-      <h1 class="entry-title">Leetcode_Valid Palindrome</h1>
+      <h1 class="entry-title">Leetcode_Binary Tree Postorder Traversal</h1>
     
     
       <p class="meta">
@@ -84,7 +84,7 @@
   
 
 
-<time datetime="2014-11-07T16:28:29+08:00" pubdate data-updated="true">Nov 7<sup>th</sup>, 2014</time>
+<time datetime="2014-11-21T14:44:22+08:00" pubdate data-updated="true">Nov 21<sup>st</sup>, 2014</time>
         
            | <a href="#disqus_thread"
              data-disqus-identifier="http://smilevchy.github.io">Comments</a>
@@ -94,49 +94,49 @@
   </header>
 
 
-<div class="entry-content"><p>原题链接: <a href="https://oj.leetcode.com/problems/valid-palindrome/">https://oj.leetcode.com/problems/valid-palindrome/</a></p>
+<div class="entry-content"><p>原题链接: <a href="https://oj.leetcode.com/problems/binary-tree-postorder-traversal/">https://oj.leetcode.com/problems/binary-tree-postorder-traversal/</a></p>
 
 <!-- more -->
 
 
-<pre><code>public boolean isPalindrome(String s) {
-    if (s == null) return false;
+<pre><code>public List&lt;Integer&gt; postorderTraversal(TreeNode root) {
+    List&lt;Integer&gt; result = new ArrayList&lt;Integer&gt;();
 
-    s = s.trim();
+    if (root == null) return result;
 
-    if (s.equals("")) return true;
+    LinkedList&lt;TreeNode&gt; stack = new LinkedList&lt;TreeNode&gt;();
+    TreeNode prev = null;
 
-    int i = 0;
-    int j = s.length() - 1;
-    char leftChar;
-    char rightChar;
+    while (root != null || !stack.isEmpty()) {
+        if (root != null) {
+            stack.push(root);
+            root = root.left;
+        } else {
+            TreeNode peek = stack.peek();
 
-    while (i &lt; j) {
-        leftChar = s.charAt(i);
-
-        if ((leftChar &lt; 'a' || leftChar &gt; 'z') &amp;&amp; (leftChar &lt; 'A' || leftChar &gt; 'Z') &amp;&amp; (leftChar &lt; '0' || leftChar &gt; '9')) {
-            i++;
-            continue;
+            if (peek.right != null &amp;&amp; peek.right != prev) {
+                root = peek.right;
+            } else {
+                stack.pop();
+                result.add(peek.val);
+                prev = peek;
+            }
         }
-
-        rightChar = s.charAt(j);
-
-        if ((rightChar &lt; 'a' || rightChar &gt; 'z') &amp;&amp; (rightChar &lt; 'A' || rightChar &gt; 'Z') &amp;&amp; (rightChar &lt; '0' || rightChar &gt; '9')) {
-            j--;
-            continue;
-        }
-
-        if (leftChar &gt; rightChar) {
-            if (leftChar - 32 != rightChar) return false;
-        } else if (leftChar &lt; rightChar) {
-            if (leftChar + 32 != rightChar) return false;
-        }
-
-        i++;
-        j--;
     }
 
-    return true;
+    return result;
+}
+
+public List&lt;Integer&gt; postorderTraversal(TreeNode root) {
+    List&lt;Integer&gt; result = new ArrayList&lt;Integer&gt;();
+
+    if (root == null) return result;
+
+    result.addAll(postorderTraversal(root.left));
+    result.addAll(postorderTraversal(root.right));
+    result.add(root.val);
+
+    return result;
 }
 </code></pre>
 </div>
@@ -161,7 +161,7 @@
   
 
 
-<time datetime="2014-11-07T16:28:29+08:00" pubdate data-updated="true">Nov 7<sup>th</sup>, 2014</time>
+<time datetime="2014-11-21T14:44:22+08:00" pubdate data-updated="true">Nov 21<sup>st</sup>, 2014</time>
       
 
 <span class="categories">
@@ -182,10 +182,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2014/11/07/leetcode-count-and-say/" title="Previous Post: Leetcode_Count and Say">&laquo; Leetcode_Count and Say</a>
+        <a class="basic-alignment left" href="/blog/2014/11/21/leetcode-binary-tree-inorder-traversal/" title="Previous Post: Leetcode_Binary Tree Inorder Traversal">&laquo; Leetcode_Binary Tree Inorder Traversal</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2014/11/08/leetcode-longest-common-prefix/" title="Next Post: Leetcode_Longest Common Prefix">Leetcode_Longest Common Prefix &raquo;</a>
       
     </p>
   </footer>
@@ -306,8 +304,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://smilevchy.github.io/blog/2014/11/07/leetcode-valid-palindrome/';
-        var disqus_url = 'http://smilevchy.github.io/blog/2014/11/07/leetcode-valid-palindrome/';
+        var disqus_identifier = 'http://smilevchy.github.io/blog/2014/11/21/leetcode-binary-tree-postorder-traversal/';
+        var disqus_url = 'http://smilevchy.github.io/blog/2014/11/21/leetcode-binary-tree-postorder-traversal/';
         var disqus_script = 'embed.js';
       
     (function () {
