@@ -4,7 +4,7 @@
   <title><![CDATA[smilevchy's blog]]></title>
   <link href="http://smilevchy.github.io/atom.xml" rel="self"/>
   <link href="http://smilevchy.github.io/"/>
-  <updated>2014-11-22T11:04:12+08:00</updated>
+  <updated>2014-11-22T11:06:41+08:00</updated>
   <id>http://smilevchy.github.io/</id>
   <author>
     <name><![CDATA[smilevchy]]></name>
@@ -19,6 +19,9 @@
     <updated>2014-11-22T10:45:23+08:00</updated>
     <id>http://smilevchy.github.io/blog/2014/11/22/trap-of-0-dot-1-plus-0-dot-2</id>
     <content type="html"><![CDATA[<p>0.1 + 0.2 == ?</p>
+
+<!-- more -->
+
 
 <p>肯定是 0.3 啊。没错，在数学上的确是等于这个值。可是在计算机的世界里，由于浮点数目前还不能很精确地表示出来，所以这个数相加后的值会有偏差，不是你想象中的值 0.3。</p>
 
