@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Algorithm | smilevchy's blog]]></title>
   <link href="http://smilevchy.github.io/blog/categories/algorithm/atom.xml" rel="self"/>
   <link href="http://smilevchy.github.io/"/>
-  <updated>2014-11-24T14:43:47+08:00</updated>
+  <updated>2014-11-24T17:02:47+08:00</updated>
   <id>http://smilevchy.github.io/</id>
   <author>
     <name><![CDATA[smilevchy]]></name>
@@ -12,6 +12,54 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Leetcode_Convert Sorted List to Binary Search Tree]]></title>
+    <link href="http://smilevchy.github.io/blog/2014/11/24/leetcode-convert-sorted-list-to-binary-search-tree/"/>
+    <updated>2014-11-24T17:01:36+08:00</updated>
+    <id>http://smilevchy.github.io/blog/2014/11/24/leetcode-convert-sorted-list-to-binary-search-tree</id>
+    <content type="html"><![CDATA[<p>原题链接: <a href="https://oj.leetcode.com/problems/convert-sorted-list-to-binary-search-tree/">https://oj.leetcode.com/problems/convert-sorted-list-to-binary-search-tree/</a></p>
+
+<!-- more -->
+
+
+<pre><code>public TreeNode sortedListToBST(ListNode head) {
+    if (head == null) return null;
+
+    ListNode cur = head;
+    int size = 0;
+
+    while (cur != null) {
+        size++;
+        cur = cur.next;
+    }
+
+    List&lt;ListNode&gt; list = new ArrayList&lt;ListNode&gt;();
+    list.add(head);
+    TreeNode tree = sortedListToBSTHelper(list, 0, size - 1);
+
+    return tree;
+}
+
+public TreeNode sortedListToBSTHelper(List&lt;ListNode&gt; list, int low, int high) {
+    if (low &gt; high) return null;
+
+    int mid = (low + high) / 2;
+
+    TreeNode left = sortedListToBSTHelper(list, low, mid - 1);
+
+    TreeNode root = new TreeNode(list.get(0).val);
+    root.left = left;
+
+    list.set(0, list.get(0).next);
+    TreeNode right = sortedListToBSTHelper(list, mid + 1, high);
+    root.right = right;
+
+    return root;
+}
+</code></pre>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Leetcode_Flatten Binary Tree to Linked List]]></title>
@@ -167,31 +215,6 @@ private void flattenHelper(TreeNode root, List&lt;TreeNode&gt; pre) {
     }
 
     return false;
-}
-</code></pre>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Leetcode_Single Number]]></title>
-    <link href="http://smilevchy.github.io/blog/2014/11/21/leetcode-single-number/"/>
-    <updated>2014-11-21T15:23:48+08:00</updated>
-    <id>http://smilevchy.github.io/blog/2014/11/21/leetcode-single-number</id>
-    <content type="html"><![CDATA[<p>原题链接: <a href="https://oj.leetcode.com/problems/single-number/">https://oj.leetcode.com/problems/single-number/</a></p>
-
-<!-- more -->
-
-
-<pre><code>PS: 利用异或运算可以用来加解密.
-
-public int singleNumber(int[] A) {
-    int num = 0;
-
-    for (int i = 0, length = A.length; i &lt; length; i++) {
-        num ^= A[i];
-    }
-
-    return num;
 }
 </code></pre>
 ]]></content>
