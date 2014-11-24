@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Algorithm | smilevchy's blog]]></title>
   <link href="http://smilevchy.github.io/blog/categories/algorithm/atom.xml" rel="self"/>
   <link href="http://smilevchy.github.io/"/>
-  <updated>2014-11-24T13:27:46+08:00</updated>
+  <updated>2014-11-24T14:43:47+08:00</updated>
   <id>http://smilevchy.github.io/</id>
   <author>
     <name><![CDATA[smilevchy]]></name>
@@ -12,6 +12,41 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Leetcode_Flatten Binary Tree to Linked List]]></title>
+    <link href="http://smilevchy.github.io/blog/2014/11/24/leetcode-flatten-binary-tree-to-linked-list/"/>
+    <updated>2014-11-24T14:42:54+08:00</updated>
+    <id>http://smilevchy.github.io/blog/2014/11/24/leetcode-flatten-binary-tree-to-linked-list</id>
+    <content type="html"><![CDATA[<p>原题链接: <a href="https://oj.leetcode.com/problems/flatten-binary-tree-to-linked-list/">https://oj.leetcode.com/problems/flatten-binary-tree-to-linked-list/</a></p>
+
+<!-- more -->
+
+
+<pre><code>public void flatten(TreeNode root) {
+    if (root == null) return;
+
+    List&lt;TreeNode&gt; pre = new ArrayList&lt;TreeNode&gt;(1);
+    pre.add(null);
+    flattenHelper(root, pre);
+}
+
+private void flattenHelper(TreeNode root, List&lt;TreeNode&gt; pre) {
+    if (root == null) return;
+
+    if (pre.get(0) != null) {
+        pre.get(0).left = null;
+        pre.get(0).right = root;
+    }
+
+    TreeNode rootRight = root.right;
+    pre.set(0, root);
+    flattenHelper(root.left, pre);
+    flattenHelper(rootRight, pre);
+}
+</code></pre>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Leetcode_Partition List]]></title>
@@ -157,51 +192,6 @@ public int singleNumber(int[] A) {
     }
 
     return num;
-}
-</code></pre>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Leetcode_Length of Last Word]]></title>
-    <link href="http://smilevchy.github.io/blog/2014/11/21/leetcode-length-of-last-word/"/>
-    <updated>2014-11-21T15:07:42+08:00</updated>
-    <id>http://smilevchy.github.io/blog/2014/11/21/leetcode-length-of-last-word</id>
-    <content type="html"><![CDATA[<p>原题链接: <a href="https://oj.leetcode.com/problems/length-of-last-word/">https://oj.leetcode.com/problems/length-of-last-word/</a></p>
-
-<!-- more -->
-
-
-<pre><code>public int lengthOfLastWord(String s) {
-    if (s == null) return 0;
-
-    int lengthOfLastWord = 0;
-    boolean meetSpace = false;
-    char c;
-
-    for (int i = 0, length = s.length(); i &lt; length; i++) {
-        c = s.charAt(i);
-
-        switch (c) {
-            case ' ':
-                meetSpace = true;
-
-                break;
-
-            default:
-                if (meetSpace) {
-                    lengthOfLastWord = 0;
-                    lengthOfLastWord++;
-                    meetSpace = false;
-                } else {
-                    lengthOfLastWord++;
-                }
-
-                break;
-        }
-    }
-
-    return lengthOfLastWord;
 }
 </code></pre>
 ]]></content>

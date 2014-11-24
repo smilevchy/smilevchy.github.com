@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Leetcode_Partition List - smilevchy's blog</title>
+  <title>Leetcode_Flatten Binary Tree to Linked List - smilevchy's blog</title>
   <meta name="author" content="smilevchy">
 
   
-  <meta name="description" content="原题链接: https://oj.leetcode.com/problems/partition-list/ public ListNode partition(ListNode head, int x) { if (head == null) return null; ListNode &hellip;">
+  <meta name="description" content="原题链接: https://oj.leetcode.com/problems/flatten-binary-tree-to-linked-list/ public void flatten(TreeNode root) { if (root == null) return; List&lt; &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://smilevchy.github.io/blog/2014/11/24/leetcode-partition-list">
+  <link rel="canonical" href="http://smilevchy.github.io/blog/2014/11/24/leetcode-flatten-binary-tree-to-linked-list">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="smilevchy's blog" type="application/atom+xml">
@@ -68,7 +68,7 @@
   
   <header>
     
-      <h1 class="entry-title">Leetcode_Partition List</h1>
+      <h1 class="entry-title">Leetcode_Flatten Binary Tree to Linked List</h1>
     
     
       <p class="meta">
@@ -84,7 +84,7 @@
   
 
 
-<time datetime="2014-11-24T11:20:23+08:00" pubdate data-updated="true">Nov 24<sup>th</sup>, 2014</time>
+<time datetime="2014-11-24T14:42:54+08:00" pubdate data-updated="true">Nov 24<sup>th</sup>, 2014</time>
         
            | <a href="#disqus_thread"
              data-disqus-identifier="http://smilevchy.github.io">Comments</a>
@@ -94,44 +94,31 @@
   </header>
 
 
-<div class="entry-content"><p>原题链接: <a href="https://oj.leetcode.com/problems/partition-list/">https://oj.leetcode.com/problems/partition-list/</a></p>
+<div class="entry-content"><p>原题链接: <a href="https://oj.leetcode.com/problems/flatten-binary-tree-to-linked-list/">https://oj.leetcode.com/problems/flatten-binary-tree-to-linked-list/</a></p>
 
 <!-- more -->
 
 
-<pre><code>public ListNode partition(ListNode head, int x) {
-    if (head == null) return null;
+<pre><code>public void flatten(TreeNode root) {
+    if (root == null) return;
 
-    ListNode lastSmallerNumCursor = null;
-    ListNode prev = null;
-    ListNode cur = head;
+    List&lt;TreeNode&gt; pre = new ArrayList&lt;TreeNode&gt;(1);
+    pre.add(null);
+    flattenHelper(root, pre);
+}
 
-    while (cur != null) {
-        if (cur.val &lt; x) {
-            if (prev == null) {
-                lastSmallerNumCursor = cur;
-                cur = cur.next;
+private void flattenHelper(TreeNode root, List&lt;TreeNode&gt; pre) {
+    if (root == null) return;
 
-                continue;
-            }
-
-            prev.next = cur.next;
-            if (lastSmallerNumCursor == null) {
-                cur.next = head;
-                head = cur;
-            } else {
-                cur.next = lastSmallerNumCursor.next;
-                lastSmallerNumCursor.next = cur;
-            }
-
-            lastSmallerNumCursor = cur;
-        }
-
-        prev = cur;
-        cur = cur.next;
+    if (pre.get(0) != null) {
+        pre.get(0).left = null;
+        pre.get(0).right = root;
     }
 
-    return head;
+    TreeNode rootRight = root.right;
+    pre.set(0, root);
+    flattenHelper(root.left, pre);
+    flattenHelper(rootRight, pre);
 }
 </code></pre>
 </div>
@@ -156,7 +143,7 @@
   
 
 
-<time datetime="2014-11-24T11:20:23+08:00" pubdate data-updated="true">Nov 24<sup>th</sup>, 2014</time>
+<time datetime="2014-11-24T14:42:54+08:00" pubdate data-updated="true">Nov 24<sup>th</sup>, 2014</time>
       
 
 <span class="categories">
@@ -177,10 +164,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2014/11/24/leetcode-linked-list-cycle-ii/" title="Previous Post: Leetcode_Linked List Cycle II">&laquo; Leetcode_Linked List Cycle II</a>
+        <a class="basic-alignment left" href="/blog/2014/11/24/leetcode-partition-list/" title="Previous Post: Leetcode_Partition List">&laquo; Leetcode_Partition List</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2014/11/24/leetcode-flatten-binary-tree-to-linked-list/" title="Next Post: Leetcode_Flatten Binary Tree to Linked List">Leetcode_Flatten Binary Tree to Linked List &raquo;</a>
       
     </p>
   </footer>
@@ -301,8 +286,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://smilevchy.github.io/blog/2014/11/24/leetcode-partition-list/';
-        var disqus_url = 'http://smilevchy.github.io/blog/2014/11/24/leetcode-partition-list/';
+        var disqus_identifier = 'http://smilevchy.github.io/blog/2014/11/24/leetcode-flatten-binary-tree-to-linked-list/';
+        var disqus_url = 'http://smilevchy.github.io/blog/2014/11/24/leetcode-flatten-binary-tree-to-linked-list/';
         var disqus_script = 'embed.js';
       
     (function () {
