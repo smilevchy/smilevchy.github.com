@@ -8,6 +8,8 @@ categories: Algorithm
 
 原题链接: https://oj.leetcode.com/problems/partition-list/
 
+<!-- more -->
+
     public ListNode partition(ListNode head, int x) {
 		if (head == null) return null;
 
