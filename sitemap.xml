@@ -3,6 +3,12 @@
   
   
   <url>
+    <loc>http://smilevchy.github.io/blog/2014/11/24/leetcode-partition-list/</loc>
+    <lastmod>2014-11-24T11:20:23+08:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
     <loc>http://smilevchy.github.io/blog/2014/11/24/leetcode-linked-list-cycle-ii/</loc>
     <lastmod>2014-11-24T10:40:28+08:00</lastmod>
     <priority>0.8</priority>
@@ -347,14 +353,14 @@
   
   <url>
     <loc>http://smilevchy.github.io/blog/archives/</loc>
-    <lastmod>2014-11-24T10:41:30+08:00</lastmod>
+    <lastmod>2014-11-24T11:21:15+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   
   <url>
     <loc>http://smilevchy.github.io/</loc>
-    <lastmod>2014-11-24T10:41:30+08:00</lastmod>
+    <lastmod>2014-11-24T11:21:15+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>

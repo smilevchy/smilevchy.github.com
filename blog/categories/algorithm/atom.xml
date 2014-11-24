@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Algorithm | smilevchy's blog]]></title>
   <link href="http://smilevchy.github.io/blog/categories/algorithm/atom.xml" rel="self"/>
   <link href="http://smilevchy.github.io/"/>
-  <updated>2014-11-24T10:41:30+08:00</updated>
+  <updated>2014-11-24T11:21:15+08:00</updated>
   <id>http://smilevchy.github.io/</id>
   <author>
     <name><![CDATA[smilevchy]]></name>
@@ -12,6 +12,51 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Leetcode_Partition List]]></title>
+    <link href="http://smilevchy.github.io/blog/2014/11/24/leetcode-partition-list/"/>
+    <updated>2014-11-24T11:20:23+08:00</updated>
+    <id>http://smilevchy.github.io/blog/2014/11/24/leetcode-partition-list</id>
+    <content type="html"><![CDATA[<p>原题链接: <a href="https://oj.leetcode.com/problems/partition-list/">https://oj.leetcode.com/problems/partition-list/</a></p>
+
+<pre><code>public ListNode partition(ListNode head, int x) {
+    if (head == null) return null;
+
+    ListNode lastSmallerNumCursor = null;
+    ListNode prev = null;
+    ListNode cur = head;
+
+    while (cur != null) {
+        if (cur.val &lt; x) {
+            if (prev == null) {
+                lastSmallerNumCursor = cur;
+                cur = cur.next;
+
+                continue;
+            }
+
+            prev.next = cur.next;
+            if (lastSmallerNumCursor == null) {
+                cur.next = head;
+                head = cur;
+            } else {
+                cur.next = lastSmallerNumCursor.next;
+                lastSmallerNumCursor.next = cur;
+            }
+
+            lastSmallerNumCursor = cur;
+        }
+
+        prev = cur;
+        cur = cur.next;
+    }
+
+    return head;
+}
+</code></pre>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Leetcode_Linked List Cycle II]]></title>
@@ -154,59 +199,6 @@ public int singleNumber(int[] A) {
     }
 
     return lengthOfLastWord;
-}
-</code></pre>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Leetcode_Binary Tree Postorder Traversal]]></title>
-    <link href="http://smilevchy.github.io/blog/2014/11/21/leetcode-binary-tree-postorder-traversal/"/>
-    <updated>2014-11-21T14:44:22+08:00</updated>
-    <id>http://smilevchy.github.io/blog/2014/11/21/leetcode-binary-tree-postorder-traversal</id>
-    <content type="html"><![CDATA[<p>原题链接: <a href="https://oj.leetcode.com/problems/binary-tree-postorder-traversal/">https://oj.leetcode.com/problems/binary-tree-postorder-traversal/</a></p>
-
-<!-- more -->
-
-
-<pre><code>public List&lt;Integer&gt; postorderTraversal(TreeNode root) {
-    List&lt;Integer&gt; result = new ArrayList&lt;Integer&gt;();
-
-    if (root == null) return result;
-
-    LinkedList&lt;TreeNode&gt; stack = new LinkedList&lt;TreeNode&gt;();
-    TreeNode prev = null;
-
-    while (root != null || !stack.isEmpty()) {
-        if (root != null) {
-            stack.push(root);
-            root = root.left;
-        } else {
-            TreeNode peek = stack.peek();
-
-            if (peek.right != null &amp;&amp; peek.right != prev) {
-                root = peek.right;
-            } else {
-                stack.pop();
-                result.add(peek.val);
-                prev = peek;
-            }
-        }
-    }
-
-    return result;
-}
-
-public List&lt;Integer&gt; postorderTraversal(TreeNode root) {
-    List&lt;Integer&gt; result = new ArrayList&lt;Integer&gt;();
-
-    if (root == null) return result;
-
-    result.addAll(postorderTraversal(root.left));
-    result.addAll(postorderTraversal(root.right));
-    result.add(root.val);
-
-    return result;
 }
 </code></pre>
 ]]></content>
