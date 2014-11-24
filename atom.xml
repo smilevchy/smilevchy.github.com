@@ -4,7 +4,7 @@
   <title><![CDATA[smilevchy's blog]]></title>
   <link href="http://smilevchy.github.io/atom.xml" rel="self"/>
   <link href="http://smilevchy.github.io/"/>
-  <updated>2014-11-22T11:06:41+08:00</updated>
+  <updated>2014-11-24T10:41:30+08:00</updated>
   <id>http://smilevchy.github.io/</id>
   <author>
     <name><![CDATA[smilevchy]]></name>
@@ -12,6 +12,51 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Leetcode_Linked List Cycle II]]></title>
+    <link href="http://smilevchy.github.io/blog/2014/11/24/leetcode-linked-list-cycle-ii/"/>
+    <updated>2014-11-24T10:40:28+08:00</updated>
+    <id>http://smilevchy.github.io/blog/2014/11/24/leetcode-linked-list-cycle-ii</id>
+    <content type="html"><![CDATA[<p>原题链接: <a href="https://oj.leetcode.com/problems/linked-list-cycle-ii/">https://oj.leetcode.com/problems/linked-list-cycle-ii/</a></p>
+
+<!-- more -->
+
+
+<pre><code>public ListNode detectCycle(ListNode head) {
+    if (head == null) return null;
+
+    ListNode slowCursor = head;
+    ListNode quickCursor = head;
+    boolean hasCycle = false;
+
+    while (quickCursor != null &amp;&amp; quickCursor.next!=null) {
+        slowCursor = slowCursor.next;
+        quickCursor = quickCursor.next.next;
+
+        if (slowCursor == quickCursor) {
+            hasCycle = true;
+
+            break;
+        }
+    }
+
+    if (!hasCycle) return null;
+
+    // reset either reference to head
+    slowCursor = head;
+
+    // iterate again until both references meet again, then getting the wanted node
+    while (slowCursor != quickCursor) {
+        slowCursor = slowCursor.next;
+        quickCursor = quickCursor.next;
+    }
+
+    return slowCursor;
+}
+</code></pre>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Trap of '0.1 + 0.2']]></title>
@@ -847,29 +892,6 @@ private ListNode mergeTwoLists(ListNode l1, ListNode l2) {
 }
 
 public int maxDepth(TreeNode root) {
-    if (root == null) return 0;
-
-    if (root.left == null &amp;&amp; root.right == null) {
-        return 1;
-    }
-
-    return Math.max(maxDepth(root.left), maxDepth(root.right)) + 1;
-}
-</code></pre>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Leetcode_Maximum Depth of Binary Tree]]></title>
-    <link href="http://smilevchy.github.io/blog/2014/11/18/leetcode-maximum-depth-of-binary-tree/"/>
-    <updated>2014-11-18T10:39:00+08:00</updated>
-    <id>http://smilevchy.github.io/blog/2014/11/18/leetcode-maximum-depth-of-binary-tree</id>
-    <content type="html"><![CDATA[<p>原题链接: <a href="https://oj.leetcode.com/problems/maximum-depth-of-binary-tree/">https://oj.leetcode.com/problems/maximum-depth-of-binary-tree/</a></p>
-
-<!-- more -->
-
-
-<pre><code>public int maxDepth(TreeNode root) {
     if (root == null) return 0;
 
     if (root.left == null &amp;&amp; root.right == null) {

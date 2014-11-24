@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Leetcode_Remove Element - smilevchy's blog</title>
+  <title>Leetcode_Linked List Cycle II - smilevchy's blog</title>
   <meta name="author" content="smilevchy">
 
   
-  <meta name="description" content="原题链接: https://oj.leetcode.com/problems/remove-element/ public int removeElement(int[] A, int elem) { if (A == null || A.length == 0) return 0; int &hellip;">
+  <meta name="description" content="原题链接: https://oj.leetcode.com/problems/linked-list-cycle-ii/ public ListNode detectCycle(ListNode head) { if (head == null) return null; ListNode &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://smilevchy.github.io/blog/2014/11/20/leetcode-remove-element">
+  <link rel="canonical" href="http://smilevchy.github.io/blog/2014/11/24/leetcode-linked-list-cycle-ii">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="smilevchy's blog" type="application/atom+xml">
@@ -68,7 +68,7 @@
   
   <header>
     
-      <h1 class="entry-title">Leetcode_Remove Element</h1>
+      <h1 class="entry-title">Leetcode_Linked List Cycle II</h1>
     
     
       <p class="meta">
@@ -84,7 +84,7 @@
   
 
 
-<time datetime="2014-11-20T11:19:55+08:00" pubdate data-updated="true">Nov 20<sup>th</sup>, 2014</time>
+<time datetime="2014-11-24T10:40:28+08:00" pubdate data-updated="true">Nov 24<sup>th</sup>, 2014</time>
         
            | <a href="#disqus_thread"
              data-disqus-identifier="http://smilevchy.github.io">Comments</a>
@@ -94,28 +94,41 @@
   </header>
 
 
-<div class="entry-content"><p>原题链接: <a href="https://oj.leetcode.com/problems/remove-element/">https://oj.leetcode.com/problems/remove-element/</a></p>
+<div class="entry-content"><p>原题链接: <a href="https://oj.leetcode.com/problems/linked-list-cycle-ii/">https://oj.leetcode.com/problems/linked-list-cycle-ii/</a></p>
 
 <!-- more -->
 
 
-<pre><code>public int removeElement(int[] A, int elem) {
-    if (A == null || A.length == 0) return 0;
+<pre><code>public ListNode detectCycle(ListNode head) {
+    if (head == null) return null;
 
-    int length = A.length;
-    int index = 0;
+    ListNode slowCursor = head;
+    ListNode quickCursor = head;
+    boolean hasCycle = false;
 
-    for (int i = 0; i &lt; length; i++) {
-        if (A[i] == elem) {
-            A[index] = A[length - 1];
-            i--;
-            length--;
-        } else {
-            index++;
+    while (quickCursor != null &amp;&amp; quickCursor.next!=null) {
+        slowCursor = slowCursor.next;
+        quickCursor = quickCursor.next.next;
+
+        if (slowCursor == quickCursor) {
+            hasCycle = true;
+
+            break;
         }
     }
 
-    return index;
+    if (!hasCycle) return null;
+
+    // reset either reference to head
+    slowCursor = head;
+
+    // iterate again until both references meet again, then getting the wanted node
+    while (slowCursor != quickCursor) {
+        slowCursor = slowCursor.next;
+        quickCursor = quickCursor.next;
+    }
+
+    return slowCursor;
 }
 </code></pre>
 </div>
@@ -140,7 +153,7 @@
   
 
 
-<time datetime="2014-11-20T11:19:55+08:00" pubdate data-updated="true">Nov 20<sup>th</sup>, 2014</time>
+<time datetime="2014-11-24T10:40:28+08:00" pubdate data-updated="true">Nov 24<sup>th</sup>, 2014</time>
       
 
 <span class="categories">
@@ -161,10 +174,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2014/11/20/leetcode-remove-duplicates-from-sorted-array/" title="Previous Post: Leetcode_Remove Duplicates from Sorted Array">&laquo; Leetcode_Remove Duplicates from Sorted Array</a>
+        <a class="basic-alignment left" href="/blog/2014/11/22/trap-of-0-dot-1-plus-0-dot-2/" title="Previous Post: Trap of '0.1 + 0.2'">&laquo; Trap of '0.1 + 0.2'</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2014/11/20/leetcode-climbing-stairs/" title="Next Post: Leetcode_Climbing Stairs">Leetcode_Climbing Stairs &raquo;</a>
       
     </p>
   </footer>
@@ -285,8 +296,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://smilevchy.github.io/blog/2014/11/20/leetcode-remove-element/';
-        var disqus_url = 'http://smilevchy.github.io/blog/2014/11/20/leetcode-remove-element/';
+        var disqus_identifier = 'http://smilevchy.github.io/blog/2014/11/24/leetcode-linked-list-cycle-ii/';
+        var disqus_url = 'http://smilevchy.github.io/blog/2014/11/24/leetcode-linked-list-cycle-ii/';
         var disqus_script = 'embed.js';
       
     (function () {
