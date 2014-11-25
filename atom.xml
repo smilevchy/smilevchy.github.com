@@ -4,7 +4,7 @@
   <title><![CDATA[smilevchy's blog]]></title>
   <link href="http://smilevchy.github.io/atom.xml" rel="self"/>
   <link href="http://smilevchy.github.io/"/>
-  <updated>2014-11-25T15:21:59+08:00</updated>
+  <updated>2014-11-25T17:46:06+08:00</updated>
   <id>http://smilevchy.github.io/</id>
   <author>
     <name><![CDATA[smilevchy]]></name>
@@ -12,6 +12,42 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Leetcode_Search Insert Position]]></title>
+    <link href="http://smilevchy.github.io/blog/2014/11/25/leetcode-search-insert-position/"/>
+    <updated>2014-11-25T17:45:19+08:00</updated>
+    <id>http://smilevchy.github.io/blog/2014/11/25/leetcode-search-insert-position</id>
+    <content type="html"><![CDATA[<p>原题链接: <a href="https://oj.leetcode.com/problems/search-insert-position/">https://oj.leetcode.com/problems/search-insert-position/</a></p>
+
+<!-- more -->
+
+
+<pre><code>public int searchInsert(int[] A, int target) {
+    if (A == null || A.length == 0) return 0;
+
+    int length = A.length;
+    int low = 0;
+    int high = length - 1;
+    int mid = 0;
+
+    while (low &lt;= high) {
+        mid = (low + high) / 2;
+
+        if (A[mid] == target) {
+            return mid;
+        } else if (A[mid] &lt; target) {
+            low = mid + 1;
+        } else {
+            high = mid - 1;
+        }
+    }
+
+    return low;
+}
+</code></pre>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Leetcode_ZigZag Conversion]]></title>
@@ -781,77 +817,6 @@ private ListNode mergeTwoLists(ListNode l1, ListNode l2) {
     }
 
     return index;
-}
-</code></pre>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Leetcode_Valid Parentheses]]></title>
-    <link href="http://smilevchy.github.io/blog/2014/11/19/leetcode-valid-parentheses/"/>
-    <updated>2014-11-19T18:19:46+08:00</updated>
-    <id>http://smilevchy.github.io/blog/2014/11/19/leetcode-valid-parentheses</id>
-    <content type="html"><![CDATA[<p>原题链接: <a href="https://oj.leetcode.com/problems/valid-parentheses/">https://oj.leetcode.com/problems/valid-parentheses/</a></p>
-
-<!-- more -->
-
-
-<pre><code>public boolean isValid(String s) {
-    if (s == null) return false;
-
-    int length = s.length();
-    char c;
-    Stack&lt;Character&gt; stack = new Stack&lt;Character&gt;();
-
-    for (int i = 0; i &lt; length; i++) {
-        c = s.charAt(i);
-
-        switch (c) {
-            case '(':
-            case '{':
-            case '[':
-                stack.push(c);
-
-                break;
-
-            case ')':
-                try {
-                    char prevChar = stack.pop();
-                    if (prevChar != '(') return false;  
-                } catch (Exception e) {
-                    return false;
-                }
-
-                break;
-
-            case '}':
-                try {
-                    char prevChar = stack.pop();
-                    if (prevChar != '{') return false;  
-                } catch (Exception e) {
-                    return false;
-                }
-
-                break;
-
-            case ']':
-                try {
-                    char prevChar = stack.pop();
-                    if (prevChar != '[') return false;  
-                } catch (Exception e) {
-                    return false;
-                }
-
-                break;
-
-            default:
-                return false;
-        }
-    }
-
-    if (!stack.isEmpty()) return false;
-
-    return true;
 }
 </code></pre>
 ]]></content>
