@@ -4,7 +4,7 @@
   <title><![CDATA[smilevchy's blog]]></title>
   <link href="http://smilevchy.github.io/atom.xml" rel="self"/>
   <link href="http://smilevchy.github.io/"/>
-  <updated>2014-11-24T18:10:04+08:00</updated>
+  <updated>2014-11-25T15:21:59+08:00</updated>
   <id>http://smilevchy.github.io/</id>
   <author>
     <name><![CDATA[smilevchy]]></name>
@@ -12,6 +12,39 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Leetcode_ZigZag Conversion]]></title>
+    <link href="http://smilevchy.github.io/blog/2014/11/25/leetcode-zigzag-conversion/"/>
+    <updated>2014-11-25T15:20:09+08:00</updated>
+    <id>http://smilevchy.github.io/blog/2014/11/25/leetcode-zigzag-conversion</id>
+    <content type="html"><![CDATA[<p>原题链接: <a href="https://oj.leetcode.com/problems/zigzag-conversion/">https://oj.leetcode.com/problems/zigzag-conversion/</a></p>
+
+<!-- more -->
+
+
+<pre><code>public String convert(String s, int nRows) {
+    if (s == null || nRows &lt;= 1) return s;
+
+    StringBuilder sb = new StringBuilder();
+    int length = s.length();
+    int span = 2 * nRows - 2;
+
+    for (int i = 0; i &lt; nRows; i++) {
+        for (int j = i; j &lt; length; j += span) {
+            sb.append(s.charAt(j));
+
+            if (i != 0 &amp;&amp; i != nRows - 1 &amp;&amp; j + span - 2 * i &lt; length) {
+                sb.append(s.charAt(j + span - 2 * i));
+            }
+        }
+    }
+
+    return sb.toString();
+}
+</code></pre>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Leetcode_Sqrt(x)]]></title>
@@ -819,51 +852,6 @@ private ListNode mergeTwoLists(ListNode l1, ListNode l2) {
     if (!stack.isEmpty()) return false;
 
     return true;
-}
-</code></pre>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Leetcode_Remove Nth Node From End of List]]></title>
-    <link href="http://smilevchy.github.io/blog/2014/11/19/leetcode-remove-nth-node-from-end-of-list/"/>
-    <updated>2014-11-19T17:55:05+08:00</updated>
-    <id>http://smilevchy.github.io/blog/2014/11/19/leetcode-remove-nth-node-from-end-of-list</id>
-    <content type="html"><![CDATA[<p>原题链接: <a href="https://oj.leetcode.com/problems/remove-nth-node-from-end-of-list/">https://oj.leetcode.com/problems/remove-nth-node-from-end-of-list/</a></p>
-
-<!-- more -->
-
-
-<pre><code>public ListNode removeNthFromEnd(ListNode head, int n) {
-    if (head == null) return null;
-    if (n == 0) return head;
-
-    ListNode cursor = head;
-    int size = 0;
-
-    while (cursor != null) {
-        cursor = cursor.next;
-        size++;
-    }
-
-    cursor = head;
-    int targetIndex = size - n;
-    int cursorIndex = 0;
-    ListNode prevNode = null;
-
-    while (cursorIndex &lt; targetIndex) {
-        prevNode = cursor;
-        cursor = cursor.next;
-        cursorIndex++;
-    }
-
-    if (prevNode == null) {
-        head = cursor.next;
-    } else {
-        prevNode.next = cursor.next;
-    }
-
-    return head;
 }
 </code></pre>
 ]]></content>

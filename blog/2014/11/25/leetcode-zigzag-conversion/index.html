@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Leetcode_Reverse Words in a String - smilevchy's blog</title>
+  <title>Leetcode_ZigZag Conversion - smilevchy's blog</title>
   <meta name="author" content="smilevchy">
 
   
-  <meta name="description" content="原题链接: https://oj.leetcode.com/problems/reverse-words-in-a-string/ public String reverseWords(String s) { String[] words = s.trim().split("\\s+"); &hellip;">
+  <meta name="description" content="原题链接: https://oj.leetcode.com/problems/zigzag-conversion/ public String convert(String s, int nRows) { if (s == null || nRows &lt;= 1) return s; &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://smilevchy.github.io/blog/2014/11/04/leetcode-reverse-words-in-a-string">
+  <link rel="canonical" href="http://smilevchy.github.io/blog/2014/11/25/leetcode-zigzag-conversion">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="smilevchy's blog" type="application/atom+xml">
@@ -68,7 +68,7 @@
   
   <header>
     
-      <h1 class="entry-title">Leetcode_Reverse Words in a String</h1>
+      <h1 class="entry-title">Leetcode_ZigZag Conversion</h1>
     
     
       <p class="meta">
@@ -84,7 +84,7 @@
   
 
 
-<time datetime="2014-11-04T21:30:38+08:00" pubdate data-updated="true">Nov 4<sup>th</sup>, 2014</time>
+<time datetime="2014-11-25T15:20:09+08:00" pubdate data-updated="true">Nov 25<sup>th</sup>, 2014</time>
         
            | <a href="#disqus_thread"
              data-disqus-identifier="http://smilevchy.github.io">Comments</a>
@@ -94,20 +94,25 @@
   </header>
 
 
-<div class="entry-content"><p>原题链接: <a href="https://oj.leetcode.com/problems/reverse-words-in-a-string/">https://oj.leetcode.com/problems/reverse-words-in-a-string/</a></p>
+<div class="entry-content"><p>原题链接: <a href="https://oj.leetcode.com/problems/zigzag-conversion/">https://oj.leetcode.com/problems/zigzag-conversion/</a></p>
 
 <!-- more -->
 
 
-<pre><code>public String reverseWords(String s) {
-    String[] words = s.trim().split("\\s+");
-    StringBuilder sb = new StringBuilder("");
+<pre><code>public String convert(String s, int nRows) {
+    if (s == null || nRows &lt;= 1) return s;
 
-    for (int i = words.length - 1; i &gt;= 0; i--) {
-        sb.append(words[i]);
+    StringBuilder sb = new StringBuilder();
+    int length = s.length();
+    int span = 2 * nRows - 2;
 
-        if (i &gt;= 1) {
-            sb.append(" ");
+    for (int i = 0; i &lt; nRows; i++) {
+        for (int j = i; j &lt; length; j += span) {
+            sb.append(s.charAt(j));
+
+            if (i != 0 &amp;&amp; i != nRows - 1 &amp;&amp; j + span - 2 * i &lt; length) {
+                sb.append(s.charAt(j + span - 2 * i));
+            }
         }
     }
 
@@ -136,7 +141,7 @@
   
 
 
-<time datetime="2014-11-04T21:30:38+08:00" pubdate data-updated="true">Nov 4<sup>th</sup>, 2014</time>
+<time datetime="2014-11-25T15:20:09+08:00" pubdate data-updated="true">Nov 25<sup>th</sup>, 2014</time>
       
 
 <span class="categories">
@@ -157,10 +162,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2014/11/04/leetcode-reorder-list/" title="Previous Post: Leetcode_Reorder List">&laquo; Leetcode_Reorder List</a>
+        <a class="basic-alignment left" href="/blog/2014/11/24/leetcode-sqrt-x/" title="Previous Post: Leetcode_Sqrt(x)">&laquo; Leetcode_Sqrt(x)</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2014/11/04/leetcode-rotate-list/" title="Next Post: Leetcode_Rotate List">Leetcode_Rotate List &raquo;</a>
       
     </p>
   </footer>
@@ -281,8 +284,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://smilevchy.github.io/blog/2014/11/04/leetcode-reverse-words-in-a-string/';
-        var disqus_url = 'http://smilevchy.github.io/blog/2014/11/04/leetcode-reverse-words-in-a-string/';
+        var disqus_identifier = 'http://smilevchy.github.io/blog/2014/11/25/leetcode-zigzag-conversion/';
+        var disqus_url = 'http://smilevchy.github.io/blog/2014/11/25/leetcode-zigzag-conversion/';
         var disqus_script = 'embed.js';
       
     (function () {
