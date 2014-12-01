@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Algorithm | smilevchy's blog]]></title>
   <link href="http://smilevchy.github.io/blog/categories/algorithm/atom.xml" rel="self"/>
   <link href="http://smilevchy.github.io/"/>
-  <updated>2014-11-25T20:44:53+08:00</updated>
+  <updated>2014-12-01T10:22:41+08:00</updated>
   <id>http://smilevchy.github.io/</id>
   <author>
     <name><![CDATA[smilevchy]]></name>
@@ -12,6 +12,33 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Leetcode_Maximum Subarray]]></title>
+    <link href="http://smilevchy.github.io/blog/2014/12/01/leetcode-maximum-subarray/"/>
+    <updated>2014-12-01T10:21:42+08:00</updated>
+    <id>http://smilevchy.github.io/blog/2014/12/01/leetcode-maximum-subarray</id>
+    <content type="html"><![CDATA[<p>原题链接: <a href="https://oj.leetcode.com/problems/maximum-subarray/">https://oj.leetcode.com/problems/maximum-subarray/</a></p>
+
+<!-- more -->
+
+
+<pre><code>public int maxSubArray(int[] A) {
+    if (A == null || A.length == 0) return 0;
+
+    int localMax = A[0];
+    int globalMax = A[0];
+
+    for (int i = 1, len = A.length; i &lt; len; i++) {
+        localMax = Math.max(A[i], localMax + A[i]);
+        globalMax = Math.max(localMax, globalMax);
+    }
+
+    return globalMax;
+}
+</code></pre>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Leetcode_Search Insert Position]]></title>
@@ -162,41 +189,6 @@ public TreeNode sortedListToBSTHelper(List&lt;ListNode&gt; list, int low, int hi
     root.right = right;
 
     return root;
-}
-</code></pre>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Leetcode_Flatten Binary Tree to Linked List]]></title>
-    <link href="http://smilevchy.github.io/blog/2014/11/24/leetcode-flatten-binary-tree-to-linked-list/"/>
-    <updated>2014-11-24T14:42:54+08:00</updated>
-    <id>http://smilevchy.github.io/blog/2014/11/24/leetcode-flatten-binary-tree-to-linked-list</id>
-    <content type="html"><![CDATA[<p>原题链接: <a href="https://oj.leetcode.com/problems/flatten-binary-tree-to-linked-list/">https://oj.leetcode.com/problems/flatten-binary-tree-to-linked-list/</a></p>
-
-<!-- more -->
-
-
-<pre><code>public void flatten(TreeNode root) {
-    if (root == null) return;
-
-    List&lt;TreeNode&gt; pre = new ArrayList&lt;TreeNode&gt;(1);
-    pre.add(null);
-    flattenHelper(root, pre);
-}
-
-private void flattenHelper(TreeNode root, List&lt;TreeNode&gt; pre) {
-    if (root == null) return;
-
-    if (pre.get(0) != null) {
-        pre.get(0).left = null;
-        pre.get(0).right = root;
-    }
-
-    TreeNode rootRight = root.right;
-    pre.set(0, root);
-    flattenHelper(root.left, pre);
-    flattenHelper(rootRight, pre);
 }
 </code></pre>
 ]]></content>
