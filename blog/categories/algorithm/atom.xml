@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Algorithm | smilevchy's blog]]></title>
   <link href="http://smilevchy.github.io/blog/categories/algorithm/atom.xml" rel="self"/>
   <link href="http://smilevchy.github.io/"/>
-  <updated>2014-12-01T10:22:41+08:00</updated>
+  <updated>2014-12-01T11:18:29+08:00</updated>
   <id>http://smilevchy.github.io/</id>
   <author>
     <name><![CDATA[smilevchy]]></name>
@@ -12,6 +12,45 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Leetcode_Single Number II]]></title>
+    <link href="http://smilevchy.github.io/blog/2014/12/01/leetcode-single-number-ii/"/>
+    <updated>2014-12-01T11:17:40+08:00</updated>
+    <id>http://smilevchy.github.io/blog/2014/12/01/leetcode-single-number-ii</id>
+    <content type="html"><![CDATA[<p>原题链接: <a href="https://oj.leetcode.com/problems/single-number-ii/">https://oj.leetcode.com/problems/single-number-ii/</a></p>
+
+<!-- more -->
+
+
+<p></p>
+
+<pre><code>public int singleNumberII(int[] A) {
+    if (A == null || A.length == 0) return 0;
+
+    // the solving key is to regard the number as binary number, not decimal number,
+    // so when a num exists 'n' times , the bits of it will multiply 'n' time too.
+
+    int len = A.length;
+    int[] digits = new int[32];
+
+    for (int i = 0; i &lt; 32; i++) {
+        for (int j = 0; j &lt; len; j++) {
+            digits[i] += A[j] &gt;&gt; i &amp; 1;    // get the i-th bit of every number of A
+        }
+    }
+
+    int result = 0;
+
+    for (int i = 0; i &lt; 32; i++) {
+        result += digits[i] % 3 &lt;&lt; i;
+    }
+
+    return result;
+}
+</code></pre>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Leetcode_Maximum Subarray]]></title>
@@ -143,54 +182,6 @@
 </code></pre>
 
 <p>求平方根的方法还有 &ldquo;牛顿迭代法求平方根&rdquo;, &ldquo;卡马克快速平方根"。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Leetcode_Convert Sorted List to Binary Search Tree]]></title>
-    <link href="http://smilevchy.github.io/blog/2014/11/24/leetcode-convert-sorted-list-to-binary-search-tree/"/>
-    <updated>2014-11-24T17:01:36+08:00</updated>
-    <id>http://smilevchy.github.io/blog/2014/11/24/leetcode-convert-sorted-list-to-binary-search-tree</id>
-    <content type="html"><![CDATA[<p>原题链接: <a href="https://oj.leetcode.com/problems/convert-sorted-list-to-binary-search-tree/">https://oj.leetcode.com/problems/convert-sorted-list-to-binary-search-tree/</a></p>
-
-<!-- more -->
-
-
-<pre><code>public TreeNode sortedListToBST(ListNode head) {
-    if (head == null) return null;
-
-    ListNode cur = head;
-    int size = 0;
-
-    while (cur != null) {
-        size++;
-        cur = cur.next;
-    }
-
-    List&lt;ListNode&gt; list = new ArrayList&lt;ListNode&gt;();
-    list.add(head);
-    TreeNode tree = sortedListToBSTHelper(list, 0, size - 1);
-
-    return tree;
-}
-
-public TreeNode sortedListToBSTHelper(List&lt;ListNode&gt; list, int low, int high) {
-    if (low &gt; high) return null;
-
-    int mid = (low + high) / 2;
-
-    TreeNode left = sortedListToBSTHelper(list, low, mid - 1);
-
-    TreeNode root = new TreeNode(list.get(0).val);
-    root.left = left;
-
-    list.set(0, list.get(0).next);
-    TreeNode right = sortedListToBSTHelper(list, mid + 1, high);
-    root.right = right;
-
-    return root;
-}
-</code></pre>
 ]]></content>
   </entry>
   

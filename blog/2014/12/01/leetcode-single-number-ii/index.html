@@ -5,13 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Today's Shock - smilevchy's blog</title>
+  <title>Leetcode_Single Number II - smilevchy's blog</title>
   <meta name="author" content="smilevchy">
 
   
-  <meta name="description" content="在看《Ruby 编程语言》时，看到一个概念，叫做 Shebang 注释。
-一开始以为是那本书籍打印出错了，因为 ”Shebang“ 看起来怎么也不像英文单词，而且直觉上能发成中文的音。
-但是还是觉得不对，所以就搜索了一下。 &ndash;_&ndash; 结果显示，维基百科上真的有叫 &hellip;">
+  <meta name="description" content="原题链接: https://oj.leetcode.com/problems/single-number-ii/ public int singleNumberII(int[] A) { if (A == null || A.length == 0) return 0; // the &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -20,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://smilevchy.github.io/blog/2014/10/19/todays-shock">
+  <link rel="canonical" href="http://smilevchy.github.io/blog/2014/12/01/leetcode-single-number-ii">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="smilevchy's blog" type="application/atom+xml">
@@ -70,7 +68,7 @@
   
   <header>
     
-      <h1 class="entry-title">Today's Shock</h1>
+      <h1 class="entry-title">Leetcode_Single Number II</h1>
     
     
       <p class="meta">
@@ -86,7 +84,7 @@
   
 
 
-<time datetime="2014-10-19T22:12:30+08:00" pubdate data-updated="true">Oct 19<sup>th</sup>, 2014</time>
+<time datetime="2014-12-01T11:17:40+08:00" pubdate data-updated="true">Dec 1<sup>st</sup>, 2014</time>
         
            | <a href="#disqus_thread"
              data-disqus-identifier="http://smilevchy.github.io">Comments</a>
@@ -96,15 +94,37 @@
   </header>
 
 
-<div class="entry-content"><p>在看《Ruby 编程语言》时，看到一个概念，叫做 Shebang 注释。
-一开始以为是那本书籍打印出错了，因为 ”Shebang“ 看起来怎么也不像英文单词，而且直觉上能发成中文的音。
-但是还是觉得不对，所以就搜索了一下。</p>
+<div class="entry-content"><p>原题链接: <a href="https://oj.leetcode.com/problems/single-number-ii/">https://oj.leetcode.com/problems/single-number-ii/</a></p>
 
-<p>&ndash;_&ndash; 结果显示，维基百科上真的有叫 Shebang 的条目。
-看了条目内容，才知道原来 Shebang 指的就是平常 unix shell 文件开头第一行的那句话（#!/bin/sh）的前两个字符。
-而一般把形如 #!XXXXX 的语句叫做 Shebang 注释。</p>
+<!-- more -->
 
-<p>我真是孤陋寡闻&hellip;&hellip;</p>
+
+<p></p>
+
+<pre><code>public int singleNumberII(int[] A) {
+    if (A == null || A.length == 0) return 0;
+
+    // the solving key is to regard the number as binary number, not decimal number,
+    // so when a num exists 'n' times , the bits of it will multiply 'n' time too.
+
+    int len = A.length;
+    int[] digits = new int[32];
+
+    for (int i = 0; i &lt; 32; i++) {
+        for (int j = 0; j &lt; len; j++) {
+            digits[i] += A[j] &gt;&gt; i &amp; 1;    // get the i-th bit of every number of A
+        }
+    }
+
+    int result = 0;
+
+    for (int i = 0; i &lt; 32; i++) {
+        result += digits[i] % 3 &lt;&lt; i;
+    }
+
+    return result;
+}
+</code></pre>
 </div>
 
 
@@ -127,12 +147,12 @@
   
 
 
-<time datetime="2014-10-19T22:12:30+08:00" pubdate data-updated="true">Oct 19<sup>th</sup>, 2014</time>
+<time datetime="2014-12-01T11:17:40+08:00" pubdate data-updated="true">Dec 1<sup>st</sup>, 2014</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/shock/'>shock</a>
+    <a class='category' href='/blog/categories/algorithm/'>algorithm</a>
   
 </span>
 
@@ -148,10 +168,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2014/09/16/let-android-talk-to-computer-with-socket/" title="Previous Post: Let Android Talk to Computer with Socket">&laquo; Let Android Talk to Computer with Socket</a>
+        <a class="basic-alignment left" href="/blog/2014/12/01/leetcode-maximum-subarray/" title="Previous Post: Leetcode_Maximum Subarray">&laquo; Leetcode_Maximum Subarray</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2014/10/21/todays-understanding/" title="Next Post: Today's Understanding">Today's Understanding &raquo;</a>
       
     </p>
   </footer>
@@ -272,8 +290,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://smilevchy.github.io/blog/2014/10/19/todays-shock/';
-        var disqus_url = 'http://smilevchy.github.io/blog/2014/10/19/todays-shock/';
+        var disqus_identifier = 'http://smilevchy.github.io/blog/2014/12/01/leetcode-single-number-ii/';
+        var disqus_url = 'http://smilevchy.github.io/blog/2014/12/01/leetcode-single-number-ii/';
         var disqus_script = 'embed.js';
       
     (function () {

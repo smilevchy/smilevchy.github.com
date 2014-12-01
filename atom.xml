@@ -4,7 +4,7 @@
   <title><![CDATA[smilevchy's blog]]></title>
   <link href="http://smilevchy.github.io/atom.xml" rel="self"/>
   <link href="http://smilevchy.github.io/"/>
-  <updated>2014-12-01T10:22:41+08:00</updated>
+  <updated>2014-12-01T11:18:29+08:00</updated>
   <id>http://smilevchy.github.io/</id>
   <author>
     <name><![CDATA[smilevchy]]></name>
@@ -12,6 +12,45 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Leetcode_Single Number II]]></title>
+    <link href="http://smilevchy.github.io/blog/2014/12/01/leetcode-single-number-ii/"/>
+    <updated>2014-12-01T11:17:40+08:00</updated>
+    <id>http://smilevchy.github.io/blog/2014/12/01/leetcode-single-number-ii</id>
+    <content type="html"><![CDATA[<p>原题链接: <a href="https://oj.leetcode.com/problems/single-number-ii/">https://oj.leetcode.com/problems/single-number-ii/</a></p>
+
+<!-- more -->
+
+
+<p></p>
+
+<pre><code>public int singleNumberII(int[] A) {
+    if (A == null || A.length == 0) return 0;
+
+    // the solving key is to regard the number as binary number, not decimal number,
+    // so when a num exists 'n' times , the bits of it will multiply 'n' time too.
+
+    int len = A.length;
+    int[] digits = new int[32];
+
+    for (int i = 0; i &lt; 32; i++) {
+        for (int j = 0; j &lt; len; j++) {
+            digits[i] += A[j] &gt;&gt; i &amp; 1;    // get the i-th bit of every number of A
+        }
+    }
+
+    int result = 0;
+
+    for (int i = 0; i &lt; 32; i++) {
+        result += digits[i] % 3 &lt;&lt; i;
+    }
+
+    return result;
+}
+</code></pre>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Leetcode_Maximum Subarray]]></title>
@@ -784,38 +823,6 @@ private ListNode mergeTwoLists(ListNode l1, ListNode l2) {
     }
 
     return c;
-}
-</code></pre>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Leetcode_Remove Element]]></title>
-    <link href="http://smilevchy.github.io/blog/2014/11/20/leetcode-remove-element/"/>
-    <updated>2014-11-20T11:19:55+08:00</updated>
-    <id>http://smilevchy.github.io/blog/2014/11/20/leetcode-remove-element</id>
-    <content type="html"><![CDATA[<p>原题链接: <a href="https://oj.leetcode.com/problems/remove-element/">https://oj.leetcode.com/problems/remove-element/</a></p>
-
-<!-- more -->
-
-
-<pre><code>public int removeElement(int[] A, int elem) {
-    if (A == null || A.length == 0) return 0;
-
-    int length = A.length;
-    int index = 0;
-
-    for (int i = 0; i &lt; length; i++) {
-        if (A[i] == elem) {
-            A[index] = A[length - 1];
-            i--;
-            length--;
-        } else {
-            index++;
-        }
-    }
-
-    return index;
 }
 </code></pre>
 ]]></content>
