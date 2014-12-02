@@ -4,7 +4,7 @@
   <title><![CDATA[smilevchy's blog]]></title>
   <link href="http://smilevchy.github.io/atom.xml" rel="self"/>
   <link href="http://smilevchy.github.io/"/>
-  <updated>2014-12-02T11:07:08+08:00</updated>
+  <updated>2014-12-02T15:05:44+08:00</updated>
   <id>http://smilevchy.github.io/</id>
   <author>
     <name><![CDATA[smilevchy]]></name>
@@ -12,6 +12,56 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Leetcode_Rotate Image]]></title>
+    <link href="http://smilevchy.github.io/blog/2014/12/02/leetcode-rotate-image/"/>
+    <updated>2014-12-02T15:04:29+08:00</updated>
+    <id>http://smilevchy.github.io/blog/2014/12/02/leetcode-rotate-image</id>
+    <content type="html"><![CDATA[<p>原题链接: <a href="https://oj.leetcode.com/problems/rotate-image/">https://oj.leetcode.com/problems/rotate-image/</a></p>
+
+<!-- more -->
+
+
+<pre><code>/*
+ * [1, 1, 1, 1, 1]
+ * [1, 2, 2, 2, 1]
+ * [1, 2, 3, 2, 1]
+ * [1, 2, 2, 2, 1]
+ * [1, 1, 1, 1, 1]
+ * 
+ * Like shown above, take the 2-dim array as it has some layers wrapping each other, layer 1 wraps layer 2, layer 2 wraps layer 3......
+ * For each layer, we can divide it into four blocks : top row, right col, bottom row, left col.
+ * What we have to do is : move top row to right col, right col to bottom row, bottom row to left col, left col to top row.
+ * And, we do this for times of numbers of layers(matrix's length / 2).  
+ */
+public void rotate(int[][] matrix) {
+    if (matrix == null || matrix.length == 0 || matrix[0].length == 0) return;
+
+    int matrixSize = matrix.length;
+    int layerNum = matrixSize / 2;
+
+    for (int i = 0; i &lt; layerNum; i++) {
+        for (int low = i, high = matrixSize - i - 1; low &lt; high; low++) {
+            int temp = matrix[i][low];
+
+            // move left col to top row
+            matrix[i][low] = matrix[matrixSize - low - 1][i];
+
+            // move bottom row to left col
+            matrix[matrixSize - low - 1][i] = matrix[high][matrixSize - low - 1];
+
+            // move right col to bottom row
+            matrix[high][matrixSize - low - 1] = matrix[low][high];
+
+            // move top row to right col
+            matrix[low][high] = temp; 
+        }
+    }
+}
+</code></pre>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Leetcode_Evaluate Reverse Polish Notation]]></title>
@@ -781,62 +831,6 @@ private ListNode mergeTwoLists(ListNode l1, ListNode l2) {
     }
 
     return l1;
-}
-</code></pre>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Leetcode_Add Binary]]></title>
-    <link href="http://smilevchy.github.io/blog/2014/11/20/leetcode-add-binary/"/>
-    <updated>2014-11-20T14:51:16+08:00</updated>
-    <id>http://smilevchy.github.io/blog/2014/11/20/leetcode-add-binary</id>
-    <content type="html"><![CDATA[<p>原题链接: <a href="https://oj.leetcode.com/problems/add-binary/">https://oj.leetcode.com/problems/add-binary/</a></p>
-
-<!-- more -->
-
-
-<pre><code>public String addBinary(String a, String b) {
-    if (a == null &amp;&amp; b == null) return null;
-
-    StringBuilder sb = new StringBuilder(a);
-
-    int i = sb.length() - 1;
-    int j = b.length() - 1;
-    int carry = 0;
-    char ac;
-    char bc;
-
-    while (i &gt;= 0 &amp;&amp; j &gt;= 0) {
-        ac = sb.charAt(i);
-        bc = b.charAt(j);
-
-        sb.setCharAt(i, (char) ('0' + (ac - '0' + bc - '0' + carry) % 2));
-        carry = (ac - '0' + bc - '0' + carry) / 2;
-
-        i--;
-        j--;
-    }
-
-    while (i &gt;= 0) {
-        ac = sb.charAt(i);
-        sb.setCharAt(i, (char) ('0' + (ac - '0' + carry) % 2));
-        carry = (ac - '0' + carry) / 2;
-        i--;
-    }
-
-    while (j &gt;= 0) {
-        bc = b.charAt(j);
-        sb.insert(0, (char) ('0' + (bc - '0' + carry) % 2));
-        carry = (bc - '0' + carry) / 2;
-        j--;
-    }
-
-    if (carry &gt; 0) {
-        sb.insert(0, '1');
-    }
-
-    return sb.toString();
 }
 </code></pre>
 ]]></content>
