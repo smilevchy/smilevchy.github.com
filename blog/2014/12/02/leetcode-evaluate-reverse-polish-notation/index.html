@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Leetcode_ZigZag Conversion - smilevchy's blog</title>
+  <title>Leetcode_Evaluate Reverse Polish Notation - smilevchy's blog</title>
   <meta name="author" content="smilevchy">
 
   
-  <meta name="description" content="原题链接: https://oj.leetcode.com/problems/zigzag-conversion/ public String convert(String s, int nRows) { if (s == null || nRows &lt;= 1) return s; &hellip;">
+  <meta name="description" content="原题链接: https://oj.leetcode.com/problems/evaluate-reverse-polish-notation/ public int evalRPN(String[] tokens) { if (tokens == null || tokens.length &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://smilevchy.github.io/blog/2014/11/25/leetcode-zigzag-conversion">
+  <link rel="canonical" href="http://smilevchy.github.io/blog/2014/12/02/leetcode-evaluate-reverse-polish-notation">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="smilevchy's blog" type="application/atom+xml">
@@ -68,7 +68,7 @@
   
   <header>
     
-      <h1 class="entry-title">Leetcode_ZigZag Conversion</h1>
+      <h1 class="entry-title">Leetcode_Evaluate Reverse Polish Notation</h1>
     
     
       <p class="meta">
@@ -84,7 +84,7 @@
   
 
 
-<time datetime="2014-11-25T15:20:09+08:00" pubdate data-updated="true">Nov 25<sup>th</sup>, 2014</time>
+<time datetime="2014-12-02T11:05:13+08:00" pubdate data-updated="true">Dec 2<sup>nd</sup>, 2014</time>
         
            | <a href="#disqus_thread"
              data-disqus-identifier="http://smilevchy.github.io">Comments</a>
@@ -94,29 +94,45 @@
   </header>
 
 
-<div class="entry-content"><p>原题链接: <a href="https://oj.leetcode.com/problems/zigzag-conversion/">https://oj.leetcode.com/problems/zigzag-conversion/</a></p>
+<div class="entry-content"><p>原题链接: <a href="https://oj.leetcode.com/problems/evaluate-reverse-polish-notation/">https://oj.leetcode.com/problems/evaluate-reverse-polish-notation/</a></p>
 
 <!-- more -->
 
 
-<pre><code>public String convert(String s, int nRows) {
-    if (s == null || nRows &lt;= 1) return s;
+<pre><code>public int evalRPN(String[] tokens) {
+    if (tokens == null || tokens.length == 0) return 0;
 
-    StringBuilder sb = new StringBuilder();
-    int length = s.length();
-    int span = 2 * nRows - 2;
+    LinkedList&lt;Integer&gt; stack = new LinkedList&lt;Integer&gt;();
+    int result = 0;
+    String ele = null;
 
-    for (int i = 0; i &lt; nRows; i++) {
-        for (int j = i; j &lt; length; j += span) {
-            sb.append(s.charAt(j));
+    for (int i = 0, len = tokens.length; i &lt; len; i++) {
+        ele = tokens[i];
 
-            if (i != 0 &amp;&amp; i != nRows - 1 &amp;&amp; j + span - 2 * i &lt; length) {
-                sb.append(s.charAt(j + span - 2 * i));
+        if ("+".equals(ele) || "-".equals(ele) || "*".equals(ele) || "/".equals(ele)) {
+            if (stack.isEmpty()) return result;
+            Integer right = stack.pop();
+
+            if (stack.isEmpty()) return result;
+            Integer left = stack.pop();
+
+            if ("+".equals(ele)) {
+                stack.push(left + right);                   
+            } else if ("-".equals(ele)) {
+                stack.push(left - right);
+            } else if ("*".equals(ele)) {
+                stack.push(left * right);
+            } else if ("/".equals(ele)) {
+                stack.push(left / right);
             }
+        } else {
+            stack.push(Integer.valueOf(ele));
         }
     }
 
-    return sb.toString();
+    if (!stack.isEmpty()) result = Integer.valueOf(stack.pop());
+
+    return result;
 }
 </code></pre>
 </div>
@@ -141,7 +157,7 @@
   
 
 
-<time datetime="2014-11-25T15:20:09+08:00" pubdate data-updated="true">Nov 25<sup>th</sup>, 2014</time>
+<time datetime="2014-12-02T11:05:13+08:00" pubdate data-updated="true">Dec 2<sup>nd</sup>, 2014</time>
       
 
 <span class="categories">
@@ -162,10 +178,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2014/11/24/leetcode-sqrt-x/" title="Previous Post: Leetcode_Sqrt(x)">&laquo; Leetcode_Sqrt(x)</a>
+        <a class="basic-alignment left" href="/blog/2014/12/01/leetcode-single-number-ii/" title="Previous Post: Leetcode_Single Number II">&laquo; Leetcode_Single Number II</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2014/11/25/leetcode-search-insert-position/" title="Next Post: Leetcode_Search Insert Position">Leetcode_Search Insert Position &raquo;</a>
       
     </p>
   </footer>
@@ -286,8 +300,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://smilevchy.github.io/blog/2014/11/25/leetcode-zigzag-conversion/';
-        var disqus_url = 'http://smilevchy.github.io/blog/2014/11/25/leetcode-zigzag-conversion/';
+        var disqus_identifier = 'http://smilevchy.github.io/blog/2014/12/02/leetcode-evaluate-reverse-polish-notation/';
+        var disqus_url = 'http://smilevchy.github.io/blog/2014/12/02/leetcode-evaluate-reverse-polish-notation/';
         var disqus_script = 'embed.js';
       
     (function () {

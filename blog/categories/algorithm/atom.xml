@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Algorithm | smilevchy's blog]]></title>
   <link href="http://smilevchy.github.io/blog/categories/algorithm/atom.xml" rel="self"/>
   <link href="http://smilevchy.github.io/"/>
-  <updated>2014-12-01T11:18:29+08:00</updated>
+  <updated>2014-12-02T11:07:08+08:00</updated>
   <id>http://smilevchy.github.io/</id>
   <author>
     <name><![CDATA[smilevchy]]></name>
@@ -12,6 +12,55 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Leetcode_Evaluate Reverse Polish Notation]]></title>
+    <link href="http://smilevchy.github.io/blog/2014/12/02/leetcode-evaluate-reverse-polish-notation/"/>
+    <updated>2014-12-02T11:05:13+08:00</updated>
+    <id>http://smilevchy.github.io/blog/2014/12/02/leetcode-evaluate-reverse-polish-notation</id>
+    <content type="html"><![CDATA[<p>原题链接: <a href="https://oj.leetcode.com/problems/evaluate-reverse-polish-notation/">https://oj.leetcode.com/problems/evaluate-reverse-polish-notation/</a></p>
+
+<!-- more -->
+
+
+<pre><code>public int evalRPN(String[] tokens) {
+    if (tokens == null || tokens.length == 0) return 0;
+
+    LinkedList&lt;Integer&gt; stack = new LinkedList&lt;Integer&gt;();
+    int result = 0;
+    String ele = null;
+
+    for (int i = 0, len = tokens.length; i &lt; len; i++) {
+        ele = tokens[i];
+
+        if ("+".equals(ele) || "-".equals(ele) || "*".equals(ele) || "/".equals(ele)) {
+            if (stack.isEmpty()) return result;
+            Integer right = stack.pop();
+
+            if (stack.isEmpty()) return result;
+            Integer left = stack.pop();
+
+            if ("+".equals(ele)) {
+                stack.push(left + right);                   
+            } else if ("-".equals(ele)) {
+                stack.push(left - right);
+            } else if ("*".equals(ele)) {
+                stack.push(left * right);
+            } else if ("/".equals(ele)) {
+                stack.push(left / right);
+            }
+        } else {
+            stack.push(Integer.valueOf(ele));
+        }
+    }
+
+    if (!stack.isEmpty()) result = Integer.valueOf(stack.pop());
+
+    return result;
+}
+</code></pre>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Leetcode_Single Number II]]></title>
@@ -145,43 +194,6 @@
     return sb.toString();
 }
 </code></pre>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Leetcode_Sqrt(x)]]></title>
-    <link href="http://smilevchy.github.io/blog/2014/11/24/leetcode-sqrt-x/"/>
-    <updated>2014-11-24T18:04:08+08:00</updated>
-    <id>http://smilevchy.github.io/blog/2014/11/24/leetcode-sqrt-x</id>
-    <content type="html"><![CDATA[<p>原题链接: <a href="https://oj.leetcode.com/problems/sqrtx/">https://oj.leetcode.com/problems/sqrtx/</a></p>
-
-<!-- more -->
-
-
-<pre><code>public int sqrt(int x) {
-    if (x &lt; 0) return -1;
-    if (x == 0) return 0;
-
-    int low = 1;
-    int high = x / 2 + 1;
-
-    while (low &lt;= high) {
-        int mid = (low + high) / 2;
-
-        if (mid &lt;= x / mid &amp;&amp; x / (mid + 1) &lt; mid + 1) {
-            return mid;
-        } else if (mid &lt; x / mid) {
-            low = mid + 1;
-        } else {
-            high = mid - 1;
-        }
-    }
-
-    return 0;
-}
-</code></pre>
-
-<p>求平方根的方法还有 &ldquo;牛顿迭代法求平方根&rdquo;, &ldquo;卡马克快速平方根"。</p>
 ]]></content>
   </entry>
   
