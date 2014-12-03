@@ -4,7 +4,7 @@
   <title><![CDATA[smilevchy's blog]]></title>
   <link href="http://smilevchy.github.io/atom.xml" rel="self"/>
   <link href="http://smilevchy.github.io/"/>
-  <updated>2014-12-02T15:05:44+08:00</updated>
+  <updated>2014-12-03T10:49:55+08:00</updated>
   <id>http://smilevchy.github.io/</id>
   <author>
     <name><![CDATA[smilevchy]]></name>
@@ -12,6 +12,49 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Leetcode_Permutations]]></title>
+    <link href="http://smilevchy.github.io/blog/2014/12/03/leetcode-permutations/"/>
+    <updated>2014-12-03T10:48:28+08:00</updated>
+    <id>http://smilevchy.github.io/blog/2014/12/03/leetcode-permutations</id>
+    <content type="html"><![CDATA[<p>原题链接: <a href="https://oj.leetcode.com/problems/permutations/">https://oj.leetcode.com/problems/permutations/</a></p>
+
+<!-- more -->
+
+
+<p></p>
+
+<pre><code>public List&lt;List&lt;Integer&gt;&gt; permute(int[] num) {
+    List&lt;List&lt;Integer&gt;&gt; result = new ArrayList&lt;List&lt;Integer&gt;&gt;();
+
+    if (num == null || num.length == 0) return result;
+
+    List&lt;Integer&gt; first = new ArrayList&lt;Integer&gt;();
+    for (int e : num) {
+        first.add(e);
+    }
+    result.add(first);
+
+    for (int pos = 0, len = num.length; pos &lt; len; pos++) {
+        for (int i = 0, s = result.size(); i &lt; s; i++) {
+            for (int j = pos + 1; j &lt; len; j++) {
+                List&lt;Integer&gt; ele = new ArrayList&lt;Integer&gt;(result.get(i));                  
+
+                ele.set(j, ele.get(j) ^ ele.get(pos));
+                ele.set(pos, ele.get(j) ^ ele.get(pos));
+                ele.set(j, ele.get(j) ^ ele.get(pos));
+
+                result.add(ele);
+            }
+        }
+    }
+
+    return result;
+}
+</code></pre>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Leetcode_Rotate Image]]></title>
@@ -781,56 +824,6 @@ private ListNode mergeTwoLists(ListNode l1, ListNode l2) {
     }
 
     return helper.next;
-}
-</code></pre>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Leetcode_Merge Two Sorted Lists]]></title>
-    <link href="http://smilevchy.github.io/blog/2014/11/20/leetcode-merge-two-sorted-lists/"/>
-    <updated>2014-11-20T15:41:09+08:00</updated>
-    <id>http://smilevchy.github.io/blog/2014/11/20/leetcode-merge-two-sorted-lists</id>
-    <content type="html"><![CDATA[<p>原题链接: <a href="https://oj.leetcode.com/problems/merge-two-sorted-lists/">https://oj.leetcode.com/problems/merge-two-sorted-lists/</a></p>
-
-<!-- more -->
-
-
-<pre><code>public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
-    if (l1 == null) return l2;
-    if (l2 == null) return l1;
-
-    ListNode cursorLeft = l1;
-    ListNode cursorRight = l2;
-    ListNode prevLeft = null;
-
-    while (cursorRight != null) {
-        while (cursorLeft != null &amp;&amp; cursorLeft.val &lt;= cursorRight.val) {
-            prevLeft = cursorLeft;
-            cursorLeft = cursorLeft.next;
-        }
-
-        if (prevLeft == null) {
-            l2 = cursorRight.next;
-            cursorRight.next = l1;
-            l1 = cursorRight;
-            cursorRight = l2;
-        } else if (cursorLeft == null) {
-            l2 = cursorRight.next;
-            cursorRight.next = null;
-            prevLeft.next = cursorRight;
-            cursorRight = l2;
-        } else {
-            l2 = cursorRight.next;
-            cursorRight.next = cursorLeft;
-            prevLeft.next = cursorRight;
-            cursorRight = l2;
-        }
-
-        cursorLeft = l1;
-    }
-
-    return l1;
 }
 </code></pre>
 ]]></content>
