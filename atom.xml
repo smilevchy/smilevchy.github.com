@@ -4,7 +4,7 @@
   <title><![CDATA[smilevchy's blog]]></title>
   <link href="http://smilevchy.github.io/atom.xml" rel="self"/>
   <link href="http://smilevchy.github.io/"/>
-  <updated>2014-12-03T10:49:55+08:00</updated>
+  <updated>2014-12-04T11:04:54+08:00</updated>
   <id>http://smilevchy.github.io/</id>
   <author>
     <name><![CDATA[smilevchy]]></name>
@@ -12,6 +12,43 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Leetcode_Validate Binary Search Tree]]></title>
+    <link href="http://smilevchy.github.io/blog/2014/12/04/leetcode-validate-binary-search-tree/"/>
+    <updated>2014-12-04T11:04:02+08:00</updated>
+    <id>http://smilevchy.github.io/blog/2014/12/04/leetcode-validate-binary-search-tree</id>
+    <content type="html"><![CDATA[<p>原题链接: <a href="https://oj.leetcode.com/problems/validate-binary-search-tree/">https://oj.leetcode.com/problems/validate-binary-search-tree/</a></p>
+
+<!-- more -->
+
+
+<pre><code>public boolean isValidBST(TreeNode root) {
+    if (root == null) return true;
+
+    LinkedList&lt;TreeNode&gt; inorderNodes = new LinkedList&lt;TreeNode&gt;();
+    List&lt;Integer&gt; vals = new ArrayList&lt;Integer&gt;();
+
+    while (root != null || !inorderNodes.isEmpty()) {
+        if (root != null) {
+            inorderNodes.push(root);
+            root = root.left;
+        } else {
+            TreeNode top = inorderNodes.pop(); 
+            vals.add(top.val);
+            root = top.right;
+        }
+    }
+
+    for (int i = 1, s = vals.size(); i &lt; s; i++) {
+        if (vals.get(i) &lt;= vals.get(i -1)) return false;
+    }
+
+    return true;
+}
+</code></pre>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Leetcode_Permutations]]></title>
@@ -767,63 +804,6 @@ public List&lt;Integer&gt; preorderTraversal(TreeNode root) {
     result.addAll(preorderTraversal(root.right));
 
     return result;
-}
-</code></pre>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Leetcode_Sort List]]></title>
-    <link href="http://smilevchy.github.io/blog/2014/11/20/leetcode-sort-list/"/>
-    <updated>2014-11-20T17:51:47+08:00</updated>
-    <id>http://smilevchy.github.io/blog/2014/11/20/leetcode-sort-list</id>
-    <content type="html"><![CDATA[<p>原题链接: <a href="https://oj.leetcode.com/problems/sort-list/">https://oj.leetcode.com/problems/sort-list/</a></p>
-
-<!-- more -->
-
-
-<pre><code>public ListNode sortList(ListNode head) {
-    if (head == null) return null;
-    if (head.next == null) return head;
-
-    ListNode slowCursor = head;
-    ListNode quickCursor = head;
-
-    while (quickCursor.next != null &amp;&amp; quickCursor.next.next != null) {
-        slowCursor = slowCursor.next;
-        quickCursor = quickCursor.next.next;
-    }
-
-    ListNode headRight = slowCursor.next;
-    ListNode headLeft = head;
-    slowCursor.next = null;
-
-    return mergeTwoLists(sortList(headLeft), sortList(headRight));
-}
-
-private ListNode mergeTwoLists(ListNode l1, ListNode l2) {
-    ListNode helper = new ListNode(0);
-    helper.next = l1;
-    ListNode pre = helper;
-
-    while (l1 != null &amp;&amp; l2 != null) {
-        if (l1.val &lt; l2.val) {
-            l1 = l1.next;
-        } else {
-            ListNode next = l2.next;
-            l2.next = pre.next;
-            pre.next = l2;
-            l2 = next;
-        }
-
-        pre = pre.next;
-    }
-
-    if (l2 != null) {
-        pre.next = l2;
-    }
-
-    return helper.next;
 }
 </code></pre>
 ]]></content>
