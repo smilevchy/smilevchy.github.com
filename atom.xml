@@ -4,7 +4,7 @@
   <title><![CDATA[smilevchy's blog]]></title>
   <link href="http://smilevchy.github.io/atom.xml" rel="self"/>
   <link href="http://smilevchy.github.io/"/>
-  <updated>2014-12-04T11:04:54+08:00</updated>
+  <updated>2014-12-04T13:02:03+08:00</updated>
   <id>http://smilevchy.github.io/</id>
   <author>
     <name><![CDATA[smilevchy]]></name>
@@ -12,6 +12,82 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Leetcode_Set Matrix Zeroes]]></title>
+    <link href="http://smilevchy.github.io/blog/2014/12/04/leetcode-set-matrix-zeroes/"/>
+    <updated>2014-12-04T12:03:59+08:00</updated>
+    <id>http://smilevchy.github.io/blog/2014/12/04/leetcode-set-matrix-zeroes</id>
+    <content type="html"><![CDATA[<p>原题链接: <a href="https://oj.leetcode.com/problems/set-matrix-zeroes/">https://oj.leetcode.com/problems/set-matrix-zeroes/</a></p>
+
+<!-- more -->
+
+
+<pre><code>public void setZeroes(int[][] matrix) {
+    if (matrix == null) return;
+
+    int m = matrix.length;
+    int n = matrix[0].length;
+
+    boolean[] row = new boolean[m];
+    boolean[] col = new boolean[n];
+
+    for (int i = 0; i &lt; m; i++) {
+        for (int j = 0; j &lt; n; j++) {
+            if (matrix[i][j] == 0) {
+                row[i] = true;
+                col[j] = true;
+            }
+        }
+    }
+
+    for (int i = 0; i &lt; m; i++) {
+        for (int j = 0; j &lt; n; j++) {
+            if (row[i] || col[j]) {
+                matrix[i][j] = 0;                   
+            }
+        }
+    }
+}
+
+public void setZeroesV2(int[][] matrix) {
+    if (matrix == null) return;
+
+    int m = matrix.length;
+    int n = matrix[0].length;
+
+    boolean firstRowZero = false;
+    boolean firstColZero = false;
+
+    for (int i = 0; i &lt; m; i++) {
+        for (int j = 0; j &lt; n; j++) {
+            if (matrix[i][j] == 0) {
+                matrix[i][0] = 0;
+                matrix[0][j] = 0;
+
+                if (i == 0) firstRowZero = true;
+                if (j == 0) firstColZero = true;
+            }
+        }
+    }
+
+    for (int i = 1; i &lt; m; i++) {
+        for (int j = 1; j &lt; n; j++) {
+            if (matrix[0][j] == 0 || matrix[i][0] == 0) matrix[i][j] = 0;
+        }
+    }
+
+    if (firstRowZero) {
+        for (int i = 0; i &lt; n; i++) matrix[0][i] = 0;
+    }
+
+    if (firstColZero) {
+        for (int i = 0; i &lt; m; i++) matrix[i][0] = 0;
+    }
+}
+</code></pre>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Leetcode_Validate Binary Search Tree]]></title>
@@ -756,52 +832,6 @@ public List&lt;Integer&gt; inorderTraversal(TreeNode root) {
     result.addAll(inorderTraversal(root.left));
     result.add(root.val);
     result.addAll(inorderTraversal(root.right));
-
-    return result;
-}
-</code></pre>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Leetcode_Binary Tree Preorder Traversal]]></title>
-    <link href="http://smilevchy.github.io/blog/2014/11/20/leetcode-binary-tree-preorder-traversal/"/>
-    <updated>2014-11-20T18:17:38+08:00</updated>
-    <id>http://smilevchy.github.io/blog/2014/11/20/leetcode-binary-tree-preorder-traversal</id>
-    <content type="html"><![CDATA[<p>原题链接: <a href="https://oj.leetcode.com/problems/binary-tree-preorder-traversal/">https://oj.leetcode.com/problems/binary-tree-preorder-traversal/</a></p>
-
-<!-- more -->
-
-
-<pre><code>public List&lt;Integer&gt; preorderTraversal(TreeNode root) {
-    List&lt;Integer&gt; result = new ArrayList&lt;Integer&gt;();
-
-    if (root == null) return result;
-
-    LinkedList&lt;TreeNode&gt; stack = new LinkedList&lt;TreeNode&gt;();
-
-    while (root != null || !stack.isEmpty()) {
-        if (root != null) {
-            result.add(root.val);
-            stack.push(root);
-            root = root.left;
-        } else {
-            root = stack.pop();
-            root = root.right;
-        }
-    }
-
-    return result;
-}
-
-public List&lt;Integer&gt; preorderTraversal(TreeNode root) {
-    List&lt;Integer&gt; result = new ArrayList&lt;Integer&gt;();
-
-    if (root == null) return result;
-
-    result.add(root.val);
-    result.addAll(preorderTraversal(root.left));
-    result.addAll(preorderTraversal(root.right));
 
     return result;
 }

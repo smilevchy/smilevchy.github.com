@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Leetcode_Remove Duplicates From Sorted List - smilevchy's blog</title>
+  <title>Leetcode_Set Matrix Zeroes - smilevchy's blog</title>
   <meta name="author" content="smilevchy">
 
   
-  <meta name="description" content="原题链接: https://oj.leetcode.com/problems/remove-duplicates-from-sorted-list/ public ListNode deleteDuplicates(ListNode head) { if (head == null) return &hellip;">
+  <meta name="description" content="原题链接: https://oj.leetcode.com/problems/set-matrix-zeroes/ public void setZeroes(int[][] matrix) { if (matrix == null) return; int m = matrix.length; &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://smilevchy.github.io/blog/2014/11/17/leetcode-remove-duplicates-from-sorted-list">
+  <link rel="canonical" href="http://smilevchy.github.io/blog/2014/12/04/leetcode-set-matrix-zeroes">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="smilevchy's blog" type="application/atom+xml">
@@ -68,7 +68,7 @@
   
   <header>
     
-      <h1 class="entry-title">Leetcode_Remove Duplicates From Sorted List</h1>
+      <h1 class="entry-title">Leetcode_Set Matrix Zeroes</h1>
     
     
       <p class="meta">
@@ -84,7 +84,7 @@
   
 
 
-<time datetime="2014-11-17T17:25:01+08:00" pubdate data-updated="true">Nov 17<sup>th</sup>, 2014</time>
+<time datetime="2014-12-04T12:03:59+08:00" pubdate data-updated="true">Dec 4<sup>th</sup>, 2014</time>
         
            | <a href="#disqus_thread"
              data-disqus-identifier="http://smilevchy.github.io">Comments</a>
@@ -94,30 +94,72 @@
   </header>
 
 
-<div class="entry-content"><p>原题链接: <a href="https://oj.leetcode.com/problems/remove-duplicates-from-sorted-list/">https://oj.leetcode.com/problems/remove-duplicates-from-sorted-list/</a></p>
+<div class="entry-content"><p>原题链接: <a href="https://oj.leetcode.com/problems/set-matrix-zeroes/">https://oj.leetcode.com/problems/set-matrix-zeroes/</a></p>
 
 <!-- more -->
 
 
-<pre><code>public ListNode deleteDuplicates(ListNode head) {
-    if (head == null) return null;
+<pre><code>public void setZeroes(int[][] matrix) {
+    if (matrix == null) return;
 
-    ListNode slowCursor = head;
-    ListNode quickCursor = head.next;
+    int m = matrix.length;
+    int n = matrix[0].length;
 
-    while (quickCursor != null) {
-        if (quickCursor.val != slowCursor.val) {
-            slowCursor = slowCursor.next;
-            quickCursor = quickCursor.next;
+    boolean[] row = new boolean[m];
+    boolean[] col = new boolean[n];
 
-            continue;
+    for (int i = 0; i &lt; m; i++) {
+        for (int j = 0; j &lt; n; j++) {
+            if (matrix[i][j] == 0) {
+                row[i] = true;
+                col[j] = true;
+            }
         }
-
-        slowCursor.next = quickCursor.next;
-        quickCursor = quickCursor.next;
     }
 
-    return head;
+    for (int i = 0; i &lt; m; i++) {
+        for (int j = 0; j &lt; n; j++) {
+            if (row[i] || col[j]) {
+                matrix[i][j] = 0;                   
+            }
+        }
+    }
+}
+
+public void setZeroesV2(int[][] matrix) {
+    if (matrix == null) return;
+
+    int m = matrix.length;
+    int n = matrix[0].length;
+
+    boolean firstRowZero = false;
+    boolean firstColZero = false;
+
+    for (int i = 0; i &lt; m; i++) {
+        for (int j = 0; j &lt; n; j++) {
+            if (matrix[i][j] == 0) {
+                matrix[i][0] = 0;
+                matrix[0][j] = 0;
+
+                if (i == 0) firstRowZero = true;
+                if (j == 0) firstColZero = true;
+            }
+        }
+    }
+
+    for (int i = 1; i &lt; m; i++) {
+        for (int j = 1; j &lt; n; j++) {
+            if (matrix[0][j] == 0 || matrix[i][0] == 0) matrix[i][j] = 0;
+        }
+    }
+
+    if (firstRowZero) {
+        for (int i = 0; i &lt; n; i++) matrix[0][i] = 0;
+    }
+
+    if (firstColZero) {
+        for (int i = 0; i &lt; m; i++) matrix[i][0] = 0;
+    }
 }
 </code></pre>
 </div>
@@ -142,7 +184,7 @@
   
 
 
-<time datetime="2014-11-17T17:25:01+08:00" pubdate data-updated="true">Nov 17<sup>th</sup>, 2014</time>
+<time datetime="2014-12-04T12:03:59+08:00" pubdate data-updated="true">Dec 4<sup>th</sup>, 2014</time>
       
 
 <span class="categories">
@@ -163,10 +205,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2014/11/17/leetcode-triangle/" title="Previous Post: Leetcode_Triangle">&laquo; Leetcode_Triangle</a>
+        <a class="basic-alignment left" href="/blog/2014/12/04/leetcode-validate-binary-search-tree/" title="Previous Post: Leetcode_Validate Binary Search Tree">&laquo; Leetcode_Validate Binary Search Tree</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2014/11/17/leetcode-path-sum/" title="Next Post: Leetcode_Path Sum">Leetcode_Path Sum &raquo;</a>
       
     </p>
   </footer>
@@ -287,8 +327,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://smilevchy.github.io/blog/2014/11/17/leetcode-remove-duplicates-from-sorted-list/';
-        var disqus_url = 'http://smilevchy.github.io/blog/2014/11/17/leetcode-remove-duplicates-from-sorted-list/';
+        var disqus_identifier = 'http://smilevchy.github.io/blog/2014/12/04/leetcode-set-matrix-zeroes/';
+        var disqus_url = 'http://smilevchy.github.io/blog/2014/12/04/leetcode-set-matrix-zeroes/';
         var disqus_script = 'embed.js';
       
     (function () {
