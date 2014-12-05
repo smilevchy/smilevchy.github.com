@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Algorithm | smilevchy's blog]]></title>
   <link href="http://smilevchy.github.io/blog/categories/algorithm/atom.xml" rel="self"/>
   <link href="http://smilevchy.github.io/"/>
-  <updated>2014-12-04T14:34:43+08:00</updated>
+  <updated>2014-12-05T10:57:35+08:00</updated>
   <id>http://smilevchy.github.io/</id>
   <author>
     <name><![CDATA[smilevchy]]></name>
@@ -12,6 +12,46 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Leetcode_Convert Sorted Array to Binary Search Tree]]></title>
+    <link href="http://smilevchy.github.io/blog/2014/12/05/leetcode-convert-sorted-array-to-binary-search-tree/"/>
+    <updated>2014-12-05T10:56:37+08:00</updated>
+    <id>http://smilevchy.github.io/blog/2014/12/05/leetcode-convert-sorted-array-to-binary-search-tree</id>
+    <content type="html"><![CDATA[<p>原题链接: <a href="https://oj.leetcode.com/problems/convert-sorted-array-to-binary-search-tree/">https://oj.leetcode.com/problems/convert-sorted-array-to-binary-search-tree/</a></p>
+
+<!-- more -->
+
+
+<pre><code>public TreeNode sortedArrayToBST(int[] num) {
+    if (num == null || num.length == 0) return null;
+
+    List&lt;Integer&gt; cursor = new ArrayList&lt;Integer&gt;(1);
+    cursor.add(0);
+
+    return sortedArrayToBSTHelper(num, 0, num.length - 1, cursor);
+}
+
+public TreeNode sortedArrayToBSTHelper(int[] num, int low, int high, List&lt;Integer&gt; cursor) {
+    if (low &gt; high) return null;
+
+    int mid = (low + high) / 2;
+
+    TreeNode left = sortedArrayToBSTHelper(num, low, mid - 1, cursor);
+
+    TreeNode root = new TreeNode(num[cursor.get(0)]);
+    root.left = left;
+
+    cursor.set(0, cursor.get(0) + 1);
+
+    TreeNode right = sortedArrayToBSTHelper(num, mid + 1, high, cursor);
+    root.right = right;
+
+    return root;
+}
+</code></pre>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Leetcode_Find Minimum in Rotated Sorted Array]]></title>
@@ -194,56 +234,6 @@ public void setZeroesV2(int[][] matrix) {
     }
 
     return result;
-}
-</code></pre>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Leetcode_Rotate Image]]></title>
-    <link href="http://smilevchy.github.io/blog/2014/12/02/leetcode-rotate-image/"/>
-    <updated>2014-12-02T15:04:29+08:00</updated>
-    <id>http://smilevchy.github.io/blog/2014/12/02/leetcode-rotate-image</id>
-    <content type="html"><![CDATA[<p>原题链接: <a href="https://oj.leetcode.com/problems/rotate-image/">https://oj.leetcode.com/problems/rotate-image/</a></p>
-
-<!-- more -->
-
-
-<pre><code>/*
- * [1, 1, 1, 1, 1]
- * [1, 2, 2, 2, 1]
- * [1, 2, 3, 2, 1]
- * [1, 2, 2, 2, 1]
- * [1, 1, 1, 1, 1]
- * 
- * Like shown above, take the 2-dim array as it has some layers wrapping each other, layer 1 wraps layer 2, layer 2 wraps layer 3......
- * For each layer, we can divide it into four blocks : top row, right col, bottom row, left col.
- * What we have to do is : move top row to right col, right col to bottom row, bottom row to left col, left col to top row.
- * And, we do this for times of numbers of layers(matrix's length / 2).  
- */
-public void rotate(int[][] matrix) {
-    if (matrix == null || matrix.length == 0 || matrix[0].length == 0) return;
-
-    int matrixSize = matrix.length;
-    int layerNum = matrixSize / 2;
-
-    for (int i = 0; i &lt; layerNum; i++) {
-        for (int low = i, high = matrixSize - i - 1; low &lt; high; low++) {
-            int temp = matrix[i][low];
-
-            // move left col to top row
-            matrix[i][low] = matrix[matrixSize - low - 1][i];
-
-            // move bottom row to left col
-            matrix[matrixSize - low - 1][i] = matrix[high][matrixSize - low - 1];
-
-            // move right col to bottom row
-            matrix[high][matrixSize - low - 1] = matrix[low][high];
-
-            // move top row to right col
-            matrix[low][high] = temp; 
-        }
-    }
 }
 </code></pre>
 ]]></content>
