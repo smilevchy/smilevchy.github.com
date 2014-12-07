@@ -3,7 +3,7 @@ layout: post
 title: "Reaction to &lt;Code Complete&gt;"
 date: 2014-08-02 15:25:54 +0800
 comments: true
-categories: Software-Engineering
+categories: Reaction
 ---
 
 终于把 \<Code Complete\>.2nd 读完了，1000多页的量。由于是电子版的，因此没有那种一看到很厚的一本书就被吓倒的感觉，但也少了那种消灭完一本大书的成就感。
