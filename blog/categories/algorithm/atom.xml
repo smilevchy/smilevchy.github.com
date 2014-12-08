@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Algorithm | smilevchy's blog]]></title>
   <link href="http://smilevchy.github.io/blog/categories/algorithm/atom.xml" rel="self"/>
   <link href="http://smilevchy.github.io/"/>
-  <updated>2014-12-07T20:08:29+08:00</updated>
+  <updated>2014-12-08T11:10:01+08:00</updated>
   <id>http://smilevchy.github.io/</id>
   <author>
     <name><![CDATA[smilevchy]]></name>
@@ -12,6 +12,42 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Leetcode_Minimum Path Sum]]></title>
+    <link href="http://smilevchy.github.io/blog/2014/12/08/leetcode-minimum-path-sum/"/>
+    <updated>2014-12-08T11:08:51+08:00</updated>
+    <id>http://smilevchy.github.io/blog/2014/12/08/leetcode-minimum-path-sum</id>
+    <content type="html"><![CDATA[<p>原题链接: <a href="https://oj.leetcode.com/problems/minimum-path-sum/">https://oj.leetcode.com/problems/minimum-path-sum/</a></p>
+
+<!-- more -->
+
+
+<pre><code>public int minPathSum(int[][] grid) {
+    if (grid == null || grid.length == 0) return 0;
+
+    int rows = grid.length;
+    int cols = grid[0].length;
+    int[] res = new int[cols];
+    res[0] = grid[0][0];
+
+    for (int i = 1; i &lt; cols; i++) {
+        res[i] = res[i - 1] + grid[0][i];
+    }
+
+    for (int i = 1; i &lt; rows; i++) {
+        for (int j = 0; j &lt; cols; j++) {
+            int top = res[j];
+            int left = j == 0 ? Integer.MAX_VALUE : res[j - 1];
+            res[j] = Math.min(top, left) + grid[i][j];
+        }
+    }
+
+    return res[cols - 1];
+}
+</code></pre>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Leetcode_Convert Sorted Array to Binary Search Tree]]></title>
@@ -191,49 +227,6 @@ public void setZeroesV2(int[][] matrix) {
     }
 
     return true;
-}
-</code></pre>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Leetcode_Permutations]]></title>
-    <link href="http://smilevchy.github.io/blog/2014/12/03/leetcode-permutations/"/>
-    <updated>2014-12-03T10:48:28+08:00</updated>
-    <id>http://smilevchy.github.io/blog/2014/12/03/leetcode-permutations</id>
-    <content type="html"><![CDATA[<p>原题链接: <a href="https://oj.leetcode.com/problems/permutations/">https://oj.leetcode.com/problems/permutations/</a></p>
-
-<!-- more -->
-
-
-<p></p>
-
-<pre><code>public List&lt;List&lt;Integer&gt;&gt; permute(int[] num) {
-    List&lt;List&lt;Integer&gt;&gt; result = new ArrayList&lt;List&lt;Integer&gt;&gt;();
-
-    if (num == null || num.length == 0) return result;
-
-    List&lt;Integer&gt; first = new ArrayList&lt;Integer&gt;();
-    for (int e : num) {
-        first.add(e);
-    }
-    result.add(first);
-
-    for (int pos = 0, len = num.length; pos &lt; len; pos++) {
-        for (int i = 0, s = result.size(); i &lt; s; i++) {
-            for (int j = pos + 1; j &lt; len; j++) {
-                List&lt;Integer&gt; ele = new ArrayList&lt;Integer&gt;(result.get(i));                  
-
-                ele.set(j, ele.get(j) ^ ele.get(pos));
-                ele.set(pos, ele.get(j) ^ ele.get(pos));
-                ele.set(j, ele.get(j) ^ ele.get(pos));
-
-                result.add(ele);
-            }
-        }
-    }
-
-    return result;
 }
 </code></pre>
 ]]></content>
