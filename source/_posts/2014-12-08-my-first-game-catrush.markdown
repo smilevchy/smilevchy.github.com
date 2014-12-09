@@ -3,7 +3,7 @@ layout: post
 title: "My First Game - CatRush"
 date: 2014-12-08 22:15:23 +0800
 comments: true
-categories: Artifact
+categories: Artifact Android
 ---
 
 完成了第一个移动端游戏，其为 [CatRush](/assets/artifacts/CatRush.apk)。
