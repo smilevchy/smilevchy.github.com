@@ -4,7 +4,7 @@
   <title><![CDATA[smilevchy's blog]]></title>
   <link href="http://smilevchy.github.io/atom.xml" rel="self"/>
   <link href="http://smilevchy.github.io/"/>
-  <updated>2014-12-09T10:02:34+08:00</updated>
+  <updated>2014-12-10T10:36:38+08:00</updated>
   <id>http://smilevchy.github.io/</id>
   <author>
     <name><![CDATA[smilevchy]]></name>
@@ -12,6 +12,72 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Call Function Lazily]]></title>
+    <link href="http://smilevchy.github.io/blog/2014/12/10/call-function-lazily/"/>
+    <updated>2014-12-10T10:19:10+08:00</updated>
+    <id>http://smilevchy.github.io/blog/2014/12/10/call-function-lazily</id>
+    <content type="html"><![CDATA[<p>某些场景下，在某些模块还未初始化完毕时就调用该模块的函数，可能会导致错误。这时候就需要延迟调用函数，等待该模块初始化完毕先再调用。</p>
+
+<!-- more -->
+
+
+<p>*. setTimeout 方法</p>
+
+<pre><code>ready = false;
+
+this.func_to_be_called = function(params) {
+    if (!ready) {
+        setTimeout(function() {
+            func_to_be_called(params);
+        }, 100);
+    }
+};
+
+var init = function() {
+    // XXX
+
+    ready = true;
+};
+</code></pre>
+
+<p>*. 缓存调用函数对象方法</p>
+
+<pre><code>var ready = false;
+var waitings = [];
+var addWaiting = function (fn, param, cb) {
+    waitings.push({
+        fn: fn,
+        param: param,
+        cb: cb
+    });
+};
+var noticeWaiting = function () {
+    $.each(waitings, function (index, waiting) {
+        waiting.fn(waiting.param, waiting.cb);
+    });
+    waitings = [];
+};
+
+this.func_to_be_called = function(params) {
+    if (!ready) {
+        addWaiting(function (params) {
+            _this.func_to_be_called(params);
+        }, params, null);
+        return;
+    }
+};
+
+var init = function() {
+    // XXX
+
+    ready = true;
+    noticeWaiting();
+};
+</code></pre>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[My First Game - CatRush]]></title>
@@ -809,37 +875,6 @@ private void flattenHelper(TreeNode root, List&lt;TreeNode&gt; pre) {
 <p>细思极恐下，平时有涉及到浮点运算时，如果单纯地用数学计算方式去运算，可能大部分情况下都不会出错，可是当遇到类似 0.1 + 0.2 的情况时，可能就会导致 bug 的出现了。</p>
 
 <p>以后在涉及到浮点运算时，首先要看所用编程语言平台是否提供了相关浮点运算支持方案可用，没有的话则要避免想当然直接运算，应该把运算结果假设在一定误差范围内。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Leetcode_Linked List Cycle]]></title>
-    <link href="http://smilevchy.github.io/blog/2014/11/21/leetcode-linked-list-cycle/"/>
-    <updated>2014-11-21T16:17:54+08:00</updated>
-    <id>http://smilevchy.github.io/blog/2014/11/21/leetcode-linked-list-cycle</id>
-    <content type="html"><![CDATA[<p>原题链接: <a href="https://oj.leetcode.com/problems/linked-list-cycle/">https://oj.leetcode.com/problems/linked-list-cycle/</a></p>
-
-<!-- more -->
-
-
-<pre><code>public boolean hasCycle(ListNode head) {
-    if (head == null) return false;
-
-    ListNode slowCursor = head;
-    ListNode quickCursor = head;
-
-    while (quickCursor.next != null &amp;&amp; quickCursor.next.next != null) {
-        slowCursor = slowCursor.next;
-        quickCursor = quickCursor.next.next;
-
-        if (slowCursor != null &amp;&amp; quickCursor != null &amp;&amp; (quickCursor == slowCursor || quickCursor.next == slowCursor)) {
-            return true;
-        }
-    }
-
-    return false;
-}
-</code></pre>
 ]]></content>
   </entry>
   

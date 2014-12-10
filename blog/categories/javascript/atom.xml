@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Javascript | smilevchy's blog]]></title>
   <link href="http://smilevchy.github.io/blog/categories/javascript/atom.xml" rel="self"/>
   <link href="http://smilevchy.github.io/"/>
-  <updated>2014-12-09T10:02:34+08:00</updated>
+  <updated>2014-12-10T10:36:38+08:00</updated>
   <id>http://smilevchy.github.io/</id>
   <author>
     <name><![CDATA[smilevchy]]></name>
@@ -12,6 +12,72 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Call Function Lazily]]></title>
+    <link href="http://smilevchy.github.io/blog/2014/12/10/call-function-lazily/"/>
+    <updated>2014-12-10T10:19:10+08:00</updated>
+    <id>http://smilevchy.github.io/blog/2014/12/10/call-function-lazily</id>
+    <content type="html"><![CDATA[<p>某些场景下，在某些模块还未初始化完毕时就调用该模块的函数，可能会导致错误。这时候就需要延迟调用函数，等待该模块初始化完毕先再调用。</p>
+
+<!-- more -->
+
+
+<p>*. setTimeout 方法</p>
+
+<pre><code>ready = false;
+
+this.func_to_be_called = function(params) {
+    if (!ready) {
+        setTimeout(function() {
+            func_to_be_called(params);
+        }, 100);
+    }
+};
+
+var init = function() {
+    // XXX
+
+    ready = true;
+};
+</code></pre>
+
+<p>*. 缓存调用函数对象方法</p>
+
+<pre><code>var ready = false;
+var waitings = [];
+var addWaiting = function (fn, param, cb) {
+    waitings.push({
+        fn: fn,
+        param: param,
+        cb: cb
+    });
+};
+var noticeWaiting = function () {
+    $.each(waitings, function (index, waiting) {
+        waiting.fn(waiting.param, waiting.cb);
+    });
+    waitings = [];
+};
+
+this.func_to_be_called = function(params) {
+    if (!ready) {
+        addWaiting(function (params) {
+            _this.func_to_be_called(params);
+        }, params, null);
+        return;
+    }
+};
+
+var init = function() {
+    // XXX
+
+    ready = true;
+    noticeWaiting();
+};
+</code></pre>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Today's Shock]]></title>

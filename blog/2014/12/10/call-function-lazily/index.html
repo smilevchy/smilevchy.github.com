@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Leetcode_Permutations - smilevchy's blog</title>
+  <title>Call Function Lazily - smilevchy's blog</title>
   <meta name="author" content="smilevchy">
 
   
-  <meta name="description" content="原题链接: https://oj.leetcode.com/problems/permutations/ public List&lt;List&lt;Integer&gt;&gt; permute(int[] num) { List&lt;List&lt;Integer&gt;&gt; &hellip;">
+  <meta name="description" content="某些场景下，在某些模块还未初始化完毕时就调用该模块的函数，可能会导致错误。这时候就需要延迟调用函数，等待该模块初始化完毕先再调用。 *. setTimeout 方法 ready = false; this.func_to_be_called = function(params) { if (! &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://smilevchy.github.io/blog/2014/12/03/leetcode-permutations">
+  <link rel="canonical" href="http://smilevchy.github.io/blog/2014/12/10/call-function-lazily">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="smilevchy's blog" type="application/atom+xml">
@@ -68,7 +68,7 @@
   
   <header>
     
-      <h1 class="entry-title">Leetcode_Permutations</h1>
+      <h1 class="entry-title">Call Function Lazily</h1>
     
     
       <p class="meta">
@@ -84,7 +84,7 @@
   
 
 
-<time datetime="2014-12-03T10:48:28+08:00" pubdate data-updated="true">Dec 3<sup>rd</sup>, 2014</time>
+<time datetime="2014-12-10T10:19:10+08:00" pubdate data-updated="true">Dec 10<sup>th</sup>, 2014</time>
         
            | <a href="#disqus_thread"
              data-disqus-identifier="http://smilevchy.github.io">Comments</a>
@@ -94,40 +94,63 @@
   </header>
 
 
-<div class="entry-content"><p>原题链接: <a href="https://oj.leetcode.com/problems/permutations/">https://oj.leetcode.com/problems/permutations/</a></p>
+<div class="entry-content"><p>某些场景下，在某些模块还未初始化完毕时就调用该模块的函数，可能会导致错误。这时候就需要延迟调用函数，等待该模块初始化完毕先再调用。</p>
 
 <!-- more -->
 
 
-<p></p>
+<p>*. setTimeout 方法</p>
 
-<pre><code>public List&lt;List&lt;Integer&gt;&gt; permute(int[] num) {
-    List&lt;List&lt;Integer&gt;&gt; result = new ArrayList&lt;List&lt;Integer&gt;&gt;();
+<pre><code>ready = false;
 
-    if (num == null || num.length == 0) return result;
-
-    List&lt;Integer&gt; first = new ArrayList&lt;Integer&gt;();
-    for (int e : num) {
-        first.add(e);
+this.func_to_be_called = function(params) {
+    if (!ready) {
+        setTimeout(function() {
+            func_to_be_called(params);
+        }, 100);
     }
-    result.add(first);
+};
 
-    for (int pos = 0, len = num.length; pos &lt; len; pos++) {
-        for (int i = 0, s = result.size(); i &lt; s; i++) {
-            for (int j = pos + 1; j &lt; len; j++) {
-                List&lt;Integer&gt; ele = new ArrayList&lt;Integer&gt;(result.get(i));                  
+var init = function() {
+    // XXX
 
-                ele.set(j, ele.get(j) ^ ele.get(pos));
-                ele.set(pos, ele.get(j) ^ ele.get(pos));
-                ele.set(j, ele.get(j) ^ ele.get(pos));
+    ready = true;
+};
+</code></pre>
 
-                result.add(ele);
-            }
-        }
+<p>*. 缓存调用函数对象方法</p>
+
+<pre><code>var ready = false;
+var waitings = [];
+var addWaiting = function (fn, param, cb) {
+    waitings.push({
+        fn: fn,
+        param: param,
+        cb: cb
+    });
+};
+var noticeWaiting = function () {
+    $.each(waitings, function (index, waiting) {
+        waiting.fn(waiting.param, waiting.cb);
+    });
+    waitings = [];
+};
+
+this.func_to_be_called = function(params) {
+    if (!ready) {
+        addWaiting(function (params) {
+            _this.func_to_be_called(params);
+        }, params, null);
+        return;
     }
+};
 
-    return result;
-}
+var init = function() {
+    // XXX
+
+    ready = true;
+    noticeWaiting();
+};
 </code></pre>
 </div>
 
@@ -151,12 +174,12 @@
   
 
 
-<time datetime="2014-12-03T10:48:28+08:00" pubdate data-updated="true">Dec 3<sup>rd</sup>, 2014</time>
+<time datetime="2014-12-10T10:19:10+08:00" pubdate data-updated="true">Dec 10<sup>th</sup>, 2014</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/algorithm/'>algorithm</a>
+    <a class='category' href='/blog/categories/javascript/'>javascript</a>
   
 </span>
 
@@ -172,10 +195,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2014/12/02/leetcode-rotate-image/" title="Previous Post: Leetcode_Rotate Image">&laquo; Leetcode_Rotate Image</a>
+        <a class="basic-alignment left" href="/blog/2014/12/08/my-first-game-catrush/" title="Previous Post: My First Game - CatRush">&laquo; My First Game - CatRush</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2014/12/04/leetcode-validate-binary-search-tree/" title="Next Post: Leetcode_Validate Binary Search Tree">Leetcode_Validate Binary Search Tree &raquo;</a>
       
     </p>
   </footer>
@@ -297,8 +318,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://smilevchy.github.io/blog/2014/12/03/leetcode-permutations/';
-        var disqus_url = 'http://smilevchy.github.io/blog/2014/12/03/leetcode-permutations/';
+        var disqus_identifier = 'http://smilevchy.github.io/blog/2014/12/10/call-function-lazily/';
+        var disqus_url = 'http://smilevchy.github.io/blog/2014/12/10/call-function-lazily/';
         var disqus_script = 'embed.js';
       
     (function () {
