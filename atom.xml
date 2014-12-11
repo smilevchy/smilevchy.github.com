@@ -4,7 +4,7 @@
   <title><![CDATA[smilevchy's blog]]></title>
   <link href="http://smilevchy.github.io/atom.xml" rel="self"/>
   <link href="http://smilevchy.github.io/"/>
-  <updated>2014-12-10T10:36:38+08:00</updated>
+  <updated>2014-12-11T21:37:36+08:00</updated>
   <id>http://smilevchy.github.io/</id>
   <author>
     <name><![CDATA[smilevchy]]></name>
@@ -12,6 +12,40 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Interrogation of AsyncTask]]></title>
+    <link href="http://smilevchy.github.io/blog/2014/12/11/interrogation-of-asynctask/"/>
+    <updated>2014-12-11T20:48:12+08:00</updated>
+    <id>http://smilevchy.github.io/blog/2014/12/11/interrogation-of-asynctask</id>
+    <content type="html"><![CDATA[<p>当需要进行一项耗时久的任务时（下载文件、访问网络等），一般都知道必须在 worker thread 中进行。但是在现实场景中不可能单纯新建一个线程那么简单，大部分时候需要和 main thread 进行交互、或者说还要保证任务能够成功进行，不会遇到被销毁的情况。可是，单纯的 thread 并不具备这些能力。</p>
+
+<p>那怎么办呢？</p>
+
+<!-- more -->
+
+
+<p>以上说的场景交互在 Android 开发中形成了一种 pattern，而 Android 团队就把这种 pattern 提取成了一个工具类出来给开发者使用，即 AsyncTask。</p>
+
+<p>关于 AsyncTask 的使用方法可参见<a href="http://developer.android.com/reference/android/os/AsyncTask.html">官方文档</a>。</p>
+
+<p>一般情况下，AsyncTask 的确就是那么容易使用。但在某些情况下，你会发现这个类出问题了。</p>
+
+<p>这个是因为 AsyncTask 的本质缺陷导致。</p>
+
+<p>Android 的基本组件 Activity/Receiver/Service 本身具有一定的生命周期管理（Life Circle Management），而 AsyncTask 并不具备与之对应的生命周期管理。</p>
+
+<p>假设一个场景如下，你编写了一个 AsyncTask，然后在一个 Activity 里调用该 AsyncTask，并且把自身引用传递进去，为了后续的一些函数调用。大部分情况下是没有问题，但是当设备转换屏幕方向时，Android 系统会销毁这个 Activity 再重建一个新的，此时之前传进去 AsyncTask 里的引用已经“无效”了，因为它指向了一个被销毁的 Activity，你再也不可能对其做任何 UI 操作，甚至会抛出 NullPointerException。即是说，你需要注意传进给 AsyncTask 的任何具有生命周期管理的引用，下一秒这个引用可能就失效了。</p>
+
+<p>解决方法？</p>
+
+<p>对于此类具有生命周期管理的引用统一使用 WeakReference，当引用指向的对象被系统销毁时，可以让这些对象被 GC 处理，同时在使用到引用的代码处再判断是否非空来决定怎么处理。</p>
+
+<p>此外，当外部发生生命周期状态改变时（按返回键、Home键、取消进度框等），若对应的 AsyncTask 需要做相应的反应时（取消任务进行、继续任务进行等），还需要监听外部的生命周期状态改变事件。</p>
+
+<p>总之，AsyncTask 看起来很简单，但需要在实际场景中考虑是否可能会出现问题。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Call Function Lazily]]></title>
@@ -852,29 +886,6 @@ private void flattenHelper(TreeNode root, List&lt;TreeNode&gt; pre) {
     return slowCursor;
 }
 </code></pre>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Trap of '0.1 + 0.2']]></title>
-    <link href="http://smilevchy.github.io/blog/2014/11/22/trap-of-0-dot-1-plus-0-dot-2/"/>
-    <updated>2014-11-22T10:45:23+08:00</updated>
-    <id>http://smilevchy.github.io/blog/2014/11/22/trap-of-0-dot-1-plus-0-dot-2</id>
-    <content type="html"><![CDATA[<p>0.1 + 0.2 == ?</p>
-
-<!-- more -->
-
-
-<p>肯定是 0.3 啊。没错，在数学上的确是等于这个值。可是在计算机的世界里，由于浮点数目前还不能很精确地表示出来，所以这个数相加后的值会有偏差，不是你想象中的值 0.3。</p>
-
-<p>为了看下相加后的值是多少，我分别用了 JavaScript\Java\Ruby\Python 测试，结果均得出值: 0.30000000000000004。
-恩，这个大家都知道，浮点数运算一般都会有偏差的。
-于是，我又测试了其他浮点数的相加，例如：0.1 + 0.1，0.2 + 0.2，0.1 + 0.4 &hellip;&hellip;
-可是这些运算的返回值却和数学上的相加精确值一样，也就是说不是所有的浮点运算都会返回偏差值。</p>
-
-<p>细思极恐下，平时有涉及到浮点运算时，如果单纯地用数学计算方式去运算，可能大部分情况下都不会出错，可是当遇到类似 0.1 + 0.2 的情况时，可能就会导致 bug 的出现了。</p>
-
-<p>以后在涉及到浮点运算时，首先要看所用编程语言平台是否提供了相关浮点运算支持方案可用，没有的话则要避免想当然直接运算，应该把运算结果假设在一定误差范围内。</p>
 ]]></content>
   </entry>
   
