@@ -4,7 +4,7 @@
   <title><![CDATA[smilevchy's blog]]></title>
   <link href="http://smilevchy.github.io/atom.xml" rel="self"/>
   <link href="http://smilevchy.github.io/"/>
-  <updated>2014-12-15T23:32:56+08:00</updated>
+  <updated>2014-12-15T23:37:13+08:00</updated>
   <id>http://smilevchy.github.io/</id>
   <author>
     <name><![CDATA[smilevchy]]></name>
@@ -20,27 +20,33 @@
     <id>http://smilevchy.github.io/blog/2014/12/15/reaction-to-effective-java</id>
     <content type="html"><![CDATA[<p><strong>第一遍</strong></p>
 
-<p>单元素的枚举类型已经成为实现 Singleton 的最佳方法</p>
+<ul>
+<li>单元素的枚举类型已经成为实现 Singleton 的最佳方法</li>
+<li>清空对象引用应该是一种例外，而不是一种规范行为</li>
+<li>内存泄漏原因：
 
-<p>清空对象引用应该是一种例外，而不是一种规范行为</p>
+<ul>
+<li>一般而言，只要类是自己管理内存，程序员就应该警惕内存泄漏问题</li>
+<li>缓存</li>
+<li>监听器和其他回调</li>
+</ul>
+</li>
+<li>内存泄漏解决方案：
 
-<p>内存泄漏原因：</p>
+<ul>
+<li>通常不会有明显表现，可能持续很长时间。只能通过仔细检查代码或者利用 Heap Profiler 才能发现</li>
+</ul>
+</li>
+<li>尽量用静态工厂方法替代构造器</li>
+<li>当想使用 B 扩展(继承) A 时，问自己两个问题：
 
-<pre><code>&gt;* 一般而言，只要类是自己管理内存，程序员就应该警惕内存泄漏问题
-&gt;* 缓存
-&gt;* 监听器和其他回调
-</code></pre>
+<ul>
+<li>每个 B 确实是 A 吗</li>
+<li>若 A 的 API 有缺陷，是否允许将其缺陷传播到 B 中</li>
+</ul>
+</li>
+</ul>
 
-<p>内存泄漏解决方案：
-通常不会有明显表现，可能持续很长时间。只能通过仔细检查代码或者利用 Heap Profiler 才能发现。</p>
-
-<p>尽量用静态工厂方法替代构造器</p>
-
-<p>当想使用 B 扩展(继承) A 时，问自己两个问题：</p>
-
-<pre><code>&gt;* 每个 B 确实是 A 吗
-&gt;* 若 A 的 API 有缺陷，是否允许将其缺陷传播到 B 中
-</code></pre>
 ]]></content>
   </entry>
   
