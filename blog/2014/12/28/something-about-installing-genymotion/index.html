@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Leetcode_Validate Binary Search Tree - smilevchy's blog</title>
+  <title>Something About Installing Genymotion - smilevchy's blog</title>
   <meta name="author" content="smilevchy">
 
   
-  <meta name="description" content="原题链接: https://oj.leetcode.com/problems/validate-binary-search-tree/ public boolean isValidBST(TreeNode root) { if (root == null) return true; &hellip;">
+  <meta name="description" content="趁着有时间安装了 Genymotion，它需要依据 Oracle 的 VirtualBox 来工作，所以就是说你还需要安装 Oracle VM VirtualBox 这个软件。 一般设计上来说，Genymotion 应该要提供一个位置来设置指向 VirtualBox 软件路径的， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://smilevchy.github.io/blog/2014/12/04/leetcode-validate-binary-search-tree">
+  <link rel="canonical" href="http://smilevchy.github.io/blog/2014/12/28/something-about-installing-genymotion">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="smilevchy's blog" type="application/atom+xml">
@@ -68,7 +68,7 @@
   
   <header>
     
-      <h1 class="entry-title">Leetcode_Validate Binary Search Tree</h1>
+      <h1 class="entry-title">Something About Installing Genymotion</h1>
     
     
       <p class="meta">
@@ -84,7 +84,7 @@
   
 
 
-<time datetime="2014-12-04T11:04:02+08:00" pubdate data-updated="true">Dec 4<sup>th</sup>, 2014</time>
+<time datetime="2014-12-28T16:21:48+08:00" pubdate data-updated="true">Dec 28<sup>th</sup>, 2014</time>
         
            | <a href="#disqus_thread"
              data-disqus-identifier="http://smilevchy.github.io">Comments</a>
@@ -94,35 +94,13 @@
   </header>
 
 
-<div class="entry-content"><p>原题链接: <a href="https://oj.leetcode.com/problems/validate-binary-search-tree/">https://oj.leetcode.com/problems/validate-binary-search-tree/</a></p>
+<div class="entry-content"><p>趁着有时间安装了 Genymotion，它需要依据 Oracle 的 VirtualBox 来工作，所以就是说你还需要安装 Oracle VM VirtualBox 这个软件。</p>
 
-<!-- more -->
+<p>一般设计上来说，Genymotion 应该要提供一个位置来设置指向 VirtualBox 软件路径的，可是找了它的安装目录、软件界面设置都没有发现这个位置，所以就是说，它可能是固定指向 VirtualBox 的。</p>
 
+<p>即，需要按照它给定的固定路径来安装 VirtualBox ，不然就无法启动成功。至于那个固定路径是什么，可以去它的日志文件里查找，如果没什么改变的话，位置一般是在用户数据文件夹里，名字为 genymotion.log。通过查看它的错误日志，找到指向 VirtualBox 时发生错误的日志记录，那里就有写该固定路径。</p>
 
-<pre><code>public boolean isValidBST(TreeNode root) {
-    if (root == null) return true;
-
-    LinkedList&lt;TreeNode&gt; inorderNodes = new LinkedList&lt;TreeNode&gt;();
-    List&lt;Integer&gt; vals = new ArrayList&lt;Integer&gt;();
-
-    while (root != null || !inorderNodes.isEmpty()) {
-        if (root != null) {
-            inorderNodes.push(root);
-            root = root.left;
-        } else {
-            TreeNode top = inorderNodes.pop(); 
-            vals.add(top.val);
-            root = top.right;
-        }
-    }
-
-    for (int i = 1, s = vals.size(); i &lt; s; i++) {
-        if (vals.get(i) &lt;= vals.get(i -1)) return false;
-    }
-
-    return true;
-}
-</code></pre>
+<p>这是我自己遇到的错误，因为在安装 Genymotion 前我就一直使用 VirtualBox ，而且是自定义路径。 &ndash;_-所以需要卸载重装，安装它的固定路径。</p>
 </div>
 
 
@@ -145,12 +123,12 @@
   
 
 
-<time datetime="2014-12-04T11:04:02+08:00" pubdate data-updated="true">Dec 4<sup>th</sup>, 2014</time>
+<time datetime="2014-12-28T16:21:48+08:00" pubdate data-updated="true">Dec 28<sup>th</sup>, 2014</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/algorithm/'>algorithm</a>
+    <a class='category' href='/blog/categories/android/'>android</a>
   
 </span>
 
@@ -166,10 +144,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2014/12/03/leetcode-permutations/" title="Previous Post: Leetcode_Permutations">&laquo; Leetcode_Permutations</a>
+        <a class="basic-alignment left" href="/blog/2014/12/15/reaction-to-effective-java/" title="Previous Post: Reaction to Effective Java">&laquo; Reaction to Effective Java</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2014/12/04/leetcode-set-matrix-zeroes/" title="Next Post: Leetcode_Set Matrix Zeroes">Leetcode_Set Matrix Zeroes &raquo;</a>
       
     </p>
   </footer>
@@ -291,8 +267,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://smilevchy.github.io/blog/2014/12/04/leetcode-validate-binary-search-tree/';
-        var disqus_url = 'http://smilevchy.github.io/blog/2014/12/04/leetcode-validate-binary-search-tree/';
+        var disqus_identifier = 'http://smilevchy.github.io/blog/2014/12/28/something-about-installing-genymotion/';
+        var disqus_url = 'http://smilevchy.github.io/blog/2014/12/28/something-about-installing-genymotion/';
         var disqus_script = 'embed.js';
       
     (function () {

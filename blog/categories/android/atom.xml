@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Android | smilevchy's blog]]></title>
   <link href="http://smilevchy.github.io/blog/categories/android/atom.xml" rel="self"/>
   <link href="http://smilevchy.github.io/"/>
-  <updated>2014-12-15T23:37:13+08:00</updated>
+  <updated>2014-12-28T16:36:54+08:00</updated>
   <id>http://smilevchy.github.io/</id>
   <author>
     <name><![CDATA[smilevchy]]></name>
@@ -12,6 +12,21 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Something About Installing Genymotion]]></title>
+    <link href="http://smilevchy.github.io/blog/2014/12/28/something-about-installing-genymotion/"/>
+    <updated>2014-12-28T16:21:48+08:00</updated>
+    <id>http://smilevchy.github.io/blog/2014/12/28/something-about-installing-genymotion</id>
+    <content type="html"><![CDATA[<p>趁着有时间安装了 Genymotion，它需要依据 Oracle 的 VirtualBox 来工作，所以就是说你还需要安装 Oracle VM VirtualBox 这个软件。</p>
+
+<p>一般设计上来说，Genymotion 应该要提供一个位置来设置指向 VirtualBox 软件路径的，可是找了它的安装目录、软件界面设置都没有发现这个位置，所以就是说，它可能是固定指向 VirtualBox 的。</p>
+
+<p>即，需要按照它给定的固定路径来安装 VirtualBox ，不然就无法启动成功。至于那个固定路径是什么，可以去它的日志文件里查找，如果没什么改变的话，位置一般是在用户数据文件夹里，名字为 genymotion.log。通过查看它的错误日志，找到指向 VirtualBox 时发生错误的日志记录，那里就有写该固定路径。</p>
+
+<p>这是我自己遇到的错误，因为在安装 Genymotion 前我就一直使用 VirtualBox ，而且是自定义路径。 &ndash;_-所以需要卸载重装，安装它的固定路径。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Interrogation of AsyncTask]]></title>

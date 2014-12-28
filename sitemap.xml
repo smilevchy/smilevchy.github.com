@@ -3,6 +3,12 @@
   
   
   <url>
+    <loc>http://smilevchy.github.io/blog/2014/12/28/something-about-installing-genymotion/</loc>
+    <lastmod>2014-12-28T16:21:48+08:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
     <loc>http://smilevchy.github.io/blog/2014/12/15/reaction-to-effective-java/</loc>
     <lastmod>2014-12-15T23:26:38+08:00</lastmod>
     <priority>0.8</priority>
@@ -467,14 +473,14 @@
   
   <url>
     <loc>http://smilevchy.github.io/blog/archives/</loc>
-    <lastmod>2014-12-15T23:37:13+08:00</lastmod>
+    <lastmod>2014-12-28T16:36:54+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   
   <url>
     <loc>http://smilevchy.github.io/</loc>
-    <lastmod>2014-12-15T23:37:13+08:00</lastmod>
+    <lastmod>2014-12-28T16:36:54+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
