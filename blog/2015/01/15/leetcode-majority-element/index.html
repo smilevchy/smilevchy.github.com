@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Leetcode_Find Minimum in Rotated Sorted Array - smilevchy's blog</title>
+  <title>Leetcode_Majority Element - smilevchy's blog</title>
   <meta name="author" content="smilevchy">
 
   
-  <meta name="description" content="原题链接: https://oj.leetcode.com/problems/find-minimum-in-rotated-sorted-array/ public int findMin(int[] num) { if (num == null || num.length == 0) &hellip;">
+  <meta name="description" content="原题链接: https://oj.leetcode.com/problems/majority-element/ public int majorityElement(int[] num) { Map&lt;Integer, Integer&gt; numToCount = new HashMap &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://smilevchy.github.io/blog/2014/12/04/leetcode-find-minimum-in-rotated-sorted-array">
+  <link rel="canonical" href="http://smilevchy.github.io/blog/2015/01/15/leetcode-majority-element">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="smilevchy's blog" type="application/atom+xml">
@@ -68,7 +68,7 @@
   
   <header>
     
-      <h1 class="entry-title">Leetcode_Find Minimum in Rotated Sorted Array</h1>
+      <h1 class="entry-title">Leetcode_Majority Element</h1>
     
     
       <p class="meta">
@@ -84,7 +84,7 @@
   
 
 
-<time datetime="2014-12-04T14:33:54+08:00" pubdate data-updated="true">Dec 4<sup>th</sup>, 2014</time>
+<time datetime="2015-01-15T11:33:16+08:00" pubdate data-updated="true">Jan 15<sup>th</sup>, 2015</time>
         
            | <a href="#disqus_thread"
              data-disqus-identifier="http://smilevchy.github.io">Comments</a>
@@ -94,26 +94,36 @@
   </header>
 
 
-<div class="entry-content"><p>原题链接: <a href="https://oj.leetcode.com/problems/find-minimum-in-rotated-sorted-array/">https://oj.leetcode.com/problems/find-minimum-in-rotated-sorted-array/</a></p>
+<div class="entry-content"><p>原题链接: <a href="https://oj.leetcode.com/problems/majority-element/">https://oj.leetcode.com/problems/majority-element/</a></p>
 
 <!-- more -->
 
 
-<pre><code>public int findMin(int[] num) {
-    if (num == null || num.length == 0) return 0;
+<pre><code>public int majorityElement(int[] num) {
+    Map&lt;Integer, Integer&gt; numToCount = new HashMap&lt;Integer, Integer&gt;();
 
-    return findMinHelper(num, 0, num.length - 1);
-}
+    for (int i = 0, len = num.length; i &lt; len; i++) {
+        if (numToCount.get(num[i]) != null) {
+            numToCount.put(num[i], numToCount.get(num[i]) + 1);
+        } else {
+            numToCount.put(num[i], 1);
+        }
+    }
 
-public int findMinHelper(int[] num, int low, int high) {
-    if (low &gt; high) return 0;
+    int majorityNum = 0;
+    int maxLen = Integer.MIN_VALUE;
 
-    if (high - low &lt;= 1) return Math.min(num[low], num[high]);
+    Iterator&lt;Integer&gt; itr = numToCount.keySet().iterator();
 
-    int mid = (low + high) / 2;
-    int result = Math.min(num[mid], Math.min(findMinHelper(num, low, mid - 1), findMinHelper(num, mid + 1, high)));
+    while (itr.hasNext()) {
+        int key = itr.next();
+        if (numToCount.get(key) &gt; maxLen) {
+            maxLen = numToCount.get(key);
+            majorityNum = key;
+        }
+    }
 
-    return result;
+    return majorityNum;
 }
 </code></pre>
 </div>
@@ -138,7 +148,7 @@ public int findMinHelper(int[] num, int low, int high) {
   
 
 
-<time datetime="2014-12-04T14:33:54+08:00" pubdate data-updated="true">Dec 4<sup>th</sup>, 2014</time>
+<time datetime="2015-01-15T11:33:16+08:00" pubdate data-updated="true">Jan 15<sup>th</sup>, 2015</time>
       
 
 <span class="categories">
@@ -159,10 +169,8 @@ public int findMinHelper(int[] num, int low, int high) {
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2014/12/04/leetcode-set-matrix-zeroes/" title="Previous Post: Leetcode_Set Matrix Zeroes">&laquo; Leetcode_Set Matrix Zeroes</a>
+        <a class="basic-alignment left" href="/blog/2015/01/15/leetcode-min-stack/" title="Previous Post: Leetcode_Min Stack">&laquo; Leetcode_Min Stack</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2014/12/05/leetcode-convert-sorted-array-to-binary-search-tree/" title="Next Post: Leetcode_Convert Sorted Array to Binary Search Tree">Leetcode_Convert Sorted Array to Binary Search Tree &raquo;</a>
       
     </p>
   </footer>
@@ -284,8 +292,8 @@ public int findMinHelper(int[] num, int low, int high) {
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://smilevchy.github.io/blog/2014/12/04/leetcode-find-minimum-in-rotated-sorted-array/';
-        var disqus_url = 'http://smilevchy.github.io/blog/2014/12/04/leetcode-find-minimum-in-rotated-sorted-array/';
+        var disqus_identifier = 'http://smilevchy.github.io/blog/2015/01/15/leetcode-majority-element/';
+        var disqus_url = 'http://smilevchy.github.io/blog/2015/01/15/leetcode-majority-element/';
         var disqus_script = 'embed.js';
       
     (function () {
