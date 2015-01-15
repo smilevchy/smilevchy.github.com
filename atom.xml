@@ -4,7 +4,7 @@
   <title><![CDATA[smilevchy's blog]]></title>
   <link href="http://smilevchy.github.io/atom.xml" rel="self"/>
   <link href="http://smilevchy.github.io/"/>
-  <updated>2015-01-10T11:07:23+08:00</updated>
+  <updated>2015-01-15T10:06:33+08:00</updated>
   <id>http://smilevchy.github.io/</id>
   <author>
     <name><![CDATA[smilevchy]]></name>
@@ -12,6 +12,56 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Leetcode_Min Stack]]></title>
+    <link href="http://smilevchy.github.io/blog/2015/01/15/leetcode-min-stack/"/>
+    <updated>2015-01-15T10:04:07+08:00</updated>
+    <id>http://smilevchy.github.io/blog/2015/01/15/leetcode-min-stack</id>
+    <content type="html"><![CDATA[<p>原题链接: <a href="https://oj.leetcode.com/problems/min-stack/">https://oj.leetcode.com/problems/min-stack/</a></p>
+
+<!-- more -->
+
+
+<pre><code>class MinStack {
+    private List&lt;Integer&gt; normalStack = new ArrayList&lt;Integer&gt;();
+    private List&lt;Integer&gt; minNumStack = new ArrayList&lt;Integer&gt;();
+
+
+    public void push(int x) {
+        normalStack.add(x);
+
+        if (minNumStack.isEmpty() || minNumStack.get(minNumStack.size() - 1) &gt;= x) {
+            minNumStack.add(x);
+        }
+    }
+
+    public void pop() {
+        if (normalStack.isEmpty()) return;
+
+        int x = normalStack.get(normalStack.size() - 1);
+        normalStack.remove(normalStack.size() - 1);
+
+        if (!minNumStack.isEmpty() &amp;&amp; x == minNumStack.get(minNumStack.size() - 1)) {
+            minNumStack.remove(minNumStack.size() - 1);
+        }
+    }
+
+    public int top() {
+        if (normalStack.isEmpty()) return 0;
+
+        return normalStack.get(normalStack.size() - 1);
+    }
+
+    public int getMin() {
+        if (minNumStack.isEmpty()) return 0;
+
+        return minNumStack.get(minNumStack.size() - 1);
+    }
+}
+</code></pre>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Something About Installing Genymotion]]></title>
@@ -808,41 +858,6 @@ public TreeNode sortedListToBSTHelper(List&lt;ListNode&gt; list, int low, int hi
     root.right = right;
 
     return root;
-}
-</code></pre>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Leetcode_Flatten Binary Tree to Linked List]]></title>
-    <link href="http://smilevchy.github.io/blog/2014/11/24/leetcode-flatten-binary-tree-to-linked-list/"/>
-    <updated>2014-11-24T14:42:54+08:00</updated>
-    <id>http://smilevchy.github.io/blog/2014/11/24/leetcode-flatten-binary-tree-to-linked-list</id>
-    <content type="html"><![CDATA[<p>原题链接: <a href="https://oj.leetcode.com/problems/flatten-binary-tree-to-linked-list/">https://oj.leetcode.com/problems/flatten-binary-tree-to-linked-list/</a></p>
-
-<!-- more -->
-
-
-<pre><code>public void flatten(TreeNode root) {
-    if (root == null) return;
-
-    List&lt;TreeNode&gt; pre = new ArrayList&lt;TreeNode&gt;(1);
-    pre.add(null);
-    flattenHelper(root, pre);
-}
-
-private void flattenHelper(TreeNode root, List&lt;TreeNode&gt; pre) {
-    if (root == null) return;
-
-    if (pre.get(0) != null) {
-        pre.get(0).left = null;
-        pre.get(0).right = root;
-    }
-
-    TreeNode rootRight = root.right;
-    pre.set(0, root);
-    flattenHelper(root.left, pre);
-    flattenHelper(rootRight, pre);
 }
 </code></pre>
 ]]></content>

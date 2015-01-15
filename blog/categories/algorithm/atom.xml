@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Algorithm | smilevchy's blog]]></title>
   <link href="http://smilevchy.github.io/blog/categories/algorithm/atom.xml" rel="self"/>
   <link href="http://smilevchy.github.io/"/>
-  <updated>2015-01-10T11:07:23+08:00</updated>
+  <updated>2015-01-15T10:06:33+08:00</updated>
   <id>http://smilevchy.github.io/</id>
   <author>
     <name><![CDATA[smilevchy]]></name>
@@ -12,6 +12,56 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Leetcode_Min Stack]]></title>
+    <link href="http://smilevchy.github.io/blog/2015/01/15/leetcode-min-stack/"/>
+    <updated>2015-01-15T10:04:07+08:00</updated>
+    <id>http://smilevchy.github.io/blog/2015/01/15/leetcode-min-stack</id>
+    <content type="html"><![CDATA[<p>原题链接: <a href="https://oj.leetcode.com/problems/min-stack/">https://oj.leetcode.com/problems/min-stack/</a></p>
+
+<!-- more -->
+
+
+<pre><code>class MinStack {
+    private List&lt;Integer&gt; normalStack = new ArrayList&lt;Integer&gt;();
+    private List&lt;Integer&gt; minNumStack = new ArrayList&lt;Integer&gt;();
+
+
+    public void push(int x) {
+        normalStack.add(x);
+
+        if (minNumStack.isEmpty() || minNumStack.get(minNumStack.size() - 1) &gt;= x) {
+            minNumStack.add(x);
+        }
+    }
+
+    public void pop() {
+        if (normalStack.isEmpty()) return;
+
+        int x = normalStack.get(normalStack.size() - 1);
+        normalStack.remove(normalStack.size() - 1);
+
+        if (!minNumStack.isEmpty() &amp;&amp; x == minNumStack.get(minNumStack.size() - 1)) {
+            minNumStack.remove(minNumStack.size() - 1);
+        }
+    }
+
+    public int top() {
+        if (normalStack.isEmpty()) return 0;
+
+        return normalStack.get(normalStack.size() - 1);
+    }
+
+    public int getMin() {
+        if (minNumStack.isEmpty()) return 0;
+
+        return minNumStack.get(minNumStack.size() - 1);
+    }
+}
+</code></pre>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Leetcode_Minimum Path Sum]]></title>
@@ -190,43 +240,6 @@ public void setZeroesV2(int[][] matrix) {
     if (firstColZero) {
         for (int i = 0; i &lt; m; i++) matrix[i][0] = 0;
     }
-}
-</code></pre>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Leetcode_Validate Binary Search Tree]]></title>
-    <link href="http://smilevchy.github.io/blog/2014/12/04/leetcode-validate-binary-search-tree/"/>
-    <updated>2014-12-04T11:04:02+08:00</updated>
-    <id>http://smilevchy.github.io/blog/2014/12/04/leetcode-validate-binary-search-tree</id>
-    <content type="html"><![CDATA[<p>原题链接: <a href="https://oj.leetcode.com/problems/validate-binary-search-tree/">https://oj.leetcode.com/problems/validate-binary-search-tree/</a></p>
-
-<!-- more -->
-
-
-<pre><code>public boolean isValidBST(TreeNode root) {
-    if (root == null) return true;
-
-    LinkedList&lt;TreeNode&gt; inorderNodes = new LinkedList&lt;TreeNode&gt;();
-    List&lt;Integer&gt; vals = new ArrayList&lt;Integer&gt;();
-
-    while (root != null || !inorderNodes.isEmpty()) {
-        if (root != null) {
-            inorderNodes.push(root);
-            root = root.left;
-        } else {
-            TreeNode top = inorderNodes.pop(); 
-            vals.add(top.val);
-            root = top.right;
-        }
-    }
-
-    for (int i = 1, s = vals.size(); i &lt; s; i++) {
-        if (vals.get(i) &lt;= vals.get(i -1)) return false;
-    }
-
-    return true;
 }
 </code></pre>
 ]]></content>
