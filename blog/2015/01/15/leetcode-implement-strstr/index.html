@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Leetcode_Merge Sorted Array - smilevchy's blog</title>
+  <title>Leetcode_Implement strStr() - smilevchy's blog</title>
   <meta name="author" content="smilevchy">
 
   
-  <meta name="description" content="原题链接: https://oj.leetcode.com/problems/merge-sorted-array/ public void merge(int A[], int m, int B[], int n) { int size = m + n; int[] workspace = &hellip;">
+  <meta name="description" content="原题链接: https://oj.leetcode.com/problems/implement-strstr/ public int strStr(String haystack, String needle) { if (haystack == null || needle == null) &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://smilevchy.github.io/blog/2014/11/19/leetcode-merge-sorted-array">
+  <link rel="canonical" href="http://smilevchy.github.io/blog/2015/01/15/leetcode-implement-strstr">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="smilevchy's blog" type="application/atom+xml">
@@ -68,7 +68,7 @@
   
   <header>
     
-      <h1 class="entry-title">Leetcode_Merge Sorted Array</h1>
+      <h1 class="entry-title">Leetcode_Implement strStr()</h1>
     
     
       <p class="meta">
@@ -84,7 +84,7 @@
   
 
 
-<time datetime="2014-11-19T17:00:17+08:00" pubdate data-updated="true">Nov 19<sup>th</sup>, 2014</time>
+<time datetime="2015-01-15T15:06:59+08:00" pubdate data-updated="true">Jan 15<sup>th</sup>, 2015</time>
         
            | <a href="#disqus_thread"
              data-disqus-identifier="http://smilevchy.github.io">Comments</a>
@@ -94,38 +94,52 @@
   </header>
 
 
-<div class="entry-content"><p>原题链接: <a href="https://oj.leetcode.com/problems/merge-sorted-array/">https://oj.leetcode.com/problems/merge-sorted-array/</a></p>
+<div class="entry-content"><p>原题链接: <a href="https://oj.leetcode.com/problems/implement-strstr/">https://oj.leetcode.com/problems/implement-strstr/</a></p>
 
 <!-- more -->
 
 
-<pre><code>public void merge(int A[], int m, int B[], int n) {
-    int size = m + n;
-    int[] workspace = new int[size];
+<pre><code>public int strStr(String haystack, String needle) {
+    if (haystack == null || needle == null) return -1;
 
-    int i = 0;
-    int j = 0;
-    int k = 0;
+    int haystackLen = haystack.length();
+    int needleLen = needle.length();
 
-    while (i &lt; m &amp;&amp; j &lt; n) {
-        if (A[i] &lt; B[j]) {
-            workspace[k++] = A[i++];
+    if (needleLen &gt; haystackLen) return -1;
+    if (needleLen == 0) return 0;
+
+    char[] haystackChars = haystack.toCharArray();
+    char[] needleChars = needle.toCharArray();
+
+    int index = 0;
+    boolean found = false;
+    while (index &lt; haystackLen) {
+        if (haystackLen - index &lt; needleLen) {
+            break;
+        }
+
+        int i = index;
+
+        for (int j = 0; j &lt; needleLen; j++) {
+            if (needleChars[j] != haystackChars[i]) {
+                break;
+            }
+
+            i++;
+
+            if (j == needleLen - 1) {
+                found = true;
+            }
+        }
+
+        if (found) {
+            break;
         } else {
-            workspace[k++] = B[j++];
+            index++;
         }
     }
 
-    while (i &lt; m) {
-        workspace[k++] = A[i++];
-    }
-
-    while (j &lt; n) {
-        workspace[k++] = B[j++];
-    }
-
-    for (k = 0; k &lt; size; k++) {
-        A[k] = workspace[k];
-    }
+    return found ? index : -1;
 }
 </code></pre>
 </div>
@@ -150,7 +164,7 @@
   
 
 
-<time datetime="2014-11-19T17:00:17+08:00" pubdate data-updated="true">Nov 19<sup>th</sup>, 2014</time>
+<time datetime="2015-01-15T15:06:59+08:00" pubdate data-updated="true">Jan 15<sup>th</sup>, 2015</time>
       
 
 <span class="categories">
@@ -171,10 +185,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2014/11/19/leetcode-binary-tree-level-order-traversal-ii/" title="Previous Post: Leetcode_Binary Tree Level Order Traversal II">&laquo; Leetcode_Binary Tree Level Order Traversal II</a>
+        <a class="basic-alignment left" href="/blog/2015/01/15/leetcode-majority-element/" title="Previous Post: Leetcode_Majority Element">&laquo; Leetcode_Majority Element</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2014/11/19/leetcode-remove-nth-node-from-end-of-list/" title="Next Post: Leetcode_Remove Nth Node From End of List">Leetcode_Remove Nth Node From End of List &raquo;</a>
       
     </p>
   </footer>
@@ -296,8 +308,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://smilevchy.github.io/blog/2014/11/19/leetcode-merge-sorted-array/';
-        var disqus_url = 'http://smilevchy.github.io/blog/2014/11/19/leetcode-merge-sorted-array/';
+        var disqus_identifier = 'http://smilevchy.github.io/blog/2015/01/15/leetcode-implement-strstr/';
+        var disqus_url = 'http://smilevchy.github.io/blog/2015/01/15/leetcode-implement-strstr/';
         var disqus_script = 'embed.js';
       
     (function () {

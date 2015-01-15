@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Algorithm | smilevchy's blog]]></title>
   <link href="http://smilevchy.github.io/blog/categories/algorithm/atom.xml" rel="self"/>
   <link href="http://smilevchy.github.io/"/>
-  <updated>2015-01-15T11:34:10+08:00</updated>
+  <updated>2015-01-15T15:08:48+08:00</updated>
   <id>http://smilevchy.github.io/</id>
   <author>
     <name><![CDATA[smilevchy]]></name>
@@ -12,6 +12,62 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Leetcode_Implement strStr()]]></title>
+    <link href="http://smilevchy.github.io/blog/2015/01/15/leetcode-implement-strstr/"/>
+    <updated>2015-01-15T15:06:59+08:00</updated>
+    <id>http://smilevchy.github.io/blog/2015/01/15/leetcode-implement-strstr</id>
+    <content type="html"><![CDATA[<p>原题链接: <a href="https://oj.leetcode.com/problems/implement-strstr/">https://oj.leetcode.com/problems/implement-strstr/</a></p>
+
+<!-- more -->
+
+
+<pre><code>public int strStr(String haystack, String needle) {
+    if (haystack == null || needle == null) return -1;
+
+    int haystackLen = haystack.length();
+    int needleLen = needle.length();
+
+    if (needleLen &gt; haystackLen) return -1;
+    if (needleLen == 0) return 0;
+
+    char[] haystackChars = haystack.toCharArray();
+    char[] needleChars = needle.toCharArray();
+
+    int index = 0;
+    boolean found = false;
+    while (index &lt; haystackLen) {
+        if (haystackLen - index &lt; needleLen) {
+            break;
+        }
+
+        int i = index;
+
+        for (int j = 0; j &lt; needleLen; j++) {
+            if (needleChars[j] != haystackChars[i]) {
+                break;
+            }
+
+            i++;
+
+            if (j == needleLen - 1) {
+                found = true;
+            }
+        }
+
+        if (found) {
+            break;
+        } else {
+            index++;
+        }
+    }
+
+    return found ? index : -1;
+}
+</code></pre>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Leetcode_Majority Element]]></title>
@@ -174,36 +230,6 @@ public TreeNode sortedArrayToBSTHelper(int[] num, int low, int high, List&lt;Int
     root.right = right;
 
     return root;
-}
-</code></pre>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Leetcode_Find Minimum in Rotated Sorted Array]]></title>
-    <link href="http://smilevchy.github.io/blog/2014/12/04/leetcode-find-minimum-in-rotated-sorted-array/"/>
-    <updated>2014-12-04T14:33:54+08:00</updated>
-    <id>http://smilevchy.github.io/blog/2014/12/04/leetcode-find-minimum-in-rotated-sorted-array</id>
-    <content type="html"><![CDATA[<p>原题链接: <a href="https://oj.leetcode.com/problems/find-minimum-in-rotated-sorted-array/">https://oj.leetcode.com/problems/find-minimum-in-rotated-sorted-array/</a></p>
-
-<!-- more -->
-
-
-<pre><code>public int findMin(int[] num) {
-    if (num == null || num.length == 0) return 0;
-
-    return findMinHelper(num, 0, num.length - 1);
-}
-
-public int findMinHelper(int[] num, int low, int high) {
-    if (low &gt; high) return 0;
-
-    if (high - low &lt;= 1) return Math.min(num[low], num[high]);
-
-    int mid = (low + high) / 2;
-    int result = Math.min(num[mid], Math.min(findMinHelper(num, low, mid - 1), findMinHelper(num, mid + 1, high)));
-
-    return result;
 }
 </code></pre>
 ]]></content>
