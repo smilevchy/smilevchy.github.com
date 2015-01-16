@@ -4,7 +4,7 @@
   <title><![CDATA[smilevchy's blog]]></title>
   <link href="http://smilevchy.github.io/atom.xml" rel="self"/>
   <link href="http://smilevchy.github.io/"/>
-  <updated>2015-01-15T15:08:48+08:00</updated>
+  <updated>2015-01-16T18:10:33+08:00</updated>
   <id>http://smilevchy.github.io/</id>
   <author>
     <name><![CDATA[smilevchy]]></name>
@@ -12,6 +12,80 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Leetcode_Gas Station]]></title>
+    <link href="http://smilevchy.github.io/blog/2015/01/16/leetcode-gas-station/"/>
+    <updated>2015-01-16T18:05:34+08:00</updated>
+    <id>http://smilevchy.github.io/blog/2015/01/16/leetcode-gas-station</id>
+    <content type="html"><![CDATA[<p>原题链接: <a href="https://oj.leetcode.com/problems/gas-station/">https://oj.leetcode.com/problems/gas-station/</a></p>
+
+<!-- more -->
+
+
+<pre><code>public int canCompleteCircuit(int[] gas, int[] cost) {
+    if (gas == null || cost == null || gas.length != cost.length) {
+        return -1;
+    }
+
+    int totalGas = 0;
+    int subSeqGas = 0;
+    int start = 0;
+    for (int i = 0, numGasStation = gas.length; i &lt; numGasStation; i++) {
+        subSeqGas += gas[i] - cost[i];
+        totalGas += gas[i] - cost[i];
+
+        if (subSeqGas &lt; 0) {
+            subSeqGas = 0;
+            start = i + 1;
+        }
+    }
+
+    return totalGas &gt;= 0 ? start : -1;
+}
+
+public int canCompleteCircuit(int[] gas, int[] cost) {
+    // brute force (will meet time limit exceed)
+
+    if (gas == null || cost == null || gas.length != cost.length) return -1;
+
+    int numGasStation = gas.length;
+    int remainGas = 0;
+    int start = 0;
+    boolean found = false;
+
+    while (!found &amp;&amp; start &lt; numGasStation) {
+        remainGas = 0;
+
+        for (int index = start;;) {
+            remainGas += gas[index];
+
+            if (remainGas &gt;= cost[index]) {
+                remainGas -= cost[index];
+
+                if (index == numGasStation - 1) {
+                    index = 0;
+                } else {
+                    index++;
+                }
+
+                if (index == start) {
+                    found = true;
+                    break;
+                }
+            } else {
+                start++;
+                break;
+            }
+        }
+
+    }
+
+    return found ? start : -1;
+}
+</code></pre>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Leetcode_Implement strStr()]]></title>
@@ -836,39 +910,6 @@ public void rotate(int[][] matrix) {
     }
 
     return low;
-}
-</code></pre>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Leetcode_ZigZag Conversion]]></title>
-    <link href="http://smilevchy.github.io/blog/2014/11/25/leetcode-zigzag-conversion/"/>
-    <updated>2014-11-25T15:20:09+08:00</updated>
-    <id>http://smilevchy.github.io/blog/2014/11/25/leetcode-zigzag-conversion</id>
-    <content type="html"><![CDATA[<p>原题链接: <a href="https://oj.leetcode.com/problems/zigzag-conversion/">https://oj.leetcode.com/problems/zigzag-conversion/</a></p>
-
-<!-- more -->
-
-
-<pre><code>public String convert(String s, int nRows) {
-    if (s == null || nRows &lt;= 1) return s;
-
-    StringBuilder sb = new StringBuilder();
-    int length = s.length();
-    int span = 2 * nRows - 2;
-
-    for (int i = 0; i &lt; nRows; i++) {
-        for (int j = i; j &lt; length; j += span) {
-            sb.append(s.charAt(j));
-
-            if (i != 0 &amp;&amp; i != nRows - 1 &amp;&amp; j + span - 2 * i &lt; length) {
-                sb.append(s.charAt(j + span - 2 * i));
-            }
-        }
-    }
-
-    return sb.toString();
 }
 </code></pre>
 ]]></content>

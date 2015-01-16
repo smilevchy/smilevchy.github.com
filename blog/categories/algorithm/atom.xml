@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Algorithm | smilevchy's blog]]></title>
   <link href="http://smilevchy.github.io/blog/categories/algorithm/atom.xml" rel="self"/>
   <link href="http://smilevchy.github.io/"/>
-  <updated>2015-01-15T15:08:48+08:00</updated>
+  <updated>2015-01-16T18:10:33+08:00</updated>
   <id>http://smilevchy.github.io/</id>
   <author>
     <name><![CDATA[smilevchy]]></name>
@@ -12,6 +12,80 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Leetcode_Gas Station]]></title>
+    <link href="http://smilevchy.github.io/blog/2015/01/16/leetcode-gas-station/"/>
+    <updated>2015-01-16T18:05:34+08:00</updated>
+    <id>http://smilevchy.github.io/blog/2015/01/16/leetcode-gas-station</id>
+    <content type="html"><![CDATA[<p>原题链接: <a href="https://oj.leetcode.com/problems/gas-station/">https://oj.leetcode.com/problems/gas-station/</a></p>
+
+<!-- more -->
+
+
+<pre><code>public int canCompleteCircuit(int[] gas, int[] cost) {
+    if (gas == null || cost == null || gas.length != cost.length) {
+        return -1;
+    }
+
+    int totalGas = 0;
+    int subSeqGas = 0;
+    int start = 0;
+    for (int i = 0, numGasStation = gas.length; i &lt; numGasStation; i++) {
+        subSeqGas += gas[i] - cost[i];
+        totalGas += gas[i] - cost[i];
+
+        if (subSeqGas &lt; 0) {
+            subSeqGas = 0;
+            start = i + 1;
+        }
+    }
+
+    return totalGas &gt;= 0 ? start : -1;
+}
+
+public int canCompleteCircuit(int[] gas, int[] cost) {
+    // brute force (will meet time limit exceed)
+
+    if (gas == null || cost == null || gas.length != cost.length) return -1;
+
+    int numGasStation = gas.length;
+    int remainGas = 0;
+    int start = 0;
+    boolean found = false;
+
+    while (!found &amp;&amp; start &lt; numGasStation) {
+        remainGas = 0;
+
+        for (int index = start;;) {
+            remainGas += gas[index];
+
+            if (remainGas &gt;= cost[index]) {
+                remainGas -= cost[index];
+
+                if (index == numGasStation - 1) {
+                    index = 0;
+                } else {
+                    index++;
+                }
+
+                if (index == start) {
+                    found = true;
+                    break;
+                }
+            } else {
+                start++;
+                break;
+            }
+        }
+
+    }
+
+    return found ? start : -1;
+}
+</code></pre>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Leetcode_Implement strStr()]]></title>
@@ -190,46 +264,6 @@
     }
 
     return res[cols - 1];
-}
-</code></pre>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Leetcode_Convert Sorted Array to Binary Search Tree]]></title>
-    <link href="http://smilevchy.github.io/blog/2014/12/05/leetcode-convert-sorted-array-to-binary-search-tree/"/>
-    <updated>2014-12-05T10:56:37+08:00</updated>
-    <id>http://smilevchy.github.io/blog/2014/12/05/leetcode-convert-sorted-array-to-binary-search-tree</id>
-    <content type="html"><![CDATA[<p>原题链接: <a href="https://oj.leetcode.com/problems/convert-sorted-array-to-binary-search-tree/">https://oj.leetcode.com/problems/convert-sorted-array-to-binary-search-tree/</a></p>
-
-<!-- more -->
-
-
-<pre><code>public TreeNode sortedArrayToBST(int[] num) {
-    if (num == null || num.length == 0) return null;
-
-    List&lt;Integer&gt; cursor = new ArrayList&lt;Integer&gt;(1);
-    cursor.add(0);
-
-    return sortedArrayToBSTHelper(num, 0, num.length - 1, cursor);
-}
-
-public TreeNode sortedArrayToBSTHelper(int[] num, int low, int high, List&lt;Integer&gt; cursor) {
-    if (low &gt; high) return null;
-
-    int mid = (low + high) / 2;
-
-    TreeNode left = sortedArrayToBSTHelper(num, low, mid - 1, cursor);
-
-    TreeNode root = new TreeNode(num[cursor.get(0)]);
-    root.left = left;
-
-    cursor.set(0, cursor.get(0) + 1);
-
-    TreeNode right = sortedArrayToBSTHelper(num, mid + 1, high, cursor);
-    root.right = right;
-
-    return root;
 }
 </code></pre>
 ]]></content>
