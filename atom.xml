@@ -4,7 +4,7 @@
   <title><![CDATA[smilevchy's blog]]></title>
   <link href="http://smilevchy.github.io/atom.xml" rel="self"/>
   <link href="http://smilevchy.github.io/"/>
-  <updated>2015-01-19T10:38:15+08:00</updated>
+  <updated>2015-01-19T14:13:55+08:00</updated>
   <id>http://smilevchy.github.io/</id>
   <author>
     <name><![CDATA[smilevchy]]></name>
@@ -12,6 +12,30 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Best Time to Buy and Sell Stock]]></title>
+    <link href="http://smilevchy.github.io/blog/2015/01/19/best-time-to-buy-and-sell-stock/"/>
+    <updated>2015-01-19T14:12:40+08:00</updated>
+    <id>http://smilevchy.github.io/blog/2015/01/19/best-time-to-buy-and-sell-stock</id>
+    <content type="html"><![CDATA[<p>原题链接: <a href="https://oj.leetcode.com/problems/best-time-to-buy-and-sell-stock/">https://oj.leetcode.com/problems/best-time-to-buy-and-sell-stock/</a></p>
+
+<!-- more -->
+
+
+<pre><code>public int maxProfit(int[] prices) {
+    int local = 0;
+    int global = 0;
+    for (int i = 1, len = prices.length; i &lt; len; i++) {
+        local = Math.max(local + prices[i] - prices[i - 1], 0);
+        global = Math.max(local, global);
+    }
+
+    return global;
+}
+</code></pre>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Intersection of Two Linked Lists]]></title>
@@ -901,33 +925,6 @@ public void rotate(int[][] matrix) {
     }
 
     return result;
-}
-</code></pre>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Leetcode_Maximum Subarray]]></title>
-    <link href="http://smilevchy.github.io/blog/2014/12/01/leetcode-maximum-subarray/"/>
-    <updated>2014-12-01T10:21:42+08:00</updated>
-    <id>http://smilevchy.github.io/blog/2014/12/01/leetcode-maximum-subarray</id>
-    <content type="html"><![CDATA[<p>原题链接: <a href="https://oj.leetcode.com/problems/maximum-subarray/">https://oj.leetcode.com/problems/maximum-subarray/</a></p>
-
-<!-- more -->
-
-
-<pre><code>public int maxSubArray(int[] A) {
-    if (A == null || A.length == 0) return 0;
-
-    int localMax = A[0];
-    int globalMax = A[0];
-
-    for (int i = 1, len = A.length; i &lt; len; i++) {
-        localMax = Math.max(A[i], localMax + A[i]);
-        globalMax = Math.max(localMax, globalMax);
-    }
-
-    return globalMax;
 }
 </code></pre>
 ]]></content>
