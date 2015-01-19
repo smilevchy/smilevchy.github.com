@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Leetcode_Plus One - smilevchy's blog</title>
+  <title>Intersection of Two Linked Lists - smilevchy's blog</title>
   <meta name="author" content="smilevchy">
 
   
-  <meta name="description" content="原题链接: https://oj.leetcode.com/problems/plus-one/ public byte[] plusOne(byte[] num) { if (num == null || num.length == 0) { return num; } byte[] &hellip;">
+  <meta name="description" content="原题链接: https://oj.leetcode.com/problems/intersection-of-two-linked-lists/ public ListNode getIntersectionNode(ListNode headA, ListNode headB) { if ( &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://smilevchy.github.io/blog/2014/11/04/leetcode-plus-one">
+  <link rel="canonical" href="http://smilevchy.github.io/blog/2015/01/19/intersection-of-two-linked-lists">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="smilevchy's blog" type="application/atom+xml">
@@ -68,7 +68,7 @@
   
   <header>
     
-      <h1 class="entry-title">Leetcode_Plus One</h1>
+      <h1 class="entry-title">Intersection of Two Linked Lists</h1>
     
     
       <p class="meta">
@@ -84,7 +84,7 @@
   
 
 
-<time datetime="2014-11-04T21:19:18+08:00" pubdate data-updated="true">Nov 4<sup>th</sup>, 2014</time>
+<time datetime="2015-01-19T10:36:39+08:00" pubdate data-updated="true">Jan 19<sup>th</sup>, 2015</time>
         
            | <a href="#disqus_thread"
              data-disqus-identifier="http://smilevchy.github.io">Comments</a>
@@ -94,39 +94,50 @@
   </header>
 
 
-<div class="entry-content"><p>原题链接: <a href="https://oj.leetcode.com/problems/plus-one/">https://oj.leetcode.com/problems/plus-one/</a></p>
+<div class="entry-content"><p>原题链接: <a href="https://oj.leetcode.com/problems/intersection-of-two-linked-lists/">https://oj.leetcode.com/problems/intersection-of-two-linked-lists/</a></p>
 
 <!-- more -->
 
 
-<pre><code>public byte[] plusOne(byte[] num) {
-    if (num == null || num.length == 0) {
-        return num;
+<pre><code>public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+    if (headA == null || headB == null) return null;
+    if (headA == headB) return headA;
+
+    ListNode cursorA = headA;
+    ListNode cursorB = headB;
+    while (cursorA != null &amp;&amp; cursorB != null) {
+        cursorA = cursorA.next;
+        cursorB = cursorB.next;
     }
 
-    byte[] result = num.clone();
-    int length = num.length;
-
-    for (int i = length - 1; i &gt;= 0; i--) {
-        byte digit = result[i];
-        result[i] = (byte) (digit + 1);
-
-        if (result[i] &lt; 10) {
-            break;
-        } else {
-            result[i] = 0;
-
-            if (i == 0) {
-
-                byte[] expandedNum = new byte[length + 1];
-                expandedNum[0] = 1;
-
-                return expandedNum;
-            }
-        }
+    ListNode longCursorStart = null;
+    ListNode longCursorEnd = null;
+    ListNode shortCursor = null;
+    if (cursorA != null) {
+        longCursorStart = headA;
+        longCursorEnd = cursorA;
+        shortCursor = headB;
+    } else if (cursorB != null) {
+        longCursorStart = headB;
+        longCursorEnd = cursorB;
+        shortCursor = headA;
+    } else {
+        longCursorStart = headA;
+        longCursorEnd = null;
+        shortCursor = headB;
     }
 
-    return result;
+    while (longCursorStart != null &amp;&amp; longCursorEnd != null) {
+        longCursorStart = longCursorStart.next;
+        longCursorEnd = longCursorEnd.next;
+    }
+
+    while (longCursorStart != shortCursor) {
+        longCursorStart = longCursorStart.next;
+        shortCursor = shortCursor.next;
+    }
+
+    return longCursorStart;
 }
 </code></pre>
 </div>
@@ -151,7 +162,7 @@
   
 
 
-<time datetime="2014-11-04T21:19:18+08:00" pubdate data-updated="true">Nov 4<sup>th</sup>, 2014</time>
+<time datetime="2015-01-19T10:36:39+08:00" pubdate data-updated="true">Jan 19<sup>th</sup>, 2015</time>
       
 
 <span class="categories">
@@ -172,10 +183,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2014/11/04/leetcode-reverse-integer/" title="Previous Post: Leetcode_Reverse Integer">&laquo; Leetcode_Reverse Integer</a>
+        <a class="basic-alignment left" href="/blog/2015/01/16/leetcode-gas-station/" title="Previous Post: Leetcode_Gas Station">&laquo; Leetcode_Gas Station</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2014/11/04/leetcode-add-two-numbers/" title="Next Post: Leetcode_Add Two Numbers">Leetcode_Add Two Numbers &raquo;</a>
       
     </p>
   </footer>
@@ -297,8 +306,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://smilevchy.github.io/blog/2014/11/04/leetcode-plus-one/';
-        var disqus_url = 'http://smilevchy.github.io/blog/2014/11/04/leetcode-plus-one/';
+        var disqus_identifier = 'http://smilevchy.github.io/blog/2015/01/19/intersection-of-two-linked-lists/';
+        var disqus_url = 'http://smilevchy.github.io/blog/2015/01/19/intersection-of-two-linked-lists/';
         var disqus_script = 'embed.js';
       
     (function () {
