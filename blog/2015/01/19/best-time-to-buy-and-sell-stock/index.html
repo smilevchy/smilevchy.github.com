@@ -9,7 +9,7 @@
   <meta name="author" content="smilevchy">
 
   
-  <meta name="description" content="原题链接: https://oj.leetcode.com/problems/best-time-to-buy-and-sell-stock/ public int maxProfit(int[] prices) { int local = 0; int global = 0; for (int &hellip;">
+  <meta name="description" content="原题链接: https://oj.leetcode.com/problems/best-time-to-buy-and-sell-stock/ public int maxProfit(int[] prices) { if (prices == null || prices.length == 0 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -100,6 +100,8 @@
 
 
 <pre><code>public int maxProfit(int[] prices) {
+    if (prices == null || prices.length == 0) return 0;
+
     int local = 0;
     int global = 0;
     for (int i = 1, len = prices.length; i &lt; len; i++) {
@@ -108,6 +110,25 @@
     }
 
     return global;
+}
+
+// brute force (time limit exceed)
+public int maxProfit(int[] prices) {
+    if (prices == null || prices.length == 0) return 0;
+
+    int maxProfit = 0;
+    int localProfit = 0;
+    for (int i = 0, len = prices.length; i &lt; len - 1; i++) {
+        int max = 0;
+        for (int j = i + 1; j &lt; len; j++) {
+            if (prices[j] &gt; max) max = prices[j];
+        }
+
+        localProfit = max - prices[i];
+        if (localProfit &gt; maxProfit) maxProfit = localProfit;
+    }
+
+    return maxProfit;
 }
 </code></pre>
 </div>
