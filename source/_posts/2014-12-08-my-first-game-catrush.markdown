@@ -6,7 +6,7 @@ comments: true
 categories: Artifact Android
 ---
 
-完成了第一个移动端游戏，其为 [CatRush](/assets/artifacts/CatRush.apk)。
+完成了第一个移动端游戏，其为 CatRush。
 
 <!-- more -->
 
