@@ -3,6 +3,12 @@
   
   
   <url>
+    <loc>http://smilevchy.github.io/blog/2015/10/05/something-about-inflation/</loc>
+    <lastmod>2015-10-05T22:41:19+08:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
     <loc>http://smilevchy.github.io/blog/2015/01/19/best-time-to-buy-and-sell-stock/</loc>
     <lastmod>2015-01-19T14:12:40+08:00</lastmod>
     <priority>0.8</priority>
@@ -509,14 +515,14 @@
   
   <url>
     <loc>http://smilevchy.github.io/blog/archives/</loc>
-    <lastmod>2015-03-17T10:25:49+08:00</lastmod>
+    <lastmod>2015-10-05T23:03:22+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   
   <url>
     <loc>http://smilevchy.github.io/</loc>
-    <lastmod>2015-03-17T10:25:49+08:00</lastmod>
+    <lastmod>2015-10-05T23:03:22+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Android | smilevchy's blog]]></title>
   <link href="http://smilevchy.github.io/blog/categories/android/atom.xml" rel="self"/>
   <link href="http://smilevchy.github.io/"/>
-  <updated>2015-03-17T10:25:49+08:00</updated>
+  <updated>2015-10-05T23:03:22+08:00</updated>
   <id>http://smilevchy.github.io/</id>
   <author>
     <name><![CDATA[smilevchy]]></name>
@@ -12,6 +12,59 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Something About Inflation]]></title>
+    <link href="http://smilevchy.github.io/blog/2015/10/05/something-about-inflation/"/>
+    <updated>2015-10-05T22:41:19+08:00</updated>
+    <id>http://smilevchy.github.io/blog/2015/10/05/something-about-inflation</id>
+    <content type="html"><![CDATA[<p>When using view inflation, there are something we should know.</p>
+
+<!-- more -->
+
+
+<h1>How to inflate a view? Usually by calling&hellip;</h1>
+
+<ul>
+<li>View#inflate(Context context, int resource, ViewGroup root)</li>
+<li>LayoutInflater#inflate(int resource, ViewGroup root)</li>
+<li>LayoutInflater#inflate(int resource, ViewGroup root, boolean attachToRoot)</li>
+</ul>
+
+
+<p>Calling is simple. The problem is <em>which one should you call and what arguments should you pass</em>.</p>
+
+<p>To solve these questions, the key is to <em>take insight in the method signature and dive into the source code</em>.</p>
+
+<p>Taking a brief example here:</p>
+
+<pre><code>// A view which presents container
+ViewGroup parent = (ViewGroup) findViewById(R.id.container);
+
+// result: layout_height = wrap_content, layout_width = match_parent
+view = LayoutInflater.from(this).inflate(R.layout.item, null);
+parent.addView(view);
+
+// result: layout_height = 100, layout_width = 100
+view = LayoutInflater.from(this).inflate(R.layout.item, null);
+parent.addView(view, 100, 100);
+
+// result: layout_height = 25dp, layout_width = 25dp
+// returned view is the root view of R.layout.item due to attachRoot = false
+view = LayoutInflater.from(this).inflate(R.layout.item, parent, false);
+parent.addView(view);
+
+// result: layout_height = 25dp, layout_width = 25dp 
+// parent.addView is not necessary as this is already done by attachRoot = true
+// returned view is parent due to parent supplied as hierarchy root and attachRoot = true
+view = LayoutInflater.from(this).inflate(R.layout.red, parent, true);
+</code></pre>
+
+<p>Above code explains the results of different methods.</p>
+
+<p><a href="https://possiblemobile.com/2013/05/layout-inflation-as-intended/">Here is another useful resources</a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Something About Installing Genymotion]]></title>

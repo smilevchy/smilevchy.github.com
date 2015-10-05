@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Category: Babble - smilevchy's blog</title>
+  <title>Something About Inflation - smilevchy's blog</title>
   <meta name="author" content="smilevchy">
 
   
-  <meta name="description" content="Category: babble">
+  <meta name="description" content="When using view inflation, there are something we should know. How to inflate a view? Usually by calling&hellip; View#inflate(Context context, int &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://smilevchy.github.io/blog/categories/babble">
+  <link rel="canonical" href="http://smilevchy.github.io/blog/2015/10/05/something-about-inflation">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="smilevchy's blog" type="application/atom+xml">
@@ -64,36 +64,136 @@
   <div id="main">
     <div id="content">
       <div>
-<article role="article">
+<article class="hentry" role="article">
   
   <header>
-    <h1 class="entry-title">Category: Babble</h1>
+    
+      <h1 class="entry-title">Something About Inflation</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-10-05T22:41:19+08:00" pubdate data-updated="true">Oct 5<sup>th</sup>, 2015</time>
+        
+           | <a href="#disqus_thread"
+             data-disqus-identifier="http://smilevchy.github.io">Comments</a>
+        
+      </p>
     
   </header>
-  
-  <div id="blog-archives" class="category">
 
 
+<div class="entry-content"><p>When using view inflation, there are something we should know.</p>
 
-  
-  <h2>2014</h2>
-
-<article>
-  
-<h1><a href="/blog/2014/11/10/the-sorrow-of-individual-game-developer/">The Sorrow of Individual Game Developer</a></h1>
-<time datetime="2014-11-10T22:16:38+08:00" pubdate><span class='month'>Nov</span> <span class='day'>10</span> <span class='year'>2014</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/babble/'>babble</a></span>
-</footer>
+<!-- more -->
 
 
-</article>
+<h1>How to inflate a view? Usually by calling&hellip;</h1>
 
+<ul>
+<li>View#inflate(Context context, int resource, ViewGroup root)</li>
+<li>LayoutInflater#inflate(int resource, ViewGroup root)</li>
+<li>LayoutInflater#inflate(int resource, ViewGroup root, boolean attachToRoot)</li>
+</ul>
+
+
+<p>Calling is simple. The problem is <em>which one should you call and what arguments should you pass</em>.</p>
+
+<p>To solve these questions, the key is to <em>take insight in the method signature and dive into the source code</em>.</p>
+
+<p>Taking a brief example here:</p>
+
+<pre><code>// A view which presents container
+ViewGroup parent = (ViewGroup) findViewById(R.id.container);
+
+// result: layout_height = wrap_content, layout_width = match_parent
+view = LayoutInflater.from(this).inflate(R.layout.item, null);
+parent.addView(view);
+
+// result: layout_height = 100, layout_width = 100
+view = LayoutInflater.from(this).inflate(R.layout.item, null);
+parent.addView(view, 100, 100);
+
+// result: layout_height = 25dp, layout_width = 25dp
+// returned view is the root view of R.layout.item due to attachRoot = false
+view = LayoutInflater.from(this).inflate(R.layout.item, parent, false);
+parent.addView(view);
+
+// result: layout_height = 25dp, layout_width = 25dp 
+// parent.addView is not necessary as this is already done by attachRoot = true
+// returned view is parent due to parent supplied as hierarchy root and attachRoot = true
+view = LayoutInflater.from(this).inflate(R.layout.red, parent, true);
+</code></pre>
+
+<p>Above code explains the results of different methods.</p>
+
+<p><a href="https://possiblemobile.com/2013/05/layout-inflation-as-intended/">Here is another useful resources</a></p>
 </div>
 
+
+  <footer>
+    <p class="meta">
+      
   
+
+<span class="byline author vcard">Posted by <span class="fn">smilevchy</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-10-05T22:41:19+08:00" pubdate data-updated="true">Oct 5<sup>th</sup>, 2015</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/android/'>android</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2015/01/19/best-time-to-buy-and-sell-stock/" title="Previous Post: Best Time to Buy and Sell Stock">&laquo; Best Time to Buy and Sell Stock</a>
+      
+      
+    </p>
+  </footer>
 </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
 
 </div>
 
@@ -204,7 +304,10 @@
       var disqus_shortname = 'smilevchy';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://smilevchy.github.io/blog/2015/10/05/something-about-inflation/';
+        var disqus_url = 'http://smilevchy.github.io/blog/2015/10/05/something-about-inflation/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
