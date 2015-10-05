@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Android | smilevchy's blog]]></title>
   <link href="http://smilevchy.github.io/blog/categories/android/atom.xml" rel="self"/>
   <link href="http://smilevchy.github.io/"/>
-  <updated>2015-10-05T23:03:22+08:00</updated>
+  <updated>2015-10-05T23:06:20+08:00</updated>
   <id>http://smilevchy.github.io/</id>
   <author>
     <name><![CDATA[smilevchy]]></name>
@@ -23,7 +23,7 @@
 <!-- more -->
 
 
-<h1>How to inflate a view? Usually by calling&hellip;</h1>
+<p>How to inflate a view? Usually by calling&hellip;</p>
 
 <ul>
 <li>View#inflate(Context context, int resource, ViewGroup root)</li>
@@ -62,7 +62,7 @@ view = LayoutInflater.from(this).inflate(R.layout.red, parent, true);
 
 <p>Above code explains the results of different methods.</p>
 
-<p><a href="https://possiblemobile.com/2013/05/layout-inflation-as-intended/">Here is another useful resources</a></p>
+<p><a href="https://possiblemobile.com/2013/05/layout-inflation-as-intended/">Here is another useful resource</a></p>
 ]]></content>
   </entry>
   
