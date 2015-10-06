@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Android | smilevchy's blog]]></title>
   <link href="http://smilevchy.github.io/blog/categories/android/atom.xml" rel="self"/>
   <link href="http://smilevchy.github.io/"/>
-  <updated>2015-10-05T23:06:20+08:00</updated>
+  <updated>2015-10-06T10:11:43+08:00</updated>
   <id>http://smilevchy.github.io/</id>
   <author>
     <name><![CDATA[smilevchy]]></name>
@@ -12,6 +12,221 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Android Performance Optimization]]></title>
+    <link href="http://smilevchy.github.io/blog/2015/10/06/android-performance-optimization/"/>
+    <updated>2015-10-06T10:05:16+08:00</updated>
+    <id>http://smilevchy.github.io/blog/2015/10/06/android-performance-optimization</id>
+    <content type="html"><![CDATA[<p><em>Collections of all kinds of tricks of optimizing app performance.</em></p>
+
+<!-- more -->
+
+
+<p>Memory Performance Tools:</p>
+
+<ul>
+<li>Memory Monitor：查看整个app所占用的内存，以及发生GC的时刻，短时间内发生大量的GC操作是一个危险的信号</li>
+<li>Allocation Tracker：使用此工具来追踪内存的分配，</li>
+<li>Heap Tool：查看当前内存快照，便于对比分析哪些对象有可能是泄漏了的</li>
+</ul>
+
+
+<hr />
+
+<p>Overall Performance Tools:</p>
+
+<ul>
+<li>Lint Tool</li>
+<li>Strict Mode Tool</li>
+</ul>
+
+
+<hr />
+
+<p>The Performance Lifecyle</p>
+
+<ul>
+<li><p>Gather：收集数据</p>
+
+<ul>
+<li>我们可以通过Android SDK里面提供的诸多工具来收集CPU、GPU、内存、电量等性能数据。</li>
+</ul>
+</li>
+<li><p>Insight：分析数据</p>
+
+<ul>
+<li>通过上面的步骤，我们获取到了大量的数据，下一步就是分析这些数据。工具帮我们生成了很多可读性强的表格，我们需要事先了解如何查看表格的数据，每一项代表的含义，这样才能够快速定位问题。如果分析数据之后还是没有找到问题，那么就只能不停的重新收集数据，再进行分析，如此循环。</li>
+</ul>
+</li>
+<li><p>Action：解决问题</p>
+
+<ul>
+<li>定位到问题之后，我们需要采取行动来解决问题。解决问题之前一定要先有个计划，评估这个解决方案是否可行，是否能够及时的解决问题。</li>
+</ul>
+</li>
+</ul>
+
+
+<hr />
+
+<p>Ui Layer</p>
+
+<ul>
+<li><p>优化布局文件</p>
+
+<ul>
+<li><p>tools: hierarchy viewer</p></li>
+<li><p>减少布局层次，保持层次扁平化</p></li>
+<li>删除不必要的组件</li>
+</ul>
+</li>
+<li><p>查看 GPU 过度渲染</p>
+
+<ul>
+<li><p>tools: gpu overdraw display</p></li>
+<li><p>利用 cliprect</p></li>
+<li>取消设置背景
+
+<ul>
+<li>移除Window默认的Background(每个 Activity 调用 setBackgroundDrawable(null))</li>
+<li>移除XML布局文件中非必需的Background</li>
+<li>按需显示占位背景图片</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>GPU 显示配置文件</p>
+
+<ul>
+<li>查看 GPU 绘制图形时是否有异样（如界面某个组件一直在循环绘制）</li>
+</ul>
+</li>
+<li><p>使用 GPU 渲染 View</p></li>
+<li><p>自定义 View 覆盖 hasOverlappingRendering() 并返回 false</p></li>
+<li><p>Avoiding allocations in onDraw()</p>
+
+<ul>
+<li>把分配对象操作移到 onDraw() 方法外面</li>
+</ul>
+</li>
+<li><p>Custom View</p>
+
+<ul>
+<li>Useless calls to onDraw() : 第1个是仅仅在View的内容发生改变的时候才去触发invalidate方法，第2个是尽量使用ClipRect等方法来提高绘制的性能</li>
+<li>Useless pixels : 减少绘制时不必要的绘制元素，对于那些不可见的元素，我们需要尽量避免重绘</li>
+<li>Wasted CPU cycles : 对于不在屏幕上的元素，可以使用Canvas.quickReject把他们给剔除，避免浪费CPU资源。另外尽量使用GPU来进行UI的渲染，这样能够极大的提高程序的整体表现性能</li>
+</ul>
+</li>
+<li><p>Smaller Pixel Formats</p></li>
+<li><p>Pre-scaling Bitmaps</p>
+
+<ul>
+<li>避免直接调用createScaledBitmap()，应该通过设置 bitmapOption 的 inSampleSize 来进行缩放图像</li>
+</ul>
+</li>
+<li><p>Re-using Bitmaps</p>
+
+<ul>
+<li>使用 inBitmap 属性</li>
+</ul>
+</li>
+</ul>
+
+
+<hr />
+
+<p>Memory Layer</p>
+
+<ul>
+<li><p>避免 GC 操作过于频繁</p>
+
+<ul>
+<li><p>tools: Memory Monitor / Heap and Allocation Tracker</p></li>
+<li><p>reason 1: memory churn</p></li>
+<li>reason 2: 瞬间产生大量的对象占用了内存区域，导致各种类型的 GC</li>
+</ul>
+</li>
+<li><p>避免 Memory Leak</p>
+
+<ul>
+<li><p>tools: Heap tool / Allocation Track</p></li>
+<li><p>method of checking leak: observed activity(use heap tool to capture current memory state) &ndash;> blank activity(call gc() actively , then use heap tool to capture current memory state, now it should not have previous activity&rsquo;s memory footprint. If not, then leak&hellip;)</p></li>
+<li><p>method of finding leaked memory footprint: blank activity(use tool of Allocation Track , begin track) &ndash;> observed activity &ndash;> blank activity(end track, then find the objects still alive)</p></li>
+<li><p>do not leak views</p>
+
+<ul>
+<li>beware callbacks(only if callback uses some context related objects)</li>
+<li>beware static objects</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>使用 Object Pools</p></li>
+<li>使用 LRU Cache</li>
+</ul>
+
+
+<hr />
+
+<p>Battery Layer</p>
+
+<ul>
+<li><p>tools: Battery Historian Tool / JobScheduler API (since level 20)</p></li>
+<li><p>我们应该尽量减少唤醒屏幕的次数与持续的时间，使用WakeLock来处理唤醒的问题，能够正确执行唤醒操作并根据设定及时关闭操作进入睡眠状态</p></li>
+<li>某些非必须马上执行的操作，例如上传歌曲，图片处理等，可以等到设备处于充电状态或者电量充足的时候才进行</li>
+<li>触发网络请求的操作，每次都会保持无线信号持续一段时间，我们可以把零散的网络请求打包进行一次操作，避免过多的无线信号引起的电量消耗</li>
+</ul>
+
+
+<hr />
+
+<p>Network Layer</p>
+
+<ul>
+<li>Batch and delay HTTP requests
+
+<ul>
+<li>tools: JobScheduler API</li>
+</ul>
+</li>
+<li>Prefetch and Compressed</li>
+</ul>
+
+
+<hr />
+
+<p>Bussiness Layer</p>
+
+<ul>
+<li>Batching Background Work Until Later
+
+<ul>
+<li>AlarmManager：使用AlarmManager设置定时任务，可以选择精确的间隔时间，也可以选择非精确时间作为参数。除非程序有很强烈的需要使用精确的定时唤醒，否者一定要避免使用他，我们应该尽量使用非精确的方式</li>
+<li>SyncAdapter：我们可以使用SyncAdapter为应用添加设置账户，这样在手机设置的账户列表里面可以找到我们的应用</li>
+<li>JobSchedulor：这是最简单高效的方法，我们可以设置任务延迟的间隔，执行条件，还可以增加重试机制</li>
+</ul>
+</li>
+</ul>
+
+
+<hr />
+
+<p>Code Layer</p>
+
+<ul>
+<li><p>基于场景选择合适的数据结构</p>
+
+<ul>
+<li> 尝试使用官方提供的数据结构(ArrayMap, SparseArray等)</li>
+<li> 判断是否使用 enum</li>
+</ul>
+</li>
+<li><p>colors.xml 不要采用业务来命名,直接使用颜色命名</p></li>
+</ul>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Something About Inflation]]></title>
@@ -179,126 +394,6 @@ view = LayoutInflater.from(this).inflate(R.layout.red, parent, true);
 <p>猫老师: 对了，最后再问个问题。为什么猫要躲避毛线团和秋刀鱼啊，混蛋，吾等猫君可是很喜欢毛线团和秋刀鱼的喵。</p>
 
 <p>smilevchy: 嘿嘿嘿，猫老师，这又是另一个故事了&hellip;&hellip;</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Let Android Talk to Computer With Socket]]></title>
-    <link href="http://smilevchy.github.io/blog/2014/09/16/let-android-talk-to-computer-with-socket/"/>
-    <updated>2014-09-16T21:45:17+08:00</updated>
-    <id>http://smilevchy.github.io/blog/2014/09/16/let-android-talk-to-computer-with-socket</id>
-    <content type="html"><![CDATA[<p>在没有公网/wifi的情况下让 Android 手机通过 USB 或者让虚拟机里的 Android 系统与电脑进行通信。</p>
-
-<!-- more -->
-
-
-<p>基本原理是当 Android 手机通过 USB 连接电脑时，两者之间就形成了一个局域网（具体是由 ADB 实现的）。
-嗯，看到这里只要了解网络编程的同学就知道怎么做了。
-就是把 Android 手机作为服务器，监听某个端口来获取客户端连接,而 PC 可以作为客户端。
-这里的问题是客户端要怎么连接到服务器的端口，这个需要运行 adb shell 指令 ：</p>
-
-<pre><code>adb.exe forward tcp:[port1] tcp:[port2]  // port1: PC 上的端口; port2: Android 上的端口。此处会把 PC 上发往 port1 的信息转发至 Android 的 port2
-</code></pre>
-
-<p>Android 服务器代码：</p>
-
-<pre><code>void startServer() {
-    ServerSocket serverSocket = null;
-
-    try {
-        Log.e("Android", "start to accpet");
-
-        serverSocket = new ServerSocket(SERVER_PORT); // 即 port2
-
-        while (true) {
-            Socket client = serverSocket.accept();
-
-            Log.e("Android", "receive client");
-
-            try {
-                BufferedReader in = new BufferedReader(new InputStreamReader(client.getInputStream()));
-                final String str = in.readLine();
-
-                Log.e("Android", str);
-
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        show.setText(str);
-                    }
-                });
-
-                PrintWriter out = new PrintWriter(new BufferedWriter(new OutputStreamWriter(client.getOutputStream())),true);
-                out.println("I'm Android");
-                in.close();
-                out.close();
-            } catch (Exception e) {
-                Log.e("Android", "");
-                e.printStackTrace();
-            } finally {
-                client.close();
-                Log.e("Android", "");
-            }
-            Thread.sleep(3000);
-        }
-    } catch (Exception e) {
-        Log.e("Android", "");
-        e.printStackTrace();
-    } finally {
-        if (serverSocket != null) {
-            try {
-                serverSocket.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-}
-</code></pre>
-
-<p>PC 客户端代码：</p>
-
-<pre><code>try {
-        // 6665是 PC 端的端口，通过运行该 Shell 命令重定向到 Android Device 的6666端口 (端口自己定，不得超过1023)
-        Runtime.getRuntime().exec("[Your Android SDK's Dir]\\platform-tools\\adb.exe forward tcp:6665 tcp:6666");
-    } catch (IOException e) {
-        e.printStackTrace();
-        return;
-    }
-
-    Socket socket = null;
-    try {
-        InetAddress serverAddr = null;
-        serverAddr = InetAddress.getByName("127.0.0.1");
-        System.out.println("Start to connect android");
-
-        socket = new Socket(serverAddr, 6665);
-
-        String message = "I'm pc";
-        System.out.println("Pc is sending message: " + message);
-        PrintWriter out = new PrintWriter(new BufferedWriter(new OutputStreamWriter(socket.getOutputStream())), true);
-        out.println(message);
-        Thread.sleep(5000);
-
-        // receive message from server (Android Device)
-        BufferedReader br = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-        String msg = br.readLine();
-        System.out.println(msg);
-    } catch (UnknownHostException e) {
-        System.out.println(e);
-    } catch (IOException e) {
-        System.out.println(e);
-    } finally {
-        try {
-            if (socket != null) {
-                socket.close();
-            }
-        } catch (IOException e) {
-            System.out.println(e);
-        }
-    }
-}
-</code></pre>
 ]]></content>
   </entry>
   

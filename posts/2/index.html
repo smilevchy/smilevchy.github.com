@@ -9,7 +9,7 @@
   <meta name="author" content="smilevchy">
 
   
-  <meta name="description" content="某些场景下，在某些模块还未初始化完毕时就调用该模块的函数，可能会导致错误。这时候就需要延迟调用函数，等待该模块初始化完毕先再调用。 ">
+  <meta name="description" content="当需要进行一项耗时久的任务时（下载文件、访问网络等），一般都知道必须在 worker thread 中进行。但是在现实场景中不可能单纯新建一个线程那么简单，大部分时候需要和 main thread 进行交互、或者说还要保证任务能够成功进行，不会遇到被销毁的情况。可是，单纯的 thread &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -65,6 +65,52 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/12/11/interrogation-of-asynctask/">Interrogation of AsyncTask</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-12-11T20:48:12+08:00" pubdate data-updated="true">Dec 11<sup>th</sup>, 2014</time>
+        
+           | <a href="/blog/2014/12/11/interrogation-of-asynctask/#disqus_thread"
+             data-disqus-identifier="http://smilevchy.github.io/blog/2014/12/11/interrogation-of-asynctask/">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>当需要进行一项耗时久的任务时（下载文件、访问网络等），一般都知道必须在 worker thread 中进行。但是在现实场景中不可能单纯新建一个线程那么简单，大部分时候需要和 main thread 进行交互、或者说还要保证任务能够成功进行，不会遇到被销毁的情况。可是，单纯的 thread 并不具备这些能力。</p>
+
+<p>那怎么办呢？</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2014/12/11/interrogation-of-asynctask/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -462,50 +508,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/12/02/leetcode-evaluate-reverse-polish-notation/">Leetcode_Evaluate Reverse Polish Notation</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-12-02T11:05:13+08:00" pubdate data-updated="true">Dec 2<sup>nd</sup>, 2014</time>
-        
-           | <a href="/blog/2014/12/02/leetcode-evaluate-reverse-polish-notation/#disqus_thread"
-             data-disqus-identifier="http://smilevchy.github.io/blog/2014/12/02/leetcode-evaluate-reverse-polish-notation/">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>原题链接: <a href="https://oj.leetcode.com/problems/evaluate-reverse-polish-notation/">https://oj.leetcode.com/problems/evaluate-reverse-polish-notation/</a></p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2014/12/02/leetcode-evaluate-reverse-polish-notation/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/3">&larr; Older</a>
@@ -529,7 +531,7 @@
   <h1>Categories</h1>
   <ul id="categories">
     <li class='category'><a href='/blog/categories/algorithm/'>algorithm (66)</a></li>
-<li class='category'><a href='/blog/categories/android/'>android (5)</a></li>
+<li class='category'><a href='/blog/categories/android/'>android (6)</a></li>
 <li class='category'><a href='/blog/categories/artifact/'>artifact (1)</a></li>
 <li class='category'><a href='/blog/categories/babble/'>babble (1)</a></li>
 <li class='category'><a href='/blog/categories/javascript/'>javascript (2)</a></li>
@@ -546,6 +548,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2015/10/06/android-performance-optimization/">Android Performance Optimization</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/10/05/something-about-inflation/">Something About Inflation</a>
       </li>
     
@@ -559,10 +565,6 @@
     
       <li class="post">
         <a href="/blog/2015/01/16/leetcode-gas-station/">Leetcode_Gas Station</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/01/15/leetcode-implement-strstr/">Leetcode_Implement strStr()</a>
       </li>
     
   </ul>
