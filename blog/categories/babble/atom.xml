@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Babble | smilevchy's blog]]></title>
   <link href="http://smilevchy.github.io/blog/categories/babble/atom.xml" rel="self"/>
   <link href="http://smilevchy.github.io/"/>
-  <updated>2015-10-06T10:11:43+08:00</updated>
+  <updated>2018-03-15T22:09:03+08:00</updated>
   <id>http://smilevchy.github.io/</id>
   <author>
     <name><![CDATA[smilevchy]]></name>
@@ -12,6 +12,16 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Come to Blog Again]]></title>
+    <link href="http://smilevchy.github.io/blog/2018/03/15/come-to-blog-again/"/>
+    <updated>2018-03-15T21:45:07+08:00</updated>
+    <id>http://smilevchy.github.io/blog/2018/03/15/come-to-blog-again</id>
+    <content type="html"><![CDATA[<p>很久没有在这个博客上发表过文章了……
+新的一年也得有点新改变。因此，立个 Flag：从现在开始，每周至少在这里发表一篇文章，话题不限，字数不限。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[The Sorrow of Individual Game Developer]]></title>

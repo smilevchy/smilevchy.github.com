@@ -9,9 +9,7 @@
   <meta name="author" content="smilevchy">
 
   
-  <meta name="description" content="想自己做个游戏，代码还好说，有困难的是各种图片资源、音效资源的创建。
-画家天赋、音乐天赋均没有点上&hellip;&hellip;
-">
+  <meta name="description" content="原题链接: https://oj.leetcode.com/problems/roman-to-integer/ ">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -67,6 +65,50 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/11/11/leetcode-roman-to-integer/">Leetcode_Roman to Integer</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-11-11T18:31:43+08:00" pubdate data-updated="true">Nov 11<sup>th</sup>, 2014</time>
+        
+           | <a href="/blog/2014/11/11/leetcode-roman-to-integer/#disqus_thread"
+             data-disqus-identifier="http://smilevchy.github.io/blog/2014/11/11/leetcode-roman-to-integer/">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>原题链接: <a href="https://oj.leetcode.com/problems/roman-to-integer/">https://oj.leetcode.com/problems/roman-to-integer/</a></p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2014/11/11/leetcode-roman-to-integer/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -460,94 +502,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/11/04/leetcode-reorder-list/">Leetcode_Reorder List</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-11-04T21:23:58+08:00" pubdate data-updated="true">Nov 4<sup>th</sup>, 2014</time>
-        
-           | <a href="/blog/2014/11/04/leetcode-reorder-list/#disqus_thread"
-             data-disqus-identifier="http://smilevchy.github.io/blog/2014/11/04/leetcode-reorder-list/">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>原题链接: <a href="https://oj.leetcode.com/problems/reorder-list/">https://oj.leetcode.com/problems/reorder-list/</a></p>
-
-<p>正是这道题，让我知道了有 “快慢指针” 这种好东西。以前每当要做类似遍历链表的操作时，比如取中点，总是先遍历完一遍链表来获得长度，求得中点再遍历一次，实在是不雅观。而通过 “快慢指针”，只要写一次遍历就可以拿到中点。</p>
-
-<pre><code>public void reorderList(ListNode head) {
-    if (head == null || head.next == null) {
-        return;
-    }
-
-    ListNode slowCursor = head;
-    ListNode quickCursor = head;
-
-    while (quickCursor != null &amp;&amp; quickCursor.next != null &amp;&amp; quickCursor.next.next != null &amp;&amp; slowCursor != null &amp;&amp; slowCursor.next != null) {
-        slowCursor = slowCursor.next;
-        quickCursor = quickCursor.next.next;
-    }
-
-    ListNode head1 = head;
-    ListNode head2 = slowCursor.next;
-
-    head2 = reverseList(head2);
-
-    while (head1 != null &amp;&amp; head2 != null) {
-        ListNode head2Next = head2.next;
-        head2.next = head1.next;
-        head1.next = head2;
-        head1 = head2.next;
-        head2 = head2Next;
-
-        if (head2 == null) {
-            head1.next = null;
-        }
-    }
-}
-
-public ListNode reverseList(ListNode head) {
-    ListNode prev = null;
-    ListNode cursor = head;
-    ListNode next = null;
-
-    while (cursor != null) {
-        next = cursor.next;
-        cursor.next = prev;
-        prev = cursor;
-        cursor = next;
-    }
-
-    return prev;
-}
-</code></pre>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/8">&larr; Older</a>
@@ -573,7 +527,7 @@ public ListNode reverseList(ListNode head) {
     <li class='category'><a href='/blog/categories/algorithm/'>algorithm (66)</a></li>
 <li class='category'><a href='/blog/categories/android/'>android (6)</a></li>
 <li class='category'><a href='/blog/categories/artifact/'>artifact (1)</a></li>
-<li class='category'><a href='/blog/categories/babble/'>babble (1)</a></li>
+<li class='category'><a href='/blog/categories/babble/'>babble (2)</a></li>
 <li class='category'><a href='/blog/categories/javascript/'>javascript (2)</a></li>
 <li class='category'><a href='/blog/categories/jquery/'>jquery (1)</a></li>
 <li class='category'><a href='/blog/categories/nginx/'>nginx (1)</a></li>
@@ -586,6 +540,10 @@ public ListNode reverseList(ListNode head) {
 </section><section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2018/03/15/come-to-blog-again/">Come to Blog Again</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2015/10/06/android-performance-optimization/">Android Performance Optimization</a>
@@ -601,10 +559,6 @@ public ListNode reverseList(ListNode head) {
     
       <li class="post">
         <a href="/blog/2015/01/19/intersection-of-two-linked-lists/">Intersection of Two Linked Lists</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/01/16/leetcode-gas-station/">Leetcode_Gas Station</a>
       </li>
     
   </ul>
@@ -653,7 +607,7 @@ public ListNode reverseList(ListNode head) {
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2015 - smilevchy -
+  Copyright &copy; 2018 - smilevchy -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 
