@@ -4,7 +4,7 @@
   <title><![CDATA[smilevchy's blog]]></title>
   <link href="http://smilevchy.github.io/atom.xml" rel="self"/>
   <link href="http://smilevchy.github.io/"/>
-  <updated>2018-03-15T22:09:03+08:00</updated>
+  <updated>2018-03-26T00:07:33+08:00</updated>
   <id>http://smilevchy.github.io/</id>
   <author>
     <name><![CDATA[smilevchy]]></name>
@@ -12,6 +12,30 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[对于保险的学习 - 序言]]></title>
+    <link href="http://smilevchy.github.io/blog/2018/03/25/the-study-about-insurance/"/>
+    <updated>2018-03-25T23:27:25+08:00</updated>
+    <id>http://smilevchy.github.io/blog/2018/03/25/the-study-about-insurance</id>
+    <content type="html"><![CDATA[<p>对于保险的相关印象与了解，在这之前主要是从电视看到的“保险是不好的东西”的印象，后面接触了社保后，对于保险的坏印象减少了几分，但也仅止步于此。关于保险的更深层次的内容，了解的还是不多。</p>
+
+<!-- more -->
+
+
+<p>于是，在专业本行之外，给自己制定了一个学习保险的计划。</p>
+
+<p>期望目标是：</p>
+
+<ol>
+<li>了解保险的相关种类</li>
+<li>了解不同种类保险的作用以及区别</li>
+<li>学会如何对比同一种类保险的不同产品</li>
+<li>学会如何配置保险</li>
+</ol>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Come to Blog Again]]></title>
@@ -1043,49 +1067,6 @@ public void setZeroesV2(int[][] matrix) {
     }
 
     return true;
-}
-</code></pre>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Leetcode_Permutations]]></title>
-    <link href="http://smilevchy.github.io/blog/2014/12/03/leetcode-permutations/"/>
-    <updated>2014-12-03T10:48:28+08:00</updated>
-    <id>http://smilevchy.github.io/blog/2014/12/03/leetcode-permutations</id>
-    <content type="html"><![CDATA[<p>原题链接: <a href="https://oj.leetcode.com/problems/permutations/">https://oj.leetcode.com/problems/permutations/</a></p>
-
-<!-- more -->
-
-
-<p></p>
-
-<pre><code>public List&lt;List&lt;Integer&gt;&gt; permute(int[] num) {
-    List&lt;List&lt;Integer&gt;&gt; result = new ArrayList&lt;List&lt;Integer&gt;&gt;();
-
-    if (num == null || num.length == 0) return result;
-
-    List&lt;Integer&gt; first = new ArrayList&lt;Integer&gt;();
-    for (int e : num) {
-        first.add(e);
-    }
-    result.add(first);
-
-    for (int pos = 0, len = num.length; pos &lt; len; pos++) {
-        for (int i = 0, s = result.size(); i &lt; s; i++) {
-            for (int j = pos + 1; j &lt; len; j++) {
-                List&lt;Integer&gt; ele = new ArrayList&lt;Integer&gt;(result.get(i));                  
-
-                ele.set(j, ele.get(j) ^ ele.get(pos));
-                ele.set(pos, ele.get(j) ^ ele.get(pos));
-                ele.set(j, ele.get(j) ^ ele.get(pos));
-
-                result.add(ele);
-            }
-        }
-    }
-
-    return result;
 }
 </code></pre>
 ]]></content>

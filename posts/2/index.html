@@ -9,11 +9,7 @@
   <meta name="author" content="smilevchy">
 
   
-  <meta name="description" content="第一遍 单元素的枚举类型已经成为实现 Singleton 的最佳方法
-清空对象引用应该是一种例外，而不是一种规范行为
-内存泄漏原因： 一般而言，只要类是自己管理内存，程序员就应该警惕内存泄漏问题
-缓存
-监听器和其他回调 内存泄漏解决方案： 通常不会有明显表现，可能持续很长时间。 &hellip;">
+  <meta name="description" content="趁着有时间安装了 Genymotion，它需要依据 Oracle 的 VirtualBox 来工作，所以就是说你还需要安装 Oracle VM VirtualBox 这个软件。 一般设计上来说，Genymotion 应该要提供一个位置来设置指向 VirtualBox 软件路径的， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -69,6 +65,51 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/12/28/something-about-installing-genymotion/">Something About Installing Genymotion</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-12-28T16:21:48+08:00" pubdate data-updated="true">Dec 28<sup>th</sup>, 2014</time>
+        
+           | <a href="/blog/2014/12/28/something-about-installing-genymotion/#disqus_thread"
+             data-disqus-identifier="http://smilevchy.github.io/blog/2014/12/28/something-about-installing-genymotion/">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>趁着有时间安装了 Genymotion，它需要依据 Oracle 的 VirtualBox 来工作，所以就是说你还需要安装 Oracle VM VirtualBox 这个软件。</p>
+
+<p>一般设计上来说，Genymotion 应该要提供一个位置来设置指向 VirtualBox 软件路径的，可是找了它的安装目录、软件界面设置都没有发现这个位置，所以就是说，它可能是固定指向 VirtualBox 的。</p>
+
+<p>即，需要按照它给定的固定路径来安装 VirtualBox ，不然就无法启动成功。至于那个固定路径是什么，可以去它的日志文件里查找，如果没什么改变的话，位置一般是在用户数据文件夹里，名字为 genymotion.log。通过查看它的错误日志，找到指向 VirtualBox 时发生错误的日志记录，那里就有写该固定路径。</p>
+
+<p>这是我自己遇到的错误，因为在安装 Genymotion 前我就一直使用 VirtualBox ，而且是自定义路径。 &ndash;_-所以需要卸载重装，安装它的固定路径。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -491,50 +532,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/12/03/leetcode-permutations/">Leetcode_Permutations</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-12-03T10:48:28+08:00" pubdate data-updated="true">Dec 3<sup>rd</sup>, 2014</time>
-        
-           | <a href="/blog/2014/12/03/leetcode-permutations/#disqus_thread"
-             data-disqus-identifier="http://smilevchy.github.io/blog/2014/12/03/leetcode-permutations/">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>原题链接: <a href="https://oj.leetcode.com/problems/permutations/">https://oj.leetcode.com/problems/permutations/</a></p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2014/12/03/leetcode-permutations/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/3">&larr; Older</a>
@@ -561,6 +558,7 @@
 <li class='category'><a href='/blog/categories/android/'>android (6)</a></li>
 <li class='category'><a href='/blog/categories/artifact/'>artifact (1)</a></li>
 <li class='category'><a href='/blog/categories/babble/'>babble (2)</a></li>
+<li class='category'><a href='/blog/categories/insurance/'>insurance (1)</a></li>
 <li class='category'><a href='/blog/categories/javascript/'>javascript (2)</a></li>
 <li class='category'><a href='/blog/categories/jquery/'>jquery (1)</a></li>
 <li class='category'><a href='/blog/categories/nginx/'>nginx (1)</a></li>
@@ -573,6 +571,10 @@
 </section><section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2018/03/25/the-study-about-insurance/">对于保险的学习 - 序言</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2018/03/15/come-to-blog-again/">Come to Blog Again</a>
@@ -588,10 +590,6 @@
     
       <li class="post">
         <a href="/blog/2015/01/19/best-time-to-buy-and-sell-stock/">Best Time to Buy and Sell Stock</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/01/19/intersection-of-two-linked-lists/">Intersection of Two Linked Lists</a>
       </li>
     
   </ul>
