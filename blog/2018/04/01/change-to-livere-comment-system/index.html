@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Leetcode_Remove Nth Node From End of List - smilevchy's blog</title>
+  <title>评论系统 - smilevchy's blog</title>
   <meta name="author" content="smilevchy">
 
   
-  <meta name="description" content="原题链接: https://oj.leetcode.com/problems/remove-nth-node-from-end-of-list/ public ListNode removeNthFromEnd(ListNode head, int n) { if (head == null) &hellip;">
+  <meta name="description" content="一开始用的是默认自带评论系统 Disqus，但是由于墙的关系，在国内基本用不了。然后搜索了下替代品，发现有友言、多说等国产评论系统。于是试用了友言，结果发现也是用不了。经调查才知，现在众多评论系统基本是“伤亡惨重”。 目前有部分网友实现了基于 Github Issues 的评论系统，考虑到 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://smilevchy.github.io/blog/2014/11/19/leetcode-remove-nth-node-from-end-of-list">
+  <link rel="canonical" href="http://smilevchy.github.io/blog/2018/04/01/change-to-livere-comment-system">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="smilevchy's blog" type="application/atom+xml">
@@ -66,7 +66,7 @@
   
   <header>
     
-      <h1 class="entry-title">Leetcode_Remove Nth Node From End of List</h1>
+      <h1 class="entry-title">评论系统</h1>
     
     
       <p class="meta">
@@ -82,50 +82,20 @@
   
 
 
-<time datetime="2014-11-19T17:55:05+08:00" pubdate data-updated="true">Nov 19<sup>th</sup>, 2014</time>
+<time datetime="2018-04-01T15:41:00+08:00" pubdate data-updated="true">Apr 1<sup>st</sup>, 2018</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p>原题链接: <a href="https://oj.leetcode.com/problems/remove-nth-node-from-end-of-list/">https://oj.leetcode.com/problems/remove-nth-node-from-end-of-list/</a></p>
+<div class="entry-content"><p>一开始用的是默认自带评论系统 <a href="http://www.disqus.com/">Disqus</a>，但是由于墙的关系，在国内基本用不了。然后搜索了下替代品，发现有友言、多说等国产评论系统。于是试用了友言，结果发现也是用不了。经调查才知，现在众多评论系统基本是“伤亡惨重”。</p>
 
-<!-- more -->
+<p>目前有部分网友实现了基于 Github Issues 的评论系统，考虑到 Github Issues 毕竟不是用来做这个的，虽然 Github 官方已表态不反对这种做法，再加上个人也是不想跑到 Github Issues 那边看评论。于是就先使用了 <a href="https://livere.com/">来必力</a> 这个评论系统。</p>
 
+<p>来必力评论系统是韩国那边开发的。实际使用过程中，速度还是可以的，而且专业性、稳定性上有保证。那就先使用这个评论系统了吧。</p>
 
-<pre><code>public ListNode removeNthFromEnd(ListNode head, int n) {
-    if (head == null) return null;
-    if (n == 0) return head;
-
-    ListNode cursor = head;
-    int size = 0;
-
-    while (cursor != null) {
-        cursor = cursor.next;
-        size++;
-    }
-
-    cursor = head;
-    int targetIndex = size - n;
-    int cursorIndex = 0;
-    ListNode prevNode = null;
-
-    while (cursorIndex &lt; targetIndex) {
-        prevNode = cursor;
-        cursor = cursor.next;
-        cursorIndex++;
-    }
-
-    if (prevNode == null) {
-        head = cursor.next;
-    } else {
-        prevNode.next = cursor.next;
-    }
-
-    return head;
-}
-</code></pre>
+<p>不想花费太多时间在这些上面，个人对工具的使用一直遵循着简单方便可用的原则。</p>
 </div>
 
 
@@ -148,12 +118,12 @@
   
 
 
-<time datetime="2014-11-19T17:55:05+08:00" pubdate data-updated="true">Nov 19<sup>th</sup>, 2014</time>
+<time datetime="2018-04-01T15:41:00+08:00" pubdate data-updated="true">Apr 1<sup>st</sup>, 2018</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/algorithm/'>algorithm</a>
+    <a class='category' href='/blog/categories/babble/'>babble</a>
   
 </span>
 
@@ -191,10 +161,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2014/11/19/leetcode-merge-sorted-array/" title="Previous Post: Leetcode_Merge Sorted Array">&laquo; Leetcode_Merge Sorted Array</a>
+        <a class="basic-alignment left" href="/blog/2018/03/25/the-study-about-insurance/" title="Previous Post: 对于保险的学习 - 序言">&laquo; 对于保险的学习 - 序言</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2014/11/19/leetcode-valid-parentheses/" title="Next Post: Leetcode_Valid Parentheses">Leetcode_Valid Parentheses &raquo;</a>
       
     </p>
   </footer>
