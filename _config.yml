@@ -102,3 +102,6 @@ github_skip_forks: true
 #facebook_like: false
 
 comment_share: true
+
+# Livere comments system
+livere_uid: MTAyMC8zNTM3NS8xMTkxMQ=="
