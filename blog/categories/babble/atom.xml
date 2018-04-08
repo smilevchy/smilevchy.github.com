@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Babble | smilevchy's blog]]></title>
   <link href="http://smilevchy.github.io/blog/categories/babble/atom.xml" rel="self"/>
   <link href="http://smilevchy.github.io/"/>
-  <updated>2018-04-01T15:59:59+08:00</updated>
+  <updated>2018-04-08T22:13:26+08:00</updated>
   <id>http://smilevchy.github.io/</id>
   <author>
     <name><![CDATA[smilevchy]]></name>
@@ -12,6 +12,17 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Two Projects of April]]></title>
+    <link href="http://smilevchy.github.io/blog/2018/04/08/two-projects-of-april/"/>
+    <updated>2018-04-08T22:06:41+08:00</updated>
+    <id>http://smilevchy.github.io/blog/2018/04/08/two-projects-of-april</id>
+    <content type="html"><![CDATA[<p>4 月份计划完成两个小项目。</p>
+
+<p>一个是 Java 代码优化相关，一个是微信开发。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[评论系统]]></title>
