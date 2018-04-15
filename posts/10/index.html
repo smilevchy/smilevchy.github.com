@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Leetcode_Convert Sorted List to Binary Search Tree - smilevchy's blog</title>
+  <title>smilevchy's blog</title>
   <meta name="author" content="smilevchy">
 
   
-  <meta name="description" content="原题链接: https://oj.leetcode.com/problems/convert-sorted-list-to-binary-search-tree/ public TreeNode sortedListToBST(ListNode head) { if (head == null) &hellip;">
+  <meta name="description" content="location smiley_019.png { root html/image; } location ~.(gif|jpg|png)$ { root E:/Pictures; } In this condition, it will just match the latter, nor &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://smilevchy.github.io/blog/2014/11/24/leetcode-convert-sorted-list-to-binary-search-tree">
+  <link rel="canonical" href="http://smilevchy.github.io/posts/10">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="smilevchy's blog" type="application/atom+xml">
@@ -61,12 +61,15 @@
 </nav>
   <div id="main">
     <div id="content">
-      <div>
-<article class="hentry" role="article">
+      <div class="blog-index">
   
+  
+  
+    <article>
+      
   <header>
     
-      <h1 class="entry-title">Leetcode_Convert Sorted List to Binary Search Tree</h1>
+      <h1 class="entry-title"><a href="/blog/2014/07/20/nginx-config-url-match/">Nginx_config_url_match</a></h1>
     
     
       <p class="meta">
@@ -82,129 +85,50 @@
   
 
 
-<time datetime="2014-11-24T17:01:36+08:00" pubdate data-updated="true">Nov 24<sup>th</sup>, 2014</time>
+<time datetime="2014-07-20T15:15:10+08:00" pubdate data-updated="true">Jul 20<sup>th</sup>, 2014</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p>原题链接: <a href="https://oj.leetcode.com/problems/convert-sorted-list-to-binary-search-tree/">https://oj.leetcode.com/problems/convert-sorted-list-to-binary-search-tree/</a></p>
+  <div class="entry-content"><p>location smiley_019.png {</p>
 
-<!-- more -->
-
-
-<pre><code>public TreeNode sortedListToBST(ListNode head) {
-    if (head == null) return null;
-
-    ListNode cur = head;
-    int size = 0;
-
-    while (cur != null) {
-        size++;
-        cur = cur.next;
-    }
-
-    List&lt;ListNode&gt; list = new ArrayList&lt;ListNode&gt;();
-    list.add(head);
-    TreeNode tree = sortedListToBSTHelper(list, 0, size - 1);
-
-    return tree;
-}
-
-public TreeNode sortedListToBSTHelper(List&lt;ListNode&gt; list, int low, int high) {
-    if (low &gt; high) return null;
-
-    int mid = (low + high) / 2;
-
-    TreeNode left = sortedListToBSTHelper(list, low, mid - 1);
-
-    TreeNode root = new TreeNode(list.get(0).val);
-    root.left = left;
-
-    list.set(0, list.get(0).next);
-    TreeNode right = sortedListToBSTHelper(list, mid + 1, high);
-    root.right = right;
-
-    return root;
-}
+<pre><code>root html/image;
 </code></pre>
+
+<p>}</p>
+
+<p>location ~.(gif|jpg|png)$ {</p>
+
+<pre><code>root E:/Pictures;
+</code></pre>
+
+<p>}</p>
+
+<p>In this condition, it will just match the latter, nor the former, which lacks a slash( must be added if it is not regex description)</p>
+
+<hr />
+
 </div>
-
-
-  <footer>
-    <p class="meta">
-      
   
-
-<span class="byline author vcard">Posted by <span class="fn">smilevchy</span></span>
-
-      
-
-
-
-
-
-
-
-
+  
+    <footer>
+      <a rel="full-article" href="/blog/2014/07/20/nginx-config-url-match/">Read on &rarr;</a>
+    </footer>
   
 
 
-<time datetime="2014-11-24T17:01:36+08:00" pubdate data-updated="true">Nov 24<sup>th</sup>, 2014</time>
-      
-
-<span class="categories">
+    </article>
   
-    <a class='category' href='/blog/categories/algorithm/'>algorithm</a>
-  
-</span>
-
-
-    </p>
+  <div class="pagination">
     
-      <div class="sharing">
-  
-  
-  
-  
-  
-  <!-- 来必力City版安装代码 -->
-<div id="lv-container" data-id="city" data-uid="MTAyMC8zNTM3NS8xMTkxMQ==">
-	<script type="text/javascript">
-   (function(d, s) {
-       var j, e = d.getElementsByTagName(s)[0];
-
-       if (typeof LivereTower === 'function') { return; }
-
-       j = d.createElement(s);
-       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
-       j.async = true;
-
-       e.parentNode.insertBefore(j, e);
-   })(document, 'script');
-	</script>
-<noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
-</div>
-<!-- City版安装代码已完成 -->
-  
-  
-</div>
-
+    <a href="/blog/archives">Blog Archives</a>
     
-    <p class="meta">
-      
-        <a class="basic-alignment left" href="/blog/2014/11/24/leetcode-flatten-binary-tree-to-linked-list/" title="Previous Post: Leetcode_Flatten Binary Tree to Linked List">&laquo; Leetcode_Flatten Binary Tree to Linked List</a>
-      
-      
-        <a class="basic-alignment right" href="/blog/2014/11/24/leetcode-sqrt-x/" title="Next Post: Leetcode_Sqrt(x)">Leetcode_Sqrt(x) &raquo;</a>
-      
-    </p>
-  </footer>
-</article>
-
+    <a class="next" href="/posts/9">Newer &rarr;</a>
+    
+  </div>
 </div>
-
 <aside class="sidebar">
   
     <section>
@@ -261,7 +185,7 @@ public TreeNode sortedListToBSTHelper(List&lt;ListNode&gt; list, int low, int hi
 <section>
   <h1>GitHub Repos</h1>
   <ul id="gh_repos">
-    <li class="loading">Status updating...</li>
+    <li class="loading">Status updating&#8230;</li>
   </ul>
   
   <a href="https://github.com/smilevchy">@smilevchy</a> on GitHub
@@ -288,7 +212,7 @@ public TreeNode sortedListToBSTHelper(List&lt;ListNode&gt; list, int low, int hi
 </section>
 
 <section>
-  <h1>smilevchy's douban</h1>
+  <h1>smilevchy&#8217;s douban</h1>
   <div>
 	<script type="text/javascript" src="http://www.douban.com/service/badge/90371463/?selection=latest&amp;picsize=small&amp;show=collection&amp;n=8&amp;hidelogo=on&amp;cat=drama%7Cmovie%7Cbook%7Cmusic&amp;columns=2"></script>
   </div>
@@ -297,7 +221,6 @@ public TreeNode sortedListToBSTHelper(List&lt;ListNode&gt; list, int low, int hi
 
   
 </aside>
-
 
     </div>
   </div>
