@@ -5,12 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Octopress 下中文的处理 - smilevchy's blog</title>
+  <title>使用 AndResGuard 遇到的问题 - smilevchy's blog</title>
   <meta name="author" content="smilevchy">
 
   
-  <meta name="description" content="安装好 Octopress 后，想要发布一篇带有中文字符的文章，结果发现在 &ldquo;rake generate&rdquo; 阶段就遇到错误。
-在网上搜寻一番，大家给出的几种处理方式大致如下： 设置环境变量 LC_ALL=zh_CN.UTF-8 LANG=zh_CN.UTF-8 或者 &hellip;">
+  <meta name="description" content="问题 当初为了缩减应用安装包的大小在项目里集成了 AndResGuard，99% 情况下没有什么问题。但是有的第三方 SDK 中会使用 getIdentifier() 的形式去获取资源，因此如果没有对这部分资源进行白名单配置的话，第三方 SDK 内部就会报错，通常也会引起自己的应用崩溃。 方案 1 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -19,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://smilevchy.github.io/blog/2014/07/20/octopresss-handling-chinese-character">
+  <link rel="canonical" href="http://smilevchy.github.io/blog/2018/05/06/problem-using-andresguard">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="smilevchy's blog" type="application/atom+xml">
@@ -67,7 +66,7 @@
   
   <header>
     
-      <h1 class="entry-title">Octopress 下中文的处理</h1>
+      <h1 class="entry-title">使用 AndResGuard 遇到的问题</h1>
     
     
       <p class="meta">
@@ -83,41 +82,37 @@
   
 
 
-<time datetime="2014-07-20T21:24:11+08:00" pubdate data-updated="true">Jul 20<sup>th</sup>, 2014</time>
+<time datetime="2018-05-06T10:58:06+08:00" pubdate data-updated="true">May 6<sup>th</sup>, 2018</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p>安装好 Octopress 后，想要发布一篇带有中文字符的文章，结果发现在 &ldquo;rake generate&rdquo; 阶段就遇到错误。
-在网上搜寻一番，大家给出的几种处理方式大致如下：</p>
+<div class="entry-content"><h2>问题</h2>
 
-<ol>
-<li><p>设置环境变量</p>
+<p>当初为了缩减应用安装包的大小在项目里集成了 <a href="https://github.com/shwenzhang/AndResGuard">AndResGuard</a>，99% 情况下没有什么问题。但是有的第三方 SDK 中会使用 getIdentifier() 的形式去获取资源，因此如果没有对这部分资源进行白名单配置的话，第三方 SDK 内部就会报错，通常也会引起自己的应用崩溃。</p>
 
-<blockquote><p>LC_ALL=zh_CN.UTF-8</p>
-
-<p>LANG=zh_CN.UTF-8</p></blockquote>
-
-<p> 或者</p>
-
-<blockquote><p>LC_ALL=en_US.UTF-8</p>
-
-<p>LANG=en_US.UTF-8</p></blockquote>
-
-<p> <!-- more --></p></li>
-<li><p>修改 Ruby 安装目录下的 convertible.rb 和 include.rb</p>
-
-<p> 分别在其中找到一句代码类似 self.content = File.read(File.join(base, name), &hellip;) 的，这句代码的行数依据不同版本会不一样的。
- 将其改为self.content = File.read(File.join(base, name), :encoding => &lsquo;utf-8&rsquo;)</p></li>
-<li>转换该文章的编码格式为 UTF-8 无 BOM 编码格式</li>
-</ol>
+<!-- more -->
 
 
-<p>本人都试验了以上的方法，发现 1 和 2 对于我的配置不设置也可以，而 3 则是必须的。这个可能看个人的配置而有所变化。</p>
+<h2>方案</h2>
 
-<p>目前也只是一种 workaround，具体的处理还需要花点时间学习下这个框架。</p>
+<h5>1. 只混淆自己项目的资源，不混淆第三方 SDK 资源</h5>
+
+<p>具体思路是：为自己项目所有的资源名字添加特定前缀，正常情况下，不会出现说第三方 SDK 的资源名字也存在相同前缀的情形，然后在 AndResGuard 的白名单配置中添加正则匹配，对于不属于自己项目的资源则不进行混淆。</p>
+
+<p>这种方案优点是自己项目不会在资源混淆出错这个问题上受第三方 SDK 限制，问题可控性大大提高了，缺点是不混淆所有第三方 SDK 资源的话，应用安装包大小缩减的效果会减弱。</p>
+
+<h5>2. 找出所有通过类似 getIdentifier() 形式获取到的资源调用，添加进白名单</h5>
+
+<p>具体思路是：编写脚本工具，若需要对第三方 SDK 反编译则先进行反编译，然后静态扫描 SDK 中的代码文件，正则匹配出 getIdentifier() 的调用处（也许资源动态获取的方法还有其他），提取出资源名字，最后把资源名字添加进 AndResGuard 的白名单配置。</p>
+
+<p>这种方案优点是所有资源可混淆从而使应用安装包大小能相对缩减更多，缺点是问题可控性没那么高，依然受第三方 SDK 影响，而且无法保证脚本能 100% 提取到所有资源动态调用处。</p>
+
+<h5>3. 综合使用方案 1 和 2</h5>
+
+<p>如果资源足够的情况下，其实可以综合使用方案 1 和 2，这样就能继续保证应用安装包缩减的效果，当然，还会继续受第三方 SDK 影响，但是可以通过持续优化工具来逐渐减少问题。</p>
 </div>
 
 
@@ -140,8 +135,14 @@
   
 
 
-<time datetime="2014-07-20T21:24:11+08:00" pubdate data-updated="true">Jul 20<sup>th</sup>, 2014</time>
+<time datetime="2018-05-06T10:58:06+08:00" pubdate data-updated="true">May 6<sup>th</sup>, 2018</time>
       
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/android/'>android</a>
+  
+</span>
 
 
     </p>
@@ -177,10 +178,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2014/07/20/nginx-config-url-match/" title="Previous Post: nginx_config_url_match">&laquo; nginx_config_url_match</a>
+        <a class="basic-alignment left" href="/blog/2018/04/29/way-to-overcome-laziness/" title="Previous Post: 克服惰性">&laquo; 克服惰性</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2014/08/02/reaction-to-code-complete/" title="Next Post: Reaction to &lt;Code Complete&gt;">Reaction to &lt;Code Complete&gt; &raquo;</a>
       
     </p>
   </footer>

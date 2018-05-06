@@ -9,8 +9,7 @@
   <meta name="author" content="smilevchy">
 
   
-  <meta name="description" content="“去年的计划又是一个都没有完成！” “明天是周末了，我要好好学习”。周末来了：看漫画、看视频、拿手机刷刷刷……；临睡前：天哪，今天我到底干嘛了，说好的学习的！
-…… ">
+  <meta name="description" content="问题 当初为了缩减应用安装包的大小在项目里集成了 AndResGuard，99% 情况下没有什么问题。但是有的第三方 SDK 中会使用 getIdentifier() 的形式去获取资源，因此如果没有对这部分资源进行白名单配置的话，第三方 SDK 内部就会报错，通常也会引起自己的应用崩溃。 ">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -64,6 +63,49 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2018/05/06/problem-using-andresguard/">使用 AndResGuard 遇到的问题</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2018-05-06T10:58:06+08:00" pubdate data-updated="true">May 6<sup>th</sup>, 2018</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>问题</h2>
+
+<p>当初为了缩减应用安装包的大小在项目里集成了 <a href="https://github.com/shwenzhang/AndResGuard">AndResGuard</a>，99% 情况下没有什么问题。但是有的第三方 SDK 中会使用 getIdentifier() 的形式去获取资源，因此如果没有对这部分资源进行白名单配置的话，第三方 SDK 内部就会报错，通常也会引起自己的应用崩溃。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2018/05/06/problem-using-andresguard/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -433,47 +475,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2015/01/19/best-time-to-buy-and-sell-stock/">Best Time to Buy and Sell Stock</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2015-01-19T14:12:40+08:00" pubdate data-updated="true">Jan 19<sup>th</sup>, 2015</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>原题链接: <a href="https://oj.leetcode.com/problems/best-time-to-buy-and-sell-stock/">https://oj.leetcode.com/problems/best-time-to-buy-and-sell-stock/</a></p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2015/01/19/best-time-to-buy-and-sell-stock/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/2">&larr; Older</a>
@@ -495,7 +496,7 @@
   <h1>Categories</h1>
   <ul id="categories">
     <li class='category'><a href='/blog/categories/algorithm/'>algorithm (66)</a></li>
-<li class='category'><a href='/blog/categories/android/'>android (6)</a></li>
+<li class='category'><a href='/blog/categories/android/'>android (7)</a></li>
 <li class='category'><a href='/blog/categories/artifact/'>artifact (1)</a></li>
 <li class='category'><a href='/blog/categories/babble/'>babble (6)</a></li>
 <li class='category'><a href='/blog/categories/insurance/'>insurance (1)</a></li>
@@ -513,6 +514,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2018/05/06/problem-using-andresguard/">使用 AndResGuard 遇到的问题</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2018/04/29/way-to-overcome-laziness/">克服惰性</a>
       </li>
     
@@ -526,10 +531,6 @@
     
       <li class="post">
         <a href="/blog/2018/04/08/two-projects-of-april/">Two Projects of April</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2018/04/01/change-to-livere-comment-system/">评论系统</a>
       </li>
     
   </ul>

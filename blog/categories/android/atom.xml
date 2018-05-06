@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Android | smilevchy's blog]]></title>
   <link href="http://smilevchy.github.io/blog/categories/android/atom.xml" rel="self"/>
   <link href="http://smilevchy.github.io/"/>
-  <updated>2018-04-29T21:42:23+08:00</updated>
+  <updated>2018-05-06T12:24:21+08:00</updated>
   <id>http://smilevchy.github.io/</id>
   <author>
     <name><![CDATA[smilevchy]]></name>
@@ -12,6 +12,38 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[使用 AndResGuard 遇到的问题]]></title>
+    <link href="http://smilevchy.github.io/blog/2018/05/06/problem-using-andresguard/"/>
+    <updated>2018-05-06T10:58:06+08:00</updated>
+    <id>http://smilevchy.github.io/blog/2018/05/06/problem-using-andresguard</id>
+    <content type="html"><![CDATA[<h2>问题</h2>
+
+<p>当初为了缩减应用安装包的大小在项目里集成了 <a href="https://github.com/shwenzhang/AndResGuard">AndResGuard</a>，99% 情况下没有什么问题。但是有的第三方 SDK 中会使用 getIdentifier() 的形式去获取资源，因此如果没有对这部分资源进行白名单配置的话，第三方 SDK 内部就会报错，通常也会引起自己的应用崩溃。</p>
+
+<!-- more -->
+
+
+<h2>方案</h2>
+
+<h5>1. 只混淆自己项目的资源，不混淆第三方 SDK 资源</h5>
+
+<p>具体思路是：为自己项目所有的资源名字添加特定前缀，正常情况下，不会出现说第三方 SDK 的资源名字也存在相同前缀的情形，然后在 AndResGuard 的白名单配置中添加正则匹配，对于不属于自己项目的资源则不进行混淆。</p>
+
+<p>这种方案优点是自己项目不会在资源混淆出错这个问题上受第三方 SDK 限制，问题可控性大大提高了，缺点是不混淆所有第三方 SDK 资源的话，应用安装包大小缩减的效果会减弱。</p>
+
+<h5>2. 找出所有通过类似 getIdentifier() 形式获取到的资源调用，添加进白名单</h5>
+
+<p>具体思路是：编写脚本工具，若需要对第三方 SDK 反编译则先进行反编译，然后静态扫描 SDK 中的代码文件，正则匹配出 getIdentifier() 的调用处（也许资源动态获取的方法还有其他），提取出资源名字，最后把资源名字添加进 AndResGuard 的白名单配置。</p>
+
+<p>这种方案优点是所有资源可混淆从而使应用安装包大小能相对缩减更多，缺点是问题可控性没那么高，依然受第三方 SDK 影响，而且无法保证脚本能 100% 提取到所有资源动态调用处。</p>
+
+<h5>3. 综合使用方案 1 和 2</h5>
+
+<p>如果资源足够的情况下，其实可以综合使用方案 1 和 2，这样就能继续保证应用安装包缩减的效果，当然，还会继续受第三方 SDK 影响，但是可以通过持续优化工具来逐渐减少问题。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Android Performance Optimization]]></title>
@@ -327,73 +359,6 @@ view = LayoutInflater.from(this).inflate(R.layout.red, parent, true);
 <p>此外，当外部发生生命周期状态改变时（按返回键、Home键、取消进度框等），若对应的 AsyncTask 需要做相应的反应时（取消任务进行、继续任务进行等），还需要监听外部的生命周期状态改变事件。</p>
 
 <p>总之，AsyncTask 看起来很简单，但需要在实际场景中考虑是否可能会出现问题。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[My First Game - CatRush]]></title>
-    <link href="http://smilevchy.github.io/blog/2014/12/08/my-first-game-catrush/"/>
-    <updated>2014-12-08T22:15:23+08:00</updated>
-    <id>http://smilevchy.github.io/blog/2014/12/08/my-first-game-catrush</id>
-    <content type="html"><![CDATA[<p>完成了第一个移动端游戏，其为 CatRush。</p>
-
-<!-- more -->
-
-
-<hr />
-
-<p>展示如下所示(当当当~当):</p>
-
-<p>首先是图标:</p>
-
-<p><img src="/images/artifacts/catrush/icon.png" alt="图标" /></p>
-
-<p>接下来是 &ldquo;启动画面&rdquo; (专业术语为 SplashScreen):</p>
-
-<p><img src="/images/artifacts/catrush/splash_scene_1.png" alt="启动画面1" />
-<img src="/images/artifacts/catrush/splash_scene_2.png" alt="启动画面2" />
-<img src="/images/artifacts/catrush/splash_scene_3.png" alt="启动画面3" /></p>
-
-<p>启动画面是一项很重要的元素。它可以做为一个公司或者个人的标识。通过持久的运营，让它变成一个品牌。让大家一看到这个标识就知道是哪个公司或者个人的作品。比如说漫威电影的开头都会有一段短动画，或者美国好莱坞的某个电影公司开头都会有一段闪电打雷开车在高速路上的动画。</p>
-
-<p>启动画面后是 &ldquo;主菜单&rdquo; 画面:
-<img src="/images/artifacts/catrush/main_menu_scene.png" alt="主菜单" /></p>
-
-<p>&ldquo;关于&rdquo; 界面:
-<img src="/images/artifacts/catrush/about_scene.png" alt="关于界面" /></p>
-
-<p>&ldquo;选项&rdquo; 界面:
-<img src="/images/artifacts/catrush/option_scene.png" alt="选项界面" /></p>
-
-<p>&ldquo;分数记录&rdquo; 界面:
-<img src="/images/artifacts/catrush/score_scene.png" alt="分数记录界面" />
-这里触摸右下的小黑猫可以截屏分享当前最高分数至社交软件。</p>
-
-<p>最后是 &ldquo;游戏界面&rdquo;
-<img src="/images/artifacts/catrush/game_scene.png" alt="游戏界面" />
-右边两只小黑爪一只是加速，一只是减速。</p>
-
-<p>没错，你要做的就是控制小黑猫的速度，躲避天上掉下来的毛线团和秋刀鱼。</p>
-
-<p>游戏中的音乐/音效资源均是采用别人的(不进行商业化就不会侵权了吧)，有<a href="http://zh.wikipedia.org/zh/%E5%B9%BB%E5%8C%96%E6%88%90%E9%A3%8E">幻化成风</a> 和<a href="http://zh.wikipedia.org/zh/%E5%8B%87%E6%B0%A3100%25">勇气100%</a>。</p>
-
-<p>图片资源大部分是上网找的，有些是自己画的(没错，看起来是幼稚园水平的就是本人画的)。</p>
-
-<hr />
-
-<p>smilevchy: 关于本游戏正式介绍完毕。</p>
-
-<p>猫老师: 喂!貌似你介绍的很简短啊!</p>
-
-<p>smilevchy: Haha&hellip;&hellip;本人是一名程序员啊，对于游戏策划、数值设计、图片制作、音效/音乐制作目前还都是 HelloWorld 水平啊，请老师再给我点时间，让我好好历练一下吧。</p>
-
-<p>猫老师: Soga！少年，请继续努力吧！</p>
-
-<p>smilevchy: 好的! 猫老师。</p>
-
-<p>猫老师: 对了，最后再问个问题。为什么猫要躲避毛线团和秋刀鱼啊，混蛋，吾等猫君可是很喜欢毛线团和秋刀鱼的喵。</p>
-
-<p>smilevchy: 嘿嘿嘿，猫老师，这又是另一个故事了&hellip;&hellip;</p>
 ]]></content>
   </entry>
   
