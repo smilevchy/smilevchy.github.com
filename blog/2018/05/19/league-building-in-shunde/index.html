@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Leetcode_Rotate Image - smilevchy's blog</title>
+  <title>团建 - smilevchy's blog</title>
   <meta name="author" content="smilevchy">
 
   
-  <meta name="description" content="原题链接: https://oj.leetcode.com/problems/rotate-image/ /* * [1, 1, 1, 1, 1] * [1, 2, 2, 2, 1] * [1, 2, 3, 2, 1] * [1, 2, 2, 2, 1] * [1, 1, 1, 1, 1 &hellip;">
+  <meta name="description" content="部门组织周末团建，目的地是佛山市顺德区。行程安排是周五下午出发，周六晚上回到深圳。 此时已是周六晚，我已回到深圳的家中，洗完澡，打开电脑，准备记录下这周末在另一个陌生城市的所见所闻。 交通 周五下午三点左右，我们就乘坐大巴前往佛山市顺德区。从导航软件上看， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://smilevchy.github.io/blog/2014/12/02/leetcode-rotate-image">
+  <link rel="canonical" href="http://smilevchy.github.io/blog/2018/05/19/league-building-in-shunde">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="smilevchy's blog" type="application/atom+xml">
@@ -66,7 +66,7 @@
   
   <header>
     
-      <h1 class="entry-title">Leetcode_Rotate Image</h1>
+      <h1 class="entry-title">团建</h1>
     
     
       <p class="meta">
@@ -82,55 +82,51 @@
   
 
 
-<time datetime="2014-12-02T15:04:29+08:00" pubdate data-updated="true">Dec 2<sup>nd</sup>, 2014</time>
+<time datetime="2018-05-19T22:55:24+08:00" pubdate data-updated="true">May 19<sup>th</sup>, 2018</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p>原题链接: <a href="https://oj.leetcode.com/problems/rotate-image/">https://oj.leetcode.com/problems/rotate-image/</a></p>
+<div class="entry-content"><p>部门组织周末团建，目的地是佛山市顺德区。行程安排是周五下午出发，周六晚上回到深圳。</p>
+
+<p>此时已是周六晚，我已回到深圳的家中，洗完澡，打开电脑，准备记录下这周末在另一个陌生城市的所见所闻。</p>
 
 <!-- more -->
 
 
-<pre><code>/*
- * [1, 1, 1, 1, 1]
- * [1, 2, 2, 2, 1]
- * [1, 2, 3, 2, 1]
- * [1, 2, 2, 2, 1]
- * [1, 1, 1, 1, 1]
- * 
- * Like shown above, take the 2-dim array as it has some layers wrapping each other, layer 1 wraps layer 2, layer 2 wraps layer 3......
- * For each layer, we can divide it into four blocks : top row, right col, bottom row, left col.
- * What we have to do is : move top row to right col, right col to bottom row, bottom row to left col, left col to top row.
- * And, we do this for times of numbers of layers(matrix's length / 2).  
- */
-public void rotate(int[][] matrix) {
-    if (matrix == null || matrix.length == 0 || matrix[0].length == 0) return;
+<h5>交通</h5>
 
-    int matrixSize = matrix.length;
-    int layerNum = matrixSize / 2;
+<p>周五下午三点左右，我们就乘坐大巴前往佛山市顺德区。从导航软件上看，大概花费两个半小时即在五点半左右可到达目的地。事实上却是，我们在传说中的虎门大桥上堵了一段时间。久已听闻虎门大桥每时每刻无不堵，现在已切身感受到了。最后我们到达顺德时，已经是晚上七点时分了。</p>
 
-    for (int i = 0; i &lt; layerNum; i++) {
-        for (int low = i, high = matrixSize - i - 1; low &lt; high; low++) {
-            int temp = matrix[i][low];
+<p>周六晚上六点回深圳时再次经过了虎门大桥，再次遇到了堵车，不过没有过来顺德时那么堵了，走走停停十几分钟就过了。同时见到了虎门大桥上的红绿灯。</p>
 
-            // move left col to top row
-            matrix[i][low] = matrix[matrixSize - low - 1][i];
+<p>顺德那边好像没有禁摩，因此路上有很多电动摩托车。许多摩托车排成一排一排的，这景象也是蛮壮观的。</p>
 
-            // move bottom row to left col
-            matrix[matrixSize - low - 1][i] = matrix[high][matrixSize - low - 1];
+<h5>饮食</h5>
 
-            // move right col to bottom row
-            matrix[high][matrixSize - low - 1] = matrix[low][high];
+<p>顺德那边的饮食也是广式风味。据说顺德在饮食上很强，私房菜也有很多。鉴于时间关系，没有去体验过私房菜。</p>
 
-            // move top row to right col
-            matrix[low][high] = temp; 
-        }
-    }
-}
-</code></pre>
+<p>到达顺德后的第一顿晚餐是在一家饭馆里进行的，然后上的菜全都是用鸡或者鸽子做成的。是不是可以说顺德那边做禽类的菜很拿手呢？</p>
+
+<p>顺德的双皮奶很出名，导游推荐了『民信』和『仁信』两家。这两家店都是爆满的。于是我们只去了『民信』品尝。看那个菜单，有点小震撼。第一次看到有这么多变种的双皮奶，令人眼花缭乱。最后我只品尝了『椰汁姜撞奶』，感受是，元气满满啊，坐车的疲劳感瞬间一扫而光了。椰汁的香味，姜汁的提神，牛奶的奶味，三者混合在一起，融洽感十足。以后要是有机会再去的话，应该会多品尝几种。</p>
+
+<h5>建筑</h5>
+
+<p>我们的行程地点有逢简水乡和清晖园。</p>
+
+<p>在逢简水乡里，看到了一些古建筑，这些古建筑和广东其他地区的没什么大区别。倒是逢简水乡本身，给人一种小桥流水人家的感觉，古风古味，很像古代武侠传里的场景。划船的大叔说，杨幂曾在这里拍过片。那应该是某部古代武侠片在这里取景过了吧。</p>
+
+<p>清晖园据说是广东四大园林之一。我就随便在里面逛了下，初步感受是这个园林占地蛮大的，里面亭台楼阁、假山瀑布、书房卧室应有尽有。</p>
+
+<h5>感受</h5>
+
+<p>我只要到了一个陌生的城市，总会是有一阵好奇心的。想要探索这座城市，想要了解这座城市的人群的生活面貌、饮食文化。</p>
+
+<p>可惜此次行程安排紧凑，时间也不足，没多少时间可供自由探索。</p>
+
+<p>有机会的话，应该再过来一趟，不赶时间地四处走走，好好探索一番。</p>
 </div>
 
 
@@ -153,12 +149,12 @@ public void rotate(int[][] matrix) {
   
 
 
-<time datetime="2014-12-02T15:04:29+08:00" pubdate data-updated="true">Dec 2<sup>nd</sup>, 2014</time>
+<time datetime="2018-05-19T22:55:24+08:00" pubdate data-updated="true">May 19<sup>th</sup>, 2018</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/algorithm/'>algorithm</a>
+    <a class='category' href='/blog/categories/babble/'>babble</a>
   
 </span>
 
@@ -196,10 +192,8 @@ public void rotate(int[][] matrix) {
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2014/12/02/leetcode-evaluate-reverse-polish-notation/" title="Previous Post: Leetcode_Evaluate Reverse Polish Notation">&laquo; Leetcode_Evaluate Reverse Polish Notation</a>
+        <a class="basic-alignment left" href="/blog/2018/05/13/shocking-of-domestic-dubbing/" title="Previous Post: 国产配音">&laquo; 国产配音</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2014/12/03/leetcode-permutations/" title="Next Post: Leetcode_Permutations">Leetcode_Permutations &raquo;</a>
       
     </p>
   </footer>
