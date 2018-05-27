@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Babble | smilevchy's blog]]></title>
   <link href="http://smilevchy.github.io/blog/categories/babble/atom.xml" rel="self"/>
   <link href="http://smilevchy.github.io/"/>
-  <updated>2018-05-20T00:52:21+08:00</updated>
+  <updated>2018-05-27T22:48:27+08:00</updated>
   <id>http://smilevchy.github.io/</id>
   <author>
     <name><![CDATA[smilevchy]]></name>
@@ -12,6 +12,25 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[A Pity for Forgetting Javascript]]></title>
+    <link href="http://smilevchy.github.io/blog/2018/05/27/forget-how-to-use-javascript/"/>
+    <updated>2018-05-27T22:21:38+08:00</updated>
+    <id>http://smilevchy.github.io/blog/2018/05/27/forget-how-to-use-javascript</id>
+    <content type="html"><![CDATA[<p>周末开始开发一个小程序，然后发现我已经忘记了 Javascript 的很多语法以及相关使用技巧。
+上一次使用 Javascript 进行开发已经是三年前了。后面专职做 Android 开发，基本没有碰 Javascript 了。于是马上打开了三年前的 Javascript 项目打算重温下，结果感受到的是陌生的感觉。</p>
+
+<!-- more -->
+
+
+<p>Such a pity.</p>
+
+<p>说实话，我很喜欢 Javascript 开发带来的那种自由的感觉。Duck typing、 修改快速运行等让当初的我觉得开发竟能如此顺畅。那段使用 Javascript 开发项目的时光应该是目前为止我觉得最开心的时期了。</p>
+
+<p>很遗憾地把 Javascript 给落下了，现在只能一点一点地重温下 Javascript 了。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[团建]]></title>
@@ -150,21 +169,6 @@
     <content type="html"><![CDATA[<p>4 月份计划完成两个小项目。</p>
 
 <p>一个是 Java 代码优化相关，一个是微信开发。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[评论系统]]></title>
-    <link href="http://smilevchy.github.io/blog/2018/04/01/change-to-livere-comment-system/"/>
-    <updated>2018-04-01T15:41:00+08:00</updated>
-    <id>http://smilevchy.github.io/blog/2018/04/01/change-to-livere-comment-system</id>
-    <content type="html"><![CDATA[<p>一开始用的是默认自带评论系统 <a href="http://www.disqus.com/">Disqus</a>，但是由于墙的关系，在国内基本用不了。然后搜索了下替代品，发现有友言、多说等国产评论系统。于是试用了友言，结果发现也是用不了。经调查才知，现在众多评论系统基本是“伤亡惨重”。</p>
-
-<p>目前有部分网友实现了基于 Github Issues 的评论系统，考虑到 Github Issues 毕竟不是用来做这个的，虽然 Github 官方已表态不反对这种做法，再加上个人也是不想跑到 Github Issues 那边看评论。于是就先使用了 <a href="https://livere.com/">来必力</a> 这个评论系统。</p>
-
-<p>来必力评论系统是韩国那边开发的。实际使用过程中，速度还是可以的，而且专业性、稳定性上有保证。那就先使用这个评论系统了吧。</p>
-
-<p>不想花费太多时间在这些上面，个人对工具的使用一直遵循着简单方便可用的原则。</p>
 ]]></content>
   </entry>
   

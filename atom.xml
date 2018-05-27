@@ -4,7 +4,7 @@
   <title><![CDATA[smilevchy's blog]]></title>
   <link href="http://smilevchy.github.io/atom.xml" rel="self"/>
   <link href="http://smilevchy.github.io/"/>
-  <updated>2018-05-20T00:52:21+08:00</updated>
+  <updated>2018-05-27T22:48:27+08:00</updated>
   <id>http://smilevchy.github.io/</id>
   <author>
     <name><![CDATA[smilevchy]]></name>
@@ -12,6 +12,25 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[A Pity for Forgetting Javascript]]></title>
+    <link href="http://smilevchy.github.io/blog/2018/05/27/forget-how-to-use-javascript/"/>
+    <updated>2018-05-27T22:21:38+08:00</updated>
+    <id>http://smilevchy.github.io/blog/2018/05/27/forget-how-to-use-javascript</id>
+    <content type="html"><![CDATA[<p>周末开始开发一个小程序，然后发现我已经忘记了 Javascript 的很多语法以及相关使用技巧。
+上一次使用 Javascript 进行开发已经是三年前了。后面专职做 Android 开发，基本没有碰 Javascript 了。于是马上打开了三年前的 Javascript 项目打算重温下，结果感受到的是陌生的感觉。</p>
+
+<!-- more -->
+
+
+<p>Such a pity.</p>
+
+<p>说实话，我很喜欢 Javascript 开发带来的那种自由的感觉。Duck typing、 修改快速运行等让当初的我觉得开发竟能如此顺畅。那段使用 Javascript 开发项目的时光应该是目前为止我觉得最开心的时期了。</p>
+
+<p>很遗憾地把 Javascript 给落下了，现在只能一点一点地重温下 Javascript 了。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[团建]]></title>
@@ -882,43 +901,6 @@ public int canCompleteCircuit(int[] gas, int[] cost) {
 <p>即，需要按照它给定的固定路径来安装 VirtualBox ，不然就无法启动成功。至于那个固定路径是什么，可以去它的日志文件里查找，如果没什么改变的话，位置一般是在用户数据文件夹里，名字为 genymotion.log。通过查看它的错误日志，找到指向 VirtualBox 时发生错误的日志记录，那里就有写该固定路径。</p>
 
 <p>这是我自己遇到的错误，因为在安装 Genymotion 前我就一直使用 VirtualBox ，而且是自定义路径。 &ndash;_-所以需要卸载重装，安装它的固定路径。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Reaction to Effective Java]]></title>
-    <link href="http://smilevchy.github.io/blog/2014/12/15/reaction-to-effective-java/"/>
-    <updated>2014-12-15T23:26:38+08:00</updated>
-    <id>http://smilevchy.github.io/blog/2014/12/15/reaction-to-effective-java</id>
-    <content type="html"><![CDATA[<p><strong>第一遍</strong></p>
-
-<ul>
-<li>单元素的枚举类型已经成为实现 Singleton 的最佳方法</li>
-<li>清空对象引用应该是一种例外，而不是一种规范行为</li>
-<li>内存泄漏原因：
-
-<ul>
-<li>一般而言，只要类是自己管理内存，程序员就应该警惕内存泄漏问题</li>
-<li>缓存</li>
-<li>监听器和其他回调</li>
-</ul>
-</li>
-<li>内存泄漏解决方案：
-
-<ul>
-<li>通常不会有明显表现，可能持续很长时间。只能通过仔细检查代码或者利用 Heap Profiler 才能发现</li>
-</ul>
-</li>
-<li>尽量用静态工厂方法替代构造器</li>
-<li>当想使用 B 扩展(继承) A 时，问自己两个问题：
-
-<ul>
-<li>每个 B 确实是 A 吗</li>
-<li>若 A 的 API 有缺陷，是否允许将其缺陷传播到 B 中</li>
-</ul>
-</li>
-</ul>
-
 ]]></content>
   </entry>
   

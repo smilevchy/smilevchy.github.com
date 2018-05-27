@@ -9,7 +9,11 @@
   <meta name="author" content="smilevchy">
 
   
-  <meta name="description" content="当需要进行一项耗时久的任务时（下载文件、访问网络等），一般都知道必须在 worker thread 中进行。但是在现实场景中不可能单纯新建一个线程那么简单，大部分时候需要和 main thread 进行交互、或者说还要保证任务能够成功进行，不会遇到被销毁的情况。可是，单纯的 thread &hellip;">
+  <meta name="description" content="第一遍 单元素的枚举类型已经成为实现 Singleton 的最佳方法
+清空对象引用应该是一种例外，而不是一种规范行为
+内存泄漏原因： 一般而言，只要类是自己管理内存，程序员就应该警惕内存泄漏问题
+缓存
+监听器和其他回调 内存泄漏解决方案： 通常不会有明显表现，可能持续很长时间。 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -63,6 +67,70 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/12/15/reaction-to-effective-java/">Reaction to Effective Java</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-12-15T23:26:38+08:00" pubdate data-updated="true">Dec 15<sup>th</sup>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><strong>第一遍</strong></p>
+
+<ul>
+<li>单元素的枚举类型已经成为实现 Singleton 的最佳方法</li>
+<li>清空对象引用应该是一种例外，而不是一种规范行为</li>
+<li>内存泄漏原因：
+
+<ul>
+<li>一般而言，只要类是自己管理内存，程序员就应该警惕内存泄漏问题</li>
+<li>缓存</li>
+<li>监听器和其他回调</li>
+</ul>
+</li>
+<li>内存泄漏解决方案：
+
+<ul>
+<li>通常不会有明显表现，可能持续很长时间。只能通过仔细检查代码或者利用 Heap Profiler 才能发现</li>
+</ul>
+</li>
+<li>尽量用静态工厂方法替代构造器</li>
+<li>当想使用 B 扩展(继承) A 时，问自己两个问题：
+
+<ul>
+<li>每个 B 确实是 A 吗</li>
+<li>若 A 的 API 有缺陷，是否允许将其缺陷传播到 B 中</li>
+</ul>
+</li>
+</ul>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -435,47 +503,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/12/02/leetcode-rotate-image/">Leetcode_Rotate Image</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-12-02T15:04:29+08:00" pubdate data-updated="true">Dec 2<sup>nd</sup>, 2014</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>原题链接: <a href="https://oj.leetcode.com/problems/rotate-image/">https://oj.leetcode.com/problems/rotate-image/</a></p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2014/12/02/leetcode-rotate-image/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/4">&larr; Older</a>
@@ -501,7 +528,7 @@
     <li class='category'><a href='/blog/categories/algorithm/'>algorithm (66)</a></li>
 <li class='category'><a href='/blog/categories/android/'>android (7)</a></li>
 <li class='category'><a href='/blog/categories/artifact/'>artifact (1)</a></li>
-<li class='category'><a href='/blog/categories/babble/'>babble (7)</a></li>
+<li class='category'><a href='/blog/categories/babble/'>babble (8)</a></li>
 <li class='category'><a href='/blog/categories/insurance/'>insurance (1)</a></li>
 <li class='category'><a href='/blog/categories/javascript/'>javascript (2)</a></li>
 <li class='category'><a href='/blog/categories/jquery/'>jquery (1)</a></li>
@@ -517,6 +544,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2018/05/27/forget-how-to-use-javascript/">A Pity for Forgetting Javascript</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2018/05/19/league-building-in-shunde/">团建</a>
       </li>
     
@@ -530,10 +561,6 @@
     
       <li class="post">
         <a href="/blog/2018/04/29/way-to-overcome-laziness/">克服惰性</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2018/04/18/joke-about-parallel-universe-and-dream/">『平行宇宙与梦』</a>
       </li>
     
   </ul>
