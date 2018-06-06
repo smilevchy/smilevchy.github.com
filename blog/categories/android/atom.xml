@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Android | smilevchy's blog]]></title>
   <link href="http://smilevchy.github.io/blog/categories/android/atom.xml" rel="self"/>
   <link href="http://smilevchy.github.io/"/>
-  <updated>2018-05-27T22:48:27+08:00</updated>
+  <updated>2018-06-06T23:37:56+08:00</updated>
   <id>http://smilevchy.github.io/</id>
   <author>
     <name><![CDATA[smilevchy]]></name>
@@ -12,6 +12,50 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[难处理的 Bug]]></title>
+    <link href="http://smilevchy.github.io/blog/2018/06/06/invisible-and-tricky-bug/"/>
+    <updated>2018-06-06T22:52:36+08:00</updated>
+    <id>http://smilevchy.github.io/blog/2018/06/06/invisible-and-tricky-bug</id>
+    <content type="html"><![CDATA[<p>唉，上周没写文章，有点惭愧。</p>
+
+<p>这篇就补算作上周的吧。（当然，这周还要再写一篇）</p>
+
+<!-- more -->
+
+
+<p>上周五快下班时客服反馈过来一个问题，大意是说有蛮多用户（一两百个）在升级到新版后，发现账本数据没了。一开始接到这个反馈，内心是震惊了好几下。因为数据丢失是比较严重的事故，处理起来也麻烦，何况是有一两百个用户同时遇到这种问题。</p>
+
+<p>这里就碰到了第一层荆棘。用户发过来的反馈描述大部分都是“升级后数据没了”，然而事实上之所以看不到数据，是因为升级后账本被切换掉了，因此显示了其他账本的数据，若其他账本没有数据，那当然在首页上就看不到数据了。这里确切的 Bug 描述应该是“升级后账本被切换了”，但是客服转过来的反馈依然使用了用户的描述文案，这就很容易在一开始就带偏别人 Debug 程序的方向。好在一开始就详细询问了客服，才知道要处理的是什么问题。</p>
+
+<p>那就开始调试这个问题了。为什么升级后账本会被切换呢？</p>
+
+<p>每次账本被选中后，都会保存该账本的唯一标识到配置文件中，这样下次重开应用后，就能知道上次选中的是哪个账本。另外，账本列表的相关信息也会保存在另一个配置文件中。</p>
+
+<p>这时很容易就想到可能有两个原因：</p>
+
+<ul>
+<li>上次选中账本的信息在配置文件中出错了</li>
+<li>账本列表的相关信息在配置文件中出错了</li>
+</ul>
+
+
+<p>初步怀疑出错原因是并发问题。</p>
+
+<p>于是看了下对应的写信息到配置文件中的过程，确认写方法是线程安全的。那还有进程不安全的可能性，也看了下 Application 的相关方法，确认只有主进程才会执行业务逻辑，也可以说是安全的。</p>
+
+<p>第二层荆棘，相关代码看似都是没有问题的，该加的防护也加了。</p>
+
+<p>没办法，只能求助客服，让客服询问用户更多的信息，好帮助排查定位问题。</p>
+
+<p>遇到第三层荆棘了，有的用户问完客服就跑了、有的是零基础用户，连账本、账本切换的概念都不知道。这样就很难从用户处获得精准的信息，噪音很多。</p>
+
+<p>严重的上下文信息不充足，只能先在可疑的地方打上监控日志，待查看是否有不正常数据出现。</p>
+
+<p>来无影，飘无踪，是我对这个 Bug 的印象。这个是目前为止遇到的最难处理的 Bug。查了两三天，还是一无所获。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[使用 AndResGuard 遇到的问题]]></title>
@@ -325,40 +369,6 @@ view = LayoutInflater.from(this).inflate(R.layout.red, parent, true);
 <p>即，需要按照它给定的固定路径来安装 VirtualBox ，不然就无法启动成功。至于那个固定路径是什么，可以去它的日志文件里查找，如果没什么改变的话，位置一般是在用户数据文件夹里，名字为 genymotion.log。通过查看它的错误日志，找到指向 VirtualBox 时发生错误的日志记录，那里就有写该固定路径。</p>
 
 <p>这是我自己遇到的错误，因为在安装 Genymotion 前我就一直使用 VirtualBox ，而且是自定义路径。 &ndash;_-所以需要卸载重装，安装它的固定路径。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Interrogation of AsyncTask]]></title>
-    <link href="http://smilevchy.github.io/blog/2014/12/11/interrogation-of-asynctask/"/>
-    <updated>2014-12-11T20:48:12+08:00</updated>
-    <id>http://smilevchy.github.io/blog/2014/12/11/interrogation-of-asynctask</id>
-    <content type="html"><![CDATA[<p>当需要进行一项耗时久的任务时（下载文件、访问网络等），一般都知道必须在 worker thread 中进行。但是在现实场景中不可能单纯新建一个线程那么简单，大部分时候需要和 main thread 进行交互、或者说还要保证任务能够成功进行，不会遇到被销毁的情况。可是，单纯的 thread 并不具备这些能力。</p>
-
-<p>那怎么办呢？</p>
-
-<!-- more -->
-
-
-<p>以上说的场景交互在 Android 开发中形成了一种 pattern，而 Android 团队就把这种 pattern 提取成了一个工具类出来给开发者使用，即 AsyncTask。</p>
-
-<p>关于 AsyncTask 的使用方法可参见<a href="http://developer.android.com/reference/android/os/AsyncTask.html">官方文档</a>。</p>
-
-<p>一般情况下，AsyncTask 的确就是那么容易使用。但在某些情况下，你会发现这个类出问题了。</p>
-
-<p>这个是因为 AsyncTask 的本质缺陷导致。</p>
-
-<p>Android 的基本组件 Activity/Receiver/Service 本身具有一定的生命周期管理（Life Circle Management），而 AsyncTask 并不具备与之对应的生命周期管理。</p>
-
-<p>假设一个场景如下，你编写了一个 AsyncTask，然后在一个 Activity 里调用该 AsyncTask，并且把自身引用传递进去，为了后续的一些函数调用。大部分情况下是没有问题，但是当设备转换屏幕方向时，Android 系统会销毁这个 Activity 再重建一个新的，此时之前传进去 AsyncTask 里的引用已经“无效”了，因为它指向了一个被销毁的 Activity，你再也不可能对其做任何 UI 操作，甚至会抛出 NullPointerException。即是说，你需要注意传进给 AsyncTask 的任何具有生命周期管理的引用，下一秒这个引用可能就失效了。</p>
-
-<p>解决方法？</p>
-
-<p>对于此类具有生命周期管理的引用统一使用 WeakReference，当引用指向的对象被系统销毁时，可以让这些对象被 GC 处理，同时在使用到引用的代码处再判断是否非空来决定怎么处理。</p>
-
-<p>此外，当外部发生生命周期状态改变时（按返回键、Home键、取消进度框等），若对应的 AsyncTask 需要做相应的反应时（取消任务进行、继续任务进行等），还需要监听外部的生命周期状态改变事件。</p>
-
-<p>总之，AsyncTask 看起来很简单，但需要在实际场景中考虑是否可能会出现问题。</p>
 ]]></content>
   </entry>
   
